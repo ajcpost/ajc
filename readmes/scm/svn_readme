@@ -1,0 +1,9 @@
+
+// Admin
+* Create repository:  svnadmin create --fs-type fsfs <path>
+
+
+// Usage
+* Checkout: svn co file:///Users/ajayc/Work/de/scm/svnrepo/ .
+* Recursively add: svn add --force ./*
+* 

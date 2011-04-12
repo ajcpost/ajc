@@ -1,0 +1,17 @@
+
+http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man4/inet6.4.html
+     The behavior of AF_INET6 TCP/UDP socket is documented in RFC2553.  Basically, it says this:
+     •   A specific bind on an AF_INET6 socket (bind(2) with an address specified) should accept IPv6 traf-
+         fic to that address only.
+     •   If you perform a wildcard bind on an AF_INET6 socket ( bind(2) to IPv6 address :: ), and there is no
+         wildcard bind AF_INET socket on that TCP/UDP port, IPv6 traffic as well as IPv4 traffic should be
+         routed to that AF_INET6 socket.  IPv4 traffic should be seen as if it came from an IPv6 address
+         like ::ffff:10.1.1.1.  This is called an IPv4 mapped address.
+     •   If there are both a wildcard bind AF_INET socket and a wildcard bind AF_INET6 socket on one TCP/UDP
+         port, they should behave separately.  IPv4 traffic should be routed to the AF_INET socket and IPv6
+         should be routed to the AF_INET6 socket.
+
+http://www.opengroup.org/onlinepubs/009619199/apdxq.htm
+Applications may use AF_INET6 sockets to open TCP connections to IPv4 nodes, or send UDP packets to IPv4 nodes, by simply encoding the destination's IPv4 address as an IPv4-mapped IPv6 address, and passing that address, within a sockaddr_in6 structure, in the connect(), sendto() or sendmsg() call. When applications use AF_INET6 sockets to accept TCP connections from IPv4 nodes, or receive UDP packets from IPv4 nodes, the system returns the peer's address to the application in the accept(), recvfrom(), recvmsg(), or getpeername() call using a sockaddr_in6 structure encoded this way. If a node has an IPv4 address, then the implementation may allow applications to communicate using that address via an AF_INET6 socket. In such a case, the address will be represented at the API by the corresponding IPv4-mapped IPv6 address. Also, the implementation may allow an AF_INET6 socket bound to in6addr_any to receive inbound connections and packets destined to one of the node's IPv4 addresses.
+
+An application may use AF_INET6 sockets to bind to a node's IPv4 address by specifying the address as an IPv4-mapped IPv6 address in a sockaddr_in6 structure in the bind() call. For an AF_INET6 socket bound to a node's IPv4 address, the system returns the address in the getsockname() call as an IPv4-mapped IPv6 address in a sockaddr_in6 structure.

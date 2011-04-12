@@ -1,0 +1,11 @@
+* edit php.ini in /usr/local/php5/lib.
+  add Asia/Calcutta to timezone:   
+     date.timezone = Asia/Calcutta
+  add socket path:
+     mysql.default_socket=/tmp/mysql.sock
+     mysqli.default_socket=/tmp/mysql.sock
+     pdo_mysql.default_socket=/tmp/mysql.sock
+  restart apache
+* add write permissions to core/* directories
+* admin user is modx/modx123
+

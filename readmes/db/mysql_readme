@@ -1,0 +1,44 @@
+
+---Links---
+* http://dev.mysql.com/doc/refman/5.0/en/mac-os-x-installation.html
+* http://dev.mysql.com/doc/refman/5.0/en/unix-post-installation.html (for cleanup of data dir)
+* http://dev.mysql.com/doc/refman/5.0/en/default-privileges.html (for setting passwords)
+
+---Deployment---
+(1) Current location
+* the install in de/deploy is not used.
+* install_dir: /usr/local/mysql
+* auto-start variable: /etc/hostconfig   MYSQLCOM=-YES-
+(2) Reinitialize if not able to start mysql (all DB will be deleted!) 
+* startup errors
+  Can't find file: './mysql/host.frm
+* rm -rf install_dir/data
+* sudo scripts/mysql_install_db --user=mysql
+  Important to use mysql as a user so as to have correct permissions
+* check passwords
+  bin/mysql -u root
+  SELECT User, Host, Password FROM mysql.user;
+* set passwords
+  bin/mysqladmin -u root password root
+
+---Usage---
+(1) Startup
+* if auto-start "YES", 
+  "sudo /Library/StartupItems/MySQLCOM/MySQLCOM start"
+* else 
+  sudo su -
+  cd install_dir
+  ./bin/mysqld_safe --user=mysql
+(2) Commands
+* bin/mysql -u root -p
+  (do not enter password after -p, it will prompt for the password)
+  password is "root"
+* Use <database>;
+* show tables;
+* System database
+  use mysql;
+  select user, host from user;
+(3) Strutsweb (In mysql prompt)
+* create database strutsweb;
+* use strutsweb;
+* source <sql file>

@@ -1,0 +1,22 @@
+Usage
+- mvn compile will only compile, will not create war/ear
+- mvn install will create war/ear
+
+POM structuring
+- Parent POM defined repositories, properties, dependencies, plugins can be inherited by child pom.
+- Parent POM need not do actual build but rather define individual modules (child poms) for the build.
+- Adhere to standard Maven dir structure (workding_dir/src/main/). Maven is pretty picky about this.
+- Don't use project.name, is a reserved tag?
+
+Profiles
+- Can be used to override various properties depending on the build environment (test, dev, 
+  production).
+  . e.g. Deployment path on Unix, Windows may be different.
+  . e.g. Versions of libraries may be different for dev vs production.
+- Activation tag can be used to activate a profile automatically if certain prerequisites are 
+  met.
+
+Plugins
+http://maven.apache.org/plugins/maven-dependency-plugin/ ## unpack contents from dependencies
+http://mojo.codehaus.org/cobertura-maven-plugin/  ## for unit test coverage reports
+

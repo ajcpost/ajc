@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>lrn</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>lrn_target</name>
+			<type>2</type>
+			<location>/Users/ajayc/Work/de/build/java/lrn_target</location>
+		</link>
+		<link>
+			<name>tgt_lrn</name>
+			<type>2</type>
+			<location>/Users/ajayc/Work/de/scm/target/java/tgt_lrn</location>
+		</link>
+	</linkedResources>
+</projectDescription>

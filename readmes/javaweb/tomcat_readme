@@ -1,0 +1,19 @@
+
+
+---Links---
+
+---Deployment---
+(1) Current location
+* install_dir: de/deploy/apache-tomcat-5.5.30
+
+---Usage---
+(1) Startup
+* Set CATALINA_HOME to install_dir
+* Set JRE_HOME (/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home)
+* Deploy the web application in install_dir/webapps
+* install_dir/bin/shutdown* install_dir/bin/start*
+(2) Logs
+* check for errors in install_dir/logs/cat*<date> during startup
+
+(3) Strutsweb
+* http://localhost:8080/strutsweb-war/pages/user.jsp

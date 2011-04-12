@@ -1,0 +1,9 @@
+#!/bin/sh
+dir=$1
+for file in `find $dir -name "*.c"`
+do
+echo "/* $file */"
+cat $file | awk '/^[a-z].*\(/, /{/' | grep -v "^{" | sed "s/{$//g" | sed "s/)[ ]*$/);/g" | sed "s/^inline //g"
+echo
+done
+
