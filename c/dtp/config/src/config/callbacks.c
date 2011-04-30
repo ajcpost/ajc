@@ -9,6 +9,13 @@ void startElementCallback (void *udata, const xmlChar *name,
     logFF ();
 
     userData *ud = (userData *) udata;
+    if (ud->error)
+    {
+        logMsg (LOG_WARNING, "%s\n",
+                "Parser state in error condition, skipping further handling.");
+        return;
+    }
+
     char *tag = (char *) name;
     logMsg (LOG_DEBUG, "%s%s%s%s\n", "Start input tag ", tag, " at fdn ",
             ((ud->fdn) ? ud->fdn : "null"));
@@ -43,6 +50,13 @@ void endElementCallback (void *udata, const xmlChar *name)
 {
     logFF ();
     userData *ud = (userData *) udata;
+    if (ud->error)
+    {
+        logMsg (LOG_WARNING, "%s\n",
+                "Parser state in error condition, skipping further handling.");
+        return;
+    }
+
     char *tag = (char *) name;
 
     if (NULL == ud->fdn || (strlen (ud->fdn) < strlen (tag)))
@@ -78,6 +92,13 @@ void startDataCallback (void *udata, const xmlChar *ch, int len)
     logFF ();
 
     userData *ud = (userData *) udata;
+    if (ud->error)
+    {
+        logMsg (LOG_WARNING, "%s\n",
+                "Parser state in error condition, skipping further handling.");
+        return;
+    }
+
     if (NULL == ud->th || ud->th->ignoreData)
     {
         logMsg (LOG_DEBUG, "%s\n", "Ignoring the data");

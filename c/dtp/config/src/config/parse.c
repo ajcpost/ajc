@@ -25,8 +25,6 @@ tagHandle * getTagHandle (userData *ud, char *tag)
 
     if (ud->error)
     {
-        logMsg (LOG_WARNING, "%s\n",
-                "Parser state in error condition, skipping further handling.");
         return NULL;
     }
 
@@ -62,7 +60,7 @@ tagHandle * getTagHandle (userData *ud, char *tag)
             return th;
         }
     }
-    logMsg (LOG_ERR, "%s%s%s%s\n", "Can not find tag tag ", tag, " at fdn ",
+    logMsg (LOG_ERR, "%s%s%s%s\n", "Can not find tag ", tag, " at fdn ",
             ((ud->fdn) ? ud->fdn : "null"));
     ud->error = 1;
     ud->errorString = malloc (sizeof(char) * 500);
