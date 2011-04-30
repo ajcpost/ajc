@@ -9,58 +9,65 @@
 #define TAG_VENDOR_ID "vendor_id"
 #define TAG_VSAI "vendor_specific_application_id"
 
-tagEntry xmltags[] =
+tagHandle xmltags[] =
 {
-{ TAG_LCN_D_CONFIG_FILE, 1, NULL },
-{ TAG_CAPABILITIES, 1, NULL },
-{ TAG_CAPABILITIES TAG_PRODUCT_NAME, 0, addProductName },
-{ TAG_CAPABILITIES TAG_VENDOR_ID, 0, addSupportedVendorId },
-{ TAG_CAPABILITIES TAG_VSAI, 0, addSupportedVendorId },
-{ TAG_CAPABILITIES TAG_VSAI TAG_VENDOR_ID, 0, addSupportedVendorId },
-{ NULL, 1, NULL } };
+{ TAG_LCN_D_CONFIG_FILE, NULL, 1, 1, NULL },
+{ TAG_CAPABILITIES, NULL, 0, 1, NULL },
+{ TAG_PRODUCT_NAME, TAG_CAPABILITIES, 0, 0, addProductName },
+{ TAG_VENDOR_ID, TAG_CAPABILITIES, 0, 0, addSupportedVendorId },
+{ TAG_VSAI, TAG_CAPABILITIES, 0, 0, addSupportedVendorId },
+{ TAG_VENDOR_ID, TAG_CAPABILITIES TAG_VSAI, 0, 0, addSupportedVendorId },
+{ NULL, NULL, 1, 1, NULL } };
 
-char *catTags (int depth, char *tags, char *lastTag)
+tagHandle * getTagHandle (userData *ud, char *tag)
 {
-    int i = 0;
-    char *p = NULL;
-    for (i=0; i<depth; i++)
-    {
-        p = realloc (p, sizeof(tags[i]));
-        strcat (p, tags[i]);
-    }
-    p = realloc (p, sizeof(lastTag));
-    strcat (p, lastTag);
-    return p;
-}
+    logFF ();
 
-tagEntry * getTagHandle (userData *ud, const char *name)
-{
     if (ud->error)
     {
+        logMsg (LOG_WARNING, "%s\n",
+                "Parser state in error condition, skipping further handling.");
         return NULL;
     }
 
     int counter = -1;
-    catTags (ud->depth, ud->tagFDN, name);
-    logMsg (LOG_INFO, "%s%s%s%s\n", "Comparing input tag ", name);
+    logMsg (LOG_INFO, "%s%s%s%s\n", "Comparing input tag ", tag, " at fdn ",
+            (ud->fdn) ? ud->fdn : "null");
     while (xmltags[++counter].tag != NULL)
     {
-        tagEntry *te = &xmltags[counter];
-        logMsg (LOG_DEBUG, "%s\n", " tag ", te->tag);
-        if (0 == strcmp (te->tag, name))
-        {
-            int pc = -1;
-            while (ud->te->path[++pc] != NULL)
-            {
+        tagHandle *th = &xmltags[counter];
+        logMsg (LOG_DEBUG, "%s%s%s%s\n", " with tag ", th->tag, " at fdn ",
+                (th->fdn) ? th->fdn : "null");
+        int match = 1;
 
-            }
-            return te;
+        /* If tags don't match */
+        if ((0 != strcmp (th->tag, tag)))
+        {
+            match = 0;
+        }
+        /* If only one of fdn is null */
+        if ((NULL == ud->fdn && NULL != th->fdn) || (NULL != ud->fdn && NULL
+            == th->fdn))
+        {
+            match = 0;
+        }
+        /* If fdns don't match */
+        if ((NULL != ud->fdn) && (NULL != th->fdn) && (0 != strcmp (th->fdn,
+                                                                    ud->fdn)))
+        {
+            match = 0;
+        }
+        if (match)
+        {
+            return th;
         }
     }
-    logMsg (LOG_ERR, "%s%s\n", "Can not parse tag ", name);
+    logMsg (LOG_ERR, "%s%s%s%s\n", "Can not find tag tag ", tag, " at fdn ",
+            ((ud->fdn) ? ud->fdn : "null"));
     ud->error = 1;
     ud->errorString = malloc (sizeof(char) * 500);
-    sprintf (ud->errorString, "%s%s%s", "Tag ", name, " can not be parsed");
+    sprintf (ud->errorString, "%s%s%s%s\n", "Can not find tag ", tag,
+             " at fdn ", ((ud->fdn) ? ud->fdn : "null"));
     return NULL;
 }
 
@@ -78,7 +85,6 @@ int parseXmlConfig (const char * const xmlFilePath)
     memset (&ud, 0, sizeof(ud));
     ud.output = malloc (sizeof(DiameterConfig_t));
     memset (ud.output, 0, sizeof(ud.output));
-    ud.te = &xmltags[0];
 
     // Set approriate handlers
     xmlSAXHandler saxh;

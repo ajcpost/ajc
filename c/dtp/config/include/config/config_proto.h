@@ -15,7 +15,6 @@ int validateSupportedVendorId (DiameterConfig_t *output, const char *value);
 void addSupportedVendorId (DiameterConfig_t *output, const char *value);
 
 /* src/config/parse.c */
-char *getNullTag ();
-tagEntry * getTagEntry (userData *ud, const char *name);
+tagHandle * getTagHandle (userData *ud, char *tag);
 int parseXmlConfig (const char * const xmlFilePath);
 

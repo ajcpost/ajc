@@ -35,7 +35,7 @@ void logMsg (const int msgLevel, const char * const format, ...)
     case 0:
         fp = (NULL == s_logFP) ? stderr : s_logFP;
         fprintf (fp, "%s", timeString);
-        freeAndNull (timeString);
+        myfree (timeString);
 
         const char * const level = s_logLevels[msgLevel];
         fprintf (fp, "_%s_ ", level);
@@ -57,7 +57,7 @@ void logMsg (const int msgLevel, const char * const format, ...)
                 rename (s_logPath, bakLogPath);
                 createLog (s_logPath, s_logLevels[s_logLevel], s_logSize,
                         s_supportRollover);
-                freeAndNull (bakLogPath);
+                myfree (bakLogPath);
             }
         }
         break;
@@ -152,6 +152,6 @@ static char *getBakLogPath (const char * const logPath)
     strcpy (bakLogPath, logPath);
     strcpy (bakLogPath, ".");
     strcpy (bakLogPath, today);
-    freeAndNull (today);
+    myfree (today);
     return bakLogPath;
 }

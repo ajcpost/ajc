@@ -5,6 +5,8 @@
 
 int validateProductName (DiameterConfig_t *output, const char *value)
 {
+    logFF();
+
     if (NULL == value)
     {
         return dtpError;
@@ -13,15 +15,19 @@ int validateProductName (DiameterConfig_t *output, const char *value)
 }
 void addProductName (DiameterConfig_t *output, const char *value)
 {
+    logFF();
+
     if (dtpSuccess == validateProductName (output, value))
     {
         strcpy (output->productName, value);
-        freeAndNull (value);
+        myfree (value);
     }
 }
 
 int validateSupportedVendorId (DiameterConfig_t *output, const char *value)
 {
+    logFF();
+
     if (output->nVendorIds >= DC_MAX_SUPPORTED_ID)
     {
         return dtpError;
@@ -35,10 +41,12 @@ int validateSupportedVendorId (DiameterConfig_t *output, const char *value)
 
 void addSupportedVendorId (DiameterConfig_t *output, const char *value)
 {
+    logFF();
+
     if (dtpSuccess == validateSupportedVendorId (output, value))
     {
         output->supportedVendorId[output->nVendorIds] = strtol (value, NULL, 0);
         output->nVendorIds++;
-        freeAndNull (value);
+        myfree (value);
     }
 }

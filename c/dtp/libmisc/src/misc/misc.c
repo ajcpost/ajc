@@ -2,12 +2,11 @@
 #include "misc_proto.h"
 #include "log_manager.h"
 
-void freeAndNull (void *p)
+void myfree (void *p)
 {
     if (NULL != p)
     {
         free (p);
-        p = NULL;
     }
 }
 

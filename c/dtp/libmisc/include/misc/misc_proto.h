@@ -7,7 +7,7 @@ static void setLogLevel (const char * const level);
 static char *getBakLogPath (const char * const logPath);
 
 /* src/misc/misc.c */
-void freeAndNull (void *p);
+void myfree (void *p);
 const char * const filePathToName (const char * const filePath);
 char * getTimeNoNewLine ();
 char *getDate ();

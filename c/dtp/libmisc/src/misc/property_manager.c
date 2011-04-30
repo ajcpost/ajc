@@ -126,7 +126,7 @@ int loadPropertiesFromFile (const char * const propertyFile)
                         logMsg (LOG_WARNING, "%s%s%s\n", "Input property ",
                                 property,
                                 " is repeated, ignoring previous value");
-                        freeAndNull (propertyValues[i]);
+                        myfree (propertyValues[i]);
                     }
                     propertyValues[i] = malloc (sizeof(**propertyValues)
                             * (strlen (value) + 1));

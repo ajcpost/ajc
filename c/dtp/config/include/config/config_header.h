@@ -11,15 +11,17 @@
 #include <libxml2/libxml/parserInternals.h>
 #include "db_config.h"
 
-typedef struct tag_entry {
-    char *tagFDN;
-    int ignore;
+typedef struct tag_handle {
+    char *tag;
+    char *fdn;
+    int ignoreTag;
+    int ignoreData;
     void (*handleData) (DiameterConfig_t *output, const char *data);
-}tagEntry;
+}tagHandle;
 
 typedef struct user_data {
-    int depth;
-    char *tagFDN;
+    tagHandle *th;
+    char *fdn;
     int error;
     char *errorString;
     DiameterConfig_t *output;

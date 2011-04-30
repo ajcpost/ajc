@@ -244,7 +244,7 @@ int util_packAddrsForConnect (const dtpSockInfo * const sockInfo,
 int util_freePackAddrs (struct sockaddr_storage *packedAddrs)
 {
     /* Though used as an array, it's a single chunk of memory allocated using realloc. Free in one shot */
-    freeAndNull (packedAddrs);
+    myfree (packedAddrs);
 }
 
 void util_freeDtpSockConfig (dtpSockConfig *dsp)
@@ -255,7 +255,7 @@ void util_freeDtpSockConfig (dtpSockConfig *dsp)
     }
     if (NULL == dsp->addrs)
     {
-        freeAndNull (dsp);
+        myfree (dsp);
         return;
     }
     int counter = -1;
@@ -263,11 +263,11 @@ void util_freeDtpSockConfig (dtpSockConfig *dsp)
     {
         if (NULL != dsp->addrs[counter]->astring)
         {
-            freeAndNull (dsp->addrs[counter]->astring);
+            myfree (dsp->addrs[counter]->astring);
         }
     }
-    freeAndNull (dsp->addrs);
-    freeAndNull (dsp);
+    myfree (dsp->addrs);
+    myfree (dsp);
 }
 
 void util_freeDtpSockData (dtpSockData *dsd)
@@ -276,7 +276,7 @@ void util_freeDtpSockData (dtpSockData *dsd)
     {
         return;
     }
-    freeAndNull (dsd);
+    myfree (dsd);
 }
 
 void util_freeDtpSockInfo (dtpSockInfo *dsi)
@@ -287,7 +287,7 @@ void util_freeDtpSockInfo (dtpSockInfo *dsi)
     }
     util_freeDtpSockConfig (dsi->sockConfig);
     util_freeDtpSockData (dsi->sockData);
-    freeAndNull (dsi);
+    myfree (dsi);
 }
 
 dtpSockConfig * util_copySockConfig (const dtpSockConfig * const inSockConfig)
