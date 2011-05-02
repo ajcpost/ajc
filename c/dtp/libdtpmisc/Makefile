@@ -11,10 +11,14 @@ print:
 	@echo "External INC: $(EXTERNAL_INC)"
 	@echo "Targets: $(TGTS)"
 	@echo "T1 Targets: $(T1_OBJ)"
+	@echo "T2 Targets: $(T2_OBJ)"
 	@echo "------------------------------------------"
 
 $(PROJ_BUILD)/libdtpmisc.a: $(T1_OBJ)
 	ar rcs $@ $^
+
+$(PROJ_BUILD)/test_conf.exe: $(T2_OBJ)
+	$(CC) $^ -o $@ $(LIB_FLAG) $(LIBS)
 
 checkdirs: $(TGTS)
 $(TGTS):
@@ -25,7 +29,7 @@ clean:
 	@echo "Cleaning...$(PROJ_BUILD)"
 	@rm -rf $(PROJ_BUILD)/*
 
-all: clean checkdirs print $(PROJ_BUILD)/libdtpmisc.a
+all: clean checkdirs print $(PROJ_BUILD)/libdtpmisc.a $(PROJ_BUILD)/test_conf.exe
 
 $(foreach bdir, $(TGTS), $(eval $(call make-goal, $(bdir))))
 

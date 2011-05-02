@@ -1,6 +1,5 @@
-#include "dtp_header.h"
-#include "dtp_proto.h"
-
+#include "dtpsock_hdr.h"
+#include "dtpsock_proto.h"
 
 int val_checkProtocol (const int protocol)
 {

@@ -1,5 +1,5 @@
-#include "dtp_header.h"
-#include "dtp_proto.h"
+#include "dtpsock_hdr.h"
+#include "dtpsock_proto.h"
 
 int transport_tcpSend (const dtpSockInfo * const sockInfo,
         const uint8_t * const sendPdu, const long transferSize)

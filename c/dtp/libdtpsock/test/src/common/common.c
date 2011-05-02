@@ -6,13 +6,13 @@
 #include <arpa/inet.h>
 #include <syslog.h>
 
-#include "dtp_header.h"
-#include "dtp_extern.h"
-#include "dtp_proto.h"
-#include "misc_proto.h"
-#include "log_manager.h"
-#include "property_manager.h"
-#include "proto.h"
+#include "dtpsock_hdr.h"
+#include "dtpsock_extern.h"
+#include "dtpsock_proto.h"
+#include "dtpmisc_proto.h"
+#include "dtp_logmgr.h"
+#include "dtp_propmgr.h"
+#include "dtpsocktest_proto.h"
 
 void usage ()
 {
