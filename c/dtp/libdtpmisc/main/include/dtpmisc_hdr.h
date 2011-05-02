@@ -19,7 +19,7 @@ typedef struct tag_metadata {
     int ignoreTag;
     int ignoreData;
     int dataProcessed;
-    void (*handleDataFunc) (DiameterConfig_t *output, const char *data);
+    int (*handleDataFunc) (DiameterConfig_t *output, const char *data);
 }tagMetadata;
 
 typedef struct user_data {

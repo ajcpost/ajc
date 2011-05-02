@@ -105,8 +105,8 @@ enum ConnectStatus_t {DC_NOT_CONNECTED=0, DC_CONNECTED, DC_APP_NOT_SUPPORTED };
 */
 
 
-typedef int HostName_t[DC_MAX_HOSTNAME_LEN];
-typedef int RealmName_t[DC_MAX_HOSTNAME_LEN];
+typedef char HostName_t[DC_MAX_HOSTNAME_LEN];
+typedef char RealmName_t[DC_MAX_HOSTNAME_LEN];
 
 typedef struct {
   int nVendorIds ;

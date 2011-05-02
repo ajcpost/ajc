@@ -39,4 +39,9 @@ void addSupportedVendorId (DiameterConfig_t *output, const char *value);
 /* src/xmlprop/xmlparse.c */
 tagMetadata * getTagMetadata (userData *ud, char *tag);
 int parseXmlConfig (const char * const xmlFilePath);
+void printServerList (ServerListEntry_t *sle);
+void printRealmConfig (RealmConfig_t *rc);
+void printPeerConfig (PeerConfig_t *pc);
+void printVSA (VendorSpecificAppId_t *vsa);
+void printOutput (DiameterConfig_t *output);
 

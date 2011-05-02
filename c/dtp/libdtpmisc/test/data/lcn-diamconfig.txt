@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- LiteCore Networks Base Diameter Config file . -->
+
+<lcn_diambase_config_file xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation='configuration.xsd'>
+
+   <!-- Capabilities of this node - used in CER/CEA exchanges -->
+   <capabilities>
+
+    
+      <product_name>LCN Diameter</product_name>
+
+      <!-- Software revision number. -->
+      <revision>1</revision>
+      <vendor_id>0</vendor_id>
+      <!-- If you are hosting more applications on this node,
+           add their vendor ids  here -->
+      <supported_vendor_id>1</supported_vendor_id>
+      <supported_vendor_id>2</supported_vendor_id>
+
+      <!-- Add your auth application Ids here -->
+      <auth_application_id>1</auth_application_id>
+      <auth_application_id>2</auth_application_id>
+
+      <!-- Add supported acct app ids. -->
+      <acct_application_id>3</acct_application_id>
+      <acct_application_id>4</acct_application_id>
+
+      <!-- Vendor specific app ids. Each entry will have one more more
+            vendor id and one auth app id OR one acct app id-->
+      <vendor_specific_application_id>
+
+          <!-- List of vendor id's advertized by this diameter
+               entity -->
+          <vendor_id>31</vendor_id>
+          <vendor_id>32</vendor_id>
+          <vendor_id>33</vendor_id>
+
+          <!-- Exactly one instance of the
+               following two -->  
+          <auth_application_id>1</auth_application_id>
+
+          <!-- Or Exactly one instance of the
+               vendor's acct application id   
+          <acct_application_id>4</acct_application_id> -->
+      </vendor_specific_application_id>
+      <vendor_specific_application_id>
+          <vendor_id>41</vendor_id>
+          <vendor_id>42</vendor_id>
+          <vendor_id>43</vendor_id>
+          <auth_application_id>5</auth_application_id>
+          <acct_application_id>6</acct_application_id>
+      </vendor_specific_application_id>
+   </capabilities>
+
+
+   <!-- Transport related information, peer and route tables -->
+   <transport>
+
+      <!-- Diameter identity of this node -->
+      <nodename>node1</nodename>
+
+      <!-- Diameter realm. --> 
+      <realm>litecore.net</realm>
+
+      <!-- Diameter TCP listening port.  -->
+      <tcp_port>3868</tcp_port>
+
+      <!-- TLS listening port.  -->
+      <tls_port>3872</tls_port>
+
+      <!-- Peer table. This node can connect only to the peers listed here... -->
+      <peer_table>
+          
+          <peer>
+              <hostname>s2.litecore.net</hostname>
+              <tcp_port>3874</tcp_port>
+              <security>0</security>
+          </peer>
+      </peer_table>
+
+      <!-- Route table. Used to make routing decisions... -->
+      <route_table>
+          <route>
+             <realm>litecore.net</realm>
+
+             <!-- Role: 0 - local, 1- relay, 2- proxy, 3 - redirect -->
+             <role>0</role> 
+             <application>
+
+                  <!-- Application Id is used as a second key for 
+                       routing queries. See details above -->
+                  <application_id>1</application_id>
+                  <vendor_id>0</vendor_id>
+                  <peer>
+
+ 
+                      <server>s1.litecore.net</server>
+ 
+                      <priority>1</priority>  
+                  </peer>
+                  <peer>
+                      <server>xxx</server>
+                      <weight>2</weight>  
+                  </peer>
+             </application>
+ 
+          </route>
+
+          <default_route>
+             <realm>research.telcordia.com</realm>
+             <role>full</role> 
+             <application>
+                  <application_id>
+                       <id>1</id>
+                       <type>1</type>
+                  </application_id> 
+                  <peer_entry>
+                      <server>server1.research.org</server>
+                      <metric>1</metric>  
+                  </peer_entry>
+                  <peer_entry>
+                      <server>server2.research.org</server>
+                      <metric>5</metric>  
+                  </peer_entry>
+             </application>
+             <application>
+                  <application_id>
+                       <id>5</id>
+                       <type>1</type>
+                  </application_id> 
+                  <peer_entry>
+                      <server>server1.research.org</server>
+                      <metric>1</metric>  
+                  </peer_entry>
+                  <peer_entry>
+                      <server>server6.research.org</server>
+                      <metric>5</metric>  
+                  </peer_entry>
+             </application>
+          </route>
+      </route_table>
+   </transport>
+
+
+   <implementation>   
+         <twinit>5</twinit>
+         <inactivity>30</inactivity>
+         <duplicate_watch>45</duplicate_watch>
+         <small_pdu_size>256</small_pdu_size>
+         <big_pdu_size>2048</big_pdu_size>
+    </implementation>
+
+

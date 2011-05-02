@@ -3,51 +3,36 @@
 #include "dtpxml_extern.h"
 #include "dtp_logmgr.h"
 
-
-int validateProductName (DiameterConfig_t *output, const char *value)
+int handleCapProductName (DiameterConfig_t *output, const char *value)
 {
     logFF();
-
     if (NULL == value)
     {
-        return dtpError;
+        logMsg (LOG_ERR, "%s\n", "Null value for product_name");
+        return -1;
     }
-    return dtpSuccess;
+    if (strlen (value) >= DC_MAX_NAME_LEN)
+    {
+        logMsg (LOG_ERR, "%s%d%s%s\n",
+            "Value for product_name exceeds limit of ", DC_MAX_NAME_LEN,
+            " chars, actual value is", value);
+        return -1;
+    }
+
+    strcpy (output->productName, value);
+    myfree (value);
+    return 0;
 }
-void addProductName (DiameterConfig_t *output, const char *value)
+
+int handleCapRevision (DiameterConfig_t *output, const char *value)
 {
     logFF();
-
-    if (dtpSuccess == validateProductName (output, value))
-    {
-        strcpy (output->productName, value);
-        myfree (value);
-    }
-}
-
-int validateSupportedVendorId (DiameterConfig_t *output, const char *value)
-{
-    logFF();
-
-    if (output->nVendorIds >= DC_MAX_SUPPORTED_ID)
-    {
-        return dtpError;
-    }
     if (NULL == value)
     {
-        return dtpError;
+        logMsg (LOG_ERR, "%s\n", "Null value for revision");
+        return -1;
     }
-    return dtpSuccess;
-}
-
-void addSupportedVendorId (DiameterConfig_t *output, const char *value)
-{
-    logFF();
-
-    if (dtpSuccess == validateSupportedVendorId (output, value))
-    {
-        output->supportedVendorId[output->nVendorIds] = strtol (value, NULL, 0);
-        output->nVendorIds++;
-        myfree (value);
-    }
+    output->firmwareRevision = strtol (value, 0, NULL);
+    myfree (value);
+    return 0;
 }

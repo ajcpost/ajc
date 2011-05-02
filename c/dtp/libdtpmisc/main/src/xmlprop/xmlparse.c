@@ -6,17 +6,83 @@
 #define TAG_LCN_D_CONFIG_FILE "lcn_diambase_config_file"
 #define TAG_CAPABILITIES "capabilities"
 #define TAG_PRODUCT_NAME "product_name"
+#define TAG_REVISION "revision"
 #define TAG_VENDOR_ID "vendor_id"
+#define TAG_SUPPORTED_VENDOR_ID "supported_vendor_id"
+#define TAG_AUTH_APP_ID "auth_application_id"
+#define TAG_ACCT_APP_ID "acct_application_id"
 #define TAG_VSAI "vendor_specific_application_id"
+#define TAG_TRANSPORT "transport"
+#define TAG_NODENAME "nodename"
+#define TAG_REALM "realm"
+#define TAG_TCP_PORT "tcp_port"
+#define TAG_TLS_PORT "tsl_port"
+#define TAG_PEER_TABLE "peer_table"
+#define TAG_PEER "peer"
+#define TAG_HOSTNAME "hostname"
+#define TAG_TCP_PORT "tcp_port"
+#define TAG_SECURITY "security"
+#define TAG_ROUTE_TABLE "route_table"
+#define TAG_ROUTE "route"
+#define TAG_ROLE "role"
+#define TAG_APP "application"
+#define TAG_APP_ID "application_id"
+#define TAG_SERVER "server"
+#define TAG_PRIORITY "priority"
+#define TAG_WEIGHT "weight"
+#define TAG_DEFAULT_ROUTE "default_route"
+#define TAG_ID "id"
+#define TAG_TYPE "type"
+#define TAG_PEER_ENTRY "peer_entry"
+#define TAG_METRIC "metric"
+#define TAG_IMPL "implementation"
+#define TAG_TWINIT "twinit"
+#define TAG_INACTIVITY "inactivity"
+#define TAG_DUP_WATCH "duplicate_watch"
+#define TAG_SMALL_PDU "small_pdu_size"
+#define TAG_BIG_PDU "big_pdu_size"
+#define
 
 tagMetadata xmltags[] =
 {
 { TAG_LCN_D_CONFIG_FILE, NULL, 1, 1, 0, NULL },
 { TAG_CAPABILITIES, NULL, 0, 1, 0, NULL },
-{ TAG_PRODUCT_NAME, TAG_CAPABILITIES, 0, 0, 0, addProductName },
-{ TAG_VENDOR_ID, TAG_CAPABILITIES, 0, 0, 0, addSupportedVendorId },
-{ TAG_VSAI, TAG_CAPABILITIES, 0, 0, 0, addSupportedVendorId },
-{ TAG_VENDOR_ID, TAG_CAPABILITIES TAG_VSAI, 0, 0, 0, addSupportedVendorId },
+{ TAG_PRODUCT_NAME, TAG_CAPABILITIES, 0, 0, 0, handleCapProductName },
+{ TAG_REVISION, TAG_CAPABILITIES, 0, 0, 0, handleCapRevision },
+{ TAG_VENDOR_ID, TAG_CAPABILITIES, 0, 0, 0, handleCapVendorId },
+{ TAG_SUPPORTED_VENDOR_ID, TAG_CAPABILITIES, 0, 0, 0, handleCapSupportedVendorId },
+{ TAG_AUTH_APP_ID, TAG_CAPABILITIES, 0, 0, 0, handleCapAuthAppId },
+{ TAG_ACCT_APP_ID, TAG_CAPABILITIES, 0, 0, 0, handleCapAcctAppId },
+{ TAG_VSAI, TAG_CAPABILITIES, 0, 1, 0, handleCapVsai },
+{ TAG_VENDOR_ID, TAG_CAPABILITIES TAG_VSAI, 0, 0, 0, handleCapVsaiVendorId },
+{ TAG_AUTH_APP_ID, TAG_CAPABILITIES TAG_VSAI, 0, 0, 0, handleCapVsaiAuthAppId },
+{ TAG_ACCT_APP_ID, TAG_CAPABILITIES TAG_VSAI, 0, 0, 0, handleCapVsaiAcctAppId },
+{ TAG_TRANSPORT, NULL, 0, 1, 0, NULL },
+{ TAG_NODENAME, TAG_TRANSPORT, 0, 0, 0, handleTransportNodeName },
+{ TAG_REALM, TAG_TRANSPORT, 0, 0, 0, handleTransportRealm },
+{ TAG_TCP_PORT, TAG_TRANSPORT, 0, 0, 0, handleTransportTcpPort },
+{ TAG_TLS_PORT, TAG_TRANSPORT, 0, 0, 0, handleTransportTlsPort },
+{ TAG_PEER_TABLE, TAG_TRANSPORT, 0, 1, 0, NULL },
+{ TAG_PEER, TAG_TRANSPORT TAG_PEER_TABLE, 0, 1, 0, handleTransportPTPeer },
+{ TAG_HOSTNAME, TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, 0, 0, 0, handleTransportPTPeerHostname },
+{ TAG_TCP_PORT, TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, 0, 0, 0, handleTransportPTPeerTcpPort },
+{ TAG_SECURITY, TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, 0, 0, 0, handleTransportPTPeerSecurity },
+/*{ TAG_ROUTE_TABLE, TAG_TRANSPORT, 0, 1, 0, NULL },
+{ TAG_ROUTE, TAG_TRANSPORT TAG_ROUTE_TABLE, 0, 1, 0, NULL },
+{ TAG_REALM, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE, 0, 0, 0, handleTransportRTRouteRealm },
+{ TAG_APP, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE, 0, 1, 0, NULL },
+{ TAG_APP_ID, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP, 0, 0, 0, handleTransportRTAppId },
+{ TAG_VENDOR_ID, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP, 0, 0, 0, handleTransportRTAppVendorId },
+{ TAG_PEER, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP, 0, 1, 0, NULL },
+{ TAG_SERVER, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP TAG_PEER, 0, 0, 0, handleTransportRTAppPeerServer },
+{ TAG_PRIORITY, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP TAG_PEER, 0, 0, 0, handleTransportRTAppPeerPriority },
+{ TAG_WEIGHT, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP TAG_PEER, 0, 0, 0, handleTransportRTAppPeerWeight },*/
+{ TAG_IMPL, NULL, 0, 1, 0, NULL },
+{ TAG_TWINIT, TAG_IMPL, 0, 0, 0, handleImplTwinit },
+{ TAG_INACTIVITY, TAG_IMPL, 0, 0, 0, handleImplINACTIVITY },
+{ TAG_DUP_WATCH, TAG_IMPL, 0, 0, 0, handleImplDupWatch },
+{ TAG_SMALL_PDU, TAG_IMPL, 0, 0, 0, handleImplSmallPdu },
+{ TAG_BIG_PDU, TAG_IMPL, 0, 0, 0, handleImplBigPdu },
 { NULL, NULL, 1, 1, 0, NULL } };
 
 tagMetadata * getTagMetadata (userData *ud, char *tag)
@@ -98,9 +164,24 @@ int parseXmlConfig (const char * const xmlFilePath)
             ud.errorString);
         return -1;
     }
+
+    printOutput (ud.output);
     return 0;
 }
 
+void printServerList (ServerListEntry_t *sle)
+{
+    if (NULL == sle)
+    {
+        logMsg (LOG_INFO, "%s\n", "serverList is Null");
+        return;
+    }
+    logMsg (LOG_INFO, "%s%s\n", "serverName: ",
+        ((sle->serverName) ? sle->serverName : "null"));
+    logMsg (LOG_INFO, "%s%d\n", "weight: ", sle->weight);
+    logMsg (LOG_INFO, "%s%d\n", "cStatus: ", sle->cStatus);
+
+}
 void printRealmConfig (RealmConfig_t *rc)
 {
     if (NULL == rc)
@@ -108,6 +189,22 @@ void printRealmConfig (RealmConfig_t *rc)
         logMsg (LOG_INFO, "%s\n", "realmConfig is Null");
         return;
     }
+    logMsg (LOG_INFO, "%s%s\n", "realmName: ",
+        ((rc->realmName) ? rc->realmName : "null"));
+    logMsg (LOG_INFO, "%s%d\n", "appIdentifier: ", rc->appIdentifier);
+    logMsg (LOG_INFO, "%s%d\n", "action: ", rc->action);
+    logMsg (LOG_INFO, "%s%d\n", "nServers: ", rc->nServers);
+    int i;
+    for (i = 0; i < rc->nServers; i++)
+    {
+        printServerList (&rc->serverList[i]);
+    }
+
+    logMsg (LOG_INFO, "%s%d\n", "isDynamic: ", rc->isDynamic);
+    logMsg (LOG_INFO, "%s%d\n", "expirationTime: ", rc->expirationTime);
+    logMsg (LOG_INFO, "%s%d\n", "isConnected: ", rc->isConnected);
+    logMsg (LOG_INFO, "%s%d\n", "activePeerIndex1: ", rc->activePeerIndex1);
+    logMsg (LOG_INFO, "%s%d\n", "activePeerIndex2: ", rc->activePeerIndex2);
 }
 
 void printPeerConfig (PeerConfig_t *pc)
@@ -125,6 +222,7 @@ void printPeerConfig (PeerConfig_t *pc)
     logMsg (LOG_INFO, "%s%d\n", "proto: ", pc->proto);
     logMsg (LOG_INFO, "%s%d\n", "port: ", pc->port);
     logMsg (LOG_INFO, "%s%d\n", "nIpAddresses: ", pc->nIpAddresses);
+    int i;
     for (i = 0; i < pc->nIpAddresses; i++)
     {
         logMsg (LOG_INFO, "%s%d%s%s\n", "ipAddress", i, ": ",
@@ -180,7 +278,7 @@ void printOutput (DiameterConfig_t *output)
             output->supportedAuthAppId[i]);
     }
     logMsg (LOG_INFO, "%s%d\n", "nAcctAppIds: ", output->nAcctAppIds);
-    for (i = 0; i < output->supportedAcctAppId; i++)
+    for (i = 0; i < output->nAcctAppIds; i++)
     {
         logMsg (LOG_INFO, "%s%d%s%s\n", "supportedAcctAppId", i, ": ",
             output->supportedAcctAppId[i]);
@@ -189,7 +287,7 @@ void printOutput (DiameterConfig_t *output)
         output->nVendorSpecificAppIds);
     for (i = 0; i < output->nVendorSpecificAppIds; i++)
     {
-        printVSA (output->supportedVendorSpecificAppId[i]);
+        printVSA (&output->supportedVendorSpecificAppId[i]);
     }
     logMsg (LOG_INFO, "%s%d\n", "appPort: ", output->appPort);
     logMsg (LOG_INFO, "%s%d\n", "proto: ", output->proto);
@@ -216,5 +314,4 @@ void printOutput (DiameterConfig_t *output)
             output->unknownPeers[i]);
     }
     logMsg (LOG_INFO, "%s%d\n", "nodeStateId: ", output->nodeStateId);
-
 }
