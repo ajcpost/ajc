@@ -14,7 +14,7 @@ void startElementCallback (void *udata, const xmlChar *name,
             "Parser in error state, skipping further handling.");
         return;
     }
-    logMsg (LOG_DEBUG, "%s%s%s%s\n", "Start input tag ", tag, " at fdn ",
+    logMsg (LOG_INFO, "%s%s%s%s\n", "Start input tag ", tag, " at fdn ",
         ((ud->fdn) ? ud->fdn : "null"));
 
     ud->tm = getTagMetadata (ud, tag);
@@ -22,7 +22,7 @@ void startElementCallback (void *udata, const xmlChar *name,
     {
         if (ud->tm->ignoreTag)
         {
-            logMsg (LOG_DEBUG, "%s\n", "Ignoring the tag");
+            logMsg (LOG_DEBUG, "%s\n", "    Ignoring the tag");
             return;
         }
 
@@ -52,7 +52,7 @@ void endElementCallback (void *udata, const xmlChar *name)
             "Parser in error state, skipping further handling.");
         return;
     }
-    logMsg (LOG_DEBUG, "%s%s%s%s\n", "End input tag ", tag, " at fdn ",
+    logMsg (LOG_INFO, "%s%s%s%s\n", "End input tag ", tag, " at fdn ",
         ((ud->fdn) ? ud->fdn : "null"));
 
     ud->tm = NULL;
@@ -62,7 +62,7 @@ void endElementCallback (void *udata, const xmlChar *name)
     {
         return;
     }
-    logMsg (LOG_DEBUG, "%s%s%s%s\n", "Adjusting fdn ", ud->fdn,
+    logMsg (LOG_DEBUG, "%s%s%s%s\n", "    Adjusting fdn ", ud->fdn,
         " to remove tag ", tag);
     if (0 == strcmp (ud->fdn, tag))
     {
@@ -78,7 +78,7 @@ void endElementCallback (void *udata, const xmlChar *name)
         myfree (ud->fdn);
         ud->fdn = p;
     }
-    logMsg (LOG_DEBUG, "%s%s\n", "Adjusted fdn ",
+    logMsg (LOG_DEBUG, "%s%s\n", "    Adjusted fdn ",
         ((ud->fdn) ? ud->fdn : "null"));
 
 }
@@ -94,12 +94,12 @@ void startDataCallback (void *udata, const xmlChar *ch, int len)
             "Parser in error state, skipping further handling.");
         return;
     }
-    logMsg (LOG_DEBUG, "%s%s\n", "Data callback at fdn ",
+    logMsg (LOG_DEBUG, "%s%s\n", "    Data callback at fdn ",
         ((ud->fdn) ? ud->fdn : "null"));
 
     if (NULL == ud->tm || ud->tm->ignoreData)
     {
-        logMsg (LOG_DEBUG, "%s\n", "Ignoring the data");
+        logMsg (LOG_DEBUG, "%s\n", "    Ignoring the data");
         return;
     }
 
@@ -108,7 +108,7 @@ void startDataCallback (void *udata, const xmlChar *ch, int len)
         char *data = copyData (ch, len);
         if (NULL != data)
         {
-            logMsg (LOG_DEBUG, "%s%s\n", "Data ", data);
+            logMsg (LOG_DEBUG, "%s%s\n", "    Data ", data);
             if (0 == ud->tm->handleDataFunc (ud->output, data))
             {
                 ud->tm->dataProcessed = 1;
@@ -121,7 +121,7 @@ int endTagMismatch (userData *ud, char *tag)
 {
     if (NULL == ud->fdn || (strlen (ud->fdn) < strlen (tag)))
     {
-        logMsg (LOG_DEBUG, "%s%s%s%s\n", "Null or incorrect fdn ",
+        logMsg (LOG_WARNING, "%s%s%s%s\n", "Null or incorrect fdn ",
             ((ud->fdn) ? ud->fdn : "null"), " can't remove ", tag);
         return 1;
     }
@@ -129,7 +129,7 @@ int endTagMismatch (userData *ud, char *tag)
     char *p2 = (p1 - strlen (tag));
     if (0 != strcmp (p2, tag))
     {
-        logMsg (LOG_DEBUG, "%s%s%s%s\n", " fdn ", ud->fdn,
+        logMsg (LOG_WARNING, "%s%s%s%s\n", " fdn ", ud->fdn,
             " doesn't end with tag ", tag);
         return 1;
     }
@@ -157,8 +157,8 @@ char *copyData (const xmlChar *ch, const int len)
     // ignore new lines or all whithspaces
     if (allSpace)
     {
-        logMsg (LOG_DEBUG, "%s\n",
-            "Data has only whitespace or newline, skipping");
+        logMsg (LOG_WARNING, "%s\n",
+            "    Data has only whitespace or newline, skipping");
         myfree (data);
         return NULL;
     }

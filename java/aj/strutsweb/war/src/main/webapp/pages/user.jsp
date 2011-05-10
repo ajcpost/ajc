@@ -15,6 +15,7 @@
 
 <h2>All Users</h2>
 
+<s:if test="userList != NULL">
 <s:if test="userList.size() > 0">
 <table border="1px" cellpadding="8px">
 	<tr>
@@ -32,6 +33,7 @@
 		</tr>
 	</s:iterator>
 </table>
+</s:if>
 </s:if>
 <br/>
 <br/>

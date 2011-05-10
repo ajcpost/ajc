@@ -3,7 +3,6 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/../../../../../../de/build/java/strutsweb/classes" />
     <output-test url="file://$MODULE_DIR$/../../../../../../de/build/java/strutsweb/test-classes" />
-    <exclude-output />
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

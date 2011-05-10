@@ -37,7 +37,7 @@ void logMsg (const int msgLevel, const char * const format, ...)
         myfree (timeString);
 
         const char * const level = s_logLevels[msgLevel];
-        fprintf (fp, "_%s_ ", level);
+        fprintf (fp, "%9s_ ", level);
         vfprintf (fp, format, args);
         fflush (fp);
 

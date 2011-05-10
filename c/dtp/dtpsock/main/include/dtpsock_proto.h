@@ -50,7 +50,7 @@ const char *util_sa6ToString (const struct sockaddr_in6 *sa6);
 const char * util_ssToString (const struct sockaddr_storage * addr);
 const char * util_aiToString (const struct addrinfo * addr);
 int util_packAddrs (const dtpSockInfo * const sockInfo,
-        const int sharedBindPort, const int forConnect,
+        const int sharedPort, const int forConnect,
         const dtpSockAddr ** const addrs,
         struct sockaddr_storage ** packedAddrs);
 int util_packAddrsForBind (const dtpSockInfo * const sockInfo,

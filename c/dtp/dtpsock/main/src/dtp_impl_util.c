@@ -177,9 +177,8 @@ const char * util_aiToString (const struct addrinfo * addr)
     return "invalid";
 }
 
-int util_packAddrs (const dtpSockInfo * const sockInfo,
-        const int sharedBindPort, const int forConnect,
-        const dtpSockAddr ** const addrs,
+int util_packAddrs (const dtpSockInfo * const sockInfo, const int sharedPort,
+        const int forConnect, const dtpSockAddr ** const addrs,
         struct sockaddr_storage ** packedAddrs)
 {
     logFF ();
@@ -199,15 +198,13 @@ int util_packAddrs (const dtpSockInfo * const sockInfo,
         }
 
         const dtpSockAddr * const addr = addrs[counter];
-        logMsg (LOG_DEBUG, "%s%d%s%s%s%s%s%d%s%d%s%d\n", "Loop no ", counter,
+        logMsg (LOG_DEBUG, "%s%d%s%s%s%s%s%d%s%d\n", "Loop no ", counter,
                 ", packing addr-string ", addr->astring, " addr-family ",
                 util_afamilyToString (addr->afamily), "for-protocol ",
-                sockInfo->sockConfig->protocol, " connect port ", addr->port,
-                " shared bind port", sharedBindPort);
+                sockInfo->sockConfig->protocol, " shared port", sharedPort);
 
-        int port = (sharedBindPort < 0) ? addr->port : sharedBindPort;
         struct addrinfo * ai = util_getAddrInfo (addr->astring, addr->afamily,
-                sockInfo->sockConfig->protocol, port, forConnect);
+                sockInfo->sockConfig->protocol, sharedPort, forConnect);
         if (NULL != ai)
         {
             logMsg (LOG_DEBUG, "%s%d%s \n", "Packing at position  ",
@@ -230,7 +227,7 @@ int util_packAddrs (const dtpSockInfo * const sockInfo,
 int util_packAddrsForBind (const dtpSockInfo * const sockInfo,
         struct sockaddr_storage ** packedAddrs)
 {
-    return (util_packAddrs (sockInfo, sockInfo->sockConfig->sharedBindPort, 0,
+    return (util_packAddrs (sockInfo, sockInfo->sockConfig->sharedPort, 0,
             sockInfo->sockConfig->addrs, packedAddrs));
 }
 
@@ -238,7 +235,8 @@ int util_packAddrsForConnect (const dtpSockInfo * const sockInfo,
         const dtpSockAddr ** const addrs,
         struct sockaddr_storage ** packedAddrs)
 {
-    return (util_packAddrs (sockInfo, -1, 1, addrs, packedAddrs));
+    return (util_packAddrs (sockInfo, sockInfo->sockConfig->sharedPort, 1,
+            addrs, packedAddrs));
 }
 
 int util_freePackAddrs (struct sockaddr_storage *packedAddrs)
@@ -366,13 +364,13 @@ dtpSockConfig * util_copySockConfig (const dtpSockConfig * const inSockConfig)
         outSockConfig->reqSctpOutStreams = inSockConfig->reqSctpOutStreams;
     }
 
-    if (dtpSuccess != val_checkInt (inSockConfig->sharedBindPort, "Bind Port",
+    if (dtpSuccess != val_checkInt (inSockConfig->sharedPort, "Port",
             g_minPort, g_maxPort))
     {
         util_freeDtpSockConfig (outSockConfig);
         return NULL;
     }
-    outSockConfig->sharedBindPort = inSockConfig->sharedBindPort;
+    outSockConfig->sharedPort = inSockConfig->sharedPort;
 
     if (NULL != inSockConfig->addrs)
     {
@@ -398,15 +396,6 @@ dtpSockConfig * util_copySockConfig (const dtpSockConfig * const inSockConfig)
             }
             outSockConfig->addrs[counter]->afamily
                     = inSockConfig->addrs[counter]->afamily;
-
-            if (dtpSuccess != val_checkInt (inSockConfig->addrs[counter]->port,
-                    "Connect Port", g_minPort, g_maxPort))
-            {
-                util_freeDtpSockConfig (outSockConfig);
-                return NULL;
-            }
-            outSockConfig->addrs[counter]->port
-                    = inSockConfig->addrs[counter]->port;
 
             if (NULL != inSockConfig->addrs[counter]->astring)
             {

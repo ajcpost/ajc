@@ -22,7 +22,7 @@ const char *g_bAddr;
 
 int propertySetup (char *argv[])
 {
-    logFF();
+    logFF ();
 
     /* Test program; no validations done on the properties */
     loadPropertiesFromFile (argv[1]);
@@ -39,8 +39,8 @@ int propertySetup (char *argv[])
     g_sockConfig.ipv6Only = strtol (getPropertyValue (propIPv6Only), NULL, 0);
     g_sockConfig.blocking = strtol (getPropertyValue (propBlocking), NULL, 0);
     g_sockConfig.protocol = strtol (getPropertyValue (propProtocol), NULL, 10);
-    g_sockConfig.sharedBindPort = strtol (getPropertyValue (
-            propServerSharedBindPort), NULL, 10);
+    g_sockConfig.sharedPort = strtol (getPropertyValue (propServerSharedPort),
+            NULL, 10);
     g_transferDataSize = strtol (getPropertyValue (propTransferDataSize), NULL,
             10);
     g_sockConfig.serverListenQLen = strtol (getPropertyValue (
@@ -48,13 +48,13 @@ int propertySetup (char *argv[])
     g_bAddr = getPropertyValue (propServerBindAddr);
 
     logMsg (LOG_DEBUG, "%s\n", "Converted the read properties");
-    g_sockConfig.addrs = createAddrs ((char *)g_bAddr);
+    g_sockConfig.addrs = createAddrs ((char *) g_bAddr);
     logMsg (LOG_DEBUG, "%s\n", "Converted the addresses");
 }
 
 int logSetup ()
 {
-    logFF();
+    logFF ();
 
     createLog (g_logPath, g_logLevel, g_logSize, 0);
     /*openlog ("TestClient", LOG_NDELAY, LOG_USER);*/
@@ -63,14 +63,14 @@ int logSetup ()
 
 void handleClient (int sockFd)
 {
-    logFF();
+    logFF ();
     recvData (sockFd, g_transferDataSize);
     sendData (sockFd, g_transferDataSize);
 }
 
 void communicate ()
 {
-    logFF();
+    logFF ();
 
     int sockFd;
     if (dtpSuccess != dtp_init (&sockFd, &g_sockConfig))

@@ -39,20 +39,16 @@ dtpSockAddr ** createAddrs (char * value)
         switch (tokenCount)
         {
         case 0:
-            port = strtol (token, NULL, 0);
-            break;
-        case 1:
             afamily = strtol (token, NULL, 0);
             break;
-        case 2:
+        case 1:
             addr = token;
             addrs[addrCount] = malloc (sizeof(**addrs));
-            addrs[addrCount]->port = port;
             addrs[addrCount]->afamily = afamily;
             addrs[addrCount]->astring = addr;
             tokenCount = -1;
-            logMsg (LOG_DEBUG, "%s%d%s%d%s%d%s%s\n", "Address, count ",
-                    addrCount, " port ", port, " afamily ", afamily,
+            logMsg (LOG_DEBUG, "%s%d%s%d%s%s\n", "Address, count ",
+                    addrCount, " afamily ", afamily,
                     " astring ", addr);
             ++addrCount;
             break;

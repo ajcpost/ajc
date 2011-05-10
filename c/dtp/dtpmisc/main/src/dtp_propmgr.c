@@ -14,20 +14,20 @@ const char * const propProtocol = "protocol";
 const char * const propBlocking = "blocking";
 const char * const propMaxPduSize = "maxPduSize";
 const char * const propServerSocketQLen = "serverSocketQLen";
-const char * const propClientSharedBindPort = "clientSharedBindPort";
+const char * const propClientSharedPort = "clientSharedPort";
 const char * const propClientBindAddr = "clientBindAddr";
-const char * const propServerSharedBindPort = "serverSharedBindPort";
+const char * const propServerSharedPort = "serverSharedPort";
 const char * const propServerBindAddr = "serverBindAddr";
 const char * const propClientConnectAddr = "clientConnectAddr";
 const char * const propTransferDataSize = "transferDataSize";
 
 /* All expected properties and corresponding value holder */
-static const char * const s_propertyNames[] = { "serverLogFilePath",
-        "serverMaxLogSize", "serverLogLevel", "clientLogFilePath",
-        "clientMaxLogSize", "clientLogLevel", "afamily", "ipv6Only",
-        "protocol", "blocking", "maxPduSize", "serverSocketQLen",
-        "clientSharedBindPort", "clientBindAddr", "serverSharedBindPort",
-        "serverBindAddr", "clientConnectAddr", "transferDataSize", NULL };
+static const char
+    * const s_propertyNames[] =
+        { "serverLogFilePath", "serverMaxLogSize", "serverLogLevel", "clientLogFilePath",
+            "clientMaxLogSize", "clientLogLevel", "afamily", "ipv6Only", "protocol", "blocking",
+            "maxPduSize", "serverSocketQLen", "clientSharedPort", "clientBindAddr", "serverSharedPort",
+            "serverBindAddr", "clientConnectAddr", "transferDataSize", NULL };
 char **propertyValues;
 
 static int s_propertiesInitialized = 0;
@@ -60,7 +60,7 @@ const char * const getPropertyValue (const char * const propertyName)
         }
     }
     logMsg (LOG_DEBUG, "%s%s%s%s\n", "Input property ", propertyName,
-            " is set to ", ((!value) ? "null" : value));
+        " is set to ", ((!value) ? "null" : value));
     return value;
 }
 
@@ -72,7 +72,7 @@ int loadPropertiesFromFile (const char * const propertyFile)
     if (NULL == fp)
     {
         logMsg (LOG_ERR, "%s%s\n", "Could not open property file ",
-                filePathToName (propertyFile));
+            filePathToName (propertyFile));
         return -1;
     }
 
@@ -80,7 +80,7 @@ int loadPropertiesFromFile (const char * const propertyFile)
     int expectedPropertyCount = getNoOfProperties ();
     propertyValues = malloc (sizeof(*propertyValues) * expectedPropertyCount);
     memset (propertyValues, 0,
-            (sizeof(*propertyValues) * expectedPropertyCount));
+        (sizeof(*propertyValues) * expectedPropertyCount));
 
     char readLine[s_propertyMaxSize];
     int lineCount = 0;
@@ -98,9 +98,8 @@ int loadPropertiesFromFile (const char * const propertyFile)
         if (lineCount > (expectedPropertyCount * 10))
         {
             logMsg (LOG_CRIT, "%s%s%s%d\n",
-                    "Too many properties in the property file ",
-                    filePathToName (propertyFile), " expect only ",
-                    expectedPropertyCount);
+                "Too many properties in the property file ", filePathToName (
+                    propertyFile), " expect only ", expectedPropertyCount);
             fclose (fp);
             return -1;
         }
@@ -108,8 +107,8 @@ int loadPropertiesFromFile (const char * const propertyFile)
         char *property = strtok (readLine, s_propertyDelimiter);
         char *value = strtok (NULL, s_propertyDelimiter);
         logMsg (LOG_DEBUG, "%s%d%s%s%s%s\n", "Line number ", lineCount,
-                ", Input property is ", property, ", value is ",
-                ((!value) ? "null" : value));
+            ", Input property is ", property, ", value is ",
+            ((!value) ? "null" : value));
 
         if (NULL != property && NULL != value)
         {
@@ -122,12 +121,11 @@ int loadPropertiesFromFile (const char * const propertyFile)
                     {
                         /* Property is repeated. Warn and pick the latest */
                         logMsg (LOG_WARNING, "%s%s%s\n", "Input property ",
-                                property,
-                                " is repeated, ignoring previous value");
+                            property, " is repeated, ignoring previous value");
                         myfree (propertyValues[i]);
                     }
                     propertyValues[i] = malloc (sizeof(**propertyValues)
-                            * (strlen (value) + 1));
+                        * (strlen (value) + 1));
                     strcpy (propertyValues[i], value);
                     break;
                 }
@@ -165,7 +163,7 @@ static int checkProperties ()
         if (NULL == propertyValues[i])
         {
             logMsg (LOG_ERR, "%s%s%s\n", "Property ", s_propertyNames[i],
-                    " is not set");
+                " is not set");
             allSet = -1;
         }
     }

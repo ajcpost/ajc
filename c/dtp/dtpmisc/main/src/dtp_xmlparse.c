@@ -92,12 +92,10 @@ tagMetadata * getTagMetadata (userData *ud, char *tag)
     }
 
     int counter = -1;
-    logMsg (LOG_INFO, "%s%s%s%s\n", "Comparing input tag ", tag, " at fdn ",
-        (ud->fdn) ? ud->fdn : "null");
     while (xmltags[++counter].tag != NULL)
     {
         tagMetadata *tm = &xmltags[counter];
-        logMsg (LOG_DEBUG, "%s%s%s%s\n", " with tag ", tm->tag, " at fdn ",
+        logMsg (LOG_DEBUG, "%s%s%s%s\n", "    comparing with tag ", tm->tag, " at fdn ",
             (tm->fdn) ? tm->fdn : "null");
         int match = 1;
 
@@ -170,78 +168,79 @@ void printServerList (ServerListEntry_t *sle)
 {
     if (NULL == sle)
     {
-        logMsg (LOG_INFO, "%s\n", "serverList is Null");
+        logMsg (LOG_INFO, "%s\n", "        serverList is Null");
         return;
     }
-    logMsg (LOG_INFO, "%s%s\n", "serverName: ",
+    logMsg (LOG_INFO, "%s%s\n", "        serverName: ",
         ((sle->serverName) ? sle->serverName : "null"));
-    logMsg (LOG_INFO, "%s%d\n", "weight: ", sle->weight);
-    logMsg (LOG_INFO, "%s%d\n", "cStatus: ", sle->cStatus);
+    logMsg (LOG_INFO, "%s%d\n", "        weight: ", sle->weight);
+    logMsg (LOG_INFO, "%s%d\n", "        cStatus: ", sle->cStatus);
 
 }
 void printRealmConfig (RealmConfig_t *rc)
 {
     if (NULL == rc)
     {
-        logMsg (LOG_INFO, "%s\n", "realmConfig is Null");
+        logMsg (LOG_INFO, "%s\n", "    realmConfig is Null");
         return;
     }
-    logMsg (LOG_INFO, "%s%s\n", "realmName: ",
+    logMsg (LOG_INFO, "%s%s\n", "    realmName: ",
         ((rc->realmName) ? rc->realmName : "null"));
-    logMsg (LOG_INFO, "%s%d\n", "appIdentifier: ", rc->appIdentifier);
-    logMsg (LOG_INFO, "%s%d\n", "action: ", rc->action);
-    logMsg (LOG_INFO, "%s%d\n", "nServers: ", rc->nServers);
+    logMsg (LOG_INFO, "%s%d\n", "    appIdentifier: ", rc->appIdentifier);
+    logMsg (LOG_INFO, "%s%d\n", "    action: ", rc->action);
+    logMsg (LOG_INFO, "%s%d\n", "    nServers: ", rc->nServers);
     int i;
     for (i = 0; i < rc->nServers; i++)
     {
         printServerList (&rc->serverList[i]);
     }
 
-    logMsg (LOG_INFO, "%s%d\n", "isDynamic: ", rc->isDynamic);
-    logMsg (LOG_INFO, "%s%d\n", "expirationTime: ", rc->expirationTime);
-    logMsg (LOG_INFO, "%s%d\n", "isConnected: ", rc->isConnected);
-    logMsg (LOG_INFO, "%s%d\n", "activePeerIndex1: ", rc->activePeerIndex1);
-    logMsg (LOG_INFO, "%s%d\n", "activePeerIndex2: ", rc->activePeerIndex2);
+    logMsg (LOG_INFO, "%s%d\n", "    isDynamic: ", rc->isDynamic);
+    logMsg (LOG_INFO, "%s%d\n", "    expirationTime: ", rc->expirationTime);
+    logMsg (LOG_INFO, "%s%d\n", "    isConnected: ", rc->isConnected);
+    logMsg (LOG_INFO, "%s%d\n", "    activePeerIndex1: ", rc->activePeerIndex1);
+    logMsg (LOG_INFO, "%s%d\n", "    activePeerIndex2: ", rc->activePeerIndex2);
 }
 
 void printPeerConfig (PeerConfig_t *pc)
 {
     if (NULL == pc)
     {
-        logMsg (LOG_INFO, "%s\n", "peerConfig is Null");
+        logMsg (LOG_INFO, "%s\n", "    peerConfig is Null");
         return;
     }
-    logMsg (LOG_INFO, "%s%d\n", "peerTableIndex: ", pc->peerTableIndex);
-    logMsg (LOG_INFO, "%s%d\n", "activePeerIndex: ", pc->activePeerIndex);
-    logMsg (LOG_INFO, "%s%d\n", "isDynamic: ", pc->isDynamic);
-    logMsg (LOG_INFO, "%s%d\n", "expirationTime: ", pc->expirationTime);
-    logMsg (LOG_INFO, "%s%d\n", "security: ", pc->security);
-    logMsg (LOG_INFO, "%s%d\n", "proto: ", pc->proto);
-    logMsg (LOG_INFO, "%s%d\n", "port: ", pc->port);
-    logMsg (LOG_INFO, "%s%d\n", "nIpAddresses: ", pc->nIpAddresses);
+    logMsg (LOG_INFO, "%s%d\n", "    peerTableIndex: ", pc->peerTableIndex);
+    logMsg (LOG_INFO, "%s%d\n", "    activePeerIndex: ", pc->activePeerIndex);
+    logMsg (LOG_INFO, "%s%d\n", "    isDynamic: ", pc->isDynamic);
+    logMsg (LOG_INFO, "%s%d\n", "    expirationTime: ", pc->expirationTime);
+    logMsg (LOG_INFO, "%s%d\n", "    security: ", pc->security);
+    logMsg (LOG_INFO, "%s%d\n", "    proto: ", pc->proto);
+    logMsg (LOG_INFO, "%s%d\n", "    port: ", pc->port);
+    logMsg (LOG_INFO, "%s%d\n", "    nIpAddresses: ", pc->nIpAddresses);
     int i;
     for (i = 0; i < pc->nIpAddresses; i++)
     {
-        logMsg (LOG_INFO, "%s%d%s%s\n", "ipAddress", i, ": ",
+        logMsg (LOG_INFO, "%s%d%s%s\n", "    ipAddress", i, ": ",
             pc->ipAddresses[i]);
     }
-    logMsg (LOG_INFO, "%s%d\n", "lastFailedConnectTime: ", pc->lastFailedConnectTime);
+    logMsg (LOG_INFO, "%s%d\n", "    lastFailedConnectTime: ", pc->lastFailedConnectTime);
 }
 
 void printVSA (VendorSpecificAppId_t *vsa)
 {
-    logMsg (LOG_INFO, "%s%d\n", "nVendorIds: ", vsa->nVendorIds);
+    logMsg (LOG_INFO, "%s%d\n", "    nVendorIds: ", vsa->nVendorIds);
     int i = 0;
     for (i = 0; i < vsa->nVendorIds; i++)
     {
-        logMsg (LOG_INFO, "%s%d%s%d\n", "vendorIds", i, ": ", vsa->vendorIds[i]);
+        logMsg (LOG_INFO, "%s%d%s%d\n", "    vendorIds", i, ": ", vsa->vendorIds[i]);
     }
-    logMsg (LOG_INFO, "%s%d\n", "isAuth: ", vsa->isAuth);
-    logMsg (LOG_INFO, "%s%d\n", "appId: ", vsa->appId);
+    logMsg (LOG_INFO, "%s%d\n", "    isAuth: ", vsa->isAuth);
+    logMsg (LOG_INFO, "%s%d\n", "    appId: ", vsa->appId);
 
 }
 void printOutput (DiameterConfig_t *output)
 {
+    logMsg (LOG_INFO, "%s\n", "------- Output -------");
     if (NULL == output)
     {
         logMsg (LOG_INFO, "%s\n", "Output is Null");
@@ -311,4 +310,6 @@ void printOutput (DiameterConfig_t *output)
             output->unknownPeers[i]);
     }
     logMsg (LOG_INFO, "%s%d\n", "nodeStateId: ", output->nodeStateId);
+    logMsg (LOG_INFO, "%s\n", "-------  -------");
+
 }

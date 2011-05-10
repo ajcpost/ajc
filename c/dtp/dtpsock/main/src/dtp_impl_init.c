@@ -81,7 +81,7 @@ int init_defaultBind (const dtpSockInfo * const sockInfo)
 {
     logFF ();
 
-    const int port = sockInfo->sockConfig->sharedBindPort;
+    const int port = sockInfo->sockConfig->sharedPort;
     const int aifamily = sockInfo->sockConfig->afamily;
 
     struct addrinfo * defaultAddr = util_getAddrInfo (NULL, aifamily,

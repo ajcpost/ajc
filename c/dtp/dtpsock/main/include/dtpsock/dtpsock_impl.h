@@ -3,7 +3,6 @@
 
 /* Structure to hold IPv4 or IPv6 address.*/
 typedef struct dtp_sockaddr {
-	int port;
 	int afamily;
 	char *astring;
 } dtpSockAddr;
@@ -18,7 +17,7 @@ typedef struct dtp_sockConfig {
 	int serverListenQLen;             /* Backlog size for server listen socket */
 	int reqSctpInStreams;             /* Requested no. of input sctp streams, may not necessarily get accepted */
 	int reqSctpOutStreams;            /* Requested no. of output sctp streams, may not necessarily get accepted */
-	int sharedBindPort;               /* Shared bind port across all the addresses below */
+	int sharedPort;                   /* Shared port across all the addresses below */
 	dtpSockAddr **addrs;              /* List of addresses for use in bind or connect */
 } dtpSockConfig;
 

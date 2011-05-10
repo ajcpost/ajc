@@ -40,8 +40,8 @@ int propertySetup (char *argv[])
     g_sockConfig.blocking = strtol (getPropertyValue (propBlocking), NULL, 0);
     g_sockConfig.protocol = strtol (getPropertyValue (propProtocol), NULL, 0);
     g_sockConfig.maxPduSize = strtol (getPropertyValue (propMaxPduSize), NULL, 0);
-    g_sockConfig.sharedBindPort = strtol (getPropertyValue (
-            propClientSharedBindPort), NULL, 0);
+    g_sockConfig.sharedPort = strtol (getPropertyValue (
+            propClientSharedPort), NULL, 0);
     g_bAddr = (char *) getPropertyValue (propClientBindAddr);
     g_cAddr = (char *) getPropertyValue (propClientConnectAddr);
     g_transferDataSize = strtol (getPropertyValue (propTransferDataSize), NULL, 0);
