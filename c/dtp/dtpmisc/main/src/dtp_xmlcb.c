@@ -35,7 +35,10 @@ void startElementCallback (void *udata, const xmlChar *name,
         ud->fdn = fdn;
         if (NULL != ud->tm->handleTagFunc)
         {
-            ud->tm->handleTagFunc (ud->output);
+            if (-1 == ud->tm->handleTagFunc (ud->output))
+            {
+                ud->error = 1;
+            }
         }
     }
 }
@@ -72,9 +75,9 @@ void endElementCallback (void *udata, const xmlChar *name)
     else
     {
         int cutAt = strlen (ud->fdn) - strlen (tag);
-        char *p = malloc ( sizeof(char) *(cutAt + 1));
+        char *p = malloc (sizeof(char) * (cutAt + 1));
         strncpy (p, ud->fdn, cutAt);
-        *(p+cutAt) = '\0';
+        *(p + cutAt) = '\0';
         myfree (ud->fdn);
         ud->fdn = p;
     }
@@ -106,13 +109,18 @@ void startDataCallback (void *udata, const xmlChar *ch, int len)
     if (NULL != ud->tm->handleDataFunc)
     {
         char *data = copyData (ch, len);
+        logMsg (LOG_DEBUG, "%s%s\n", "    Data is ", (data ? data : "null"));
         if (NULL != data)
         {
-            logMsg (LOG_DEBUG, "%s%s\n", "    Data ", data);
-            if (0 == ud->tm->handleDataFunc (ud->output, data))
+            if (-1 == ud->tm->handleDataFunc (ud->output, data))
+            {
+                ud->error = 1;
+            }
+            else
             {
                 ud->tm->dataProcessed = 1;
             }
+            myfree (data);
         }
     }
 }
@@ -154,7 +162,7 @@ char *copyData (const xmlChar *ch, const int len)
     }
     *p = '\0';
 
-    // ignore new lines or all whithspaces
+    // ignore new lines or all whitespaces
     if (allSpace)
     {
         logMsg (LOG_WARNING, "%s\n",

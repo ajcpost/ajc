@@ -15,10 +15,10 @@
 /* Test program; will use globals to speed up */
 dtpSockConfig g_sockConfig;
 int g_transferDataSize;
-const char *g_logPath;
+char *g_logPath;
 int g_logSize;
-const char *g_logLevel;
-const char *g_bAddr;
+char *g_logLevel;
+char *g_bAddr;
 
 int propertySetup (char *argv[])
 {

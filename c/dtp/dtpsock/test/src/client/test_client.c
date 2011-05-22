@@ -14,11 +14,12 @@
 /* Test program; will use globals to speed up */
 dtpSockConfig g_sockConfig;
 int g_transferDataSize;
-const char *g_logPath;
+char *g_logPath;
 int g_logSize;
-const char *g_logLevel;
-const char *g_bAddr;
-const char *g_cAddr;
+char *g_logLevel;
+char *g_bAddr;
+int g_cPort;
+char *g_cAddr;
 dtpSockAddr **g_connectAddrs;
 
 
@@ -43,6 +44,7 @@ int propertySetup (char *argv[])
     g_sockConfig.sharedPort = strtol (getPropertyValue (
             propClientSharedPort), NULL, 0);
     g_bAddr = (char *) getPropertyValue (propClientBindAddr);
+    g_cPort = strtol (getPropertyValue (propServerSharedPort), NULL, 0);
     g_cAddr = (char *) getPropertyValue (propClientConnectAddr);
     g_transferDataSize = strtol (getPropertyValue (propTransferDataSize), NULL, 0);
 
@@ -73,7 +75,7 @@ void communicate ()
     }
     logMsg (LOG_DEBUG, "%s%d\n", "Initialized DTP socket ", sockFd);
 
-    if (dtpSuccess != dtp_connect (sockFd, g_connectAddrs))
+    if (dtpSuccess != dtp_connect (sockFd, g_cPort, g_connectAddrs))
     {
         usage ();
     }

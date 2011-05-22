@@ -3,7 +3,8 @@
 
 /* Structure to hold IPv4 or IPv6 address.*/
 typedef struct dtp_sockaddr {
-	int afamily;
+	int isHost;
+    int afamily;
 	char *astring;
 } dtpSockAddr;
 

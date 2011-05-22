@@ -5,6 +5,7 @@
 #define TAG_CAPABILITIES "capabilities"
 #define TAG_PRODUCT_NAME "product_name"
 #define TAG_REVISION "revision"
+#define TAG_IPADDRESS "ipaddress"
 #define TAG_VENDOR_ID "vendor_id"
 #define TAG_SUPPORTED_VENDOR_ID "supported_vendor_id"
 #define TAG_AUTH_APP_ID "auth_application_id"
@@ -13,8 +14,11 @@
 #define TAG_TRANSPORT "transport"
 #define TAG_NODENAME "nodename"
 #define TAG_REALM "realm"
+#define TAG_PROTO "proto"
+#define TAG_APP_PORT "app_port"
 #define TAG_TCP_PORT "tcp_port"
-#define TAG_TLS_PORT "tsl_port"
+#define TAG_TCP_PORT "sctp_port"
+#define TAG_UNKNOWNPEER_ACTION "unknownpeer_action"
 #define TAG_PEER_TABLE "peer_table"
 #define TAG_PEER "peer"
 #define TAG_HOSTNAME "hostname"
@@ -26,9 +30,7 @@
 #define TAG_APP "application"
 #define TAG_APP_ID "application_id"
 #define TAG_SERVER "server"
-#define TAG_PRIORITY "priority"
 #define TAG_WEIGHT "weight"
-#define TAG_DEFAULT_ROUTE "default_route"
 #define TAG_ID "id"
 #define TAG_TYPE "type"
 #define TAG_PEER_ENTRY "peer_entry"
@@ -36,6 +38,10 @@
 #define TAG_IMPL "implementation"
 #define TAG_TWINIT "twinit"
 #define TAG_INACTIVITY "inactivity"
+#define TAG_ROLE "role"
+#define TAG_NUM_THREADS "num_threads"
+#define TAG_REOPEN_TIMER "reopen_timer"
+#define TAG_POLLING_INTERVAL "polling_interval"
 #define TAG_DUP_WATCH "duplicate_watch"
 #define TAG_SMALL_PDU "small_pdu_size"
 #define TAG_BIG_PDU "big_pdu_size"
@@ -46,40 +52,51 @@ tagMetadata xmltags[] =
 { TAG_CAPABILITIES, NULL, 0, 1, 0, NULL, NULL },
 { TAG_PRODUCT_NAME, TAG_CAPABILITIES, 0, 0, 0, NULL, handleCapProductName },
 { TAG_REVISION, TAG_CAPABILITIES, 0, 0, 0, NULL, handleCapRevision },
+{ TAG_IPADDRESS, TAG_CAPABILITIES, 0, 0, 0, NULL, handleCapIpAddress },
 { TAG_VENDOR_ID, TAG_CAPABILITIES, 0, 0, 0, NULL, handleCapVendorId },
 { TAG_SUPPORTED_VENDOR_ID, TAG_CAPABILITIES, 0, 0, 0, NULL, handleCapSupportedVendorId },
 { TAG_AUTH_APP_ID, TAG_CAPABILITIES, 0, 0, 0, NULL, handleCapAuthAppId },
 { TAG_ACCT_APP_ID, TAG_CAPABILITIES, 0, 0, 0, NULL, handleCapAcctAppId },
-{ TAG_VSAI, TAG_CAPABILITIES, 0, 1, 0, handleCapVsai, NULL },
+{ TAG_VSAI, TAG_CAPABILITIES, 0, 1, 0, handleTagCapVsai, NULL },
 { TAG_VENDOR_ID, TAG_CAPABILITIES TAG_VSAI, 0, 0, 0, NULL, handleCapVsaiVendorId },
-/*{ TAG_AUTH_APP_ID, TAG_CAPABILITIES TAG_VSAI, 0, 0, 0, NULL, handleCapVsaiAuthAppId },
+{ TAG_AUTH_APP_ID, TAG_CAPABILITIES TAG_VSAI, 0, 0, 0, NULL, handleCapVsaiAuthAppId },
 { TAG_ACCT_APP_ID, TAG_CAPABILITIES TAG_VSAI, 0, 0, 0, NULL, handleCapVsaiAcctAppId },
 { TAG_TRANSPORT, NULL, 0, 1, 0, NULL, NULL },
 { TAG_NODENAME, TAG_TRANSPORT, 0, 0, 0, NULL, handleTransportNodeName },
 { TAG_REALM, TAG_TRANSPORT, 0, 0, 0, NULL, handleTransportRealm },
+{ TAG_PROTO, TAG_TRANSPORT, 0, 0, 0, NULL, handleTransportProto },
+{ TAG_APP_PORT, TAG_TRANSPORT, 0, 0, 0, NULL, handleTransportAppPort },
 { TAG_TCP_PORT, TAG_TRANSPORT, 0, 0, 0, NULL, handleTransportTcpPort },
-{ TAG_TLS_PORT, TAG_TRANSPORT, 0, 0, 0, NULL, handleTransportTlsPort },
+{ TAG_SCTP_PORT, TAG_TRANSPORT, 0, 0, 0, NULL, handleTransportSctpPort },
+{ TAG_UNKNOWNPEER_ACTION, TAG_TRANSPORT, 0, 0, 0, NULL, handleTransportUnknownPeerAction },
 { TAG_PEER_TABLE, TAG_TRANSPORT, 0, 1, 0, NULL, NULL },
-{ TAG_PEER, TAG_TRANSPORT TAG_PEER_TABLE, 0, 1, 0, NULL, handleTransportPTPeer },
+{ TAG_PEER, TAG_TRANSPORT TAG_PEER_TABLE, 0, 1, 0, handleTagTransportPTPeer, handleTransportPTPeer },
 { TAG_HOSTNAME, TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, 0, 0, 0, NULL, handleTransportPTPeerHostname },
+{ TAG_PROTO, TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, 0, 0, 0, NULL, handleTransportPTPeerProto },
 { TAG_TCP_PORT, TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, 0, 0, 0, NULL, handleTransportPTPeerTcpPort },
+{ TAG_SCTP_PORT, TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, 0, 0, 0, NULL, handleTransportPTPeerSctpPort },
 { TAG_SECURITY, TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, 0, 0, 0, NULL, handleTransportPTPeerSecurity },
+{ TAG_IPADDRESS, TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, 0, 0, 0, NULL, handleTransportPTPeerIPAddress },
 { TAG_ROUTE_TABLE, TAG_TRANSPORT, 0, 1, 0, NULL, NULL },
-{ TAG_ROUTE, TAG_TRANSPORT TAG_ROUTE_TABLE, 0, 1, 0, NULL, NULL },
+{ TAG_ROUTE, TAG_TRANSPORT TAG_ROUTE_TABLE, 0, 1, 0, handleTagTransportRTRoute, NULL },
 { TAG_REALM, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE, 0, 0, 0, NULL, handleTransportRTRouteRealm },
+{ TAG_ACTION, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE, 0, 0, 0, NULL, handleTransportRTRouteAction },
 { TAG_APP, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE, 0, 1, 0, NULL, NULL },
-{ TAG_APP_ID, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP, 0, 0, 0, NULL, handleTransportRTAppId },
-{ TAG_VENDOR_ID, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP, 0, 0, 0, NULL, handleTransportRTAppVendorId },
-{ TAG_PEER, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP, 0, 1, 0, NULL, NULL },
-{ TAG_SERVER, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP TAG_PEER, 0, 0, 0, NULL, handleTransportRTAppPeerServer },
-{ TAG_PRIORITY, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP TAG_PEER, 0, 0, 0, NULL, handleTransportRTAppPeerPriority },
-{ TAG_WEIGHT, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP TAG_PEER, 0, 0, 0, NULL, handleTransportRTAppPeerWeight },
+{ TAG_APP_ID, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP, 0, 0, 0, NULL, handleTransportRTRouteAppId },
+{ TAG_VENDOR_ID, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP, 0, 0, 0, NULL, handleTransportRTRouteAppVendorId },
+{ TAG_PEER, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP, 0, 1, 0, handleTagTransportRTRouteAppPeer, NULL },
+{ TAG_SERVER, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP TAG_PEER, 0, 0, 0, NULL, handleTransportRTRouteAppPeerServer },
+{ TAG_WEIGHT, TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP TAG_PEER, 0, 0, 0, NULL, handleTransportRTRouteAppPeerWeight },
 { TAG_IMPL, NULL, 0, 1, 0, NULL, NULL },
 { TAG_TWINIT, TAG_IMPL, 0, 0, 0, NULL, handleImplTwinit },
-{ TAG_INACTIVITY, TAG_IMPL, 0, 0, 0, NULL, handleImplINACTIVITY },
-{ TAG_DUP_WATCH, TAG_IMPL, 0, 0, 0, NULL, handleImplDupWatch },
+{ TAG_INACTIVITY, TAG_IMPL, 0, 0, 0, NULL, handleImplInactivity },
+{ TAG_ROLE, TAG_IMPL, 0, 0, 0, NULL, handleImplRole },
+{ TAG_NUM_THREADS, TAG_IMPL, 0, 0, 0, NULL, handleNumOfThreads },
+{ TAG_REOPEN_TIMER, TAG_IMPL, 0, 0, 0, NULL, handleImplReopenTimer },
+{ TAG_POLLING_INTERVAL, TAG_IMPL, 0, 0, 0, NULL, handleImplPollingInterval },
+/*{ TAG_DUP_WATCH, TAG_IMPL, 0, 0, 0, NULL, handleImplDupWatch },*/
 { TAG_SMALL_PDU, TAG_IMPL, 0, 0, 0, NULL, handleImplSmallPdu },
-{ TAG_BIG_PDU, TAG_IMPL, 0, 0, 0, NULL, handleImplBigPdu },*/
+{ TAG_BIG_PDU, TAG_IMPL, 0, 0, 0, NULL, handleImplBigPdu },
 { NULL, NULL, 1, 1, 0, NULL, NULL } };
 
 tagMetadata * getTagMetadata (userData *ud, char *tag)

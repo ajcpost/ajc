@@ -232,10 +232,11 @@ int util_packAddrsForBind (const dtpSockInfo * const sockInfo,
 }
 
 int util_packAddrsForConnect (const dtpSockInfo * const sockInfo,
+        const int sharedPort,
         const dtpSockAddr ** const addrs,
         struct sockaddr_storage ** packedAddrs)
 {
-    return (util_packAddrs (sockInfo, sockInfo->sockConfig->sharedPort, 1,
+    return (util_packAddrs (sockInfo, sharedPort, 1,
             addrs, packedAddrs));
 }
 
@@ -388,12 +389,14 @@ dtpSockConfig * util_copySockConfig (const dtpSockConfig * const inSockConfig)
 
             outSockConfig->addrs[counter] = malloc (
                     sizeof(**(outSockConfig->addrs)));
+            memset (outSockConfig->addrs[counter], 0 , sizeof(outSockConfig->addrs[counter]));
             if (dtpSuccess != val_checkAfamily (
                     inSockConfig->addrs[counter]->afamily))
             {
                 util_freeDtpSockConfig (outSockConfig);
                 return NULL;
             }
+            outSockConfig->addrs[counter]->isHost = inSockConfig->addrs[counter]->isHost;
             outSockConfig->addrs[counter]->afamily
                     = inSockConfig->addrs[counter]->afamily;
 

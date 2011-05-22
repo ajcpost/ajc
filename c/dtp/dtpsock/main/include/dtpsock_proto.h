@@ -49,14 +49,13 @@ const char *util_saToString (const struct sockaddr_in *sa);
 const char *util_sa6ToString (const struct sockaddr_in6 *sa6);
 const char * util_ssToString (const struct sockaddr_storage * addr);
 const char * util_aiToString (const struct addrinfo * addr);
-int util_packAddrs (const dtpSockInfo * const sockInfo,
-        const int sharedPort, const int forConnect,
-        const dtpSockAddr ** const addrs,
+int util_packAddrs (const dtpSockInfo * const sockInfo, const int sharedPort,
+        const int forConnect, const dtpSockAddr ** const addrs,
         struct sockaddr_storage ** packedAddrs);
 int util_packAddrsForBind (const dtpSockInfo * const sockInfo,
         struct sockaddr_storage ** packedAddrs);
 int util_packAddrsForConnect (const dtpSockInfo * const sockInfo,
-        const dtpSockAddr ** const addrs,
+        const int sharedPort, const dtpSockAddr ** const addrs,
         struct sockaddr_storage ** packedAddrs);
 void util_freeDtpSockConfig (dtpSockConfig *dsp);
 void util_freeDtpSockData (dtpSockData *dsd);
@@ -73,7 +72,8 @@ int val_checkInt (const int value, const char * const name, const int min,
 /* src/dtp/dtp_interface.c */
 int dtp_init (int *sockFd, const dtpSockConfig * const sockConfig);
 int dtp_bind (const dtpSockInfo * const sockInfo);
-int dtp_connect (const int sockFd, const dtpSockAddr ** const connectAddrs);
+int dtp_connect (const int sockFd, const int sharedPort,
+        const dtpSockAddr ** const connectAddrs);
 int dtp_listen (const int sockFd);
 int dtp_accept (int sockFd, int *newSockFd);
 void dtp_close (const int sockFd);

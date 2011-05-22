@@ -1,60 +1,35 @@
 #include "dtpmisc_hdr.h"
 #include "dtpmisc_proto.h"
 
-int handleCapProductName (DiameterConfig_t *output, const char *value)
+int handleCapProductName (DiameterConfig_t *output, char *value)
 {
     logFF();
-    if (NULL == value)
-    {
-        logMsg (LOG_ERR, "%s\n", "Null value for capabilities/product_name");
-        return -1;
-    }
     if (strlen (value) >= DC_MAX_NAME_LEN)
     {
         logMsg (LOG_ERR, "%s%d%s%s\n",
             "Value for product_name exceeds limit of ", DC_MAX_NAME_LEN,
-            " chars, actual value is", value);
+            " chars; value is ", value);
         return -1;
     }
-
     strcpy (output->productName, value);
-    myfree (value);
     return 0;
 }
 
-int handleCapRevision (DiameterConfig_t *output, const char *value)
+int handleCapRevision (DiameterConfig_t *output, char *value)
 {
     logFF();
-    if (NULL == value)
-    {
-        logMsg (LOG_ERR, "%s\n", "Null value for capabilities/revision");
-        return -1;
-    }
     output->firmwareRevision = strtol (value, NULL, 0);
-    myfree (value);
     return 0;
 }
-int handleCapVendorId (DiameterConfig_t *output, const char *value)
+int handleCapVendorId (DiameterConfig_t *output, char *value)
 {
     logFF();
-    if (NULL == value)
-    {
-        logMsg (LOG_ERR, "%s\n", "Null value for capabilities/vendor_id");
-        return -1;
-    }
     output->vendorId = strtol (value, NULL, 0);
-    myfree (value);
     return 0;
 }
-int handleCapSupportedVendorId (DiameterConfig_t *output, const char *value)
+int handleCapSupportedVendorId (DiameterConfig_t *output, char *value)
 {
     logFF();
-    if (NULL == value)
-    {
-        logMsg (LOG_ERR, "%s\n",
-            "Null value for capabilities/supported_vendor_id");
-        return -1;
-    }
     if (DC_MAX_SUPPORTED_ID == output->nVendorIds)
     {
         logMsg (LOG_ERR, "%s%d\n",
@@ -64,17 +39,11 @@ int handleCapSupportedVendorId (DiameterConfig_t *output, const char *value)
     }
     output->supportedVendorId[output->nVendorIds] = strtol (value, NULL, 0);
     ++output->nVendorIds;
-    myfree (value);
     return 0;
 }
-int handleCapAuthAppId (DiameterConfig_t *output, const char *value)
+int handleCapAuthAppId (DiameterConfig_t *output, char *value)
 {
     logFF();
-    if (NULL == value)
-    {
-        logMsg (LOG_ERR, "%s\n", "Null value for capabilities/auth_app_id");
-        return -1;
-    }
     if (DC_MAX_SUPPORTED_ID == output->nAuthAppIds)
     {
         logMsg (LOG_ERR, "%s%d\n", "Number of auth_app_id exceeds limit of ",
@@ -83,17 +52,11 @@ int handleCapAuthAppId (DiameterConfig_t *output, const char *value)
     }
     output->supportedAuthAppId[output->nAuthAppIds] = strtol (value, NULL, 0);
     ++output->nAuthAppIds;
-    myfree (value);
     return 0;
 }
-int handleCapAcctAppId (DiameterConfig_t *output, const char *value)
+int handleCapAcctAppId (DiameterConfig_t *output, char *value)
 {
     logFF();
-    if (NULL == value)
-    {
-        logMsg (LOG_ERR, "%s\n", "Null value for capabilities/acct_app_id");
-        return -1;
-    }
     if (DC_MAX_SUPPORTED_ID == output->nAcctAppIds)
     {
         logMsg (LOG_ERR, "%s%d\n", "Number of acct_app_id exceeds limit of ",
@@ -102,11 +65,132 @@ int handleCapAcctAppId (DiameterConfig_t *output, const char *value)
     }
     output->supportedAcctAppId[output->nAcctAppIds] = strtol (value, NULL, 0);
     ++output->nAcctAppIds;
-    myfree (value);
     return 0;
 }
 
-int handleCapVsai (DiameterConfig_t *output)
+int handleCapVsaiVendorId (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    int curVsaPosition = (output->nVendorSpecificAppIds - 1);
+    if (DC_MAX_SUPPORTED_ID
+        == output->supportedVendorSpecificAppId[curVsaPosition].nVendorIds)
+    {
+        logMsg (LOG_ERR, "%s%d%s%d\n", "Number of vendor_id exceeds limit of ",
+            DC_MAX_SUPPORTED_ID, " for VSA at position ", curVsaPosition);
+        return -1;
+    }
+    ++(output->supportedVendorSpecificAppId[curVsaPosition].nVendorIds);
+    int vendorPositionInCurVsa =
+        (output->supportedVendorSpecificAppId[curVsaPosition].nVendorIds - 1);
+    output->supportedVendorSpecificAppId[curVsaPosition].vendorIds[vendorPositionInCurVsa]
+        = strtol (value, NULL, 0);
+    return 0;
+}
+
+int handleCapVsaiAuthAppId (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    int curVsaPosition = (output->nVendorSpecificAppIds - 1);
+    if (output->supportedVendorSpecificAppId[curVsaPosition].isAuth != -1)
+    {
+        logMsg (LOG_ERR, "%s\n", "Auth or Acct id is alredy set");
+        return -1;
+    }
+    output->supportedVendorSpecificAppId[curVsaPosition].appId = strtol (value,
+        NULL, 0);
+    output->supportedVendorSpecificAppId[curVsaPosition].isAuth = 1;
+}
+
+int handleCapVsaiAcctAppId (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    int curVsaPosition = (output->nVendorSpecificAppIds - 1);
+    if (output->supportedVendorSpecificAppId[curVsaPosition].isAuth != -1)
+    {
+        logMsg (LOG_ERR, "%s\n", "Auth or Acct id is alredy set");
+        return -1;
+    }
+    output->supportedVendorSpecificAppId[curVsaPosition].appId = strtol (value,
+        NULL, 0);
+    output->supportedVendorSpecificAppId[curVsaPosition].isAuth = 0;
+}
+
+int handleTransportAppPort (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    output->appPort = strtol (value, NULL, 0);
+    return 0;
+}
+int handleTransportProto (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    output->proto = strtol (value, NULL, 0);
+    return 0;
+}
+int handleTransportTcpPort (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    output->diamTCPPort = strtol (value, NULL, 0);
+    return 0;
+}
+int handleTransportSctpPort (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    output->diamSCTPPort = strtol (value, NULL, 0);
+    return 0;
+}
+
+int handleTransportUnknownPeerAction (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    output->unknownPeerAction = strtol (value, NULL, 0);
+    return 0;
+}
+
+int handleImplRole (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    output->role = strtol (value, NULL, 0);
+    return 0;
+}
+int handleImplNumOfThreads (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    output->numberOfThreads = strtol (value, NULL, 0);
+    return 0;
+}
+int handleImplTwinit (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    output->Twinit = strtol (value, NULL, 0);
+    return 0;
+}
+int handleImplInactivity (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    output->inactivityTimer = strtol (value, NULL, 0);
+    return 0;
+}
+int handleImplReopenTimer (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    output->reopenTimer = strtol (value, NULL, 0);
+    return 0;
+}
+int handleImplSmallPdu (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    output->smallPduSize = strtol (value, NULL, 0);
+    return 0;
+}
+int handleImplBigPdu (DiameterConfig_t *output, char *value)
+{
+    logFF();
+    output->bigPduSize = strtol (value, NULL, 0);
+    return 0;
+}
+
+int handleTagCapVsai (DiameterConfig_t *output)
 {
     if (DC_MAX_SUPPORTED_ID == output->nVendorSpecificAppIds)
     {
@@ -116,30 +200,19 @@ int handleCapVsai (DiameterConfig_t *output)
         return -1;
     }
     ++(output->nVendorSpecificAppIds);
+    output->supportedVendorSpecificAppId[output->nVendorSpecificAppIds].isAuth
+        = -1;
 }
-
-int handleCapVsaiVendorId (DiameterConfig_t *output, const char *value)
+int handleTagTransportPTPeer (DiameterConfig_t *output)
 {
-    logFF();
-    if (NULL == value)
-    {
-        logMsg (LOG_ERR, "%s\n", "Null value for capabilities/Vsai/vendor_id");
-        return -1;
-    }
-    if (DC_MAX_SUPPORTED_ID == output->nVendorSpecificAppIds
-        || DC_MAX_SUPPORTED_ID
-            == output->supportedVendorSpecificAppId[output->nVendorSpecificAppIds].nVendorIds)
-    {
-        logMsg (LOG_ERR, "%s%d\n", "Number of vendor_id exceeds limit of ",
-            DC_MAX_SUPPORTED_ID);
-        return -1;
-    }
-
-    int e1 = (output->nVendorSpecificAppIds-1); /*todo */
-    int e2 = output->supportedVendorSpecificAppId[e1].nVendorIds;
-    output->supportedVendorSpecificAppId[e1].vendorIds[e2] = strtol (value,
-        NULL, 0);
-    ++(output->supportedVendorSpecificAppId[e1].nVendorIds);
-    myfree (value);
-    return 0;
+    /*if (DC_MAX_SUPPORTED_ID == output->nPeerEntries)
+     {
+     logMsg (LOG_ERR, "%s%d\n",
+     "Number of peer configs exceeds limit of ",
+     DC_MAX_SUPPORTED_ID);
+     return -1;
+     }*/
+    ++(output->nPeerEntries);
+    output->peerConfiguration = realloc (peerConfiguration,
+        (output->nPeerEntries * sizeof(*(output->peerConfiguration))));
 }

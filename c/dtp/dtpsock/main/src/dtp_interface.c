@@ -136,12 +136,13 @@ int dtp_bind (const dtpSockInfo * const sockInfo)
  * it connects to all addresses possible.
  *
  * (Parameter, int sockFd) The dtp socket id. The socket must have been initialized using dtp_init.
+ * (Parameter, int sharedPort) The server port.
  * (Parameter, dtpSockAddr **connectAddrs) Pointer to a structure holding addresses to be connected to.
  * Caller can reclaim the allocated memory after the call returns.
  *
  * (Return) dtpSuccess if successful completion, else dtpError
  */
-int dtp_connect (const int sockFd, const dtpSockAddr ** const connectAddrs)
+int dtp_connect (const int sockFd, const int sharedPort, const dtpSockAddr ** const connectAddrs)
 {
     logFF ();
 
@@ -167,7 +168,7 @@ int dtp_connect (const int sockFd, const dtpSockAddr ** const connectAddrs)
     /* Pack the incoming IPv4/IPv6 addresses into sockaddr_storage.*/
     int packedCount;
     struct sockaddr_storage *packedAddrs = NULL;
-    packedCount = util_packAddrsForConnect (sockInfo, connectAddrs,
+    packedCount = util_packAddrsForConnect (sockInfo, sharedPort, connectAddrs,
             &packedAddrs);
     if (NULL == packedAddrs)
     {
