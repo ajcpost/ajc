@@ -46,6 +46,8 @@
 #define TAG_SMALL_PDU "small_pdu_size"
 #define TAG_BIG_PDU "big_pdu_size"
 
+#define MAX_FULLTAG_LEN 300
+
 tagMetadata
     xmltags[] =
         {
@@ -100,7 +102,7 @@ tagMetadata
         { TAG_BIG_PDU, TAG_LCN_D TAG_IMPL, NULL, NULL, handleImplBigPdu },
         { NULL, NULL, NULL, NULL } };
 
-tagMetadata * getTagMetadata (userData *ud, char *tag)
+tagMetadata * findTagMetadata (userData *ud, char *tag)
 {
     logFF ();
 
@@ -112,8 +114,8 @@ tagMetadata * getTagMetadata (userData *ud, char *tag)
     }
 
     int counter = -1;
-    char fromMeta[200];
-    char fromUd[200];
+    char fromMeta[MAX_FULLTAG_LEN];
+    char fromUd[MAX_FULLTAG_LEN];
     strcpy (fromUd, ud->curPath ? ud->curPath : "");
     strcat (fromUd, tag ? tag : "");
     while (xmltags[++counter].tag != NULL)
@@ -122,7 +124,7 @@ tagMetadata * getTagMetadata (userData *ud, char *tag)
         strcpy (fromMeta, tm->parentPath ? tm->parentPath : "");
         strcat (fromMeta, tm->tag);
         /*logMsg (LOG_DEBUG, "%s%s%s%s\n", "    comparing from meta ", fromMeta,
-            " with from ud ", fromUd);*/
+         " with from ud ", fromUd);*/
         if (0 == strcmp (fromMeta, fromUd))
         {
             return tm;
@@ -135,19 +137,150 @@ tagMetadata * getTagMetadata (userData *ud, char *tag)
     return NULL;
 }
 
-int parseXmlConfig (const char * const xmlFilePath)
+void startTagCallback (void *udata, const xmlChar *name, const xmlChar **attrs)
+{
+    logFF ();
+
+    char *tag = (char *) name;
+    userData *ud = (userData *) udata;
+    logMsg (LOG_INFO, "%s%s%s%s\n", "Start input tag ", tag, " at path ",
+        ((ud->curPath) ? ud->curPath : "null"));
+
+    /* Find the matching tag metadata */
+    ud->curTm = findTagMetadata (ud, tag);
+    if (NULL == ud->curTm)
+    {
+        return;
+    }
+
+    /* Adjust the path to reflect the current hierarchy */
+    int curLen = ((ud->curPath) ? strlen (ud->curPath) : 0);
+    int incrementalLen = strlen (tag);
+    ud->curPath = realloc (ud->curPath, curLen + incrementalLen + 1);
+    strcpy (ud->curPath + curLen, tag);
+    logMsg (LOG_DEBUG, "%s%s\n", "    Adjusted path ",
+        ((ud->curPath) ? ud->curPath : "null"));
+
+    /* Call the handler */
+    if (NULL != ud->curTm->handleStartTagFunc)
+    {
+        ud->curTm->handleStartTagFunc (ud);
+    }
+}
+
+void endTagCallback (void *udata, const xmlChar *name)
+{
+    logFF ();
+
+    char *tag = (char *) name;
+    userData *ud = (userData *) udata;
+    logMsg (LOG_INFO, "%s%s%s%s\n", "End input tag ", tag, " at path ",
+        ((ud->curPath) ? ud->curPath : "null"));
+
+    /* Find the matching tag metadata, don't pass tag since it's already part of curPath */
+    ud->curTm = findTagMetadata (ud, NULL);
+    if (NULL == ud->curTm)
+    {
+        return;
+    }
+
+    /*
+     * Adjust the path to reflect the current hierarchy.
+     * Don't realloc but rather null terminate at appropriate position. The memory will eventually be
+     * freed at the end of XML parsing.
+     * */
+    int curLen = ((ud->curPath) ? strlen (ud->curPath) : 0);
+    int incrementalLen = strlen (tag);
+    if (curLen >= incrementalLen)
+    {
+        *(ud->curPath + curLen - incrementalLen) = '\0';
+    }
+    logMsg (LOG_DEBUG, "%s%s\n", "    Adjusted path ",
+        ((ud->curPath) ? ud->curPath : "null"));
+
+    /* Call the handler */
+    if (NULL != ud->curTm->handleEndTagFunc)
+    {
+        ud->curTm->handleEndTagFunc (ud);
+    }
+}
+
+void dataCallback (void *udata, const xmlChar *ch, int len)
+{
+    logFF ();
+
+    userData *ud = (userData *) udata;
+    logMsg (LOG_DEBUG, "%s%s\n", "    Data callback at path ",
+        ((ud->curPath) ? ud->curPath : "null"));
+
+    if (NULL != ud->curTm && NULL != ud->curTm->handleDataFunc)
+    {
+        char *data = copyData (ch, len);
+        logMsg (LOG_DEBUG, "%s%s\n", "    Data is ", (data ? data : "null"));
+        if (NULL != data)
+        {
+            ud->curTm->handleDataFunc (ud, data);
+            myfree (data);
+        }
+    }
+}
+
+char *copyData (const xmlChar *ch, const int len)
+{
+    logFF();
+    int allSpace = 1;
+
+    char *data = malloc (sizeof(char) * (len + 1));
+    char *p = data;
+    int i = 0;
+    for (i = 0; i < len; i++)
+    {
+        if (*ch != ' ' && *ch != '\n')
+        {
+            allSpace = 0;
+        }
+        *p++ = *ch++;
+    }
+    *p = '\0';
+
+    // ignore new lines or all whitespaces
+    if (allSpace)
+    {
+        logMsg (LOG_WARNING, "%s\n",
+            "    Data has only whitespace or newline, skipping");
+        myfree (data);
+        return NULL;
+    }
+    return data;
+}
+
+void logDetails (userData *ud)
+{
+    logMsg (LOG_INFO, "%s%s\n", "Error in tag ",
+        (ud->tagErrString ? ud->tagErrString : "none"));
+    logMsg (LOG_INFO, "%s%s\n", "Errors in data \n",
+        (ud->dataErrString ? ud->dataErrString : "none"));
+
+    if (NULL == ud->tagErrString && NULL == ud->dataErrString)
+    {
+        printOutput (ud->output);
+    }
+}
+
+int parseXmlConfig (const char * const xmlFilePath, DiameterConfig_t *output)
 {
     logFF();
 
-    if (NULL == xmlFilePath)
+    if (NULL == xmlFilePath || NULL == output)
     {
-        logMsg (LOG_CRIT, "%s%s\n", "Null input xml config");
+        logMsg (LOG_CRIT, "%s%s\n",
+            "Null input xml config or output data holder");
         return -1;
     }
 
     userData ud;
     memset (&ud, 0, sizeof(ud));
-    ud.output = malloc (sizeof(DiameterConfig_t));
+    ud.output = output;
     memset (ud.output, 0, sizeof(ud.output));
 
     // Set approriate handlers
@@ -158,171 +291,16 @@ int parseXmlConfig (const char * const xmlFilePath)
     saxh.characters = dataCallback;
 
     xmlSAXUserParseFile (&saxh, &ud, xmlFilePath);
-    if (NULL != ud.tagErrString)
-    {
-        logMsg (LOG_ERR, "%s%s\n", "Error in tag ", ud.tagErrString);
-        return -1;
-    }
-    if (NULL != ud.dataErrString)
-    {
-        logMsg (LOG_ERR, "%s%s\n", "Errors while processing tag data ",
-            ud.dataErrString);
-        return -1;
-    }
+    logDetails (&ud);
 
-    printOutput (ud.output);
-    return 0;
-}
+    /* Free up memory */
+    myfree (ud.curPath);
+    myfree (ud.dataErrString);
+    myfree (ud.tagErrString);
 
-void printServerList (ServerListEntry_t *sle)
-{
-    if (NULL == sle)
+    if (NULL == ud.tagErrString && NULL == ud.dataErrString)
     {
-        logMsg (LOG_INFO, "%s\n", "        serverList is Null");
-        return;
+        return 0;
     }
-    logMsg (LOG_INFO, "%s%s\n", "        serverName: ",
-        ((sle->serverName) ? sle->serverName : "null"));
-    logMsg (LOG_INFO, "%s%d\n", "        weight: ", sle->weight);
-    logMsg (LOG_INFO, "%s%d\n", "        cStatus: ", sle->cStatus);
-
-}
-void printRealmConfig (RealmConfig_t *rc)
-{
-    if (NULL == rc)
-    {
-        logMsg (LOG_INFO, "%s\n", "    realmConfig is Null");
-        return;
-    }
-    logMsg (LOG_INFO, "%s%s\n", "    realmName: ",
-        ((rc->realmName) ? rc->realmName : "null"));
-    logMsg (LOG_INFO, "%s%d\n", "    appIdentifier: ", rc->appIdentifier);
-    logMsg (LOG_INFO, "%s%d\n", "    action: ", rc->action);
-    logMsg (LOG_INFO, "%s%d\n", "    nServers: ", rc->nServers);
-    int i;
-    for (i = 0; i < rc->nServers; i++)
-    {
-        printServerList (&rc->serverList[i]);
-    }
-
-    logMsg (LOG_INFO, "%s%d\n", "    isDynamic: ", rc->isDynamic);
-    logMsg (LOG_INFO, "%s%d\n", "    expirationTime: ", rc->expirationTime);
-    logMsg (LOG_INFO, "%s%d\n", "    isConnected: ", rc->isConnected);
-    logMsg (LOG_INFO, "%s%d\n", "    activePeerIndex1: ", rc->activePeerIndex1);
-    logMsg (LOG_INFO, "%s%d\n", "    activePeerIndex2: ", rc->activePeerIndex2);
-}
-
-void printPeerConfig (PeerConfig_t *pc)
-{
-    if (NULL == pc)
-    {
-        logMsg (LOG_INFO, "%s\n", "    peerConfig is Null");
-        return;
-    }
-    logMsg (LOG_INFO, "%s%d\n", "    peerTableIndex: ", pc->peerTableIndex);
-    logMsg (LOG_INFO, "%s%d\n", "    activePeerIndex: ", pc->activePeerIndex);
-    logMsg (LOG_INFO, "%s%d\n", "    isDynamic: ", pc->isDynamic);
-    logMsg (LOG_INFO, "%s%d\n", "    expirationTime: ", pc->expirationTime);
-    logMsg (LOG_INFO, "%s%d\n", "    security: ", pc->security);
-    logMsg (LOG_INFO, "%s%d\n", "    proto: ", pc->proto);
-    logMsg (LOG_INFO, "%s%d\n", "    tcp_port: ", pc->tcp_port);
-    logMsg (LOG_INFO, "%s%d\n", "    sctp_port: ", pc->sctp_port);
-    logMsg (LOG_INFO, "%s%d\n", "    nIpAddresses: ", pc->nIpAddresses);
-    int i;
-    for (i = 0; i < pc->nIpAddresses; i++)
-    {
-        logMsg (LOG_INFO, "%s%d%s%s\n", "    ipAddress", i, ": ",
-            pc->ipAddresses[i]);
-    }
-    logMsg (LOG_INFO, "%s%d\n", "    lastFailedConnectTime: ",
-        pc->lastFailedConnectTime);
-}
-
-void printVSA (VendorSpecificAppId_t *vsa)
-{
-    logMsg (LOG_INFO, "%s%d\n", "    nVendorIds: ", vsa->nVendorIds);
-    int i = 0;
-    for (i = 0; i < vsa->nVendorIds; i++)
-    {
-        logMsg (LOG_INFO, "%s%d%s%d\n", "    vendorIds", i, ": ",
-            vsa->vendorIds[i]);
-    }
-    logMsg (LOG_INFO, "%s%d\n", "    isAuth: ", vsa->isAuth);
-    logMsg (LOG_INFO, "%s%d\n", "    appId: ", vsa->appId);
-
-}
-void printOutput (DiameterConfig_t *output)
-{
-    logMsg (LOG_INFO, "%s\n", "------- Output -------");
-    if (NULL == output)
-    {
-        logMsg (LOG_INFO, "%s\n", "Output is Null");
-        return;
-    }
-    logMsg (LOG_INFO, "%s%s\n", "nodeName: ",
-        ((output->nodeName) ? output->nodeName : "null"));
-    logMsg (LOG_INFO, "%s%s\n", "nodeRealm: ",
-        ((output->nodeRealm) ? output->nodeRealm : "null"));
-    logMsg (LOG_INFO, "%s%d\n", "nAddresses: ", output->nAddresses);
-    int i = 0;
-    for (i = 0; i < output->nAddresses; i++)
-    {
-        logMsg (LOG_INFO, "%s%d%s%s\n", "ipAddress", i, ": ",
-            output->ipAddresses[i]);
-    }
-    logMsg (LOG_INFO, "%s%d\n", "vendorId: ", output->vendorId);
-    logMsg (LOG_INFO, "%s%s\n", "productName: ",
-        ((output->productName) ? output->productName : "null"));
-    logMsg (LOG_INFO, "%s%d\n", "firmwareRevistion: ", output->firmwareRevision);
-    logMsg (LOG_INFO, "%s%d\n", "nVendorIds: ", output->nVendorIds);
-    for (i = 0; i < output->nVendorIds; i++)
-    {
-        logMsg (LOG_INFO, "%s%d%s%d\n", "supportedVendorId", i, ": ",
-            output->supportedVendorId[i]);
-    }
-    logMsg (LOG_INFO, "%s%d\n", "nAuthAppIds: ", output->nAuthAppIds);
-    for (i = 0; i < output->nAuthAppIds; i++)
-    {
-        logMsg (LOG_INFO, "%s%d%s%d\n", "supportedAuthAppId", i, ": ",
-            output->supportedAuthAppId[i]);
-    }
-    logMsg (LOG_INFO, "%s%d\n", "nAcctAppIds: ", output->nAcctAppIds);
-    for (i = 0; i < output->nAcctAppIds; i++)
-    {
-        logMsg (LOG_INFO, "%s%d%s%d\n", "supportedAcctAppId", i, ": ",
-            output->supportedAcctAppId[i]);
-    }
-    logMsg (LOG_INFO, "%s%d\n", "nVendorSpecificAppIds: ",
-        output->nVendorSpecificAppIds);
-    for (i = 0; i < output->nVendorSpecificAppIds; i++)
-    {
-        printVSA (&output->supportedVendorSpecificAppId[i]);
-    }
-    logMsg (LOG_INFO, "%s%d\n", "appPort: ", output->appPort);
-    logMsg (LOG_INFO, "%s%d\n", "proto: ", output->proto);
-    logMsg (LOG_INFO, "%s%d\n", "diamTCPPort: ", output->diamTCPPort);
-    logMsg (LOG_INFO, "%s%d\n", "diamSCTPPort: ", output->diamSCTPPort);
-    logMsg (LOG_INFO, "%s%d\n", "security: ", output->security);
-    logMsg (LOG_INFO, "%s%d\n", "role: ", output->role);
-    logMsg (LOG_INFO, "%s%d\n", "numberOfThreads: ", output->numberOfThreads);
-    logMsg (LOG_INFO, "%s%d\n", "Twinit: ", output->Twinit);
-    logMsg (LOG_INFO, "%s%d\n", "reopenTimer: ", output->reopenTimer);
-    logMsg (LOG_INFO, "%s%d\n", "smallPduSize: ", output->smallPduSize);
-    logMsg (LOG_INFO, "%s%d\n", "bigPduSize: ", output->bigPduSize);
-    logMsg (LOG_INFO, "%s%d\n", "pollingInterval: ", output->pollingInterval);
-    logMsg (LOG_INFO, "%s%d\n", "unknownPeerAction: ",
-        output->unknownPeerAction);
-    logMsg (LOG_INFO, "%s%d\n", "nPeerEntries: ", output->nPeerEntries);
-    printPeerConfig (output->peerConfiguration);
-    logMsg (LOG_INFO, "%s%d\n", "nRealmEntries: ", output->nRealmEntries);
-    printRealmConfig (output->realmConfiguration);
-    logMsg (LOG_INFO, "%s%d\n", "nUnknownPeers: ", output->nUnknownPeers);
-    for (i = 0; i < output->nUnknownPeers; i++)
-    {
-        logMsg (LOG_INFO, "%s%d%s%s\n", "unknownPeers", i, ": ",
-            output->unknownPeers[i]);
-    }
-    logMsg (LOG_INFO, "%s%d\n", "nodeStateId: ", output->nodeStateId);
-    logMsg (LOG_INFO, "%s\n", "-------  -------");
-
+    return -1;
 }

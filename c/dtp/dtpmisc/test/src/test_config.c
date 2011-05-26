@@ -3,6 +3,8 @@
 
 int main (int argc, char *argv[])
 {
-    parseXmlConfig (argv[1]);
+    DiameterConfig_t *output = malloc (sizeof(DiameterConfig_t));
+
+    parseXmlConfig (argv[1], output);
 }
 

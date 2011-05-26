@@ -132,12 +132,12 @@ void recvData (const int sockFd, const int size)
     logMsg (LOG_DEBUG, "%s%d\n", "Receiving PDU of size ", size);
 
     uint8_t *recvPdu = NULL;
-    uint8_t *chunkPdu = NULL;
+    uint8_t *chunkPdu = malloc (sizeof(*chunkPdu) * (size));
     int recvSize = 0;
     int chunkSize = 0;
     while (1)
     {
-        chunkSize = dtp_recv (sockFd, &chunkPdu, (size-recvSize));
+        chunkSize = dtp_recv (sockFd, chunkPdu, (size-recvSize));
         logMsg (LOG_DEBUG, "%s%d%s%d\n", " Received chunk ", chunkSize, " received total ", recvSize+chunkSize);
         if (chunkSize <= 0)
         {
@@ -157,4 +157,6 @@ void recvData (const int sockFd, const int size)
 
     logMsg (LOG_DEBUG, "%s\n", "Portions of received data: ");
     displayDataPdu (recvPdu, recvSize);
+    myfree(chunkPdu);
+    myfree(recvPdu);
 }

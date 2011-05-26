@@ -1,7 +1,7 @@
 #include "dtpmisc_hdr.h"
 #include "dtpmisc_proto.h"
 
-#define MAX_ERROR_LENGTH 200
+#define MAX_ERROR_LENGTH 500
 char errString[MAX_ERROR_LENGTH];
 
 void appendDataError (userData *ud, char *errString)
@@ -10,9 +10,8 @@ void appendDataError (userData *ud, char *errString)
     int curLen = ud->dataErrString ? (strlen (ud->dataErrString)) : 0;
     int incrementalLen = strlen (errString);
     ud->dataErrString = realloc (ud->dataErrString, (curLen + incrementalLen
-        + 2));
-    strcpy ((ud->dataErrString + curLen), "\n");
-    strcpy ((ud->dataErrString + curLen + 1), errString);
+        + 1));
+    strcpy ((ud->dataErrString + curLen), errString);
 }
 void handleCapProductName (userData *ud, char *data)
 {
@@ -43,7 +42,7 @@ void handleCapIPAddress (userData *ud, char *data)
     logFF();
     int curIPAddrPosition = (ud->output->nAddresses - 1);
 
-    if (strlen (data) >= DC_MAX_HOSTNAME_LEN) /* todo, use correct max size */
+    if (strlen (data) >= DC_MAX_HOSTNAME_LEN)
     {
         sprintf (errString, "%s%d%s%s\n",
             "Value for capability ipaddress exceeds limit of ",
@@ -151,10 +150,10 @@ void handleCapVsaiAcctAppId (userData *ud, char *data)
 void handleTransportNodeName (userData *ud, char *data)
 {
     logFF();
-    if (strlen (data) >= DC_MAX_NAME_LEN) /* todo use correct MAX */
+    if (strlen (data) >= DC_MAX_HOSTNAME_LEN)
     {
         sprintf (errString, "%s%d%s%s\n",
-            "Value for nodename exceeds limit of ", DC_MAX_NAME_LEN,
+            "Value for nodename exceeds limit of ", DC_MAX_HOSTNAME_LEN,
             " chars; data is ", data);
         appendDataError (ud, errString);
         return;
@@ -164,10 +163,10 @@ void handleTransportNodeName (userData *ud, char *data)
 void handleTransportNodeRealm (userData *ud, char *data)
 {
     logFF();
-    if (strlen (data) >= DC_MAX_NAME_LEN) /* todo use correct MAX */
+    if (strlen (data) >= DC_MAX_HOSTNAME_LEN)
     {
         sprintf (errString, "%s%d%s%s\n",
-            "Value for realmname exceeds limit of ", DC_MAX_NAME_LEN,
+            "Value for realmname exceeds limit of ", DC_MAX_HOSTNAME_LEN,
             " chars; data is ", data);
         appendDataError (ud, errString);
         return;
@@ -204,10 +203,10 @@ void handleTransportUnknownPeerAction (userData *ud, char *data)
 void handleTransportPTPeerHostname (userData *ud, char *data)
 {
     logFF();
-    if (strlen (data) >= DC_MAX_NAME_LEN)
+    if (strlen (data) >= DC_MAX_HOSTNAME_LEN)
     {
         sprintf (errString, "%s%d%s%s\n",
-            "Value for peer hostname exceeds limit of ", DC_MAX_NAME_LEN,
+            "Value for peer hostname exceeds limit of ", DC_MAX_HOSTNAME_LEN,
             " chars; data is ", data);
         appendDataError (ud, errString);
         return;
@@ -243,9 +242,9 @@ void handleTransportPTPeerIPAddress (userData *ud, char *data)
 {
     logFF();
     PeerConfig_t *pc = (PeerConfig_t *) ud->op;
-    int curIPAddrPosition = (pc->nIpAddresses - 1);
+    int curIPAddrPosition = (pc->nIpAddresses) - 1;
 
-    if (strlen (data) >= DC_MAX_HOSTNAME_LEN) /* todo, use correct max size */
+    if (strlen (data) >= DC_MAX_HOSTNAME_LEN)
     {
         sprintf (errString, "%s%d%s%s\n",
             "Value for peer ipaddress exceeds limit of ", DC_MAX_HOSTNAME_LEN,
@@ -259,10 +258,10 @@ void handleTransportPTPeerIPAddress (userData *ud, char *data)
 void handleTransportRTRouteRealm (userData *ud, char *data)
 {
     logFF();
-    if (strlen (data) >= DC_MAX_NAME_LEN) /*todo correct MAX */
+    if (strlen (data) >= DC_MAX_HOSTNAME_LEN)
     {
         sprintf (errString, "%s%d%s%s\n",
-            "Value for peer realmname exceeds limit of ", DC_MAX_NAME_LEN,
+            "Value for peer realmname exceeds limit of ", DC_MAX_HOSTNAME_LEN,
             " chars; data is ", data);
         appendDataError (ud, errString);
         return;
@@ -295,7 +294,7 @@ void handleTransportRTRouteAppPeerServer (userData *ud, char *data)
     RealmConfig_t *rc = (RealmConfig_t *) ud->op;
     int curServerPosition = (rc->nServers - 1);
 
-    if (strlen (data) >= DC_MAX_HOSTNAME_LEN) /* todo, use correct max size */
+    if (strlen (data) >= DC_MAX_HOSTNAME_LEN)
     {
         sprintf (errString, "%s%d%s%s\n",
             "Value for route peer server exceeds limit of ", DC_MAX_HOSTNAME_LEN,
@@ -384,7 +383,7 @@ void handleEndTagCapVsai (userData *ud)
 void handleStartTagCapIPAddress (userData *ud)
 {
     logFF();
-    if (DC_MAX_IP_ADDRESSES_PER_PEER == ud->output->nAddresses) /*todo use correct MAX */
+    if (DC_MAX_IP_ADDRESSES_PER_PEER == ud->output->nAddresses)
     {
         sprintf (errString, "%s%d\n",
             "Number of ipaddress for capability exceeds limit of ",
@@ -398,6 +397,7 @@ void handleStartTagTransportPTPeer (userData *ud)
 {
     logFF();
     PeerConfig_t *pc = malloc (sizeof(*pc));
+    memset (pc, 0, sizeof(*pc));
     ud->op = (void*) pc;
 }
 void handleEndTagTransportPTPeer (userData *ud)
@@ -426,6 +426,7 @@ void handleStartTagTransportRTRoute (userData *ud)
 {
     logFF();
     RealmConfig_t *rc = malloc (sizeof(*rc));
+    memset (rc, 0, sizeof(*rc));
     ud->op = (void*) rc;
 }
 void handleEndTagTransportRTRoute (userData *ud)
@@ -440,34 +441,13 @@ void handleStartTagTransportRTRouteAppPeer (userData *ud)
 {
     logFF();
     RealmConfig_t *rc = (void *) ud->op;
-    if (DC_MAX_IP_ADDRESSES_PER_PEER == rc->nServers) /* todo use correct MAX */
+    if (DC_MAX_SERVERS_PER_APP == rc->nServers)
     {
         sprintf (errString, "%s%d\n",
             "Number of peer for route exceeds limit of ",
-            DC_MAX_IP_ADDRESSES_PER_PEER);
+            DC_MAX_SERVERS_PER_APP);
         appendDataError (ud, errString);
         return;
     }
     ++(rc->nServers);
-}
-
-
-
-
-
-
-
-
-
-/* Dummy function. Replaces previous value of pc, if any */
-void addPeerTableEntry (userData *ud, PeerConfig_t *pc)
-{
-    logMsg (LOG_ERR, "%s\n", "Adding Peer config");
-    ud->output->peerConfiguration = pc;
-}
-/* Dummy function. Replaces previous value of rc, if any */
-void addRealmTableEntry (userData *ud, RealmConfig_t *rc)
-{
-    logMsg (LOG_ERR, "%s\n", "Adding Realm config");
-    ud->output->realmConfiguration = rc;
 }

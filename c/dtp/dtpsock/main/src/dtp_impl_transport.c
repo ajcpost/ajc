@@ -11,7 +11,7 @@ int transport_tcpSend (const dtpSockInfo * const sockInfo,
     return sentSize;
 }
 
-int transport_tcpRecv (const dtpSockInfo * const sockInfo, uint8_t **recvPdu,
+int transport_tcpRecv (const dtpSockInfo * const sockInfo, uint8_t *recvPdu,
         const long transferSize)
 {
     struct msghdr mh;
@@ -19,13 +19,7 @@ int transport_tcpRecv (const dtpSockInfo * const sockInfo, uint8_t **recvPdu,
     logMsg (LOG_DEBUG, "%s%d%s%d\n", "Receiving TCP data over socket ",
             sockInfo->sockFd, ", expected size is ", transferSize);
 
-    *recvPdu = NULL;
-    uint8_t *chunkPdu = malloc (sizeof(*chunkPdu) * (transferSize));
-    int recvSize = recv (sockInfo->sockFd, chunkPdu, transferSize, 0);
-    if (recvSize > 0)
-    {
-        *recvPdu = realloc (chunkPdu, recvSize);
-    }
+    int recvSize = recv (sockInfo->sockFd, recvPdu, transferSize, 0);
     return recvSize;
 }
 

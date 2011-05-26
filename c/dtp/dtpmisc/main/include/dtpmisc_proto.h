@@ -1,3 +1,7 @@
+/* src/dtp_dummy.c */
+void addPeerTableEntry (userData *ud, PeerConfig_t *pc);
+void addRealmTableEntry (userData *ud, RealmConfig_t *rc);
+
 /* src/dtp_logmgr.c */
 void logMsg (const int msgLevel, const char * const format, ...);
 void useSyslog (int facility);
@@ -21,13 +25,6 @@ char *getDate ();
 const int getRandomNo (const int hwm);
 void displayMemory(char *address, int length);
 void logMemoryData (char *address, int length);
-
-/* src/dtp_xmlcb.c */
-void startTagCallback (void *udata, const xmlChar *name,
-    const xmlChar **attrs);
-void endTagCallback (void *udata, const xmlChar *name);
-void dataCallback (void *udata, const xmlChar *ch, int len);
-char *copyData (const xmlChar *ch, const int len);
 
 /* src/dtp_xmlop.c */
 void appendDataError (userData *ud, char *errString);
@@ -77,15 +74,20 @@ void handleStartTagTransportPTPeerIPAddress (userData *ud);
 void handleStartTagTransportRTRoute (userData *ud);
 void handleEndTagTransportRTRoute (userData *ud);
 void handleStartTagTransportRTRouteAppPeer (userData *ud);
-void addPeerTableEntry (userData *ud, PeerConfig_t *pc);
-void addRealmTableEntry (userData *ud, RealmConfig_t *rc);
 
-/* src/dtp_xmlparse.c */
-tagMetadata * getTagMetadata (userData *ud, char *tag);
-int parseXmlConfig (const char * const xmlFilePath);
+/* src/dtp_xmlop_print.c */
 void printServerList (ServerListEntry_t *sle);
 void printRealmConfig (RealmConfig_t *rc);
 void printPeerConfig (PeerConfig_t *pc);
 void printVSA (VendorSpecificAppId_t *vsa);
 void printOutput (DiameterConfig_t *output);
+
+/* src/dtp_xmlparse.c */
+tagMetadata * findTagMetadata (userData *ud, char *tag);
+void startTagCallback (void *udata, const xmlChar *name, const xmlChar **attrs);
+void endTagCallback (void *udata, const xmlChar *name);
+void dataCallback (void *udata, const xmlChar *ch, int len);
+char *copyData (const xmlChar *ch, const int len);
+void logDetails (userData *ud);
+int parseXmlConfig (const char * const xmlFilePath, DiameterConfig_t *output);
 
