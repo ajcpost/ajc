@@ -1,148 +1,95 @@
 #include "dtpmisc_hdr.h"
 #include "dtpmisc_proto.h"
 
-void startElementCallback (void *udata, const xmlChar *name,
+void startTagCallback (void *udata, const xmlChar *name,
     const xmlChar **attrs)
 {
     logFF ();
 
     char *tag = (char *) name;
     userData *ud = (userData *) udata;
-    if (ud->error)
+    logMsg (LOG_INFO, "%s%s%s%s\n", "Start input tag ", tag, " at path ",
+        ((ud->curPath) ? ud->curPath : "null"));
+
+    /* Find the matching tag metadata */
+    ud->curTm = getTagMetadata (ud, tag);
+    if (NULL == ud->curTm)
     {
-        logMsg (LOG_WARNING, "%s\n",
-            "Parser in error state, skipping further handling.");
         return;
     }
-    logMsg (LOG_INFO, "%s%s%s%s\n", "Start input tag ", tag, " at fdn ",
-        ((ud->fdn) ? ud->fdn : "null"));
 
-    ud->tm = getTagMetadata (ud, tag);
-    if (NULL != ud->tm)
+    /* Adjust the path to reflect the current hierarchy */
+    int curLen = ((ud->curPath) ? strlen (ud->curPath) : 0);
+    int incrementalLen = strlen (tag);
+    ud->curPath = realloc (ud->curPath, curLen + incrementalLen + 1);
+    strcpy (ud->curPath + curLen, tag);
+    logMsg (LOG_DEBUG, "%s%s\n", "    Adjusted path ",
+        ((ud->curPath) ? ud->curPath : "null"));
+
+    /* Call the handler */
+    if (NULL != ud->curTm->handleStartTagFunc)
     {
-        if (ud->tm->ignoreTag)
-        {
-            logMsg (LOG_DEBUG, "%s\n", "    Ignoring the tag");
-            return;
-        }
-
-        /* The fdn in user_data is to be adjusted in start/end calls */
-        int totallen = ((ud->fdn) ? strlen (ud->fdn) : 0) + (strlen (tag) + 1);
-        char *fdn = malloc (sizeof(char) * totallen);
-        strcpy (fdn, ((ud->fdn) ? (ud->fdn) : ""));
-        strcat (fdn, tag);
-        myfree (ud->fdn);
-        ud->fdn = fdn;
-        if (NULL != ud->tm->handleTagFunc)
-        {
-            if (-1 == ud->tm->handleTagFunc (ud->output))
-            {
-                ud->error = 1;
-            }
-        }
+        ud->curTm->handleStartTagFunc (ud);
     }
 }
 
-void endElementCallback (void *udata, const xmlChar *name)
+void endTagCallback (void *udata, const xmlChar *name)
 {
     logFF ();
 
     char *tag = (char *) name;
     userData *ud = (userData *) udata;
-    if (ud->error)
-    {
-        logMsg (LOG_WARNING, "%s\n",
-            "Parser in error state, skipping further handling.");
-        return;
-    }
-    logMsg (LOG_INFO, "%s%s%s%s\n", "End input tag ", tag, " at fdn ",
-        ((ud->fdn) ? ud->fdn : "null"));
+    logMsg (LOG_INFO, "%s%s%s%s\n", "End input tag ", tag, " at path ",
+        ((ud->curPath) ? ud->curPath : "null"));
 
-    ud->tm = NULL;
-
-    /* The fdn in user_data is to be adjusted in start/end calls */
-    if (endTagMismatch (ud, tag))
+    /* Find the matching tag metadata, don't pass tag since it's already part of curPath */
+    ud->curTm = getTagMetadata (ud, NULL);
+    if (NULL == ud->curTm)
     {
         return;
     }
-    logMsg (LOG_DEBUG, "%s%s%s%s\n", "    Adjusting fdn ", ud->fdn,
-        " to remove tag ", tag);
-    if (0 == strcmp (ud->fdn, tag))
-    {
-        myfree (ud->fdn);
-        ud->fdn = NULL;
-    }
-    else
-    {
-        int cutAt = strlen (ud->fdn) - strlen (tag);
-        char *p = malloc (sizeof(char) * (cutAt + 1));
-        strncpy (p, ud->fdn, cutAt);
-        *(p + cutAt) = '\0';
-        myfree (ud->fdn);
-        ud->fdn = p;
-    }
-    logMsg (LOG_DEBUG, "%s%s\n", "    Adjusted fdn ",
-        ((ud->fdn) ? ud->fdn : "null"));
 
+    /*
+     * Adjust the path to reflect the current hierarchy.
+     * Don't realloc but rather null terminate at appropriate position. The memory will eventually be
+     * freed at the end of XML parsing.
+     * */
+    int curLen = ((ud->curPath) ? strlen (ud->curPath) : 0);
+    int incrementalLen = strlen (tag);
+    if (curLen >= incrementalLen)
+    {
+        *(ud->curPath + curLen - incrementalLen) = '\0';
+    }
+    logMsg (LOG_DEBUG, "%s%s\n", "    Adjusted path ",
+        ((ud->curPath) ? ud->curPath : "null"));
+
+    /* Call the handler */
+    if (NULL != ud->curTm->handleEndTagFunc)
+    {
+        ud->curTm->handleEndTagFunc (ud);
+    }
 }
 
-void startDataCallback (void *udata, const xmlChar *ch, int len)
+void dataCallback (void *udata, const xmlChar *ch, int len)
 {
     logFF ();
 
     userData *ud = (userData *) udata;
-    if (ud->error)
-    {
-        logMsg (LOG_WARNING, "%s\n",
-            "Parser in error state, skipping further handling.");
-        return;
-    }
-    logMsg (LOG_DEBUG, "%s%s\n", "    Data callback at fdn ",
-        ((ud->fdn) ? ud->fdn : "null"));
+    logMsg (LOG_DEBUG, "%s%s\n", "    Data callback at path ",
+        ((ud->curPath) ? ud->curPath : "null"));
 
-    if (NULL == ud->tm || ud->tm->ignoreData)
-    {
-        logMsg (LOG_DEBUG, "%s\n", "    Ignoring the data");
-        return;
-    }
-
-    if (NULL != ud->tm->handleDataFunc)
+    if (NULL != ud->curTm && NULL != ud->curTm->handleDataFunc)
     {
         char *data = copyData (ch, len);
         logMsg (LOG_DEBUG, "%s%s\n", "    Data is ", (data ? data : "null"));
         if (NULL != data)
         {
-            if (-1 == ud->tm->handleDataFunc (ud->output, data))
-            {
-                ud->error = 1;
-            }
-            else
-            {
-                ud->tm->dataProcessed = 1;
-            }
+            ud->curTm->handleDataFunc (ud, data);
             myfree (data);
         }
     }
 }
 
-int endTagMismatch (userData *ud, char *tag)
-{
-    if (NULL == ud->fdn || (strlen (ud->fdn) < strlen (tag)))
-    {
-        logMsg (LOG_WARNING, "%s%s%s%s\n", "Null or incorrect fdn ",
-            ((ud->fdn) ? ud->fdn : "null"), " can't remove ", tag);
-        return 1;
-    }
-    char *p1 = ud->fdn + strlen (ud->fdn);
-    char *p2 = (p1 - strlen (tag));
-    if (0 != strcmp (p2, tag))
-    {
-        logMsg (LOG_WARNING, "%s%s%s%s\n", " fdn ", ud->fdn,
-            " doesn't end with tag ", tag);
-        return 1;
-    }
-    return 0;
-}
 
 char *copyData (const xmlChar *ch, const int len)
 {

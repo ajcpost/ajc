@@ -1,218 +1,473 @@
 #include "dtpmisc_hdr.h"
 #include "dtpmisc_proto.h"
 
-int handleCapProductName (DiameterConfig_t *output, char *value)
+#define MAX_ERROR_LENGTH 200
+char errString[MAX_ERROR_LENGTH];
+
+void appendDataError (userData *ud, char *errString)
+{
+    logMsg (LOG_ERR, "%s\n", errString);
+    int curLen = ud->dataErrString ? (strlen (ud->dataErrString)) : 0;
+    int incrementalLen = strlen (errString);
+    ud->dataErrString = realloc (ud->dataErrString, (curLen + incrementalLen
+        + 2));
+    strcpy ((ud->dataErrString + curLen), "\n");
+    strcpy ((ud->dataErrString + curLen + 1), errString);
+}
+void handleCapProductName (userData *ud, char *data)
 {
     logFF();
-    if (strlen (value) >= DC_MAX_NAME_LEN)
+    if (strlen (data) >= DC_MAX_NAME_LEN)
     {
-        logMsg (LOG_ERR, "%s%d%s%s\n",
+        sprintf (errString, "%s%d%s%s\n",
             "Value for product_name exceeds limit of ", DC_MAX_NAME_LEN,
-            " chars; value is ", value);
-        return -1;
+            " chars; data is ", data);
+        appendDataError (ud, errString);
+        return;
     }
-    strcpy (output->productName, value);
-    return 0;
+    strcpy (ud->output->productName, data);
 }
 
-int handleCapRevision (DiameterConfig_t *output, char *value)
+void handleCapRevision (userData *ud, char *data)
 {
     logFF();
-    output->firmwareRevision = strtol (value, NULL, 0);
-    return 0;
+    ud->output->firmwareRevision = strtol (data, NULL, 0);
 }
-int handleCapVendorId (DiameterConfig_t *output, char *value)
+void handleCapVendorId (userData *ud, char *data)
 {
     logFF();
-    output->vendorId = strtol (value, NULL, 0);
-    return 0;
+    ud->output->vendorId = strtol (data, NULL, 0);
 }
-int handleCapSupportedVendorId (DiameterConfig_t *output, char *value)
+void handleCapIPAddress (userData *ud, char *data)
 {
     logFF();
-    if (DC_MAX_SUPPORTED_ID == output->nVendorIds)
+    int curIPAddrPosition = (ud->output->nAddresses - 1);
+
+    if (strlen (data) >= DC_MAX_HOSTNAME_LEN) /* todo, use correct max size */
     {
-        logMsg (LOG_ERR, "%s%d\n",
+        sprintf (errString, "%s%d%s%s\n",
+            "Value for capability ipaddress exceeds limit of ",
+            DC_MAX_HOSTNAME_LEN, " chars; data is ", data);
+        appendDataError (ud, errString);
+        return;
+    }
+    strcpy (ud->output->ipAddresses[curIPAddrPosition], data);
+}
+void handleCapSupportedVendorId (userData *ud, char *data)
+{
+    logFF();
+    if (DC_MAX_SUPPORTED_ID == ud->output->nVendorIds)
+    {
+        sprintf (errString, "%s%d\n",
             "Number of supported_vendor_id exceeds limit of ",
             DC_MAX_SUPPORTED_ID);
-        return -1;
+        appendDataError (ud, errString);
+        return;
     }
-    output->supportedVendorId[output->nVendorIds] = strtol (value, NULL, 0);
-    ++output->nVendorIds;
-    return 0;
+    ud->output->supportedVendorId[ud->output->nVendorIds] = strtol (data, NULL,
+        0);
+    ++ud->output->nVendorIds;
 }
-int handleCapAuthAppId (DiameterConfig_t *output, char *value)
+void handleCapAuthAppId (userData *ud, char *data)
 {
     logFF();
-    if (DC_MAX_SUPPORTED_ID == output->nAuthAppIds)
+    if (DC_MAX_SUPPORTED_ID == ud->output->nAuthAppIds)
     {
-        logMsg (LOG_ERR, "%s%d\n", "Number of auth_app_id exceeds limit of ",
-            DC_MAX_SUPPORTED_ID);
-        return -1;
+        sprintf (errString, "%s%d\n",
+            "Number of auth_app_id exceeds limit of ", DC_MAX_SUPPORTED_ID);
+        appendDataError (ud, errString);
+        return;
     }
-    output->supportedAuthAppId[output->nAuthAppIds] = strtol (value, NULL, 0);
-    ++output->nAuthAppIds;
-    return 0;
+    ud->output->supportedAuthAppId[ud->output->nAuthAppIds] = strtol (data,
+        NULL, 0);
+    ++ud->output->nAuthAppIds;
 }
-int handleCapAcctAppId (DiameterConfig_t *output, char *value)
+void handleCapAcctAppId (userData *ud, char *data)
 {
     logFF();
-    if (DC_MAX_SUPPORTED_ID == output->nAcctAppIds)
+    if (DC_MAX_SUPPORTED_ID == ud->output->nAcctAppIds)
     {
-        logMsg (LOG_ERR, "%s%d\n", "Number of acct_app_id exceeds limit of ",
-            DC_MAX_SUPPORTED_ID);
-        return -1;
+        sprintf (errString, "%s%d\n",
+            "Number of acct_app_id exceeds limit of ", DC_MAX_SUPPORTED_ID);
+        appendDataError (ud, errString);
+        return;
     }
-    output->supportedAcctAppId[output->nAcctAppIds] = strtol (value, NULL, 0);
-    ++output->nAcctAppIds;
-    return 0;
+    ud->output->supportedAcctAppId[ud->output->nAcctAppIds] = strtol (data,
+        NULL, 0);
+    ++ud->output->nAcctAppIds;
 }
 
-int handleCapVsaiVendorId (DiameterConfig_t *output, char *value)
+void handleCapVsaiVendorId (userData *ud, char *data)
 {
     logFF();
-    int curVsaPosition = (output->nVendorSpecificAppIds - 1);
+    int curVsaPosition = (ud->output->nVendorSpecificAppIds - 1);
     if (DC_MAX_SUPPORTED_ID
-        == output->supportedVendorSpecificAppId[curVsaPosition].nVendorIds)
+        == ud->output->supportedVendorSpecificAppId[curVsaPosition].nVendorIds)
     {
-        logMsg (LOG_ERR, "%s%d%s%d\n", "Number of vendor_id exceeds limit of ",
-            DC_MAX_SUPPORTED_ID, " for VSA at position ", curVsaPosition);
-        return -1;
+        sprintf (errString, "%s%d%s%d\n",
+            "Number of vendor_id exceeds limit of ", DC_MAX_SUPPORTED_ID,
+            " for VSA at position ", curVsaPosition);
+        appendDataError (ud, errString);
+        return;
     }
-    ++(output->supportedVendorSpecificAppId[curVsaPosition].nVendorIds);
+    ++(ud->output->supportedVendorSpecificAppId[curVsaPosition].nVendorIds);
     int vendorPositionInCurVsa =
-        (output->supportedVendorSpecificAppId[curVsaPosition].nVendorIds - 1);
-    output->supportedVendorSpecificAppId[curVsaPosition].vendorIds[vendorPositionInCurVsa]
-        = strtol (value, NULL, 0);
-    return 0;
+        (ud->output->supportedVendorSpecificAppId[curVsaPosition].nVendorIds
+            - 1);
+    ud->output->supportedVendorSpecificAppId[curVsaPosition].vendorIds[vendorPositionInCurVsa]
+        = strtol (data, NULL, 0);
 }
 
-int handleCapVsaiAuthAppId (DiameterConfig_t *output, char *value)
+void handleCapVsaiAuthAppId (userData *ud, char *data)
 {
     logFF();
-    int curVsaPosition = (output->nVendorSpecificAppIds - 1);
-    if (output->supportedVendorSpecificAppId[curVsaPosition].isAuth != -1)
+    int curVsaPosition = (ud->output->nVendorSpecificAppIds - 1);
+    if (ud->output->supportedVendorSpecificAppId[curVsaPosition].isAuth != -1)
     {
-        logMsg (LOG_ERR, "%s\n", "Auth or Acct id is alredy set");
-        return -1;
+        sprintf (errString, "%s\n", "Auth or Acct id is alredy set");
+        appendDataError (ud, errString);
+        return;
     }
-    output->supportedVendorSpecificAppId[curVsaPosition].appId = strtol (value,
-        NULL, 0);
-    output->supportedVendorSpecificAppId[curVsaPosition].isAuth = 1;
+    ud->output->supportedVendorSpecificAppId[curVsaPosition].appId = strtol (
+        data, NULL, 0);
+    ud->output->supportedVendorSpecificAppId[curVsaPosition].isAuth = 1;
 }
 
-int handleCapVsaiAcctAppId (DiameterConfig_t *output, char *value)
+void handleCapVsaiAcctAppId (userData *ud, char *data)
 {
     logFF();
-    int curVsaPosition = (output->nVendorSpecificAppIds - 1);
-    if (output->supportedVendorSpecificAppId[curVsaPosition].isAuth != -1)
+    int curVsaPosition = (ud->output->nVendorSpecificAppIds - 1);
+    if (ud->output->supportedVendorSpecificAppId[curVsaPosition].isAuth != -1)
     {
-        logMsg (LOG_ERR, "%s\n", "Auth or Acct id is alredy set");
-        return -1;
+        sprintf (errString, "%s\n", "Auth or Acct id is alredy set");
+        appendDataError (ud, errString);
+        return;
     }
-    output->supportedVendorSpecificAppId[curVsaPosition].appId = strtol (value,
-        NULL, 0);
-    output->supportedVendorSpecificAppId[curVsaPosition].isAuth = 0;
+    ud->output->supportedVendorSpecificAppId[curVsaPosition].appId = strtol (
+        data, NULL, 0);
+    ud->output->supportedVendorSpecificAppId[curVsaPosition].isAuth = 0;
 }
 
-int handleTransportAppPort (DiameterConfig_t *output, char *value)
+void handleTransportNodeName (userData *ud, char *data)
 {
     logFF();
-    output->appPort = strtol (value, NULL, 0);
-    return 0;
-}
-int handleTransportProto (DiameterConfig_t *output, char *value)
-{
-    logFF();
-    output->proto = strtol (value, NULL, 0);
-    return 0;
-}
-int handleTransportTcpPort (DiameterConfig_t *output, char *value)
-{
-    logFF();
-    output->diamTCPPort = strtol (value, NULL, 0);
-    return 0;
-}
-int handleTransportSctpPort (DiameterConfig_t *output, char *value)
-{
-    logFF();
-    output->diamSCTPPort = strtol (value, NULL, 0);
-    return 0;
-}
-
-int handleTransportUnknownPeerAction (DiameterConfig_t *output, char *value)
-{
-    logFF();
-    output->unknownPeerAction = strtol (value, NULL, 0);
-    return 0;
-}
-
-int handleImplRole (DiameterConfig_t *output, char *value)
-{
-    logFF();
-    output->role = strtol (value, NULL, 0);
-    return 0;
-}
-int handleImplNumOfThreads (DiameterConfig_t *output, char *value)
-{
-    logFF();
-    output->numberOfThreads = strtol (value, NULL, 0);
-    return 0;
-}
-int handleImplTwinit (DiameterConfig_t *output, char *value)
-{
-    logFF();
-    output->Twinit = strtol (value, NULL, 0);
-    return 0;
-}
-int handleImplInactivity (DiameterConfig_t *output, char *value)
-{
-    logFF();
-    output->inactivityTimer = strtol (value, NULL, 0);
-    return 0;
-}
-int handleImplReopenTimer (DiameterConfig_t *output, char *value)
-{
-    logFF();
-    output->reopenTimer = strtol (value, NULL, 0);
-    return 0;
-}
-int handleImplSmallPdu (DiameterConfig_t *output, char *value)
-{
-    logFF();
-    output->smallPduSize = strtol (value, NULL, 0);
-    return 0;
-}
-int handleImplBigPdu (DiameterConfig_t *output, char *value)
-{
-    logFF();
-    output->bigPduSize = strtol (value, NULL, 0);
-    return 0;
-}
-
-int handleTagCapVsai (DiameterConfig_t *output)
-{
-    if (DC_MAX_SUPPORTED_ID == output->nVendorSpecificAppIds)
+    if (strlen (data) >= DC_MAX_NAME_LEN) /* todo use correct MAX */
     {
-        logMsg (LOG_ERR, "%s%d\n",
+        sprintf (errString, "%s%d%s%s\n",
+            "Value for nodename exceeds limit of ", DC_MAX_NAME_LEN,
+            " chars; data is ", data);
+        appendDataError (ud, errString);
+        return;
+    }
+    strcpy ((char *) ud->output->nodeName, data);
+}
+void handleTransportNodeRealm (userData *ud, char *data)
+{
+    logFF();
+    if (strlen (data) >= DC_MAX_NAME_LEN) /* todo use correct MAX */
+    {
+        sprintf (errString, "%s%d%s%s\n",
+            "Value for realmname exceeds limit of ", DC_MAX_NAME_LEN,
+            " chars; data is ", data);
+        appendDataError (ud, errString);
+        return;
+    }
+    strcpy ((char *) ud->output->nodeRealm, data);
+}
+void handleTransportAppPort (userData *ud, char *data)
+{
+    logFF();
+    ud->output->appPort = strtol (data, NULL, 0);
+}
+void handleTransportProto (userData *ud, char *data)
+{
+    logFF();
+    ud->output->proto = strtol (data, NULL, 0);
+}
+void handleTransportTcpPort (userData *ud, char *data)
+{
+    logFF();
+    ud->output->diamTCPPort = strtol (data, NULL, 0);
+}
+void handleTransportSctpPort (userData *ud, char *data)
+{
+    logFF();
+    ud->output->diamSCTPPort = strtol (data, NULL, 0);
+}
+
+void handleTransportUnknownPeerAction (userData *ud, char *data)
+{
+    logFF();
+    ud->output->unknownPeerAction = strtol (data, NULL, 0);
+}
+
+void handleTransportPTPeerHostname (userData *ud, char *data)
+{
+    logFF();
+    if (strlen (data) >= DC_MAX_NAME_LEN)
+    {
+        sprintf (errString, "%s%d%s%s\n",
+            "Value for peer hostname exceeds limit of ", DC_MAX_NAME_LEN,
+            " chars; data is ", data);
+        appendDataError (ud, errString);
+        return;
+    }
+    PeerConfig_t *pc = (PeerConfig_t *) ud->op;
+    strcpy (pc->hostName, data);
+}
+void handleTransportPTPeerSecurity (userData *ud, char *data)
+{
+    logFF();
+    PeerConfig_t *pc = (PeerConfig_t *) ud->op;
+    pc->security = strtol (data, NULL, 0);
+}
+void handleTransportPTPeerProto (userData *ud, char *data)
+{
+    logFF();
+    PeerConfig_t *pc = (PeerConfig_t *) ud->op;
+    pc->proto = strtol (data, NULL, 0);
+}
+void handleTransportPTPeerTcpPort (userData *ud, char *data)
+{
+    logFF();
+    PeerConfig_t *pc = (PeerConfig_t *) ud->op;
+    pc->tcp_port = strtol (data, NULL, 0);
+}
+void handleTransportPTPeerSctpPort (userData *ud, char *data)
+{
+    logFF();
+    PeerConfig_t *pc = (PeerConfig_t *) ud->op;
+    pc->sctp_port = strtol (data, NULL, 0);
+}
+void handleTransportPTPeerIPAddress (userData *ud, char *data)
+{
+    logFF();
+    PeerConfig_t *pc = (PeerConfig_t *) ud->op;
+    int curIPAddrPosition = (pc->nIpAddresses - 1);
+
+    if (strlen (data) >= DC_MAX_HOSTNAME_LEN) /* todo, use correct max size */
+    {
+        sprintf (errString, "%s%d%s%s\n",
+            "Value for peer ipaddress exceeds limit of ", DC_MAX_HOSTNAME_LEN,
+            " chars; data is ", data);
+        appendDataError (ud, errString);
+        return;
+    }
+    strcpy (pc->ipAddresses[curIPAddrPosition], data);
+}
+
+void handleTransportRTRouteRealm (userData *ud, char *data)
+{
+    logFF();
+    if (strlen (data) >= DC_MAX_NAME_LEN) /*todo correct MAX */
+    {
+        sprintf (errString, "%s%d%s%s\n",
+            "Value for peer realmname exceeds limit of ", DC_MAX_NAME_LEN,
+            " chars; data is ", data);
+        appendDataError (ud, errString);
+        return;
+    }
+    RealmConfig_t *rc = (RealmConfig_t *) ud->op;
+    strcpy (rc->realmName, data);
+}
+void handleTransportRTRouteAction (userData *ud, char *data)
+{
+    logFF();
+    RealmConfig_t *rc = (RealmConfig_t *) ud->op;
+    rc->action = strtol (data, NULL, 0);
+}
+void handleTransportRTRouteAppId (userData *ud, char *data)
+{
+    logFF();
+    RealmConfig_t *rc = (RealmConfig_t *) ud->op;
+    rc->appIdentifier = strtol (data, NULL, 0);
+}
+void handleTransportRTRouteAppVendorId (userData *ud, char *data)
+{
+    logFF();
+    RealmConfig_t *rc = (RealmConfig_t *) ud->op;
+    rc->vendorId = strtol (data, NULL, 0);
+}
+
+void handleTransportRTRouteAppPeerServer (userData *ud, char *data)
+{
+    logFF();
+    RealmConfig_t *rc = (RealmConfig_t *) ud->op;
+    int curServerPosition = (rc->nServers - 1);
+
+    if (strlen (data) >= DC_MAX_HOSTNAME_LEN) /* todo, use correct max size */
+    {
+        sprintf (errString, "%s%d%s%s\n",
+            "Value for route peer server exceeds limit of ", DC_MAX_HOSTNAME_LEN,
+            " chars; data is ", data);
+        appendDataError (ud, errString);
+        return;
+    }
+    strcpy (rc->serverList[curServerPosition].serverName, data);
+}
+void handleTransportRTRouteAppPeerWeight (userData *ud, char *data)
+{
+    logFF();
+    RealmConfig_t *rc = (RealmConfig_t *) ud->op;
+    int curServerPosition = (rc->nServers - 1);
+    rc->serverList[curServerPosition].weight = strtol (data, NULL, 0);
+}
+
+
+void handleImplRole (userData *ud, char *data)
+{
+    logFF();
+    ud->output->role = strtol (data, NULL, 0);
+}
+void handleImplNumOfThreads (userData *ud, char *data)
+{
+    logFF();
+    ud->output->numberOfThreads = strtol (data, NULL, 0);
+}
+void handleImplTwinit (userData *ud, char *data)
+{
+    logFF();
+    ud->output->Twinit = strtol (data, NULL, 0);
+}
+void handleImplInactivity (userData *ud, char *data)
+{
+    logFF();
+    ud->output->inactivityTimer = strtol (data, NULL, 0);
+}
+void handleImplReopenTimer (userData *ud, char *data)
+{
+    logFF();
+    ud->output->reopenTimer = strtol (data, NULL, 0);
+}
+void handleImplSmallPdu (userData *ud, char *data)
+{
+    logFF();
+    ud->output->smallPduSize = strtol (data, NULL, 0);
+}
+void handleImplBigPdu (userData *ud, char *data)
+{
+    logFF();
+    ud->output->bigPduSize = strtol (data, NULL, 0);
+}
+void handleImplPollingInterval (userData *ud, char *data)
+{
+    logFF();
+    ud->output->pollingInterval = strtol (data, NULL, 0);
+}
+
+void handleStartTagCapVsai (userData *ud)
+{
+    logFF();
+    if (DC_MAX_SUPPORTED_ID == ud->output->nVendorSpecificAppIds)
+    {
+        sprintf (errString, "%s%d\n",
             "Number of vendor_specific_application_id exceeds limit of ",
             DC_MAX_SUPPORTED_ID);
-        return -1;
+        appendDataError (ud, errString);
+        return;
     }
-    ++(output->nVendorSpecificAppIds);
-    output->supportedVendorSpecificAppId[output->nVendorSpecificAppIds].isAuth
+    ud->output->supportedVendorSpecificAppId[ud->output->nVendorSpecificAppIds].isAuth
         = -1;
+    ++(ud->output->nVendorSpecificAppIds);
 }
-int handleTagTransportPTPeer (DiameterConfig_t *output)
+void handleEndTagCapVsai (userData *ud)
 {
-    /*if (DC_MAX_SUPPORTED_ID == output->nPeerEntries)
-     {
-     logMsg (LOG_ERR, "%s%d\n",
-     "Number of peer configs exceeds limit of ",
-     DC_MAX_SUPPORTED_ID);
-     return -1;
-     }*/
-    ++(output->nPeerEntries);
-    output->peerConfiguration = realloc (peerConfiguration,
-        (output->nPeerEntries * sizeof(*(output->peerConfiguration))));
+    logFF();
+    int curVsaPos = (ud->output->nVendorSpecificAppIds-1);
+    if (-1 == ud->output->supportedVendorSpecificAppId[curVsaPos].isAuth)
+    {
+        sprintf (errString, "%s%d\n",
+            "None of acct or auth id set for VSA position ", curVsaPos);
+        appendDataError (ud, errString);
+    }
+}
+void handleStartTagCapIPAddress (userData *ud)
+{
+    logFF();
+    if (DC_MAX_IP_ADDRESSES_PER_PEER == ud->output->nAddresses) /*todo use correct MAX */
+    {
+        sprintf (errString, "%s%d\n",
+            "Number of ipaddress for capability exceeds limit of ",
+            DC_MAX_IP_ADDRESSES_PER_PEER);
+        appendDataError (ud, errString);
+        return;
+    }
+    ++(ud->output->nAddresses);
+}
+void handleStartTagTransportPTPeer (userData *ud)
+{
+    logFF();
+    PeerConfig_t *pc = malloc (sizeof(*pc));
+    ud->op = (void*) pc;
+}
+void handleEndTagTransportPTPeer (userData *ud)
+{
+    logFF();
+    PeerConfig_t *pc = (void *) ud->op;
+    ud->op = NULL;
+    addPeerTableEntry (ud, pc);
+}
+void handleStartTagTransportPTPeerIPAddress (userData *ud)
+{
+    logFF();
+    PeerConfig_t *pc = (void *) ud->op;
+    if (DC_MAX_IP_ADDRESSES_PER_PEER == pc->nIpAddresses)
+    {
+        sprintf (errString, "%s%d\n",
+            "Number of ipaddress for peer exceeds limit of ",
+            DC_MAX_IP_ADDRESSES_PER_PEER);
+        appendDataError (ud, errString);
+        return;
+    }
+    ++(pc->nIpAddresses);
+}
+
+void handleStartTagTransportRTRoute (userData *ud)
+{
+    logFF();
+    RealmConfig_t *rc = malloc (sizeof(*rc));
+    ud->op = (void*) rc;
+}
+void handleEndTagTransportRTRoute (userData *ud)
+{
+    logFF();
+    RealmConfig_t *rc = (void *) ud->op;
+    ud->op = NULL;
+    addRealmTableEntry (ud, rc);
+}
+
+void handleStartTagTransportRTRouteAppPeer (userData *ud)
+{
+    logFF();
+    RealmConfig_t *rc = (void *) ud->op;
+    if (DC_MAX_IP_ADDRESSES_PER_PEER == rc->nServers) /* todo use correct MAX */
+    {
+        sprintf (errString, "%s%d\n",
+            "Number of peer for route exceeds limit of ",
+            DC_MAX_IP_ADDRESSES_PER_PEER);
+        appendDataError (ud, errString);
+        return;
+    }
+    ++(rc->nServers);
+}
+
+
+
+
+
+
+
+
+
+/* Dummy function. Replaces previous value of pc, if any */
+void addPeerTableEntry (userData *ud, PeerConfig_t *pc)
+{
+    logMsg (LOG_ERR, "%s\n", "Adding Peer config");
+    ud->output->peerConfiguration = pc;
+}
+/* Dummy function. Replaces previous value of rc, if any */
+void addRealmTableEntry (userData *ud, RealmConfig_t *rc)
+{
+    logMsg (LOG_ERR, "%s\n", "Adding Realm config");
+    ud->output->realmConfiguration = rc;
 }

@@ -68,6 +68,7 @@
       <tcp_port>3868</tcp_port>
       <sctp_port>3872</sctp_port>
       <unknown_peer_action>2</unknown_peer_action>
+      <proto>9</proto>
 
       <!-- Peer table. This node can connect only to the peers listed here... -->
       <peer_table>

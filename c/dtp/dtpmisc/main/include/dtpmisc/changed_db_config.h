@@ -18,6 +18,12 @@
 #ifndef _DB_CONFIG_H
 #define _DB_CONFIG_H 1
 
+/* ajc, Added */
+# define DC_MAX_HOSTNAME_LEN 50
+typedef unsigned char lcn_u8_t;
+typedef unsigned char lcn_u16_t;
+typedef unsigned char lcn_u32_t;
+
 /* for sundry names like product name */
 #define DC_MAX_NAME_LEN 128
 
@@ -85,17 +91,17 @@
 /* Name of the product */
 #define LCN_PRODUCT_NAME "LCN Base Diameter"
 
-enum Security_t { DC_SEC_INVALID=0, DC_SEC_NONE, DC_SEC_TLS,DC_SEC_IPSEC, 
+/*enum Security_t { DC_SEC_INVALID=0, DC_SEC_NONE, DC_SEC_TLS,DC_SEC_IPSEC,
                    DC_SEC_BOTH } ;
 enum Protocol_t { DC_PROTO_INVALID=0,DC_PROTO_TCP, DC_PROTO_SCTP,
                    DC_PROTO_BOTH } ;
 enum Role_t {DC_ROLE_INVALID=0, DC_ROLE_CLIENT, DC_ROLE_SERVER,
                    DC_ROLE_CLIENTSERVER};
-enum LocalAction_t {DC_LA_LOCAL=1, DC_LA_RELAY, DC_LA_REDIRECT, DC_LA_PROXY, 
+enum LocalAction_t {DC_LA_LOCAL=1, DC_LA_RELAY, DC_LA_REDIRECT, DC_LA_PROXY,
                    DC_LA_NOT_FOUND};
 
-/* For marking the servers in the realm table */
-enum ConnectStatus_t {DC_NOT_CONNECTED=0, DC_CONNECTED, DC_APP_NOT_SUPPORTED }; 
+ For marking the servers in the realm table
+enum ConnectStatus_t {DC_NOT_CONNECTED=0, DC_CONNECTED, DC_APP_NOT_SUPPORTED };*/
 
 
 /*
@@ -103,14 +109,14 @@ enum ConnectStatus_t {DC_NOT_CONNECTED=0, DC_CONNECTED, DC_APP_NOT_SUPPORTED };
 #define etsi_vendor_id  13019
 */
 
-
+typedef lcn_u8_t lcn_Address_t[DC_MAX_HOSTNAME_LEN];
 typedef lcn_u8_t HostName_t[DC_MAX_HOSTNAME_LEN];
 typedef lcn_u8_t RealmName_t[DC_MAX_HOSTNAME_LEN];
 
 typedef struct {
   int nVendorIds ;
   lcn_u32_t vendorIds[DC_MAX_SUPPORTED_ID];
-  bool isAuth; /*Auth or Accting? TRUE for Auth */
+  int isAuth; /*Auth or Accting? TRUE for Auth */
   lcn_u32_t appId ;
 } VendorSpecificAppId_t ;
 
@@ -125,12 +131,12 @@ typedef struct PeerConfigEntry {
 
   int  peerTableIndex ; /* Initialized during config read, starting with 0 */  /*(no tag)*/
   int  activePeerIndex ; /* Initialized when transport connection   /*(no tag)*/
-       * is established- maintained here for easy reference
+       /* is established- maintained here for easy reference
        * -1 indicates not connected */
-  bool isDynamic ; /* False if statically configured, true otherwise */ /*(no tag)*/
+  int isDynamic ; /* False if statically configured, true otherwise */ /*(no tag)*/
   time_t expirationTime ; /* for dynamically configured entry */ /*(no tag)*/
-  enum Security_t security ; /* TLS/IPSec/BOTH/NONE */
-  enum Protocol_t proto ; /*SCTP/TCP/BOTH */ /*(add proto tag under peer)*/
+  int security ; /* TLS/IPSec/BOTH/NONE */
+  int proto ; /*SCTP/TCP/BOTH */ /*(add proto tag under peer)*/
   unsigned int   tcp_port ; /* If different from the standard port */ /*(remove port, add tcp_port/sctp_port tags under peer)*/
   unsigned int   sctp_port ; /* If different from the standard port */ /*(remove port, add tcp_port/sctp_port tags under peer)*/
   /* If IP address(es) is not specified, gethostbyname() will be used */
@@ -143,7 +149,7 @@ typedef struct PeerConfigEntry {
 typedef struct {
   HostName_t serverName;
   int weight; /*(change priority tag to weight)*/
-  enum ConnectStatus_t cStatus ; /* CONNECTED/NOT-CONNECTED/APP-NOT-SUPPORTED */ /*(no tag)*/
+  int cStatus ; /* CONNECTED/NOT-CONNECTED/APP-NOT-SUPPORTED */ /*(no tag)*/
   /* Realm entry may indicate APP-NOT-SUPPORTED even if peer is connected, if
    * CEA didn't have the required appId. This may indicate a config error */
 } ServerListEntry_t ;
@@ -154,14 +160,14 @@ typedef struct RealmConfigEntry {
   HostName_t realmName; /*To be indexed by both realName AND appIdentifier*/
   lcn_u32_t  appIdentifier; /*we don't use vendor id for routing*/
   lcn_u32_t vendorId;
-  enum LocalAction_t action; /*(change role tag to action)*/
+  int action; /*(change role tag to action)*/
   int nServers; /* Number of servers for this realm/appId */
   ServerListEntry_t  serverList[DC_MAX_SERVERS_PER_APP]; /* has name and weight*/
-  bool isDynamic ; /* False if statically configured, true otherwise */ /*(no tag)*/
+  int isDynamic ; /* False if statically configured, true otherwise */ /*(no tag)*/
   time_t expirationTime ; /* for dynamically configured entry */ /*(no tag)*/
   /* The following fields are state information for quick lookup, and are
    * not part of configuration */
-  bool isConnected ; /* Set when a peer is connected */ /*(no tag)*/
+  int isConnected ; /* Set when a peer is connected */ /*(no tag)*/
   int activePeerIndex1; /* Will be a valid index if connected */ /*(no tag)*/
   int activePeerIndex2; /* -1 if not valid, valid if two peers are connected*/ /*(no tag)*/
 } RealmConfig_t ;
@@ -190,15 +196,15 @@ typedef struct DiameterConfig {
   unsigned int  appPort;   /* (add tag under transport) */
   /* Listening Port used by application to communicate with Diameter Daemon */
 
-  enum Protocol_t proto; /* TCP/SCTP/BOTH: Protocols supported by this node */   /* (add tag under transport) */
+  int proto; /* TCP/SCTP/BOTH: Protocols supported by this node */   /* (add tag under transport) */
   unsigned int  diamTCPPort ; 
   /* TCP Port used for listening to Peer connections */
 
   unsigned int  diamSCTPPort ; /* (add tag under transport) */
   /* SCTP Port used for listening to Peer connections */
 
-  enum Security_t security;  /* TLS/IPSEC/NONE, enumerated value */ /* (no tag) */
-  enum Role_t  role ;  /* If "client only" , node doesn't 'listen' for Peer */  /* (add tag under implementation) */
+  int security;  /* TLS/IPSEC/NONE, enumerated value */ /* (no tag) */
+  int  role ;  /* If "client only" , node doesn't 'listen' for Peer */  /* (add tag under implementation) */
   int  numberOfThreads; /* Number of worker threads to be created */  /* (add tag under implementation */
   int  Twinit ; /* Initial value of Heartbeat timer */
   int  inactivityTimer ; /* Connections are closed if idle for this long*/
@@ -217,64 +223,5 @@ typedef struct DiameterConfig {
 
 } DiameterConfig_t ;
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-void DCF_SetSysLogMask();
-int DCF_ReadConfiguration(char *file) ;
-void DCF_MergeConfiguration(enum Role_t clRole, enum Protocol_t clProtocol,
-    enum Security_t clSecurity,int clAppPort, int clDiamPort, int clNumThreads);
-enum LocalAction_t DCF_RealmLookup(lcn_u8_t *realm, lcn_u32_t appId, 
-                                       int *pindex ,int *nServers, 
-                                       HostName_t *serverList);
-void DCF_PeerConnected(HostName_t peerName, int activePeerIndex, int nApps, 
-                        lcn_u32_t *pAppId) ;
-void DCF_RealmConnected(RealmName_t realm, lcn_u32_t appId, 
-                         HostName_t peerName, int activePeerIndex);
-void DCF_RealmRemovePeerIndex(int activePeerIndex);
-void DCF_InvalidatePeer(RealmName_t realm,lcn_u32_t appId,HostName_t peerName);
-int DCF_GetNumberOfThreads();
-enum Role_t  DCF_GetRole();
-enum Protocol_t  DCF_GetProtocl();
-enum Security_t  DCF_GetSecurity();
-int  DCF_GetAppPort();
-int  DCF_GetDiamTCPPort();
-int  DCF_GetDiamSCTPPort();
-long  DCF_GetPollingInterval();
-int  DCF_GetUnknownPeerAction();
-lcn_u8_t *DCF_GetNodeName();
-lcn_u8_t *DCF_GetRealmName();
-lcn_u32_t DCF_GetStateId();
-void DCF_GetIpAddresses(int *nAddresses, lcn_Address_t *ipAddress);
-void DCF_GetServerConnectionInfo(lcn_u8_t *server, enum Protocol_t *proto,
-                                  enum Security_t *sec, int *port,int *nAddress,
-                                  lcn_Address_t  **ipAddress,
-                                  void **secParam);
-void DCF_PeerStatusDown(int peerIndex);
-void DCF_PeerConnectionFailed(HostName_t host);
-int  DCF_AddUnknownPeer(HostName_t hostName);
-void DCF_RemoveUnknownPeer(HostName_t hostName);
-lcn_u32_t DCF_GetVendorId();
-lcn_u8_t * DCF_GetProductName();
-lcn_u32_t  DCF_GetFirmwareRevision();
-void DCF_GetSupportedVendorIds(int *nVIDs, Supported_Vendor_Id_t *vid);
-void DCF_GetSupportedAuthAppIds(int *nAAIDs, Auth_Application_Id_t *appid);
-void DCF_GetSupportedAcctAppIds(int *nAAIDs, Acct_Application_Id_t *appid);
-int DCF_GetHeartbeatTimer();
-int DCF_GetInactivityTimer();
-int DCF_ReopenTimer();
-int DCF_GetSmallPduSize();
-int DCF_GetBigPduSize() ;
-bool DCF_OKtoConnect(HostName_t hostname);
-lcn_u32_t DCF_NextHopId();
-bool DCF_IsInPeerTable(HostName_t host, int *activeIndex);
-int DCF_GetActivePeerIndex(int peerNum);
-int DCF_GetPeerEntry(HostName_t host);
-
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

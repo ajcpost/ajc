@@ -4,25 +4,25 @@
 #include <libxml2/libxml/tree.h>
 #include <libxml2/libxml/parser.h>
 #include <libxml2/libxml/parserInternals.h>
-#include "db_config.h"
+#include "changed_db_config.h"
+
+typedef struct user_data {
+    char *curPath;
+    struct tag_metadata *curTm;
+    char *dataErrString;  /* processing continues even in error case */
+    char *tagErrString;   /* No further processing, if error in tag handling */
+    DiameterConfig_t *output;
+    void *op;
+} userData;
 
 typedef struct tag_metadata {
     char *tag;
-    char *fdn;
-    int ignoreTag;
-    int ignoreData;
-    int dataProcessed;
-    int (*handleTagFunc) (DiameterConfig_t *output);
-    int (*handleDataFunc) (DiameterConfig_t *output, char *data);
+    char *parentPath;
+    void (*handleStartTagFunc) (struct user_data *ud);
+    void (*handleEndTagFunc) (struct user_data *ud);
+    void (*handleDataFunc) (struct user_data *ud, char *data);
 }tagMetadata;
 
-typedef struct user_data {
-    tagMetadata *tm;
-    char *fdn;
-    int error;
-    char *errorString;
-    DiameterConfig_t *output;
-} userData;
 
 extern tagMetadata xmltags[];
 
