@@ -79,5 +79,5 @@ int dtp_listen (const int sockFd);
 int dtp_accept (int sockFd, int *newSockFd);
 void dtp_close (const int sockFd);
 int dtp_send (const int sockFd, const uint8_t * const payLoad, const long size);
-int dtp_recv (const int sockFd, uint8_t **buf, const long maxBytes);
+int dtp_recv (const int sockFd, uint8_t *buf, const long maxBytes);
 

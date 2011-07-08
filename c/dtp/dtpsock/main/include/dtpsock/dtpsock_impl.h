@@ -14,6 +14,7 @@ typedef struct dtp_sockConfig {
 	int ipv6Only;                     /* Support ipv4 on ipv6? */
 	int protocol;                     /* Per the socket protocol types */
 	int blocking;                     /* Blocking or Non-blocking */
+	int enableSSL;                    /* Enable secure socket */
 	int maxPduSize;                   /* Maximum PDU size, must be between g_minPduSize to g_maxPduSize */
 	int serverListenQLen;             /* Backlog size for server listen socket */
 	int reqSctpInStreams;             /* Requested no. of input sctp streams, may not necessarily get accepted */
@@ -40,6 +41,7 @@ typedef enum dtp_sockState {
 
 typedef struct dtp_sockData {
 	dtpSockState sockState;
+	SSL *ssl;
 	int confirmedSctpInStreams;
 	int confirmedSctpOutStreams;
 } dtpSockData;

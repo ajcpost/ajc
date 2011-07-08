@@ -391,7 +391,7 @@ int dtp_send (const int sockFd, const uint8_t * const payLoad, const long size)
  *
  * (Return) size of data sent if successful completion, else -1
  */
-int dtp_recv (const int sockFd, uint8_t **buf, const long maxBytes)
+int dtp_recv (const int sockFd, uint8_t *buf, const long maxBytes)
 {
     logFF ();
 

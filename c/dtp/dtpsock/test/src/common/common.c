@@ -23,6 +23,10 @@ dtpSockAddr ** createAddrs (char * value)
     int afamily;
     char *addr;
 
+    if (NULL == value)
+    {
+        return NULL;
+    }
     dtpSockAddr **addrs = malloc (sizeof(*addrs) * (g_maxAddrs + 1));
     memset (addrs, 0, (sizeof(*addrs) * (g_maxAddrs + 1)));
     char *token = strtok (value, " ");

@@ -24,12 +24,12 @@ int init_createSocket (int *sockFd, const dtpSockConfig * const sockConfig)
                 strerror (errno));
         return dtpError;
     }
-    int on = 1;
-    if (setsockopt (*sockFd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on)
-            < 0))
+    int on = 5;
+    if (setsockopt (*sockFd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on)) < 0)
     {
         logMsg (LOG_WARNING, "%s%s\n",
-                "Failed to set socket option SO_REUSEADDR, error is", strerror (errno));
+                "Failed to set socket option SO_REUSEADDR, error is", strerror (
+                        errno));
     }
 
     /* If IPv4, all done. */
@@ -39,8 +39,8 @@ int init_createSocket (int *sockFd, const dtpSockConfig * const sockConfig)
     }
     /* If IPv6, should it accept IPv4 clients? */
     int ipv6On = sockConfig->ipv6Only;
-    if (setsockopt (*sockFd, IPPROTO_IPV6, IPV6_V6ONLY, &ipv6On, sizeof(ipv6On)
-            < 0))
+    if (setsockopt (*sockFd, IPPROTO_IPV6, IPV6_V6ONLY, &ipv6On, sizeof(ipv6On))
+            < 0)
     {
         logMsg (LOG_WARNING, "%s%d%s%s\n",
                 "Failed to set socket option IPV6_V6ONLY to ", ipv6On,
@@ -93,17 +93,20 @@ int init_defaultBind (const dtpSockInfo * const sockInfo)
     logMsg (LOG_DEBUG, "%s \n", util_aiToString (defaultAddr));
 
     struct addrinfo *p;
+    int bound = 0;
     for (p = defaultAddr; p != NULL; p = p->ai_next)
     {
         if (bind (sockInfo->sockFd, defaultAddr->ai_addr,
                 defaultAddr->ai_addrlen) < 0)
         {
-            logMsg (LOG_DEBUG, "%s%s%s\n", "Default bind error ",
-                    strerror (errno), " trying next address, if any");
+            logMsg (LOG_DEBUG, "%s%s%s\n", "Default bind error ", strerror (
+                    errno), " trying next address, if any");
+            continue;
         }
+        bound = 1;
     }
     freeaddrinfo (defaultAddr);
-    if (NULL == p)
+    if (!bound)
     {
         logMsg (LOG_INFO, "%s\n", "Default bind failed");
         return dtpError;

@@ -12,6 +12,8 @@
 #include <netinet/sctp.h>
 #include <netdb.h>
 #include <fcntl.h>
+#include <openssl/ssl.h>
+#include <openssl/err.h>
 
 #include "dtpsock_impl.h"
 #include "dtpmisc_hdr.h"
