@@ -7,6 +7,8 @@ const int g_maxOpenSocks = 1000;
 
 const int g_defaultNonBlocking = 0;
 
+const int g_defaultEnableSsl = 0;
+
 const int g_defaultIPv6Only = 0;
 
 const int g_minPduSize = 10;

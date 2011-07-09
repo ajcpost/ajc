@@ -2,6 +2,7 @@
 #include "dtpsock_proto.h"
 
 static SSL_CTX *s_ctx = NULL;
+static int s_enableSSLClientAuth = 0;
 
 static int verifyCallback (int preverify_ok, X509_STORE_CTX *ctx)
 {
@@ -13,6 +14,7 @@ int ssl_init (const char * const certStore, const char * const certFile,
 {
     logFF ();
 
+    s_enableSSLClientAuth = enableSSLClientAuth;
     logMsg (LOG_INFO, "%s%s%s%s%s%s\n", "Initializing SSL with store: ",
             certStore, " cert file: ", certFile, " key file: ", keyFile);
     if (NULL != s_ctx)
@@ -35,7 +37,7 @@ int ssl_init (const char * const certStore, const char * const certFile,
         return dtpError;
     }
 
-    if (enableSSLClientAuth)
+    if (s_enableSSLClientAuth)
     {
         SSL_CTX_set_verify (s_ctx, SSL_VERIFY_PEER | SSL_VERIFY_CLIENT_ONCE,
                 verifyCallback);
@@ -130,5 +132,9 @@ int ssl_doOnAccept (const dtpSockInfo * newSockInfo)
                 ERR_reason_error_string (ERR_get_error ()));
         return dtpError;
     }
-    return (ssl_validateCerts (newSockInfo->sockData->ssl));
+    if (s_enableSSLClientAuth)
+    {
+        return (ssl_validateCerts (newSockInfo->sockData->ssl));
+    }
+    return dtpSuccess;
 }

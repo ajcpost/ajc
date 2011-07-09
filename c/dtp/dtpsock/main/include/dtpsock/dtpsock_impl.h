@@ -62,6 +62,8 @@ extern const int g_maxOpenSocks;
 
 extern const int g_defaultNonBlocking;
 
+extern const int g_defaultEnableSsl;
+
 extern const int g_defaultIPv6Only;
 
 extern const int g_minPduSize;

@@ -325,6 +325,14 @@ dtpSockConfig * util_copySockConfig (const dtpSockConfig * const inSockConfig)
     {
         outSockConfig->blocking = inSockConfig->blocking;
     }
+    if (dtpSuccess != val_checkInt (inSockConfig->enableSSL, "EnableSsl", 0, 1))
+    {
+        outSockConfig->enableSSL = g_defaultEnableSsl;
+    }
+    else
+    {
+        outSockConfig->enableSSL = inSockConfig->enableSSL;
+    }
 
     if (dtpSuccess != val_checkInt (inSockConfig->maxPduSize, "PDU Size",
             g_minPduSize, g_maxPduSize))
