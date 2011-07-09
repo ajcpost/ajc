@@ -1,14 +1,21 @@
 #include "dtpsock_hdr.h"
 #include "dtpsock_proto.h"
 
-SSL_CTX *g_ctx = NULL;
+static SSL_CTX *s_ctx = NULL;
+
+static int verifyCallback (int preverify_ok, X509_STORE_CTX *ctx)
+{
+    return 1;
+}
 
 int ssl_init (const char * const certStore, const char * const certFile,
-        const char * const keyFile)
+        const char * const keyFile, const int enableSSLClientAuth)
 {
     logFF ();
 
-    if (NULL != g_ctx)
+    logMsg (LOG_INFO, "%s%s%s%s%s%s\n", "Initializing SSL with store: ",
+            certStore, " cert file: ", certFile, " key file: ", keyFile);
+    if (NULL != s_ctx)
     {
         logMsg (LOG_WARNING, "%s\n",
                 "SSL already initialized, ignoring the call");
@@ -20,15 +27,21 @@ int ssl_init (const char * const certStore, const char * const certFile,
     OpenSSL_add_all_algorithms();
     SSL_load_error_strings ();
     method = TLSv1_method ();
-    g_ctx = SSL_CTX_new (method);
-    if (g_ctx == NULL)
+    s_ctx = SSL_CTX_new (method);
+    if (s_ctx == NULL)
     {
         logMsg (LOG_CRIT, "%s%s\n", "Failed to create SSL context, error is ",
                 ERR_reason_error_string (ERR_get_error ()));
         return dtpError;
     }
 
-    if (SSL_CTX_load_verify_locations (g_ctx, certStore, NULL) != 1)
+    if (enableSSLClientAuth)
+    {
+        SSL_CTX_set_verify (s_ctx, SSL_VERIFY_PEER | SSL_VERIFY_CLIENT_ONCE,
+                verifyCallback);
+    }
+
+    if (SSL_CTX_load_verify_locations (s_ctx, certStore, NULL) != 1)
     {
         logMsg (LOG_CRIT, "%s%s%s%s\n", "Failed to load trust store  ",
                 certStore, " error is ", ERR_reason_error_string (
@@ -36,20 +49,20 @@ int ssl_init (const char * const certStore, const char * const certFile,
         return dtpError;
     }
 
-    if (SSL_CTX_use_certificate_file (g_ctx, certFile, SSL_FILETYPE_PEM) != 1)
+    if (SSL_CTX_use_certificate_file (s_ctx, certFile, SSL_FILETYPE_PEM) != 1)
     {
         logMsg (LOG_CRIT, "%s%s%s%s\n", "Failed to load certificate file ",
                 certFile, " error is ", ERR_reason_error_string (
                         ERR_get_error ()));
         return dtpError;
     }
-    if (SSL_CTX_use_PrivateKey_file (g_ctx, keyFile, SSL_FILETYPE_PEM) != 1)
+    if (SSL_CTX_use_PrivateKey_file (s_ctx, keyFile, SSL_FILETYPE_PEM) != 1)
     {
         logMsg (LOG_CRIT, "%s%s%s%s\n", "Failed to load key file ", keyFile,
                 " error is", ERR_reason_error_string (ERR_get_error ()));
         return dtpError;
     }
-    if (SSL_CTX_check_private_key (g_ctx) != 1)
+    if (SSL_CTX_check_private_key (s_ctx) != 1)
     {
         logMsg (LOG_CRIT, "%s\n", "Key does not match public certificate");
         return dtpError;
@@ -72,7 +85,7 @@ int ssl_validateCerts (SSL *ssl)
         return dtpError;
     }
     peerCert = SSL_get_peer_certificate (ssl);
-    if (NULL == perrCert)
+    if (NULL == peerCert)
     {
         logMsg (LOG_CRIT, "%s%s\n", "No peer certificate");
         return dtpError;
@@ -95,7 +108,7 @@ int ssl_doOnConnect (const dtpSockInfo * sockInfo)
 {
     logFF ();
 
-    sockInfo->sockData->ssl = SSL_new (g_ctx);
+    sockInfo->sockData->ssl = SSL_new (s_ctx);
     SSL_set_fd (sockInfo->sockData->ssl, sockInfo->sockFd);
     if (SSL_connect (sockInfo->sockData->ssl) != 1)
     {
@@ -109,7 +122,7 @@ int ssl_doOnAccept (const dtpSockInfo * newSockInfo)
 {
     logFF ();
 
-    newSockInfo->sockData->ssl = SSL_new (g_ctx);
+    newSockInfo->sockData->ssl = SSL_new (s_ctx);
     SSL_set_fd (newSockInfo->sockData->ssl, newSockInfo->sockFd);
     if (SSL_accept (newSockInfo->sockData->ssl) != 1)
     {
@@ -117,5 +130,5 @@ int ssl_doOnAccept (const dtpSockInfo * newSockInfo)
                 ERR_reason_error_string (ERR_get_error ()));
         return dtpError;
     }
-    return dtpSuccess;
+    return (ssl_validateCerts (newSockInfo->sockData->ssl));
 }

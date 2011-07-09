@@ -129,6 +129,19 @@ int dtp_bind (const dtpSockInfo * const sockInfo)
     return retValue;
 }
 
+/*
+ * (dtp_ssl) Initialize SSL context.
+ *
+ * (Parameter, char *certStore) Path to certificate trust store
+ * (Parameter, char *certFile) Path to certificate
+ * (Parameter, char *keyFile) Path to key file
+ * (Parameter, int enableSSLClientAuth) Enable client authentication
+ */
+int dtp_ssl (const char * const certStore, const char * const certFile,
+        const char * const keyFile, const int enableSSLClientAuth)
+{
+    return (ssl_init (certStore, certFile,keyFile,enableSSLClientAuth));
+}
 
 /*
  * (dtp_connect) Connects previously initialized dtp socket to the input addresses. If the socket is of
@@ -351,20 +364,21 @@ int dtp_send (const int sockFd, const uint8_t * const payLoad, const long size)
         return -1;
     }
 
+    char *errorString="";
     int retSize;
     int stream;
     switch (sockInfo->sockConfig->protocol)
     {
     case IPPROTO_TCP:
-        retSize = transport_tcpSend (sockInfo, payLoad, size);
+        retSize = transport_tcpSend (sockInfo, payLoad, size, errorString);
         break;
     case IPPROTO_SCTP:
         stream = util_getSctpStream (
                 sockInfo->sockData->confirmedSctpOutStreams);
-        retSize = transport_sctpSend (sockInfo, stream, payLoad, size);
+        retSize = transport_sctpSend (sockInfo, stream, payLoad, size, errorString);
         break;
     default:
-        logMsg (LOG_CRIT, "%s%d\n", "Unrecognized prototype in send ",
+        logMsg (LOG_CRIT, "%s%d\n", "Unrecognized protocol in send ",
                 sockInfo->sockConfig->protocol);
         retSize = -1;
         break;
@@ -372,8 +386,7 @@ int dtp_send (const int sockFd, const uint8_t * const payLoad, const long size)
 
     if (retSize != size)
     {
-        logMsg (LOG_ERR, "%s%s\n", "Failed to send data, error is ", strerror (
-                errno));
+        logMsg (LOG_ERR, "%s%s\n", "Failed to send data, error is ", errorString);
     }
     else
     {
@@ -409,25 +422,25 @@ int dtp_recv (const int sockFd, uint8_t *buf, const long maxBytes)
         return -1;
     }
 
+    char *errorString = "";
     int retSize;
     switch (sockInfo->sockConfig->protocol)
     {
     case IPPROTO_TCP:
-        retSize = transport_tcpRecv (sockInfo, buf, maxBytes);
+        retSize = transport_tcpRecv (sockInfo, buf, maxBytes, errorString);
         break;
     case IPPROTO_SCTP:
-        retSize = transport_sctpRecv (sockInfo, buf, maxBytes);
+        retSize = transport_sctpRecv (sockInfo, buf, maxBytes, errorString);
         break;
     default:
-        logMsg (LOG_CRIT, "%s%d\n", "Unrecognized prototype in recv ",
+        logMsg (LOG_CRIT, "%s%d\n", "Unrecognized protocol in recv ",
                 sockInfo->sockConfig->protocol);
         retSize = -1;
         break;
     }
     if (retSize < 0)
     {
-        logMsg (LOG_ERR, "%s%s\n", "Failed to recv data, error is ", strerror (
-                errno));
+        logMsg (LOG_ERR, "%s%s\n", "Failed to recv data, error is ", errorString);
     }
     else
     {

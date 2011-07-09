@@ -21,9 +21,13 @@ const char * const propServerBindAddr = "serverBindAddr";
 const char * const propClientConnectAddr = "clientConnectAddr";
 const char * const propTransferDataSize = "transferDataSize";
 const char * const propEnableSsl = "enableSsl";
+const char * const propEnableSslClientAuth = "enableSslClientAuth";
+const char * const propClientKeyFile = "clientKeyFile";
+const char * const propClientCertFile = "clientCertFile";
+const char * const propClientCertStore = "clientCertStore";
 const char * const propServerKeyFile = "serverKeyFile";
 const char * const propServerCertFile = "serverCertFile";
-const char * const propCertStore = "certStore";
+const char * const propServerCertStore = "serverCertStore";
 
 /* All expected properties and corresponding value holder */
 static const char
@@ -31,8 +35,9 @@ static const char
         { "serverLogFilePath", "serverMaxLogSize", "serverLogLevel", "clientLogFilePath",
             "clientMaxLogSize", "clientLogLevel", "afamily", "ipv6Only", "protocol", "blocking",
             "maxPduSize", "serverSocketQLen", "clientSharedPort", "clientBindAddr", "serverSharedPort",
-            "serverBindAddr", "clientConnectAddr", "transferDataSize", "enableSsl", "serverKeyFile", "serverCertFile",
-            "certStore",NULL };
+            "serverBindAddr", "clientConnectAddr", "transferDataSize", "enableSsl", "enableSslClientAuth",
+            "clientKeyFile", "clientCertFile", "clientCertStore","serverKeyFile", "serverCertFile",
+            "serverCertStore",NULL };
 char **propertyValues;
 
 static int s_propertiesInitialized = 0;

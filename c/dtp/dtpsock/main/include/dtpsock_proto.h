@@ -20,8 +20,9 @@ void init_getSctpStreams (const dtpSockInfo *sockInfo);
 void init_registerSctpEvents (const dtpSockInfo * const sockInfo);
 
 /* src/dtp_impl_ssl.c */
+static int verifyCallback (int preverify_ok, X509_STORE_CTX *ctx);
 int ssl_init (const char * const certStore, const char * const certFile,
-        const char * const keyFile);
+        const char * const keyFile, const int enableSSLClientAuth);
 int ssl_validateCerts (SSL *ssl);
 int ssl_doOnConnect (const dtpSockInfo * sockInfo);
 int ssl_doOnAccept (const dtpSockInfo * newSockInfo);
@@ -36,13 +37,13 @@ int store_remove (const int sockFd);
 
 /* src/dtp_impl_transport.c */
 int transport_tcpSend (const dtpSockInfo * const sockInfo,
-        const uint8_t * const sendPdu, const long transferSize);
+        const uint8_t * const sendPdu, const long transferSize, char *errorString);
 int transport_tcpRecv (const dtpSockInfo * const sockInfo, uint8_t *recvPdu,
-        const long transferSize);
+        const long transferSize, char *errorString);
 int transport_sctpSend (const dtpSockInfo * const sockInfo, const int stream,
-        const uint8_t * const sendPdu, const long transferSize);
+        const uint8_t * const sendPdu, const long transferSize, char *errorString);
 int transport_sctpRecv (const dtpSockInfo * const sockInfo, uint8_t **recvPdu,
-        const int transferSize);
+        const int transferSize, char *errorString);
 int transport_handleSctpEvent (const int sockFd, const uint8_t * const buf);
 
 /* src/dtp_impl_util.c */
@@ -81,6 +82,8 @@ int val_checkInt (const int value, const char * const name, const int min,
 /* src/dtp_interface.c */
 int dtp_init (int *sockFd, const dtpSockConfig * const sockConfig);
 int dtp_bind (const dtpSockInfo * const sockInfo);
+int dtp_ssl (const char * const certStore, const char * const certFile,
+        const char * const keyFile, const int enableSSLClientAuth);
 int dtp_connect (const int sockFd, const int sharedPort, const dtpSockAddr ** const connectAddrs);
 int dtp_listen (const int sockFd);
 int dtp_accept (int sockFd, int *newSockFd);

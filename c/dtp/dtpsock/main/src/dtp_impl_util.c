@@ -275,6 +275,7 @@ void util_freeDtpSockData (dtpSockData *dsd)
     {
         return;
     }
+    myfree(dsd->ssl);
     myfree (dsd);
 }
 

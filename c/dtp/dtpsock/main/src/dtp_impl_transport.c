@@ -2,7 +2,7 @@
 #include "dtpsock_proto.h"
 
 int transport_tcpSend (const dtpSockInfo * const sockInfo,
-        const uint8_t * const sendPdu, const long transferSize)
+        const uint8_t * const sendPdu, const long transferSize, char *errorString)
 {
     int sentSize;
     if (sockInfo->sockConfig->enableSSL)
@@ -11,6 +11,7 @@ int transport_tcpSend (const dtpSockInfo * const sockInfo,
                 "Sending TCP data over secure socket ", sockInfo->sockFd,
                 ", size is ", transferSize);
         sentSize = SSL_write (sockInfo->sockData->ssl, sendPdu, transferSize);
+        errorString = ERR_reason_error_string (ERR_get_error ());
     }
     else
     {
@@ -18,12 +19,13 @@ int transport_tcpSend (const dtpSockInfo * const sockInfo,
                 sockInfo->sockFd, ", size is ", transferSize);
 
         sentSize = write (sockInfo->sockFd, sendPdu, transferSize);
+        errorString = strerror (errno);
     }
     return sentSize;
 }
 
 int transport_tcpRecv (const dtpSockInfo * const sockInfo, uint8_t *recvPdu,
-        const long transferSize)
+        const long transferSize, char *errorString)
 {
     struct msghdr mh;
 
@@ -34,12 +36,14 @@ int transport_tcpRecv (const dtpSockInfo * const sockInfo, uint8_t *recvPdu,
                 "Receiving TCP data over secure socket ", sockInfo->sockFd,
                 ", expected size is ", transferSize);
         recvSize = SSL_read (sockInfo->sockData->ssl, recvPdu, transferSize);
+        errorString = ERR_reason_error_string (ERR_get_error ());
     }
     else
     {
         logMsg (LOG_DEBUG, "%s%d%s%d\n", "Receiving TCP data over socket ",
                 sockInfo->sockFd, ", expected size is ", transferSize);
         recvSize = read (sockInfo->sockFd, recvPdu, transferSize);
+        errorString = strerror (errno);
     }
     return recvSize;
 }
@@ -47,7 +51,7 @@ int transport_tcpRecv (const dtpSockInfo * const sockInfo, uint8_t *recvPdu,
 /* Add event support in send/receive */
 /*todo nonblocking sctp_send */
 int transport_sctpSend (const dtpSockInfo * const sockInfo, const int stream,
-        const uint8_t * const sendPdu, const long transferSize)
+        const uint8_t * const sendPdu, const long transferSize, char *errorString)
 {
     logFF ();
 
@@ -111,12 +115,13 @@ int transport_sctpSend (const dtpSockInfo * const sockInfo, const int stream,
         iov.iov_base = ((char *) sendPdu) + sentSize;
         iov.iov_len = transferSize - sentSize;
     }
+    errorString = strerror (errno);
     return sentSize;
 }
 
 /*todo nonblocking sctp_recv */
 int transport_sctpRecv (const dtpSockInfo * const sockInfo, uint8_t **recvPdu,
-        const int transferSize)
+        const int transferSize, char *errorString)
 {
     logMsg (LOG_DEBUG, "%s%d%s%d\n", "Receiving SCTP data over socket ",
             sockInfo->sockFd, ", expected size is ", transferSize);
@@ -188,6 +193,7 @@ int transport_sctpRecv (const dtpSockInfo * const sockInfo, uint8_t **recvPdu,
         iov.iov_base = (char *) chunkPdu + recvSize;
         iov.iov_len = transferSize - recvSize;
     }
+    errorString = strerror (errno);
     return recvSize;
 }
 

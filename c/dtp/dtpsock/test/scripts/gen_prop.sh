@@ -8,10 +8,14 @@ protoTcp=6
 protoSctp=132
 clientPort=5777
 serverPort=2999
-certStore=/tmp/store.pem
-serverCertFile=/tmp/cert.pem
-serverKeyFile=/tmp/key.pem
+clientCertStore=/tmp/store.pem
+clientCertFile=/tmp/clientCert.pem
+clientKeyFile=/tmp/clientKey.pem
+serverCertStore=/tmp/store.pem
+serverCertFile=/tmp/serverCert.pem
+serverKeyFile=/tmp/serverKey.pem
 enableSsl=0
+enableSslClientAuth=0
 #v4ClientAddr=10.66.92.78
 v4ClientAddr=localhost
 v6ClientAddr=fe80::21f:5bff:feeb:2f37%en0
@@ -56,7 +60,10 @@ genDefault ()
     echo "afamily=$v4Family"
     echo "ipv6Only=0"
     echo "blocking=1"
-    echo "certStore=$certStore"
+    echo "clientCertStore=$clientCertStore"
+    echo "clientCertFile=$clientCertFile"
+    echo "clientKeyFile=$clientKeyFile"
+    echo "serverCertStore=$serverCertStore"
     echo "serverCertFile=$serverCertFile"
     echo "serverKeyFile=$serverKeyFile"
 }
@@ -77,6 +84,8 @@ do
         a) cfgAddr="$OPTARG"
         ;;
         s) enableSsl=1
+        ;;
+        c) enableSslClientAuth=1
         ;;
         ?) usage
         ;;
@@ -130,6 +139,7 @@ else
     usage
 fi
 echo "enableSsl=$enableSsl"
+echo "enableSslClientAuth=$enableSslClientAuth"
 }
 
 genDefault

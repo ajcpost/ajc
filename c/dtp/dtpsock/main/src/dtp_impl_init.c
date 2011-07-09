@@ -230,7 +230,16 @@ int init_connect (const dtpSockInfo * const sockInfo, const int packedCount,
         logMsg (LOG_INFO, "%s\n", "Connect failed");
         return dtpError;
     }
-    ssl_doOnConnect (sockInfo);
+
+    if (sockInfo->sockConfig->enableSSL)
+    {
+        if (dtpError == ssl_doOnConnect (sockInfo))
+        {
+            /* Close connection */
+            logMsg (LOG_INFO, "%s\n", "Secure connect failed");
+            return dtpError;
+        }
+    }
     logMsg (LOG_INFO, "%s\n", "Connect successful");
     return dtpSuccess;
 }

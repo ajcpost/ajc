@@ -20,6 +20,7 @@ char *g_logLevel;
 char *g_bAddr;
 int g_cPort;
 char *g_cAddr;
+int g_enableSslClientAuth;
 char *g_keyFile;
 char *g_certFile;
 char *g_certStore;
@@ -51,10 +52,11 @@ int propertySetup (char *argv[])
     g_cAddr = (char *) getPropertyValue (propClientConnectAddr);
     g_transferDataSize = strtol (getPropertyValue (propTransferDataSize), NULL, 0);
     g_sockConfig.enableSSL = strtol (getPropertyValue (propEnableSsl), NULL, 0);
-    g_keyFile = (char *) getPropertyValue (propServerKeyFile);
-    g_certFile = (char *) getPropertyValue (propServerCertFile);
-    g_certStore = (char *) getPropertyValue (propCertStore);
-
+    g_keyFile = (char *) getPropertyValue (propClientKeyFile);
+    g_certFile = (char *) getPropertyValue (propClientCertFile);
+    g_certStore = (char *) getPropertyValue (propClientCertStore);
+    g_enableSslClientAuth = strtol (getPropertyValue (
+            propEnableSslClientAuth), NULL, 10);
     logMsg (LOG_DEBUG, "%s\n", "Converted the read properties");
     g_sockConfig.addrs = createAddrs ((char *) g_bAddr);
     g_connectAddrs = createAddrs ((char *) g_cAddr);
@@ -76,7 +78,7 @@ void communicate ()
 
     int sockFd;
 
-    if (dtpSuccess != ssl_init (g_certStore, g_certFile, g_keyFile))
+    if (dtpSuccess != dtp_ssl (g_certStore, g_certFile, g_keyFile, g_enableSslClientAuth))
     {
         usage  ();
     }

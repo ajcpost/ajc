@@ -21,8 +21,12 @@ extern const char * const propServerBindAddr;
 extern const char * const propClientConnectAddr;
 extern const char * const propTransferDataSize;
 extern const char * const propEnableSsl;
+extern const char * const propEnableSslClientAuth;
+extern const char * const propClientKeyFile;
+extern const char * const propClientCertFile;
+extern const char * const propClientCertStore;
 extern const char * const propServerKeyFile;
 extern const char * const propServerCertFile;
-extern const char * const propCertStore;
+extern const char * const propServerCertStore;
 
 #endif /* DTP_PROPMGR_H */
