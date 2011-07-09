@@ -19,6 +19,10 @@ char *g_logPath;
 int g_logSize;
 char *g_logLevel;
 char *g_bAddr;
+char *g_keyFile;
+char *g_certFile;
+char *g_certStore;
+
 
 int propertySetup (char *argv[])
 {
@@ -46,6 +50,11 @@ int propertySetup (char *argv[])
     g_sockConfig.serverListenQLen = strtol (getPropertyValue (
             propServerSocketQLen), NULL, 10);
     g_bAddr = getPropertyValue (propServerBindAddr);
+    g_sockConfig.enableSSL = strtol (getPropertyValue (propEnableSsl), NULL, 0);
+    g_keyFile = (char *) getPropertyValue (propServerKeyFile);
+    g_certFile = (char *) getPropertyValue (propServerCertFile);
+    g_certStore = (char *) getPropertyValue (propCertStore);
+
 
     logMsg (LOG_DEBUG, "%s\n", "Converted the read properties");
     g_sockConfig.addrs = createAddrs ((char *) g_bAddr);
@@ -71,6 +80,15 @@ void handleClient (int sockFd)
 void communicate ()
 {
     logFF ();
+
+    if (dtpSuccess != ssl_init (g_certStore, g_certFile, g_keyFile))
+    {
+        usage  ();
+    }
+    if (dtpSuccess != ssl_init (g_certStore, g_certFile, g_keyFile))
+    {
+        usage  ();
+    }
 
     int sockFd;
     if (dtpSuccess != dtp_init (&sockFd, &g_sockConfig))

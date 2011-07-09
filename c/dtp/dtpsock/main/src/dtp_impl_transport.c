@@ -4,10 +4,21 @@
 int transport_tcpSend (const dtpSockInfo * const sockInfo,
         const uint8_t * const sendPdu, const long transferSize)
 {
-    logMsg (LOG_DEBUG, "%s%d%s%d\n", "Sending TCP data over socket ",
-            sockInfo->sockFd, ", size is ", transferSize);
+    int sentSize;
+    if (sockInfo->sockConfig->enableSSL)
+    {
+        logMsg (LOG_DEBUG, "%s%d%s%d\n",
+                "Sending TCP data over secure socket ", sockInfo->sockFd,
+                ", size is ", transferSize);
+        sentSize = SSL_write (sockInfo->sockData->ssl, sendPdu, transferSize);
+    }
+    else
+    {
+        logMsg (LOG_DEBUG, "%s%d%s%d\n", "Sending TCP data over socket ",
+                sockInfo->sockFd, ", size is ", transferSize);
 
-    int sentSize = send (sockInfo->sockFd, sendPdu, transferSize, 0);
+        sentSize = write (sockInfo->sockFd, sendPdu, transferSize);
+    }
     return sentSize;
 }
 
@@ -16,10 +27,20 @@ int transport_tcpRecv (const dtpSockInfo * const sockInfo, uint8_t *recvPdu,
 {
     struct msghdr mh;
 
-    logMsg (LOG_DEBUG, "%s%d%s%d\n", "Receiving TCP data over socket ",
-            sockInfo->sockFd, ", expected size is ", transferSize);
-
-    int recvSize = recv (sockInfo->sockFd, recvPdu, transferSize, 0);
+    int recvSize;
+    if (sockInfo->sockConfig->enableSSL)
+    {
+        logMsg (LOG_DEBUG, "%s%d%s%d\n",
+                "Receiving TCP data over secure socket ", sockInfo->sockFd,
+                ", expected size is ", transferSize);
+        recvSize = SSL_read (sockInfo->sockData->ssl, recvPdu, transferSize);
+    }
+    else
+    {
+        logMsg (LOG_DEBUG, "%s%d%s%d\n", "Receiving TCP data over socket ",
+                sockInfo->sockFd, ", expected size is ", transferSize);
+        recvSize = read (sockInfo->sockFd, recvPdu, transferSize);
+    }
     return recvSize;
 }
 
@@ -28,7 +49,7 @@ int transport_tcpRecv (const dtpSockInfo * const sockInfo, uint8_t *recvPdu,
 int transport_sctpSend (const dtpSockInfo * const sockInfo, const int stream,
         const uint8_t * const sendPdu, const long transferSize)
 {
-    logFF();
+    logFF ();
 
     if (stream > sockInfo->sockData->confirmedSctpOutStreams)
     {
@@ -172,7 +193,7 @@ int transport_sctpRecv (const dtpSockInfo * const sockInfo, uint8_t **recvPdu,
 
 int transport_handleSctpEvent (const int sockFd, const uint8_t * const buf)
 {
-    logFF();
+    logFF ();
 
     if (NULL == buf)
     {

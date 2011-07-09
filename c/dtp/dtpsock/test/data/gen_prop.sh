@@ -8,6 +8,10 @@ protoTcp=6
 protoSctp=132
 clientPort=5777
 serverPort=2999
+certStore=/tmp/store.pem
+serverCertFile=/tmp/cert.pem
+serverKeyFile=/tmp/key.pem
+enableSsl=0
 #v4ClientAddr=10.66.92.78
 v4ClientAddr=localhost
 v6ClientAddr=fe80::21f:5bff:feeb:2f37%en0
@@ -26,7 +30,7 @@ v6MultiServer="$v6Family junkfe80::21f:5bffA $v4Family $v6ServerAddr $v6Family $
 
 usage ()
 {
-printf "Usage: %s: [-p tcp|sctp] [-f 4|6] [-a v4|v4multi|v6|v6multi|v4v6] args\n" $(basename $0) >&2
+printf "Usage: %s: [-p tcp|sctp] [-f 4|6] [-a v4|v4multi|v6|v6multi|v4v6] args [-s]\n" $(basename $0) >&2
 exit 1;
 }
 
@@ -52,6 +56,9 @@ genDefault ()
     echo "afamily=$v4Family"
     echo "ipv6Only=0"
     echo "blocking=1"
+    echo "certStore=$certStore"
+    echo "serverCertFile=$serverCertFile"
+    echo "serverKeyFile=$serverKeyFile"
 }
 
 ## Based on input
@@ -60,7 +67,7 @@ genConfig ()
 cfgProtocol=""
 cfgFamily=""
 cfgAddr=""
-while getopts p:f:a: option
+while getopts p:f:a:s option
 do
     case $option in
         p) cfgProtocol="$OPTARG"
@@ -68,6 +75,8 @@ do
         f) cfgFamily="$OPTARG"
         ;;
         a) cfgAddr="$OPTARG"
+        ;;
+        s) enableSsl=1
         ;;
         ?) usage
         ;;
@@ -120,6 +129,7 @@ else
     echo "Wrong address value $cfgAddr"
     usage
 fi
+echo "enableSsl=$enableSsl"
 }
 
 genDefault

@@ -20,5 +20,9 @@ extern const char * const propServerSharedPort;
 extern const char * const propServerBindAddr;
 extern const char * const propClientConnectAddr;
 extern const char * const propTransferDataSize;
+extern const char * const propEnableSsl;
+extern const char * const propServerKeyFile;
+extern const char * const propServerCertFile;
+extern const char * const propCertStore;
 
 #endif /* DTP_PROPMGR_H */

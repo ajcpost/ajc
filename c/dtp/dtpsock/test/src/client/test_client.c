@@ -20,6 +20,9 @@ char *g_logLevel;
 char *g_bAddr;
 int g_cPort;
 char *g_cAddr;
+char *g_keyFile;
+char *g_certFile;
+char *g_certStore;
 dtpSockAddr **g_connectAddrs;
 
 
@@ -47,7 +50,10 @@ int propertySetup (char *argv[])
     g_cPort = strtol (getPropertyValue (propServerSharedPort), NULL, 0);
     g_cAddr = (char *) getPropertyValue (propClientConnectAddr);
     g_transferDataSize = strtol (getPropertyValue (propTransferDataSize), NULL, 0);
-
+    g_sockConfig.enableSSL = strtol (getPropertyValue (propEnableSsl), NULL, 0);
+    g_keyFile = (char *) getPropertyValue (propServerKeyFile);
+    g_certFile = (char *) getPropertyValue (propServerCertFile);
+    g_certStore = (char *) getPropertyValue (propCertStore);
 
     logMsg (LOG_DEBUG, "%s\n", "Converted the read properties");
     g_sockConfig.addrs = createAddrs ((char *) g_bAddr);
@@ -69,6 +75,11 @@ void communicate ()
     logFF ();
 
     int sockFd;
+
+    if (dtpSuccess != ssl_init (g_certStore, g_certFile, g_keyFile))
+    {
+        usage  ();
+    }
     if (dtpSuccess != dtp_init (&sockFd, &g_sockConfig))
     {
         usage ();

@@ -18,6 +18,13 @@ int init_createSocket (int *sockFd, const dtpSockConfig * const sockConfig)
             util_afamilyToString (afamily), " and protocol type ",
             util_protocolToString (protocol));
 
+    if (IPPROTO_SCTP == protocol && sockConfig->enableSSL)
+    {
+        logMsg (LOG_CRIT, "%s%s\n", "SSL not supported with SCTP ", strerror (
+                errno));
+        return dtpError;
+    }
+
     if ((*sockFd = socket (afamily, SOCK_STREAM, protocol)) < 0)
     {
         logMsg (LOG_CRIT, "%s%s\n", "Failed to create socket, error is ",
@@ -213,7 +220,7 @@ int init_connect (const dtpSockInfo * const sockInfo, const int packedCount,
         else
         {
             logMsg (LOG_DEBUG, "%s%s%s\n", "Connect error is ",
-                    strerror (errno), " trying next address, if any");
+                    strerror (errno), ", trying next address if any");
         }
 
     }
@@ -223,6 +230,7 @@ int init_connect (const dtpSockInfo * const sockInfo, const int packedCount,
         logMsg (LOG_INFO, "%s\n", "Connect failed");
         return dtpError;
     }
+    ssl_doOnConnect (sockInfo);
     logMsg (LOG_INFO, "%s\n", "Connect successful");
     return dtpSuccess;
 }
@@ -341,6 +349,7 @@ int init_tcpAccept (const dtpSockInfo * const sockInfo, int *newSockFd)
     logMsg (LOG_INFO, "%s%s%s%d\n", "Connect request by IP ",
             init_getPeerAddress (newSockInfo), " accepted on socket ",
             newSockInfo->sockFd);
+    ssl_doOnAccept (newSockInfo);
     return dtpSuccess;
 }
 

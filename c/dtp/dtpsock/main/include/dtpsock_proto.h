@@ -19,6 +19,13 @@ void init_setSctpStreams (const dtpSockInfo * const sockInfo);
 void init_getSctpStreams (const dtpSockInfo *sockInfo);
 void init_registerSctpEvents (const dtpSockInfo * const sockInfo);
 
+/* src/dtp_impl_ssl.c */
+int ssl_init (const char * const certStore, const char * const certFile,
+        const char * const keyFile);
+int ssl_validateCerts (SSL *ssl);
+int ssl_doOnConnect (const dtpSockInfo * sockInfo);
+int ssl_doOnAccept (const dtpSockInfo * newSockInfo);
+
 /* src/dtp_impl_store.c */
 int store_getSockCount ();
 dtpSockInfo * store_getSockInfo (const int sockFd);
