@@ -20,12 +20,12 @@ void init_getSctpStreams (const dtpSockInfo *sockInfo);
 void init_registerSctpEvents (const dtpSockInfo * const sockInfo);
 
 /* src/dtp_impl_ssl.c */
-static int verifyCallback (int preverify_ok, X509_STORE_CTX *ctx);
 int ssl_init (const char * const certStore, const char * const certFile,
         const char * const keyFile, const int enableSSLClientAuth);
 int ssl_validateCerts (SSL *ssl);
-int ssl_doOnConnect (const dtpSockInfo * sockInfo);
-int ssl_doOnAccept (const dtpSockInfo * newSockInfo);
+int ssl_onConnect (const dtpSockInfo * sockInfo);
+int ssl_onAccept (const dtpSockInfo * newSockInfo);
+int ssl_verifyCallback (int preverify_ok, X509_STORE_CTX *ctx);
 
 /* src/dtp_impl_store.c */
 int store_getSockCount ();
@@ -37,13 +37,13 @@ int store_remove (const int sockFd);
 
 /* src/dtp_impl_transport.c */
 int transport_tcpSend (const dtpSockInfo * const sockInfo,
-        const uint8_t * const sendPdu, const long transferSize, char *errorString);
+        const uint8_t * const sendPdu, const long transferSize);
 int transport_tcpRecv (const dtpSockInfo * const sockInfo, uint8_t *recvPdu,
-        const long transferSize, char *errorString);
+        const long transferSize);
 int transport_sctpSend (const dtpSockInfo * const sockInfo, const int stream,
-        const uint8_t * const sendPdu, const long transferSize, char *errorString);
-int transport_sctpRecv (const dtpSockInfo * const sockInfo, uint8_t **recvPdu,
-        const int transferSize, char *errorString);
+        const uint8_t * const sendPdu, const long transferSize);
+int transport_sctpRecv (const dtpSockInfo * const sockInfo, uint8_t *recvPdu,
+        const int transferSize);
 int transport_handleSctpEvent (const int sockFd, const uint8_t * const buf);
 
 /* src/dtp_impl_util.c */

@@ -2,9 +2,12 @@
 #include "dtpsock_proto.h"
 
 int transport_tcpSend (const dtpSockInfo * const sockInfo,
-        const uint8_t * const sendPdu, const long transferSize, char *errorString)
+        const uint8_t * const sendPdu, const long transferSize)
 {
+    logFF();
     int sentSize;
+    char *errorString="";
+
     if (sockInfo->sockConfig->enableSSL)
     {
         logMsg (LOG_DEBUG, "%s%d%s%d\n",
@@ -21,15 +24,29 @@ int transport_tcpSend (const dtpSockInfo * const sockInfo,
         sentSize = write (sockInfo->sockFd, sendPdu, transferSize);
         errorString = strerror (errno);
     }
+
+    if (sentSize != transferSize)
+    {
+        logMsg (LOG_ERR, "%s%s\n", "Failed to send data, error is ",
+                errorString);
+    }
+    else
+    {
+        logMsg (LOG_INFO, "%s%d\n", "Sent data of size ", sentSize);
+    }
+
     return sentSize;
 }
 
 int transport_tcpRecv (const dtpSockInfo * const sockInfo, uint8_t *recvPdu,
-        const long transferSize, char *errorString)
+        const long transferSize)
 {
-    struct msghdr mh;
+    logFF();
 
+    struct msghdr mh;
     int recvSize;
+    char *errorString="";
+
     if (sockInfo->sockConfig->enableSSL)
     {
         logMsg (LOG_DEBUG, "%s%d%s%d\n",
@@ -45,15 +62,26 @@ int transport_tcpRecv (const dtpSockInfo * const sockInfo, uint8_t *recvPdu,
         recvSize = read (sockInfo->sockFd, recvPdu, transferSize);
         errorString = strerror (errno);
     }
+    if (recvSize != transferSize)
+    {
+        logMsg (LOG_ERR, "%s%s\n", "Failed to recv data, error is ",
+                errorString);
+    }
+    else
+    {
+        logMsg (LOG_INFO, "%s%d\n", "Recv data of size ", recvSize);
+    }
+
     return recvSize;
 }
 
 /* Add event support in send/receive */
 /*todo nonblocking sctp_send */
 int transport_sctpSend (const dtpSockInfo * const sockInfo, const int stream,
-        const uint8_t * const sendPdu, const long transferSize, char *errorString)
+        const uint8_t * const sendPdu, const long transferSize)
 {
     logFF ();
+    char *errorString="";
 
     if (stream > sockInfo->sockData->confirmedSctpOutStreams)
     {
@@ -115,14 +143,25 @@ int transport_sctpSend (const dtpSockInfo * const sockInfo, const int stream,
         iov.iov_base = ((char *) sendPdu) + sentSize;
         iov.iov_len = transferSize - sentSize;
     }
-    errorString = strerror (errno);
+    if (sentSize != transferSize)
+    {
+        logMsg (LOG_ERR, "%s%s\n", "Failed to send data, error is ",
+                errorString);
+    }
+    else
+    {
+        logMsg (LOG_INFO, "%s%d\n", "Sent data of size ", sentSize);
+    }
     return sentSize;
 }
 
 /*todo nonblocking sctp_recv */
-int transport_sctpRecv (const dtpSockInfo * const sockInfo, uint8_t **recvPdu,
-        const int transferSize, char *errorString)
+int transport_sctpRecv (const dtpSockInfo * const sockInfo, uint8_t *recvPdu,
+        const int transferSize)
 {
+    logFF();
+    char *errorString="";
+
     logMsg (LOG_DEBUG, "%s%d%s%d\n", "Receiving SCTP data over socket ",
             sockInfo->sockFd, ", expected size is ", transferSize);
 
@@ -143,7 +182,7 @@ int transport_sctpRecv (const dtpSockInfo * const sockInfo, uint8_t **recvPdu,
     cmsg->cmsg_type = SCTP_SNDRCV;
     ssr = CMSG_DATA(cmsg);
 
-    *recvPdu = NULL;
+    recvPdu = NULL;
     uint8_t *chunkPdu = malloc (sizeof(*chunkPdu) * (transferSize));
     memset (chunkPdu, 0, (sizeof(*chunkPdu) * (transferSize)));
 
@@ -161,7 +200,7 @@ int transport_sctpRecv (const dtpSockInfo * const sockInfo, uint8_t **recvPdu,
         if (chunkSize < 0)
         {
             /* Error, return NULL */
-            *recvPdu = NULL;
+            recvPdu = NULL;
             recvSize = -1;
             break;
         }
@@ -173,7 +212,7 @@ int transport_sctpRecv (const dtpSockInfo * const sockInfo, uint8_t **recvPdu,
             if (transport_handleSctpEvent (sockInfo->sockFd, chunkPdu) < 0)
             {
                 /* Shutdown, return NULL */
-                *recvPdu = NULL;
+                recvPdu = NULL;
                 recvSize = -1;
                 break;
             }
@@ -187,13 +226,22 @@ int transport_sctpRecv (const dtpSockInfo * const sockInfo, uint8_t **recvPdu,
         if ((mh.msg_flags & MSG_EOR) || (recvSize >= transferSize))
         {
             logMsg (LOG_DEBUG, "%s\n", "Received complete PDU");
-            *recvPdu = chunkPdu;
+            recvPdu = chunkPdu;
             break;
         }
         iov.iov_base = (char *) chunkPdu + recvSize;
         iov.iov_len = transferSize - recvSize;
     }
-    errorString = strerror (errno);
+    if (recvSize != transferSize)
+    {
+        logMsg (LOG_ERR, "%s%s\n", "Failed to recv data, error is ",
+                errorString);
+    }
+    else
+    {
+        logMsg (LOG_INFO, "%s%d\n", "Recv data of size ", recvSize);
+    }
+
     return recvSize;
 }
 

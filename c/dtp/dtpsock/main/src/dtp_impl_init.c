@@ -232,7 +232,7 @@ int init_connect (const dtpSockInfo * const sockInfo, const int packedCount,
 
     if (sockInfo->sockConfig->enableSSL)
     {
-        if (dtpError == ssl_doOnConnect (sockInfo))
+        if (dtpError == ssl_onConnect (sockInfo))
         {
             logMsg (LOG_INFO, "%s\n", "Secure connect failed");
             return dtpError;
@@ -359,7 +359,7 @@ int init_tcpAccept (const dtpSockInfo * const sockInfo, int *newSockFd)
 
     if (newSockInfo->sockConfig->enableSSL)
     {
-        if (dtpError == ssl_doOnAccept (newSockInfo))
+        if (dtpError == ssl_onAccept (newSockInfo))
         {
             logMsg (LOG_INFO, "%s\n", "Secure accept failed");
             dtp_close (*newSockFd);

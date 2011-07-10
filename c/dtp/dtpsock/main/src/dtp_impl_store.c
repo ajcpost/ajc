@@ -125,6 +125,8 @@ int store_remove (const int sockFd)
         return dtpError;
     }
     logMsg (LOG_DEBUG, "%s%d\n", "Removing socket at slot ", slot);
-    util_freeDtpSockInfo (s_openSocks[slot]);
+    dtpSockInfo *sockInfo = s_openSocks[slot];
+    s_openSocks[slot] = NULL;
+    util_freeDtpSockInfo (sockInfo);
     return dtpSuccess;
 }

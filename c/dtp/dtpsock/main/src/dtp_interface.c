@@ -146,7 +146,8 @@ int dtp_ssl (const char * const certStore, const char * const certFile,
 /*
  * (dtp_connect) Connects previously initialized dtp socket to the input addresses. If the socket is of
  * type TCP, it loops through the addresses until one of them is successful. If the socket is of type SCTP,
- * it connects to all addresses possible.
+ * it connects to all addresses possible. If SSL is enabled, it will establish a secure connection on top
+ * of basic connection.
  *
  * (Parameter, int sockFd) The dtp socket id. The socket must have been initialized using dtp_init.
  * (Parameter, int sharedPort) The server port.
@@ -364,33 +365,23 @@ int dtp_send (const int sockFd, const uint8_t * const payLoad, const long size)
         return -1;
     }
 
-    char *errorString="";
     int retSize;
     int stream;
     switch (sockInfo->sockConfig->protocol)
     {
     case IPPROTO_TCP:
-        retSize = transport_tcpSend (sockInfo, payLoad, size, errorString);
+        retSize = transport_tcpSend (sockInfo, payLoad, size);
         break;
     case IPPROTO_SCTP:
         stream = util_getSctpStream (
                 sockInfo->sockData->confirmedSctpOutStreams);
-        retSize = transport_sctpSend (sockInfo, stream, payLoad, size, errorString);
+        retSize = transport_sctpSend (sockInfo, stream, payLoad, size);
         break;
     default:
         logMsg (LOG_CRIT, "%s%d\n", "Unrecognized protocol in send ",
                 sockInfo->sockConfig->protocol);
         retSize = -1;
         break;
-    }
-
-    if (retSize != size)
-    {
-        logMsg (LOG_ERR, "%s%s\n", "Failed to send data, error is ", errorString);
-    }
-    else
-    {
-        logMsg (LOG_INFO, "%s%d\n", "Sent data of size ", retSize);
     }
     return retSize;
 }
@@ -399,7 +390,7 @@ int dtp_send (const int sockFd, const uint8_t * const payLoad, const long size)
  * (dtp_recv) Receive data on a previously initialized dtp socket.
  *
  * (Parameter, int sockFd) The dtp socket id. The socket must have been initialized using dtp_init.
- * (Parameter, uint8_t** buf) Buffer to hold the received data. Memory is allocated as necessary.
+ * (Parameter, uint8_t* buf) Buffer to hold the received data. Caller to allocate appropriate memory.
  * (Parameter, long maxBytes) Maximum bytes expected during recv.
  *
  * (Return) size of data sent if successful completion, else -1
@@ -422,29 +413,20 @@ int dtp_recv (const int sockFd, uint8_t *buf, const long maxBytes)
         return -1;
     }
 
-    char *errorString = "";
     int retSize;
     switch (sockInfo->sockConfig->protocol)
     {
     case IPPROTO_TCP:
-        retSize = transport_tcpRecv (sockInfo, buf, maxBytes, errorString);
+        retSize = transport_tcpRecv (sockInfo, buf, maxBytes);
         break;
     case IPPROTO_SCTP:
-        retSize = transport_sctpRecv (sockInfo, buf, maxBytes, errorString);
+        retSize = transport_sctpRecv (sockInfo, buf, maxBytes);
         break;
     default:
         logMsg (LOG_CRIT, "%s%d\n", "Unrecognized protocol in recv ",
                 sockInfo->sockConfig->protocol);
         retSize = -1;
         break;
-    }
-    if (retSize < 0)
-    {
-        logMsg (LOG_ERR, "%s%s\n", "Failed to recv data, error is ", errorString);
-    }
-    else
-    {
-        logMsg (LOG_INFO, "%s%d\n", "Received data of size ", retSize);
     }
     return retSize;
 }

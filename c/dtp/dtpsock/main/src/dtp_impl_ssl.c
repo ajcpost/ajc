@@ -4,25 +4,21 @@
 static SSL_CTX *s_ctx = NULL;
 static int s_enableSSLClientAuth = 0;
 
-static int verifyCallback (int preverify_ok, X509_STORE_CTX *ctx)
-{
-    return 1;
-}
-
 int ssl_init (const char * const certStore, const char * const certFile,
         const char * const keyFile, const int enableSSLClientAuth)
 {
     logFF ();
-
-    s_enableSSLClientAuth = enableSSLClientAuth;
-    logMsg (LOG_INFO, "%s%s%s%s%s%s\n", "Initializing SSL with store: ",
-            certStore, " cert file: ", certFile, " key file: ", keyFile);
     if (NULL != s_ctx)
     {
         logMsg (LOG_WARNING, "%s\n",
                 "SSL already initialized, ignoring the call");
         return dtpSuccess;
     }
+
+    s_enableSSLClientAuth = enableSSLClientAuth;
+    logMsg (LOG_INFO, "%s%s%s%s%s%s%s%d\n", "Initializing SSL with store: ",
+            certStore, " cert file: ", certFile, " key file: ", keyFile,
+            "client auth:", enableSSLClientAuth);
 
     SSL_METHOD *method;
     SSL_library_init ();
@@ -36,13 +32,11 @@ int ssl_init (const char * const certStore, const char * const certFile,
                 ERR_reason_error_string (ERR_get_error ()));
         return dtpError;
     }
-
     if (s_enableSSLClientAuth)
     {
         SSL_CTX_set_verify (s_ctx, SSL_VERIFY_PEER | SSL_VERIFY_CLIENT_ONCE,
-                verifyCallback);
+                ssl_verifyCallback);
     }
-
     if (SSL_CTX_load_verify_locations (s_ctx, certStore, NULL) != 1)
     {
         logMsg (LOG_CRIT, "%s%s%s%s\n", "Failed to load trust store  ",
@@ -50,7 +44,6 @@ int ssl_init (const char * const certStore, const char * const certFile,
                         ERR_get_error ()));
         return dtpError;
     }
-
     if (SSL_CTX_use_certificate_file (s_ctx, certFile, SSL_FILETYPE_PEM) != 1)
     {
         logMsg (LOG_CRIT, "%s%s%s%s\n", "Failed to load certificate file ",
@@ -89,24 +82,24 @@ int ssl_validateCerts (SSL *ssl)
     peerCert = SSL_get_peer_certificate (ssl);
     if (NULL == peerCert)
     {
-        logMsg (LOG_CRIT, "%s%s\n", "No peer certificate");
+        logMsg (LOG_CRIT, "%s\n", "No peer certificate");
         return dtpError;
     }
 
     char *txt;
     logMsg (LOG_DEBUG, "%s\n", "Peer certificate details...");
     txt = X509_NAME_oneline (X509_get_subject_name (peerCert), 0, 0);
-    logMsg (LOG_INFO, "%s%s\n", "Subject: ", txt);
+    logMsg (LOG_DEBUG, "%s%s\n", "Subject: ", txt);
     free (txt);
     txt = X509_NAME_oneline (X509_get_issuer_name (peerCert), 0, 0);
-    logMsg (LOG_INFO, "%s%s\n", "Issuer: ", txt);
+    logMsg (LOG_DEBUG, "%s%s\n", "Issuer: ", txt);
     free (txt);
     X509_free (peerCert);
 
     return dtpSuccess;
 }
 
-int ssl_doOnConnect (const dtpSockInfo * sockInfo)
+int ssl_onConnect (const dtpSockInfo * sockInfo)
 {
     logFF ();
 
@@ -120,7 +113,7 @@ int ssl_doOnConnect (const dtpSockInfo * sockInfo)
     }
     return (ssl_validateCerts (sockInfo->sockData->ssl));
 }
-int ssl_doOnAccept (const dtpSockInfo * newSockInfo)
+int ssl_onAccept (const dtpSockInfo * newSockInfo)
 {
     logFF ();
 
@@ -137,4 +130,9 @@ int ssl_doOnAccept (const dtpSockInfo * newSockInfo)
         return (ssl_validateCerts (newSockInfo->sockData->ssl));
     }
     return dtpSuccess;
+}
+
+int ssl_verifyCallback (int preverify_ok, X509_STORE_CTX *ctx)
+{
+    return 1;
 }
