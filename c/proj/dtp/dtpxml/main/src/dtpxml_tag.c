@@ -4,6 +4,118 @@
 #define MAX_ERROR_LENGTH 500
 char errString[MAX_ERROR_LENGTH];
 
+#define TAG_LCN_D "lcn_diambase_config_file"
+#define TAG_CAPABILITIES "capabilities"
+#define TAG_PRODUCT_NAME "product_name"
+#define TAG_REVISION "revision"
+#define TAG_IPADDRESS "ipaddress"
+#define TAG_VENDOR_ID "vendor_id"
+#define TAG_SUPPORTED_VENDOR_ID "supported_vendor_id"
+#define TAG_AUTH_APP_ID "auth_application_id"
+#define TAG_ACCT_APP_ID "acct_application_id"
+#define TAG_VSAI "vendor_specific_application_id"
+#define TAG_TRANSPORT "transport"
+#define TAG_NODENAME "nodename"
+#define TAG_REALM "realm"
+#define TAG_PROTO "proto"
+#define TAG_APP_PORT "app_port"
+#define TAG_TCP_PORT "tcp_port"
+#define TAG_SCTP_PORT "sctp_port"
+#define TAG_UNKNOWN_PEER_ACTION "unknown_peer_action"
+#define TAG_PEER_TABLE "peer_table"
+#define TAG_PEER "peer"
+#define TAG_HOSTNAME "hostname"
+#define TAG_SECURITY "security"
+#define TAG_ROUTE_TABLE "route_table"
+#define TAG_ROUTE "route"
+#define TAG_ACTION "action"
+#define TAG_ROLE "role"
+#define TAG_APP "application"
+#define TAG_APP_ID "application_id"
+#define TAG_SERVER "server"
+#define TAG_WEIGHT "weight"
+#define TAG_ID "id"
+#define TAG_TYPE "type"
+#define TAG_PEER_ENTRY "peer_entry"
+#define TAG_METRIC "metric"
+#define TAG_IMPL "implementation"
+#define TAG_TWINIT "twinit"
+#define TAG_INACTIVITY "inactivity"
+#define TAG_ROLE "role"
+#define TAG_NUM_THREADS "num_threads"
+#define TAG_REOPEN_TIMER "reopen_timer"
+#define TAG_POLLING_INTERVAL "polling_interval"
+#define TAG_DUP_WATCH "duplicate_watch"
+#define TAG_SMALL_PDU "small_pdu_size"
+#define TAG_BIG_PDU "big_pdu_size"
+
+tagMetadata
+    xmltags[] =
+        {
+        { TAG_LCN_D, NULL, NULL, NULL, NULL },
+        { TAG_CAPABILITIES, TAG_LCN_D, NULL, NULL, NULL },
+        { TAG_PRODUCT_NAME, TAG_LCN_D TAG_CAPABILITIES, NULL, NULL, handleCapProductName },
+        { TAG_REVISION, TAG_LCN_D TAG_CAPABILITIES, NULL, NULL, handleCapRevision },
+        { TAG_IPADDRESS, TAG_LCN_D TAG_CAPABILITIES, handleStartTagCapIPAddress, NULL, handleCapIPAddress },
+        { TAG_VENDOR_ID, TAG_LCN_D TAG_CAPABILITIES, NULL, NULL, handleCapVendorId },
+        { TAG_SUPPORTED_VENDOR_ID, TAG_LCN_D TAG_CAPABILITIES, NULL, NULL, handleCapSupportedVendorId },
+        { TAG_AUTH_APP_ID, TAG_LCN_D TAG_CAPABILITIES, NULL, NULL, handleCapAuthAppId },
+        { TAG_ACCT_APP_ID, TAG_LCN_D TAG_CAPABILITIES, NULL, NULL, handleCapAcctAppId },
+        { TAG_VSAI, TAG_LCN_D TAG_CAPABILITIES, handleStartTagCapVsai, handleEndTagCapVsai, NULL },
+        { TAG_VENDOR_ID, TAG_LCN_D TAG_CAPABILITIES TAG_VSAI, NULL, NULL, handleCapVsaiVendorId },
+        { TAG_AUTH_APP_ID, TAG_LCN_D TAG_CAPABILITIES TAG_VSAI, NULL, NULL, handleCapVsaiAuthAppId },
+        { TAG_ACCT_APP_ID, TAG_LCN_D TAG_CAPABILITIES TAG_VSAI, NULL, NULL, handleCapVsaiAcctAppId },
+        { TAG_TRANSPORT, TAG_LCN_D, NULL, NULL, NULL },
+        { TAG_NODENAME, TAG_LCN_D TAG_TRANSPORT, NULL, NULL, handleTransportNodeName },
+        { TAG_REALM, TAG_LCN_D TAG_TRANSPORT, NULL, NULL, handleTransportNodeRealm },
+        { TAG_PROTO, TAG_LCN_D TAG_TRANSPORT, NULL, NULL, handleTransportProto },
+        { TAG_APP_PORT, TAG_LCN_D TAG_TRANSPORT, NULL, NULL, handleTransportAppPort },
+        { TAG_TCP_PORT, TAG_LCN_D TAG_TRANSPORT, NULL, NULL, handleTransportTcpPort },
+        { TAG_SCTP_PORT, TAG_LCN_D TAG_TRANSPORT, NULL, NULL, handleTransportSctpPort },
+        { TAG_UNKNOWN_PEER_ACTION, TAG_LCN_D TAG_TRANSPORT, NULL, NULL, handleTransportUnknownPeerAction },
+        { TAG_PEER_TABLE, TAG_LCN_D TAG_TRANSPORT, NULL, NULL, NULL },
+        { TAG_PEER, TAG_LCN_D TAG_TRANSPORT TAG_PEER_TABLE, handleStartTagTransportPTPeer, handleEndTagTransportPTPeer, NULL },
+        { TAG_HOSTNAME, TAG_LCN_D TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, NULL, NULL, handleTransportPTPeerHostname },
+        { TAG_PROTO, TAG_LCN_D TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, NULL, NULL, handleTransportPTPeerProto },
+        { TAG_TCP_PORT, TAG_LCN_D TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, NULL, NULL, handleTransportPTPeerTcpPort },
+        { TAG_SCTP_PORT, TAG_LCN_D TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, NULL, NULL, handleTransportPTPeerSctpPort },
+        { TAG_SECURITY, TAG_LCN_D TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, NULL, NULL, handleTransportPTPeerSecurity },
+        { TAG_IPADDRESS, TAG_LCN_D TAG_TRANSPORT TAG_PEER_TABLE TAG_PEER, handleStartTagTransportPTPeerIPAddress, NULL, handleTransportPTPeerIPAddress },
+        { TAG_ROUTE_TABLE, TAG_LCN_D TAG_TRANSPORT, NULL, NULL, NULL },
+        { TAG_ROUTE, TAG_LCN_D TAG_TRANSPORT TAG_ROUTE_TABLE, handleStartTagTransportRTRoute, handleEndTagTransportRTRoute, NULL },
+        { TAG_REALM, TAG_LCN_D TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE, NULL, NULL, handleTransportRTRouteRealm },
+        { TAG_ACTION, TAG_LCN_D TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE, NULL, NULL, handleTransportRTRouteAction },
+        { TAG_APP, TAG_LCN_D TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE, NULL, NULL, NULL },
+        { TAG_APP_ID, TAG_LCN_D TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP, NULL, NULL, handleTransportRTRouteAppId },
+        { TAG_VENDOR_ID, TAG_LCN_D TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP, NULL, NULL, handleTransportRTRouteAppVendorId },
+        { TAG_PEER, TAG_LCN_D TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP, handleStartTagTransportRTRouteAppPeer, NULL, NULL },
+        { TAG_SERVER, TAG_LCN_D TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP TAG_PEER, NULL, NULL, handleTransportRTRouteAppPeerServer },
+        { TAG_WEIGHT, TAG_LCN_D TAG_TRANSPORT TAG_ROUTE_TABLE TAG_ROUTE TAG_APP TAG_PEER, NULL, NULL, handleTransportRTRouteAppPeerWeight },
+        { TAG_IMPL, TAG_LCN_D, NULL, NULL, NULL },
+        { TAG_TWINIT, TAG_LCN_D TAG_IMPL, NULL, NULL, handleImplTwinit },
+        { TAG_INACTIVITY, TAG_LCN_D TAG_IMPL, NULL, NULL, handleImplInactivity },
+        { TAG_ROLE, TAG_LCN_D TAG_IMPL, NULL, NULL, handleImplRole },
+        { TAG_NUM_THREADS, TAG_LCN_D TAG_IMPL, NULL, NULL, handleImplNumOfThreads },
+        { TAG_REOPEN_TIMER, TAG_LCN_D TAG_IMPL, NULL, NULL, handleImplReopenTimer },
+        { TAG_POLLING_INTERVAL, TAG_LCN_D TAG_IMPL, NULL, NULL, handleImplPollingInterval },
+        /*{ TAG_DUP_WATCH, TAG_LCN_D TAG_IMPL, NULL, NULL, handleImplDupWatch },*/
+        { TAG_SMALL_PDU, TAG_LCN_D TAG_IMPL, NULL, NULL, handleImplSmallPdu },
+        { TAG_BIG_PDU, TAG_LCN_D TAG_IMPL, NULL, NULL, handleImplBigPdu },
+        { NULL, NULL, NULL, NULL } };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void appendDataError (userData *ud, char *errString)
 {
     logMsg (LOG_ERR, "%s\n", errString);

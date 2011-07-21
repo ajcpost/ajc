@@ -15,8 +15,8 @@
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 
-#include "logmgr.h"
-#include "propmgr.h"
+#include "core_logmgr.h"
+#include "core_propmgr.h"
 #include "dtpsock_impl.h"
 
 #endif /* DTPSOCK_HDR_H */

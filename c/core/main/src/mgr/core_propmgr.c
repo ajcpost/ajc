@@ -1,5 +1,5 @@
-#include "hdr.h"
-#include "proto.h"
+#include "core_hdr.h"
+#include "core_proto.h"
 
 /* Must be in sync with s_propertyNames/propertyValues below */
 const char * const propServerLogFilePath = "serverLogFilePath";

@@ -1,5 +1,5 @@
-#ifndef PROPMGR_H
-#define PROPMGR_H
+#ifndef CORE_PROPMGR_H
+#define CORE_PROPMGR_H
 
 /* Must be in sync with propertyNames in .c */
 extern const char * const propServerLogFilePath;
@@ -29,4 +29,4 @@ extern const char * const propServerKeyFile;
 extern const char * const propServerCertFile;
 extern const char * const propServerCertStore;
 
-#endif /* PROPMGR_H */
+#endif /* CORE_PROPMGR_H */

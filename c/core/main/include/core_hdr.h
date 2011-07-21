@@ -1,5 +1,5 @@
-#ifndef HDR_H_
-#define HDR_H_
+#ifndef CORE_HDR_H_
+#define CORE_HDR_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 #include <syslog.h>
 
-#include "logmgr.h"
-#include "propmgr.h"
+#include "core_logmgr.h"
+#include "core_propmgr.h"
 
-#endif /* HDR_H_ */
+#endif /* CORE_HDR_H_ */

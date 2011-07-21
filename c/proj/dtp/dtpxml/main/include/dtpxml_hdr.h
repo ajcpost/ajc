@@ -9,8 +9,8 @@
 #include <sys/stat.h>
 #include <syslog.h>
 
-#include "logmgr.h"
-#include "propmgr.h"
-#include "dtp_xmlmgr.h"
+#include "core_logmgr.h"
+#include "core_propmgr.h"
+#include "dtpxml_impl.h"
 
 #endif /* DTPXML_HDR_H_ */

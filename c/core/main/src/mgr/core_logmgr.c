@@ -1,5 +1,5 @@
-#include "hdr.h"
-#include "proto.h"
+#include "core_hdr.h"
+#include "core_proto.h"
 
 /* position must match with log levels defined in syslog */
 static const char * const s_logLevels[] = { "emergency", "alert", "critical",

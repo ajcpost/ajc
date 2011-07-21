@@ -1,5 +1,5 @@
-#ifndef DTP_XMLMGR_H_
-#define DTP_XMLMGR_H_
+#ifndef DTPXML_IMPL_H_
+#define DTPXML_IMPL_H_
 
 #include <libxml2/libxml/tree.h>
 #include <libxml2/libxml/parser.h>
@@ -26,4 +26,4 @@ typedef struct tag_metadata {
 
 extern tagMetadata xmltags[];
 
-#endif /* DTP_XMLMGR_H_ */
+#endif /* DTPXML_IMPL_H_ */
