@@ -8,7 +8,38 @@
 
 #include "dtpsock_hdr.h"
 #include "dtpsock_proto.h"
+#include "dtpsocktest.h"
 #include "dtpsocktest_proto.h"
+
+
+const char * const propServerLogFilePath = "serverLogFilePath";
+const char * const propServerMaxLogSize = "serverMaxLogSize";
+const char * const propServerLogLevel = "serverLogLevel";
+const char * const propClientLogFilePath = "clientLogFilePath";
+const char * const propClientMaxLogSize = "clientMaxLogSize";
+const char * const propClientLogLevel = "clientLogLevel";
+const char * const propAfamily = "afamily";
+const char * const propIPv6Only = "ipv6Only";
+const char * const propProtocol = "protocol";
+const char * const propBlocking = "blocking";
+const char * const propMaxPduSize = "maxPduSize";
+const char * const propServerSocketQLen = "serverSocketQLen";
+const char * const propClientSharedPort = "clientSharedPort";
+const char * const propClientBindAddr = "clientBindAddr";
+const char * const propServerSharedPort = "serverSharedPort";
+const char * const propServerBindAddr = "serverBindAddr";
+const char * const propClientConnectAddr = "clientConnectAddr";
+const char * const propTransferDataSize = "transferDataSize";
+const char * const propEnableSsl = "enableSsl";
+const char * const propEnableSslClientAuth = "enableSslClientAuth";
+const char * const propClientKeyFile = "clientKeyFile";
+const char * const propClientCertFile = "clientCertFile";
+const char * const propClientCertStore = "clientCertStore";
+const char * const propServerKeyFile = "serverKeyFile";
+const char * const propServerCertFile = "serverCertFile";
+const char * const propServerCertStore = "serverCertStore";
+
+
 
 void usage ()
 {

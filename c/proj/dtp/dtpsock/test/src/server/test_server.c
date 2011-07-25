@@ -9,6 +9,7 @@
 
 #include "dtpsock_hdr.h"
 #include "dtpsock_proto.h"
+#include "dtpsocktest.h"
 #include "dtpsocktest_proto.h"
 
 /* Test program; will use globals to speed up */
@@ -18,18 +19,18 @@ char *g_logPath;
 int g_logSize;
 char *g_logLevel;
 char *g_bAddr;
+int g_enableSsl;
 int g_enableSslClientAuth;
 char *g_keyFile;
 char *g_certFile;
 char *g_certStore;
-
 
 int propertySetup (char *argv[])
 {
     logFF ();
 
     /* Test program; no validations done on the properties */
-    loadPropertiesFromFile (argv[1]);
+    loadPropertiesFromFile (argv[1], 20);
     logMsg (LOG_DEBUG, "%s%s\n", "Loaded properties from the file", argv[1]);
 
     memset (&g_sockConfig, 0, sizeof(g_sockConfig));
@@ -51,12 +52,12 @@ int propertySetup (char *argv[])
             propServerSocketQLen), NULL, 10);
     g_bAddr = getPropertyValue (propServerBindAddr);
     g_sockConfig.enableSSL = strtol (getPropertyValue (propEnableSsl), NULL, 0);
-    g_enableSslClientAuth = strtol (getPropertyValue (
-            propEnableSslClientAuth), NULL, 10);
+    g_enableSsl = strtol (getPropertyValue (propEnableSsl), NULL, 10);
+    g_enableSslClientAuth = strtol (getPropertyValue (propEnableSslClientAuth),
+            NULL, 10);
     g_keyFile = (char *) getPropertyValue (propServerKeyFile);
     g_certFile = (char *) getPropertyValue (propServerCertFile);
     g_certStore = (char *) getPropertyValue (propServerCertStore);
-
 
     logMsg (LOG_DEBUG, "%s\n", "Converted the read properties");
     g_sockConfig.addrs = createAddrs ((char *) g_bAddr);
@@ -83,13 +84,18 @@ void communicate ()
 {
     logFF ();
 
-    if (dtpSuccess != dtp_ssl (g_certStore, g_certFile, g_keyFile, g_enableSslClientAuth))
+    if (1 == g_enableSsl)
     {
-        usage  ();
-    }
-    if (dtpSuccess != dtp_ssl (g_certStore, g_certFile, g_keyFile, g_enableSslClientAuth))
-    {
-        usage  ();
+        if (dtpSuccess != dtp_ssl (g_certStore, g_certFile, g_keyFile,
+                g_enableSslClientAuth))
+        {
+            usage ();
+        }
+        if (dtpSuccess != dtp_ssl (g_certStore, g_certFile, g_keyFile,
+                g_enableSslClientAuth))
+        {
+            usage ();
+        }
     }
 
     int sockFd;

@@ -11,5 +11,6 @@
 
 #include "core_logmgr.h"
 #include "core_propmgr.h"
+#include "core_hashMap.h"
 
 #endif /* CORE_HDR_H_ */

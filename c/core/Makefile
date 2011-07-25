@@ -17,6 +17,9 @@ print:
 $(PROJ_BUILD)/libcore.a: $(T1_OBJ)
 	ar rcs $@ $^
 
+$(PROJ_BUILD)/test_hash: $(T2_OBJ)
+	$(CC) $^ -o $@ $(LIBS)
+
 checkdirs: $(TGTS)
 $(TGTS):
 	@mkdir -p $@
@@ -26,7 +29,7 @@ clean:
 	@echo "Cleaning...$(PROJ_BUILD)"
 	@rm -rf $(PROJ_BUILD)/*
 
-all: clean checkdirs print $(PROJ_BUILD)/libcore.a
+all: clean checkdirs print $(PROJ_BUILD)/libcore.a $(PROJ_BUILD)/test_hash
 
 $(foreach bdir, $(TGTS), $(eval $(call make-goal, $(bdir))))
 

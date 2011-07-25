@@ -8,6 +8,7 @@
 
 #include "dtpsock_hdr.h"
 #include "dtpsock_proto.h"
+#include "dtpsocktest.h"
 #include "dtpsocktest_proto.h"
 
 /* Test program; will use globals to speed up */
@@ -19,19 +20,19 @@ char *g_logLevel;
 char *g_bAddr;
 int g_cPort;
 char *g_cAddr;
+int g_enableSsl;
 int g_enableSslClientAuth;
 char *g_keyFile;
 char *g_certFile;
 char *g_certStore;
 dtpSockAddr **g_connectAddrs;
 
-
 int propertySetup (char *argv[])
 {
-    logFF();
+    logFF ();
 
     /* Test program; no validations done on the properties */
-    loadPropertiesFromFile (argv[1]);
+    loadPropertiesFromFile (argv[1], 20);
     logMsg (LOG_DEBUG, "%s%s\n", "Loaded properties from the file", argv[1]);
 
     g_logPath = (char *) getPropertyValue (propClientLogFilePath);
@@ -43,19 +44,22 @@ int propertySetup (char *argv[])
     g_sockConfig.ipv6Only = strtol (getPropertyValue (propIPv6Only), NULL, 0);
     g_sockConfig.blocking = strtol (getPropertyValue (propBlocking), NULL, 0);
     g_sockConfig.protocol = strtol (getPropertyValue (propProtocol), NULL, 0);
-    g_sockConfig.maxPduSize = strtol (getPropertyValue (propMaxPduSize), NULL, 0);
-    g_sockConfig.sharedPort = strtol (getPropertyValue (
-            propClientSharedPort), NULL, 0);
+    g_sockConfig.maxPduSize = strtol (getPropertyValue (propMaxPduSize), NULL,
+            0);
+    g_sockConfig.sharedPort = strtol (getPropertyValue (propClientSharedPort),
+            NULL, 0);
     g_bAddr = (char *) getPropertyValue (propClientBindAddr);
     g_cPort = strtol (getPropertyValue (propServerSharedPort), NULL, 0);
     g_cAddr = (char *) getPropertyValue (propClientConnectAddr);
-    g_transferDataSize = strtol (getPropertyValue (propTransferDataSize), NULL, 0);
+    g_transferDataSize = strtol (getPropertyValue (propTransferDataSize), NULL,
+            0);
     g_sockConfig.enableSSL = strtol (getPropertyValue (propEnableSsl), NULL, 0);
     g_keyFile = (char *) getPropertyValue (propClientKeyFile);
     g_certFile = (char *) getPropertyValue (propClientCertFile);
     g_certStore = (char *) getPropertyValue (propClientCertStore);
-    g_enableSslClientAuth = strtol (getPropertyValue (
-            propEnableSslClientAuth), NULL, 10);
+    g_enableSsl = strtol (getPropertyValue (propEnableSsl), NULL, 10);
+    g_enableSslClientAuth = strtol (getPropertyValue (propEnableSslClientAuth),
+            NULL, 10);
     logMsg (LOG_DEBUG, "%s\n", "Converted the read properties");
     g_sockConfig.addrs = createAddrs ((char *) g_bAddr);
     g_connectAddrs = createAddrs ((char *) g_cAddr);
@@ -64,7 +68,7 @@ int propertySetup (char *argv[])
 
 int logSetup ()
 {
-    logFF();
+    logFF ();
 
     createLog (g_logPath, g_logLevel, g_logSize, 0);
     /*openlog ("TestClient", LOG_NDELAY, LOG_USER);*/
@@ -77,9 +81,13 @@ void communicate ()
 
     int sockFd;
 
-    if (dtpSuccess != dtp_ssl (g_certStore, g_certFile, g_keyFile, g_enableSslClientAuth))
+    if (1 == g_enableSsl)
     {
-        usage  ();
+        if (dtpSuccess != dtp_ssl (g_certStore, g_certFile, g_keyFile,
+                g_enableSslClientAuth))
+        {
+            usage ();
+        }
     }
     if (dtpSuccess != dtp_init (&sockFd, &g_sockConfig))
     {
