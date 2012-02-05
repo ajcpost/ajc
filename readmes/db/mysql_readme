@@ -20,6 +20,8 @@
   SELECT User, Host, Password FROM mysql.user;
 * set passwords
   bin/mysqladmin -u root password root
+(3) Enabling PDO extension for PHP, Symfony
+* https://discussions.apple.com/thread/1539743?start=0&tstart=0
 
 ---Usage---
 (1) Startup
@@ -28,7 +30,7 @@
 * else 
   sudo su -
   cd install_dir
-  ./bin/mysqld_safe --user=mysql
+  ./bin/mysqld_safe --user=mysql &
 (2) Commands
 * bin/mysql -u root -p
   (do not enter password after -p, it will prompt for the password)

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+  <title>New</title>
+  <meta name="generator" content="Amaya, see http://www.w3.org/Amaya/" />
+</head>
+
+<body>
+<p></p>
+
+<h1>SQL basics</h1>
+
+<div class="toc">
+<ul>
+  <li><a href="#L3920">Questions</a></li>
+  <li><a href="#L2580">Syntax</a></li>
+  <li><a href="#L3013">Select</a></li>
+  <li><a href="#L2844">Advanced</a>
+    <ul>
+      <li><a href="#L3933">Hierarchical data</a></li>
+    </ul>
+  </li>
+  <li><a href="#L2919">References</a></li>
+</ul>
+</div>
+
+<h3 id="L3920">Questions</h3>
+<ul>
+  <li>Table (Title, Description, Manufacturer, Price) -- Some products have
+    same title but different manufacturer. Find out unique titles, along with
+    other data picked up from the record with lowest price (useful to show
+    "prices start at...")</li>
+  <li>select Title, MIN(price), Description from Table group by Title;</li>
+</ul>
+
+<p></p>
+
+<h3 id="L2580">Syntax</h3>
+<ul>
+  <li>Insert into &lt;table&gt; values (comma separated values)</li>
+  <li>Insert into &lt;table&gt; (comma separated column names) values (comma
+    separated values)</li>
+  <li>Update &lt;table&gt; SET &lt;column&gt;=value, &lt;column&gt;=value WHERE
+    &lt;column&gt; = value (Where clause is mandatory)</li>
+  <li>Delete from &lt;table&gt; WHERE &lt;column&gt; = value (Where clause is
+    mandatory)</li>
+  <li>Select from ....</li>
+  <li>Not case sensitive</li>
+  <li>DML (Data manipulation language)
+    <ul>
+      <li>Select, update, delete, insert into</li>
+    </ul>
+  </li>
+  <li>DDL (Data definition language)
+    <ul>
+      <li>create database, alter database</li>
+      <li>create table, alter table, drop table</li>
+      <li>create index, drop index</li>
+    </ul>
+  </li>
+  <li>Date/time handling:
+    <ul>
+      <li></li>
+    </ul>
+  </li>
+</ul>
+
+<p></p>
+
+<h3 id="L3013">Select</h3>
+<ul>
+  <li>Most likely optimizer will handle the correct ordering for Join but it's
+    better to understand the execution plans and validate. If not, join order
+    change may be necessary.</li>
+  <li>JOIN clause should occur before HAVING clause?</li>
+  <li>If no column is selected and if it's a JOIN query, it will display
+    columns from all the tables.</li>
+  <li>WHERE clause doesn't work with aggregate functions (e.g. select employee,
+    sum (bonus) from emp group by employee where sum(bouns) &gt; 1000). In
+    these cases, need to use HAVING clause.</li>
+  <li>select * from transactions where login in ('john', 'peter', 'aj')</li>
+  <li>select * from transactions where login like '%john%'</li>
+  <li>select * from transactions where login between 'aj' and 'john' (whether
+    'aj' and 'john' is inclusive depends on the DB!)</li>
+  <li>select distinct login, transaction_city from transactions (distinct on
+    multiple columns)</li>
+  <li>like (using %, _, [charlist], [^charlist], escape)
+    <ul>
+      <li>like 'j%' : Everything starting with j</li>
+      <li>lile 'a%j' : Everything starting with a and ending with j</li>
+      <li>like 'tp_dd' : Matching exactly 5 chars beginning with tp and ending
+        with dd</li>
+      <li>like '[bj]%' : Matching starting with b or j</li>
+      <li>like '[^bj]%': Matching not starting with b or j</li>
+      <li>like '!%aj' escape '!' : Maching exactly "%aj". Escape char specified
+        explicitely.</li>
+    </ul>
+  </li>
+</ul>
+
+<p></p>
+
+<h3 id="L2844">Advanced</h3>
+
+<h4 id="L3933">Hierarchical data</h4>
+<ul>
+  <li>SQL is on SETs and not meant for hierarchical data (e.g.
+    company-&gt;dept-&gt;sub-dept-&gt; or ceo-&gt;executive mgmt-&gt;senior
+    mgmt-&gt;mgmt-&gt;employees).</li>
+  <li>There are ways in which it can be modelled (see Nested Sets, Common table
+    expressions) and many modern DBs support special syntax for recurssive
+    traversal.</li>
+</ul>
+
+<h3 id="L2919">References</h3>
+<ul>
+  <li>http://www.w3schools.com/sql/sql_syntax.asp</li>
+  <li>http://www.programmerinterview.com/index.php/database-sql/find-maximum-value-without-using-aggregate/
+    (Look at compare problem)</li>
+  <li>http://en.wikipedia.org/wiki/Nested_set_model</li>
+</ul>
+
+<p></p>
+</body>
+</html>

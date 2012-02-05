@@ -1,0 +1,2162 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+  <title>New</title>
+  <meta name="generator" content="Amaya, see http://www.w3.org/Amaya/" />
+</head>
+
+<body>
+<p></p>
+
+<h1>SQL examples</h1>
+
+<div class="toc">
+<ul>
+  <li><a href="#L1200">Example#1, Retail store</a>
+    <ul>
+      <li><a href="#L1209">Schema details</a></li>
+      <li><a href="#L4418">Queries</a>
+        <ul>
+          <li><a href="#L4443">customer with max transactions by volume</a></li>
+          <li><a href="#L4494">customer with max transactions by price</a></li>
+          <li><a href="#L4549">details of unsold products</a></li>
+          <li><a href="#L4597">details of least sold products</a></li>
+          <li><a href="#L4636">details of products purchased by 'aj'</a></li>
+          <li><a href="#L4631">details of customers who have purchased products
+            purchased by 'aj'</a></li>
+          <li><a href="#L4713">entire details of all sales, join all 5
+            tables</a></li>
+          <li><a href="#L4728">details of products who have same category as
+            'moto-defy' (self join)</a></li>
+          <li><a href="#L4761">Self join</a></li>
+          <li><a href="#L4792">customer and sales details, outer join</a></li>
+          <li><a href="#L4815">Cartesian join, no where condition</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#L5164">Example#2, Employee</a>
+    <ul>
+      <li><a href="#L5172">Schema details</a></li>
+      <li><a href="#L5185">Queries</a>
+        <ul>
+          <li><a href="#L4851">Find salary sum for all sub-ordinates</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+
+<h2 id="L1200">Example#1, Retail store</h2>
+
+<h3 id="L1209">Schema details</h3>
+<ul>
+  <li>Manufacturer (master table)</li>
+  <li>Product category (master table)</li>
+  <li>Products (master table)</li>
+  <li>Customer (master table</li>
+  <li>Sales (transactions table)</li>
+</ul>
+-------------- select * from manufacturer -------------- 
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>motorola</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>htc</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>samsung</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>sony</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>apple</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>lg</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>nokia</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>acer</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>hp</td>
+    </tr>
+  </tbody>
+</table>
+-------------- select * from category -------------- 
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>category</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>smartphone</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>tablet</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>laptop</td>
+    </tr>
+  </tbody>
+</table>
+-------------- select * from product -------------- 
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>price</th>
+      <th>category</th>
+      <th>manufacturer</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>moto-razor</td>
+      <td>50</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>moto-droid</td>
+      <td>40</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>htc-sp1</td>
+      <td>75</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>htc-sp2</td>
+      <td>95</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>htc-sp3</td>
+      <td>45</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>samsung-sp1</td>
+      <td>58</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>samsung-sp2</td>
+      <td>73</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>sony-sp1</td>
+      <td>70</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>apple-sp1</td>
+      <td>100</td>
+      <td>1</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>apple-laptop1</td>
+      <td>200</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>lg-sp1</td>
+      <td>65</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>lg-sp2</td>
+      <td>80</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>nokia-sp1</td>
+      <td>78</td>
+      <td>1</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>nokia-sp1</td>
+      <td>80</td>
+      <td>1</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>nokia-sp1</td>
+      <td>90</td>
+      <td>1</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>acer-tablet1</td>
+      <td>100</td>
+      <td>2</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>acer-tablet2</td>
+      <td>120</td>
+      <td>2</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>acer-laptop1</td>
+      <td>150</td>
+      <td>3</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>hp-laptop1</td>
+      <td>80</td>
+      <td>3</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>hp-laptop2</td>
+      <td>140</td>
+      <td>3</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>hp-tablet1</td>
+      <td>74</td>
+      <td>2</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>hp-tablet2</td>
+      <td>85</td>
+      <td>2</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+-------------- select * from customer -------------- 
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>login</th>
+      <th>name</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>aj</td>
+      <td>ajay</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>john</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>dave</td>
+      <td>dave</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>chris</td>
+      <td>chris</td>
+    </tr>
+  </tbody>
+</table>
+-------------- select * from sales -------------- 
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>product</th>
+      <th>quantity</th>
+      <th>login</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>aj</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>xx</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>19</td>
+      <td>1</td>
+      <td>aj</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>17</td>
+      <td>1</td>
+      <td>aj</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>1</td>
+      <td>2</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>23</td>
+      <td>1</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>3</td>
+      <td>3</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>5</td>
+      <td>1</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>13</td>
+      <td>2</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>7</td>
+      <td>1</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>12</td>
+      <td>1</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>5</td>
+      <td>1</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>11</td>
+      <td>10</td>
+      <td>dave</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>21</td>
+      <td>5</td>
+      <td>dave</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>2</td>
+      <td>1</td>
+      <td>dave</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>2</td>
+      <td>1</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>10</td>
+      <td>1</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>9</td>
+      <td>1</td>
+      <td>aj</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+
+<h3 id="L4418">Queries</h3>
+
+<h4 id="L4443">customer with max transactions by volume</h4>
+
+<p># Step 1, get count of transactions per login</p>
+
+<p># select login, count(login) cnt from sales group by login order by cnt
+desc;</p>
+
+<p># Step 2, first get a max of count</p>
+
+<p># Multiple rows may have same count so MAX() function may return more than
+one rows.</p>
+
+<p># Due to this a direct "select login, MAX(cnt)" will not work.</p>
+
+<p># Due to this, one can not apply limit or TOP clauses and get direct
+answers.</p>
+
+<p># select MAX(cnt) from (select login, count(login) cnt from sales group by
+login) as p;</p>
+
+<p><strong># Step 3,</strong> Use having clause and compare to get the top
+row(s)</p>
+
+<p></p>
+
+<p>-------------- select login, count(login) from sales group by login having
+count(login) = (select max(cnt) from (select login, count(login) cnt from sales
+group by login) as p1) -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>login</th>
+      <th>count(login)</th>
+    </tr>
+    <tr>
+      <td>mike</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+
+<h4 id="L4494">customer with max transactions by price</h4>
+
+<p># Step 1, get price info by joining with Product table</p>
+
+<p># select login, product.name, (quantity * product.price) amount, quantity
+from sales join product on sales.product=product.id;</p>
+
+<p># Step 2, sum individual amounts to compute total per login</p>
+
+<p># select login, SUM(amount) total from (select login, product.name,
+(quantity * product.price) amount, quantity from sales join product on
+sales.product=product.id) as p1 group by login;</p>
+
+<p># Step 3, get max of total</p>
+
+<p># select MAX(total) from (select login, SUM(amount) total from (select
+login, product.name, (quantity * product.price) amount, quantity from sales
+join product on sales.product=product.id) as p group by login) as p1;</p>
+
+<p><strong># Step 4</strong>, Use having clause and compare to get the top
+row(s)</p>
+
+<p>-------------- select login, SUM(amount) from (select login, product.name,
+(quantity * product.price) amount, quantity from sales join product on
+sales.product=product.id) as p group by login having SUM(amount) = (select
+MAX(total) from (select login, SUM(amount) total from (select login,
+product.name, (quantity * product.price) amount, quantity from sales join
+product on sales.product = product.id) as p1 group by login) as p2)
+-------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>login</th>
+      <th>SUM(amount)</th>
+    </tr>
+    <tr>
+      <td>dave</td>
+      <td>2770</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+
+<h4 id="L4549">details of unsold products</h4>
+
+<p>-------------- select pd.name, pd.price, cat.category, manf.name from
+product pd, category cat, manufacturer manf where pd.category = cat.id and
+pd.manufacturer = manf.id and pd.id not in (select distinct product from sales)
+-------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>name</th>
+      <th>price</th>
+      <th>category</th>
+      <th>name</th>
+    </tr>
+    <tr>
+      <td>htc-sp1</td>
+      <td>75</td>
+      <td>smartphone</td>
+      <td>htc</td>
+    </tr>
+    <tr>
+      <td>htc-sp3</td>
+      <td>45</td>
+      <td>smartphone</td>
+      <td>htc</td>
+    </tr>
+    <tr>
+      <td>samsung-sp2</td>
+      <td>73</td>
+      <td>smartphone</td>
+      <td>samsung</td>
+    </tr>
+    <tr>
+      <td>nokia-sp1</td>
+      <td>78</td>
+      <td>smartphone</td>
+      <td>nokia</td>
+    </tr>
+    <tr>
+      <td>nokia-sp1</td>
+      <td>80</td>
+      <td>smartphone</td>
+      <td>nokia</td>
+    </tr>
+    <tr>
+      <td>nokia-sp1</td>
+      <td>90</td>
+      <td>smartphone</td>
+      <td>nokia</td>
+    </tr>
+    <tr>
+      <td>acer-tablet2</td>
+      <td>120</td>
+      <td>tablet</td>
+      <td>acer</td>
+    </tr>
+    <tr>
+      <td>hp-laptop1</td>
+      <td>80</td>
+      <td>laptop</td>
+      <td>hp</td>
+    </tr>
+    <tr>
+      <td>hp-tablet1</td>
+      <td>74</td>
+      <td>tablet</td>
+      <td>hp</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+
+<h4 id="L4597">details of least sold products</h4>
+
+<p># Step 1, get sum of all the product quantities sold</p>
+
+<p># select product, SUM(quantity) total from sales group by product;</p>
+
+<p># Step 2, Find min</p>
+
+<p># Multiple rows may have same count so MIN() function may return more than
+one rows.</p>
+
+<p># Due to this a direct "select product, MIN(total)" will not work.</p>
+
+<p># Due to this, one can not apply limit or TOP clauses and get direct
+answers.</p>
+
+<p># select MIN(total) from (select product, SUM(quantity) total from sales
+group by product) as p;</p>
+
+<p># Step 3, Use having clause and compare to get the top row(s)</p>
+
+<p># select product, SUM(quantity) total from sales group by product having
+total = (select MIN(total) from (select product, SUM(quantity) total from sales
+group by product) as p);</p>
+
+<p><strong># Step 4</strong>, add join to find the product name</p>
+
+<p><strong># Note</strong>: Will not work if join is placed at the end.</p>
+
+<p>-------------- select p2.name, sales.product, SUM(quantity) total from sales
+inner join product p2 on p2.id = sales.product group by sales.product having
+total = (select MIN(total) from (select product, SUM(quantity) total from sales
+group by product) as p) -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>name</th>
+      <th>product</th>
+      <th>total</th>
+    </tr>
+    <tr>
+      <td>samsung-sp1</td>
+      <td>7</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>sony-sp1</td>
+      <td>9</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>apple-sp1</td>
+      <td>10</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>lg-sp1</td>
+      <td>12</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>acer-tablet1</td>
+      <td>17</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>acer-laptop1</td>
+      <td>19</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>hp-tablet2</td>
+      <td>23</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+
+<h4 id="L4636">details of products purchased by 'aj'</h4>
+
+<p>-------------- select * from product where id in (select distinct product
+from sales where login = 'aj') -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>price</th>
+      <th>category</th>
+      <th>manufacturer</th>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>sony-sp1</td>
+      <td>70</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>acer-tablet1</td>
+      <td>100</td>
+      <td>2</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>acer-laptop1</td>
+      <td>150</td>
+      <td>3</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+
+<h4 id="L4631">details of customers who have purchased products purchased by
+'aj'</h4>
+
+<p><strong>Way#1</strong></p>
+
+<p>-------------- select sales.login, customer.name from sales inner join
+customer on customer.login = sales.login where sales.product in (select
+sales.product from sales where sales.login = 'aj') and sales.login != 'aj'
+-------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>login</th>
+      <th>name</th>
+    </tr>
+    <tr>
+      <td>john</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>dave</td>
+      <td>dave</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Way#2</strong></p>
+
+<p><strong># Note</strong>: Will not work if customer login is compared with
+s2.login. Doing a cross between s2 and customer is of no use. s1 is used to
+output data and hence it must be used in comparision.</p>
+
+<p><strong># Note</strong>: Will not work if ON clause is used</p>
+
+<p>-------------- select s1.login, customer.name from sales s1, sales s2,
+customer where s2.login='aj' and s2.product = s1.product and s1.login != 'aj'
+and customer.login = s1.login -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>login</th>
+      <th>name</th>
+    </tr>
+    <tr>
+      <td>dave</td>
+      <td>dave</td>
+    </tr>
+    <tr>
+      <td>john</td>
+      <td>john</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+
+<h4 id="L4713">entire details of all sales, join all 5 tables</h4>
+
+<p>-------------- select * from manufacturer inner join product on
+product.manufacturer = manufacturer.id inner join category on product.category
+= category.id inner join sales on sales.product = product.id inner join
+customer on sales.login = customer.login -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>id</th>
+      <th>name</th>
+      <th>price</th>
+      <th>category</th>
+      <th>manufacturer</th>
+      <th>id</th>
+      <th>category</th>
+      <th>id</th>
+      <th>product</th>
+      <th>quantity</th>
+      <th>login</th>
+      <th>id</th>
+      <th>login</th>
+      <th>name</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>motorola</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>aj</td>
+      <td>1</td>
+      <td>aj</td>
+      <td>ajay</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>acer</td>
+      <td>19</td>
+      <td>acer-laptop1</td>
+      <td>150</td>
+      <td>3</td>
+      <td>8</td>
+      <td>3</td>
+      <td>laptop</td>
+      <td>3</td>
+      <td>19</td>
+      <td>1</td>
+      <td>aj</td>
+      <td>1</td>
+      <td>aj</td>
+      <td>ajay</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>acer</td>
+      <td>17</td>
+      <td>acer-tablet1</td>
+      <td>100</td>
+      <td>2</td>
+      <td>8</td>
+      <td>2</td>
+      <td>tablet</td>
+      <td>4</td>
+      <td>17</td>
+      <td>1</td>
+      <td>aj</td>
+      <td>1</td>
+      <td>aj</td>
+      <td>ajay</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>motorola</td>
+      <td>1</td>
+      <td>moto-razor</td>
+      <td>50</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>5</td>
+      <td>1</td>
+      <td>2</td>
+      <td>john</td>
+      <td>2</td>
+      <td>john</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>hp</td>
+      <td>23</td>
+      <td>hp-tablet2</td>
+      <td>85</td>
+      <td>2</td>
+      <td>9</td>
+      <td>2</td>
+      <td>tablet</td>
+      <td>6</td>
+      <td>23</td>
+      <td>1</td>
+      <td>john</td>
+      <td>2</td>
+      <td>john</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>motorola</td>
+      <td>3</td>
+      <td>moto-droid</td>
+      <td>40</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>7</td>
+      <td>3</td>
+      <td>3</td>
+      <td>mike</td>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>htc</td>
+      <td>5</td>
+      <td>htc-sp2</td>
+      <td>95</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>8</td>
+      <td>5</td>
+      <td>1</td>
+      <td>mike</td>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>lg</td>
+      <td>13</td>
+      <td>lg-sp2</td>
+      <td>80</td>
+      <td>1</td>
+      <td>6</td>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>9</td>
+      <td>13</td>
+      <td>2</td>
+      <td>mike</td>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>samsung</td>
+      <td>7</td>
+      <td>samsung-sp1</td>
+      <td>58</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>10</td>
+      <td>7</td>
+      <td>1</td>
+      <td>mike</td>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>lg</td>
+      <td>12</td>
+      <td>lg-sp1</td>
+      <td>65</td>
+      <td>1</td>
+      <td>6</td>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>11</td>
+      <td>12</td>
+      <td>1</td>
+      <td>mike</td>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>htc</td>
+      <td>5</td>
+      <td>htc-sp2</td>
+      <td>95</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>12</td>
+      <td>5</td>
+      <td>1</td>
+      <td>mike</td>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>apple</td>
+      <td>11</td>
+      <td>apple-laptop1</td>
+      <td>200</td>
+      <td>3</td>
+      <td>5</td>
+      <td>3</td>
+      <td>laptop</td>
+      <td>13</td>
+      <td>11</td>
+      <td>10</td>
+      <td>dave</td>
+      <td>4</td>
+      <td>dave</td>
+      <td>dave</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>hp</td>
+      <td>21</td>
+      <td>hp-laptop2</td>
+      <td>140</td>
+      <td>3</td>
+      <td>9</td>
+      <td>3</td>
+      <td>laptop</td>
+      <td>14</td>
+      <td>21</td>
+      <td>5</td>
+      <td>dave</td>
+      <td>4</td>
+      <td>dave</td>
+      <td>dave</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>motorola</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>15</td>
+      <td>2</td>
+      <td>1</td>
+      <td>dave</td>
+      <td>4</td>
+      <td>dave</td>
+      <td>dave</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>motorola</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>16</td>
+      <td>2</td>
+      <td>1</td>
+      <td>john</td>
+      <td>2</td>
+      <td>john</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>apple</td>
+      <td>10</td>
+      <td>apple-sp1</td>
+      <td>100</td>
+      <td>1</td>
+      <td>5</td>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>17</td>
+      <td>10</td>
+      <td>1</td>
+      <td>john</td>
+      <td>2</td>
+      <td>john</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>sony</td>
+      <td>9</td>
+      <td>sony-sp1</td>
+      <td>70</td>
+      <td>1</td>
+      <td>4</td>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>18</td>
+      <td>9</td>
+      <td>1</td>
+      <td>aj</td>
+      <td>1</td>
+      <td>aj</td>
+      <td>ajay</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+
+<h4 id="L4728">details of products who have same category as 'moto-defy' (self
+join)</h4>
+
+<p><strong>Way#1</strong></p>
+
+<p>-------------- select * from product p1, product p2 where p1.category =
+p2.category and p2.name = 'moto-defy' -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>price</th>
+      <th>category</th>
+      <th>manufacturer</th>
+      <th>id</th>
+      <th>name</th>
+      <th>price</th>
+      <th>category</th>
+      <th>manufacturer</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>moto-razor</td>
+      <td>50</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>moto-droid</td>
+      <td>40</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>htc-sp1</td>
+      <td>75</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>htc-sp2</td>
+      <td>95</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>htc-sp3</td>
+      <td>45</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>samsung-sp1</td>
+      <td>58</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>samsung-sp2</td>
+      <td>73</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>sony-sp1</td>
+      <td>70</td>
+      <td>1</td>
+      <td>4</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>apple-sp1</td>
+      <td>100</td>
+      <td>1</td>
+      <td>5</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>lg-sp1</td>
+      <td>65</td>
+      <td>1</td>
+      <td>6</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>lg-sp2</td>
+      <td>80</td>
+      <td>1</td>
+      <td>6</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>nokia-sp1</td>
+      <td>78</td>
+      <td>1</td>
+      <td>7</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>nokia-sp1</td>
+      <td>80</td>
+      <td>1</td>
+      <td>7</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>nokia-sp1</td>
+      <td>90</td>
+      <td>1</td>
+      <td>7</td>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p></p>
+
+<p><strong>Way#2</strong></p>
+
+<p>-------------- select * from product p where p.category in (select category
+from product where product.name = 'moto-defy') -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>price</th>
+      <th>category</th>
+      <th>manufacturer</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>moto-razor</td>
+      <td>50</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>moto-defy</td>
+      <td>70</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>moto-droid</td>
+      <td>40</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>htc-sp1</td>
+      <td>75</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>htc-sp2</td>
+      <td>95</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>htc-sp3</td>
+      <td>45</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>samsung-sp1</td>
+      <td>58</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>samsung-sp2</td>
+      <td>73</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>sony-sp1</td>
+      <td>70</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>apple-sp1</td>
+      <td>100</td>
+      <td>1</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>lg-sp1</td>
+      <td>65</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>lg-sp2</td>
+      <td>80</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>nokia-sp1</td>
+      <td>78</td>
+      <td>1</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>nokia-sp1</td>
+      <td>80</td>
+      <td>1</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>nokia-sp1</td>
+      <td>90</td>
+      <td>1</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+
+<p></p>
+<hr />
+
+<h4 id="L4761">Self join</h4>
+
+<p></p>
+
+<p><strong>With matching</strong>, just duplicate columns for each row</p>
+
+<p>-------------- select * from category c1 inner join category c2 on
+(c1.category = c2.category) -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>category</th>
+      <th>id</th>
+      <th>category</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>1</td>
+      <td>smartphone</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>tablet</td>
+      <td>2</td>
+      <td>tablet</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>laptop</td>
+      <td>3</td>
+      <td>laptop</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Without matching</strong>, every row from second table is repeated
+for every row in the first table</p>
+
+<p>-------------- select * from category c1 inner join category c2 on
+(c1.category != c2.category) -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>category</th>
+      <th>id</th>
+      <th>category</th>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>tablet</td>
+      <td>1</td>
+      <td>smartphone</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>laptop</td>
+      <td>1</td>
+      <td>smartphone</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>2</td>
+      <td>tablet</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>laptop</td>
+      <td>2</td>
+      <td>tablet</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>smartphone</td>
+      <td>3</td>
+      <td>laptop</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>tablet</td>
+      <td>3</td>
+      <td>laptop</td>
+    </tr>
+  </tbody>
+</table>
+
+<p></p>
+<hr />
+
+<h4 id="L4792">customer and sales details, outer join</h4>
+
+<p><strong>Null row</strong> for Chris since he hasn't purchased any product</p>
+
+<p>-------------- select * from customer left join sales on customer.login =
+sales.login -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>login</th>
+      <th>name</th>
+      <th>id</th>
+      <th>product</th>
+      <th>quantity</th>
+      <th>login</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>aj</td>
+      <td>ajay</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>aj</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>aj</td>
+      <td>ajay</td>
+      <td>3</td>
+      <td>19</td>
+      <td>1</td>
+      <td>aj</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>aj</td>
+      <td>ajay</td>
+      <td>4</td>
+      <td>17</td>
+      <td>1</td>
+      <td>aj</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>aj</td>
+      <td>ajay</td>
+      <td>18</td>
+      <td>9</td>
+      <td>1</td>
+      <td>aj</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>john</td>
+      <td>john</td>
+      <td>5</td>
+      <td>1</td>
+      <td>2</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>john</td>
+      <td>john</td>
+      <td>6</td>
+      <td>23</td>
+      <td>1</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>john</td>
+      <td>john</td>
+      <td>16</td>
+      <td>2</td>
+      <td>1</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>john</td>
+      <td>john</td>
+      <td>17</td>
+      <td>10</td>
+      <td>1</td>
+      <td>john</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+      <td>7</td>
+      <td>3</td>
+      <td>3</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+      <td>8</td>
+      <td>5</td>
+      <td>1</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+      <td>9</td>
+      <td>13</td>
+      <td>2</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+      <td>10</td>
+      <td>7</td>
+      <td>1</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+      <td>11</td>
+      <td>12</td>
+      <td>1</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>mike</td>
+      <td>mike</td>
+      <td>12</td>
+      <td>5</td>
+      <td>1</td>
+      <td>mike</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>dave</td>
+      <td>dave</td>
+      <td>13</td>
+      <td>11</td>
+      <td>10</td>
+      <td>dave</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>dave</td>
+      <td>dave</td>
+      <td>14</td>
+      <td>21</td>
+      <td>5</td>
+      <td>dave</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>dave</td>
+      <td>dave</td>
+      <td>15</td>
+      <td>2</td>
+      <td>1</td>
+      <td>dave</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>chris</td>
+      <td>chris</td>
+      <td>NULL</td>
+      <td>NULL</td>
+      <td>NULL</td>
+      <td>NULL</td>
+    </tr>
+  </tbody>
+</table>
+
+<p></p>
+<hr />
+
+<h4 id="L4815">Cartesian join, no where condition</h4>
+
+<p>For every category, every product is displayed.</p>
+
+<p>-------------- select category.category, product.name from category, product
+-------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>category</th>
+      <th>name</th>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>moto-razor</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>moto-razor</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>moto-razor</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>moto-defy</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>moto-defy</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>moto-defy</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>moto-droid</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>moto-droid</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>moto-droid</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>htc-sp1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>htc-sp1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>htc-sp1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>htc-sp2</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>htc-sp2</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>htc-sp2</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>htc-sp3</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>htc-sp3</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>htc-sp3</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>samsung-sp1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>samsung-sp1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>samsung-sp1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>samsung-sp2</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>samsung-sp2</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>samsung-sp2</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>sony-sp1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>sony-sp1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>sony-sp1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>apple-sp1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>apple-sp1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>apple-sp1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>apple-laptop1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>apple-laptop1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>apple-laptop1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>lg-sp1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>lg-sp1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>lg-sp1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>lg-sp2</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>lg-sp2</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>lg-sp2</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>nokia-sp1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>nokia-sp1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>nokia-sp1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>nokia-sp1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>nokia-sp1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>nokia-sp1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>nokia-sp1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>nokia-sp1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>nokia-sp1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>acer-tablet1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>acer-tablet1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>acer-tablet1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>acer-tablet2</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>acer-tablet2</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>acer-tablet2</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>acer-laptop1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>acer-laptop1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>acer-laptop1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>hp-laptop1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>hp-laptop1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>hp-laptop1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>hp-laptop2</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>hp-laptop2</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>hp-laptop2</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>hp-tablet1</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>hp-tablet1</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>hp-tablet1</td>
+    </tr>
+    <tr>
+      <td>smartphone</td>
+      <td>hp-tablet2</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>hp-tablet2</td>
+    </tr>
+    <tr>
+      <td>laptop</td>
+      <td>hp-tablet2</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+
+<h2 id="L5164">Example#2, Employee</h2>
+
+<h3 id="L5172">Schema details</h3>
+
+<p>-------------- select * from employee -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>manager</th>
+      <th>sal</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>john</td>
+      <td>NULL</td>
+      <td>10000</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>mike</td>
+      <td>1</td>
+      <td>800</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>chris</td>
+      <td>1</td>
+      <td>750</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>clay</td>
+      <td>3</td>
+      <td>500</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>mark</td>
+      <td>3</td>
+      <td>520</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>pat</td>
+      <td>2</td>
+      <td>600</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+
+<h3 id="L5185">Queries</h3>
+
+<h4 id="L4851">Find salary sum for all sub-ordinates</h4>
+
+<p><strong>Correct</strong></p>
+
+<p>-------------- select e1.name, sum(e2.sal) from employee e1, employee e2
+where e1.id = e2.manager group by e1.name -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>name</th>
+      <th>sum(e2.sal)</th>
+    </tr>
+    <tr>
+      <td>chris</td>
+      <td>1020</td>
+    </tr>
+    <tr>
+      <td>john</td>
+      <td>1550</td>
+    </tr>
+    <tr>
+      <td>mike</td>
+      <td>600</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Incorrect,</strong> e2 is treated as employee and e1 as manager.
+Hence sum should be off e2 and not e1</p>
+
+<p>-------------- select e1.name, sum(e1.sal) from employee e1, employee e2
+where e1.id = e2.manager group by e1.name -------------- </p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>name</th>
+      <th>sum(e1.sal)</th>
+    </tr>
+    <tr>
+      <td>chris</td>
+      <td>1500</td>
+    </tr>
+    <tr>
+      <td>john</td>
+      <td>20000</td>
+    </tr>
+    <tr>
+      <td>mike</td>
+      <td>800</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

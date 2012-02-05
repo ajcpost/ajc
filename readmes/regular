@@ -1,0 +1,187 @@
+
+---Links---
+* http://dev.mysql.com/doc/refman/5.0/en/mac-os-x-installation.html
+* http://dev.mysql.com/doc/refman/5.0/en/unix-post-installation.html (for cleanup of data dir)
+* http://dev.mysql.com/doc/refman/5.0/en/default-privileges.html (for setting passwords)
+
+---Deployment---
+(1) Current location
+* the install in de/deploy is not used.
+* install_dir: /usr/local/mysql
+* auto-start variable: /etc/hostconfig   MYSQLCOM=-YES-
+(2) Reinitialize if not able to start mysql (all DB will be deleted!) 
+* startup errors
+  Can't find file: './mysql/host.frm
+* rm -rf install_dir/data
+* sudo scripts/mysql_install_db --user=mysql
+  Important to use mysql as a user so as to have correct permissions
+* check passwords
+  bin/mysql -u root
+  SELECT User, Host, Password FROM mysql.user;
+* set passwords
+  bin/mysqladmin -u root password root
+(3) Enabling PDO extension for PHP, Symfony
+* https://discussions.apple.com/thread/1539743?start=0&tstart=0
+
+---Usage---
+(1) Startup
+* if auto-start "YES", 
+  "sudo /Library/StartupItems/MySQLCOM/MySQLCOM start"
+* else 
+  sudo su -
+  cd install_dir
+  ./bin/mysqld_safe --user=mysql &
+(2) Commands
+* bin/mysql -u root -p
+  (do not enter password after -p, it will prompt for the password)
+  password is "root"
+* Use <database>;
+* show tables;
+* System database
+  use mysql;
+  select user, host from user;
+(3) Strutsweb (In mysql prompt)
+* create database strutsweb;
+* use strutsweb;
+* source <sql file>
+-------------------------------
+
+* http://today.java.net/pub/a/today/2005/03/01/InstallingJBoss.html
+* http://www.fusioncube.net/index.php/coldfusion-on-jboss-with-apache-proxy
+* http://www.coderanch.com/t/426982/JBoss/JBoss-Action-with-or-without
+* http://www.mail-archive.com/jboss-user@lists.sourceforge.net/msg09389.html
+* http://blog.vinodsingh.com/2009/01/apache-in-front-of-tomcat-and-jboss.html
+* "default" type under server is the default choice
+-------------------------------
+
+
+---Links---
+
+---Deployment---
+(1) Current location
+* install_dir: de/deploy/apache-tomcat-5.5.30
+
+---Usage---
+(1) Startup
+* Set CATALINA_HOME to install_dir
+* Set JRE_HOME (/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home)
+* Deploy the web application in install_dir/webapps
+* install_dir/bin/shutdown* install_dir/bin/start*
+(2) Logs
+* check for errors in install_dir/logs/cat*<date> during startup
+
+(3) Strutsweb
+* http://localhost:8080/strutsweb-war/pages/user.jsp
+-------------------------------
+
+* Filter vs Servlet in web.xml : http://stackoverflow.com/questions/2957165/servlet-vs-filter
+* http://java.sun.com/products/servlet/docs.html
+* http://www.novocode.com/doc/servlet-essentials
+-------------------------------
+
+Global setup:
+
+ Download and install Git
+  git config --global user.name "Your Name"
+  git config --global user.email ajcpost@gmail.com
+        
+
+Next steps:
+
+  mkdir aj
+  cd aj
+  git init
+  touch README
+  git add README
+  git commit -m 'first commit'
+  git remote add origin git@github.com:ajcpost/aj.git
+  git push origin master
+      
+
+Existing Git Repo?
+
+  cd existing_git_repo
+  git remote add origin git@github.com:ajcpost/aj.git
+  git push origin master
+      
+
+Importing a Subversion Repo?
+
+  Click here
+      
+
+When you're done:
+
+  Continue
+
+// Usual steps
+git status
+git add * 
+git commit -a -m "updates"
+git push origin master
+
+-------------------------------
+Usage
+- mvn compile will only compile, will not create war/ear
+- mvn install will create war/ear
+
+POM structuring
+- Parent POM defined repositories, properties, dependencies, plugins can be inherited by child pom.
+- Parent POM need not do actual build but rather define individual modules (child poms) for the build.
+- Adhere to standard Maven dir structure (workding_dir/src/main/). Maven is pretty picky about this.
+- Don't use project.name, is a reserved tag?
+
+Profiles
+- Can be used to override various properties depending on the build environment (test, dev, 
+  production).
+  . e.g. Deployment path on Unix, Windows may be different.
+  . e.g. Versions of libraries may be different for dev vs production.
+- Activation tag can be used to activate a profile automatically if certain prerequisites are 
+  met.
+
+Plugins
+http://maven.apache.org/plugins/maven-dependency-plugin/ ## unpack contents from dependencies
+http://mojo.codehaus.org/cobertura-maven-plugin/  ## for unit test coverage reports
+
+-------------------------------
+
+// Admin
+* Create repository:  svnadmin create --fs-type fsfs <path>
+
+
+// Usage
+* Checkout: svn co file:///Users/ajayc/Work/de/scm/svnrepo/ .
+* Recursively add: svn add --force ./*
+* 
+
+
+svn+ssh://svn.corp.yahoo.com/yahoo/ysm/AdSys/displayapps/branches/da_2_2_0_0
+-------------------------------
+
+* define function prototypes. without these, some c compilers assume function returns int
+  and can take any no. of params.
+* memset won't work on array of pointers.
+* can't allocate memory to "file static" variables.
+* .include to have only declarations, all definitions should go in .c
+* include \n in strtok delimiter array to remove newlines from the read line
+* core dumps at later point if arguments to vararg functions are not correct
+* Following declaration causes core dump when initialized is used later in the program
+  char *propertyValues[] = { };
+  int initialized = 0;
+* malloc (sizeof(variable)) vs malloc (sizeof(type))
+* pass of uninitialized char pointer and expect changed value in calling function
+  main { char *p = NULL;, f1(p) }  f1 (char *p) { malloc, strcpy }
+* don't use _t since these may be reserved by OS
+* be aware of changes to return values
+  - all socket calls return -1 upon failure so ( < 0) check works
+  - getaddrinfo returns a nonzero error code on failure so ( < 0) check will not work
+* Use char **values; vs char *values[] for declaration. Compilers assumes 1 element and
+  has resulted in memory corruption later.
+* Platform specific: Linux doesn't have sa_len, ss_len, etc.
+* Careful about socket structure sizes... Bind fail if sizeof sockaddr, success if sizeof
+  sockaddr_in
+* Pointer arithmetic: If want to increase by specific number, cast to (char *) before doing
+  the addition.
+* send,receive fail due to large PDU size in SCTP case.
+
+-------------------------------
