@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+  <title>db</title>
+  <meta name="generator" content="Amaya, see http://www.w3.org/Amaya/" />
+</head>
+
+<body>
+<h1>DB tidbits</h1>
+
+<div class="toc">
+<ul>
+  <li><a href="#L122">Mysql</a>
+    <ul>
+      <li><a href="#L35">Deployment</a></li>
+      <li><a href="#L321">Basic usage</a></li>
+      <li><a href="#L478">Links</a></li>
+    </ul>
+  </li>
+</ul>
+</div>
+
+<h2 id="L122">Mysql</h2>
+
+<h3 id="L35">Deployment</h3>
+<ul>
+  <li>Typical location /usr/local/mysql</li>
+  <li>Auto-start variable: /etc/hostconfig MYSQLCOM=-YES-</li>
+  <li>To reinitialize if not able to start mysql (all DBs will be deleted!)
+    <ul>
+      <li>startup errors seen : Can't find file: './mysql/host.frm</li>
+      <li>rm -rf install_dir/data</li>
+      <li>sudo scripts/mysql_install_db --user=mysql (Important to use mysql as
+        a user so as to have correct permissions)</li>
+      <li>check passwords: bin/mysql -u root, SELECT User, Host, Password FROM
+        mysql.user;</li>
+      <li>set passwords: bin/mysqladmin -u root password root</li>
+    </ul>
+  </li>
+</ul>
+
+<p></p>
+
+<h3 id="L321">Basic usage</h3>
+<ul>
+  <li>To start
+    <ul>
+      <li>if auto-start "YES": "sudo /Library/StartupItems/MySQLCOM/MySQLCOM
+        start"</li>
+      <li>else: sudo su, cd install_dir ./bin/mysqld_safe --user=mysql
+      &amp;</li>
+    </ul>
+  </li>
+  <li>bin/mysql -u root -p, password is "mysql"</li>
+  <li>Use &lt;database&gt;;</li>
+  <li>show tables;</li>
+  <li>System database
+    <ul>
+      <li>use mysql;</li>
+      <li>select user, host from user;</li>
+    </ul>
+  </li>
+</ul>
+
+<p></p>
+
+<p></p>
+
+<h3 id="L478">Links</h3>
+<ul>
+  <li>http://dev.mysql.com/doc/refman/5.0/en/mac-os-x-installation.html</li>
+  <li>http://dev.mysql.com/doc/refman/5.0/en/unix-post-installation.html (for
+    cleanup of data dir)</li>
+  <li>http://dev.mysql.com/doc/refman/5.0/en/default-privileges.html (for
+    setting passwords)</li>
+</ul>
+</body>
+</html>
