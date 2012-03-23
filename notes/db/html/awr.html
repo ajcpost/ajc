@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+  <title>New</title>
+  <meta name="generator" content="Amaya, see http://www.w3.org/Amaya/" />
+</head>
+
+<body>
+<p></p>
+
+<h1>Oracle</h1>
+
+<div class="toc">
+<ul>
+  <li><a href="#L54">About DB</a>
+    <ul>
+      <li><a href="#L56">Basics</a></li>
+      <li><a href="#L87">init.ora</a></li>
+      <li><a href="#L115">Terms</a>
+        <ul>
+          <li><a href="#L117">Buffer cache</a></li>
+          <li><a href="#L139">Shared pool cache</a></li>
+          <li><a href="#L148">Log Buffer</a></li>
+          <li><a href="#L160">Std block size</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#L453">SQL</a>
+    <ul>
+      <li><a href="#L1121">Syntax</a></li>
+      <li><a href="#L1151">Select</a></li>
+      <li><a href="#L3933">Hierarchical data</a></li>
+    </ul>
+  </li>
+  <li><a href="#L171">Transactions</a></li>
+  <li><a href="#L182">AWR</a>
+    <ul>
+      <li><a href="#L186">Optimization </a></li>
+      <li><a href="#L2844"></a></li>
+      <li><a href="#L196">Before comparing</a></li>
+      <li><a href="#L215">Report</a>
+        <ul>
+          <li><a href="#L217">Cache sizes</a></li>
+          <li><a href="#L226">Load profile</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#L2919">References</a></li>
+</ul>
+</div>
+
+<h2 id="L54">About DB</h2>
+
+<h3 id="L56">Basics</h3>
+<ul>
+  <li>"Schema" -- Is a collection of objects (tables, views, indexes, stored
+    procedures, etc) that are owned by a database user. A user can own exactly
+    one schema only (may have access to multiple schema). Hence in a JDBC
+    connection, one need not specify the schema to use. It's identified
+    automatically based on user's credentials.</li>
+  <li>"Database" -- Is a collection of physical files (data files, redo log
+    files, control files, temp files, etc). These are identified by a System
+    identifier called as SID.</li>
+  <li>"Instance" -- Is a set of Oracle processes (&amp; their shared memory
+    area) that operate on a database. In most cases instance == sid, but may
+    differ in some cases, e.g. RAC. Running more than one instance on a given
+    physical server is _NOT_ a recommended practice. One instance can hit the
+    system resources hard and affect other instance. </li>
+  <li>"Default schema" -- There's a default user SYS/SYSTEM and associated
+    schemas. The SYS schema contains data dictionary for the database and the
+    SYS user has the highest priveleage.</li>
+  <li>"Tablespace" -- Logical grouping for schema objects. All schema must
+    belong to one of the tablespaces.</li>
+  <li>"Connection" -- A connection created by client code to an oracle instance
+    process above. (1 instance -- many connections)</li>
+  <li>"Session" -- A session created by client code over an existing
+    connection. (1 connection -- many sessions)</li>
+</ul>
+
+<p><img alt="instance detials" src="images/instance.png" width="491"
+height="206" /></p>
+
+<p></p>
+
+<p></p>
+
+<h3 id="L87">init.ora</h3>
+<ul>
+  <li>Is the configuration for Oracle instance configuration and has a huge
+    impact on overall performance.</li>
+  <li>Optimizer settings 
+    <ul>
+      <li>optimizer_mode 
+        <ul>
+          <li>= first_rows: Will favour index access over full table scan to
+            return rows as quickly as possibile. In some cases, it may result
+            in more resource consumption (e.g. indexed access has to first read
+            indexes and may in some cases incur additional io overhead).Usually
+            used for <strong>online</strong> systems</li>
+          <li>= all_rows: Will favour full table scan when server resources
+            will be minimized. Usually used for <strong>batch</strong>
+          systems.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="L115">Terms</h3>
+
+<h4 id="L117">Buffer cache</h4>
+<ul>
+  <li>Cache of blocks read from disk... helps minimize IO.</li>
+  <li>Is segmented into multiple sets to redue contention on multipprocessor
+    systems.</li>
+  <li>Has multiple pools 
+    <ul>
+      <li>Keep pool: Small objects that should always be cached, e.g. look up
+        tables</li>
+      <li>Recycle pool: Larger objects which are arranged based on
+      MRU--&gt;LRU</li>
+      <li>Default ppol</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="L139">Shared pool cache</h4>
+<ul>
+  <li>Stores metadata like query plans, parsed SQL statements, open
+  cursors.</li>
+  <li>Should remain of same size, else indicates that bind variables are not
+    being used.</li>
+</ul>
+
+<h4 id="L148">Log Buffer</h4>
+<ul>
+  <li>Caches redo logs that are being written for each transaciton. Must be
+    flushed to disk along with transaction commit. </li>
+  <li>Redo disk must be able to support rates equal to sum of rates across all
+    data disks. The buffer is written synchronously.</li>
+  <li>A small value will result in high "redo log space request event" while
+    high value will result in high "log file sync" events.</li>
+</ul>
+
+<h4 id="L160">Std block size</h4>
+<ul>
+  <li>Small is better for small rows with lots of random access, it reduces
+    contention. Has large space overhead since each block needs to maintain
+    metadata. </li>
+  <li>Large has low overhead, good for sequential access or large rows. May
+    waste space when doing random access (e.g. read 50 byte of row in a 8k
+    block). Not good for index blocks since they increase block level
+    contention.</li>
+</ul>
+
+<p></p>
+
+<h2 id="L453">SQL</h2>
+
+<h3 id="L1121">Syntax</h3>
+<ul>
+  <li>Insert into &lt;table&gt; values (comma separated values)</li>
+  <li>Insert into &lt;table&gt; (comma separated column names) values (comma
+    separated values)</li>
+  <li>Update &lt;table&gt; SET &lt;column&gt;=value, &lt;column&gt;=value WHERE
+    &lt;column&gt; = value (Where clause is mandatory)</li>
+  <li>Delete from &lt;table&gt; WHERE &lt;column&gt; = value (Where clause is
+    mandatory)</li>
+  <li>Select from ....</li>
+  <li>Not case sensitive</li>
+  <li>DML (Data manipulation language) 
+    <ul>
+      <li>Select, update, delete, insert into</li>
+    </ul>
+  </li>
+  <li>DDL (Data definition language) 
+    <ul>
+      <li>create database, alter database</li>
+      <li>create table, alter table, drop table</li>
+      <li>create index, drop index</li>
+    </ul>
+  </li>
+  <li>Date/time handling: </li>
+</ul>
+
+<p></p>
+
+<h3 id="L1151">Select</h3>
+<ul>
+  <li>Most likely optimizer will handle the correct ordering for Join but it's
+    better to understand the execution plans and validate. If not, join order
+    change may be necessary.</li>
+  <li>JOIN clause should occur before HAVING clause?</li>
+  <li>If no column is selected and if it's a JOIN query, it will display
+    columns from all the tables.</li>
+  <li>WHERE clause doesn't work with aggregate functions (e.g. select employee,
+    sum (bonus) from emp group by employee where sum(bouns) &gt; 1000). In
+    these cases, need to use HAVING clause.</li>
+  <li>select * from transactions where login in ('john', 'peter', 'aj')</li>
+  <li>select * from transactions where login like '%john%'</li>
+  <li>select * from transactions where login between 'aj' and 'john' (whether
+    'aj' and 'john' is inclusive depends on the DB!)</li>
+  <li>select distinct login, transaction_city from transactions (distinct on
+    multiple columns)</li>
+  <li>like (using %, _, [charlist], [^charlist], escape) 
+    <ul>
+      <li>like 'j%' : Everything starting with j</li>
+      <li>lile 'a%j' : Everything starting with a and ending with j</li>
+      <li>like 'tp_dd' : Matching exactly 5 chars beginning with tp and ending
+        with dd</li>
+      <li>like '[bj]%' : Matching starting with b or j</li>
+      <li>like '[^bj]%': Matching not starting with b or j</li>
+      <li>like '!%aj' escape '!' : Maching exactly "%aj". Escape char specified
+        explicitely.</li>
+    </ul>
+  </li>
+  <li>Processing steps
+    <ul>
+      <li>From/Where clause </li>
+      <li>Rownum is assigned </li>
+      <li>Select is applied </li>
+      <li>Group by is applied </li>
+      <li>Having is applied </li>
+      <li>Order by is applied</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Rownum, Rowid</h3>
+<ul>
+  <li>Rownum is a pseudo column assigned after retrieving the result set. It's
+    applied just after where clause selection so will not get applied to order
+    by or other clauses unless inner query is mechanism is used.</li>
+  <li>Rowid identifies a physical location of a record and hence is always
+    present. It's unique within a table but <strong>may</strong> have duplicate
+    values across tables. If the record is physically moved (e.g. index
+    organized or partitioned tables), rowid will change.</li>
+</ul>
+
+<h3>Cursors</h3>
+<ul>
+  <li>Cursors are a mechanism to access result set produced by a query. Oracle
+    implicitely creates a curosr but can also be requested explicitely.</li>
+  <li>From Java programs, make sure to close the cursor, not just the
+    connection. A bad JDBC driver may not close the cursor during conneciton
+    close and will lead to "max open cursors" error.
+    <p>Connection conn = dataSource.getConnection();</p>
+    <p>try{</p>
+    <p>PreparedStatement stmt = conn.prepareStatement();</p>
+    <p>//initialize the statement</p>
+    <p>stmt.execute();</p>
+    <p>ResultSet rs = stmt.getResultSet();</p>
+    <p>//get data</p>
+    <p>}finally{</p>
+    <p>conn.close();</p>
+    <p>}</p>
+  </li>
+  <li>call <strong>stmt.close and also rs.close</strong> in the finally
+  block.</li>
+</ul>
+
+<h3 id="L3933">Hierarchical data</h3>
+<ul>
+  <li>SQL is on SETs and not meant for hierarchical data (e.g.
+    company-&gt;dept-&gt;sub-dept-&gt; or ceo-&gt;executive mgmt-&gt;senior
+    mgmt-&gt;mgmt-&gt;employees).</li>
+  <li>There are ways in which it can be modelled (see Nested Sets, Common table
+    expressions) and many modern DBs support special syntax for recurssive
+    traversal.</li>
+</ul>
+
+<h2 id="L171">Transactions</h2>
+<ul>
+  <li>Always row level locking</li>
+  <li></li>
+</ul>
+
+<h2 id="L182">AWR</h2>
+
+<h3 id="L186">Optimization </h3>
+
+<h3 id="L2844"></h3>
+
+<p><a href="images/sql_tuning_hierarchy.gif"><img alt="tuning possibilities"
+src="images/sql_tuning_hierarchy.gif" width="509" height="344" /></a></p>
+
+<p></p>
+
+<h3 id="L196">Before comparing</h3>
+<ul>
+  <li>Make sure its apples to apples 
+    <ul>
+      <li>ora.init params are same</li>
+      <li>begin/end snap timings are similar</li>
+      <li>load characteristics are similar (e.g. no. of requests, pass/fail
+        ratio, no. of concurrent users)</li>
+    </ul>
+  </li>
+  <li></li>
+</ul>
+
+<h3 id="L215">Report</h3>
+
+<h4 id="L217">Cache sizes</h4>
+<ul>
+  <li>Compare various caches to see differences</li>
+  <li>Increase in Shared pool size may indicate SQLs without bind
+  variables.</li>
+</ul>
+
+<h4 id="L226">Load profile</h4>
+<ul>
+  <li>Gives an idea of the work profile on the database.</li>
+  <li>"Redo size" -- indicates the overall work. Note that SELECT
+    <strong>may</strong> also cause redo to be generated if it has to read
+    blocks in cache (i.e. not available in buffer) and in doing so it may
+    touch(dirties) the block headers. These must be written back to the
+  disk.</li>
+  <li>"Logical reads" -- consistent get + DB block gets 
+    <ul>
+      <li>Consistent get is reading of a block from buffer cache. A check will
+        be made if data needs to eb reconstructed from rollback logs to get a
+        consistent view. Even though these are from cache, it still makes sense
+        to minimize it by tuning the SQLs. Note that for each consistent get,
+        Oracle must first acquire latch resulting in contention.</li>
+      <li>DB block gets is more of internal processing by Oracle.</li>
+    </ul>
+  </li>
+  <li>"Block changes" -- Changes to data blocks during a DML. Note that a
+    single insert may cause changes to more than one block if indexes are
+    included.</li>
+  <li>"User calls" -- Total number of calls client makes to the instance.
+    Oracle allocates internal structures (call stat objects) to keep track of
+    relevant user data structures for every login, parse, execute statement.
+    This should be minimized.</li>
+  <li>"Parses" -- Oracle parses every SQL statement before it executes. There
+    are a number of steps during parsing: 
+    <ol>
+      <li>Do syntax as per the grammer.</li>
+      <li>Do semantic check: do the tables actuall exist, does user have
+        rights, column name ambiguity (e.g. select c1 from t1, t2 and both
+        t1/t2 have column c1)</li>
+      <li>Check if shared pool already has the SQL 
+        <ul>
+          <li>For SQL to be identical, all characters must match, all objects
+            must match.</li>
+          <li>e.g. "select NAME from customer" is different from "select name
+            from customer"</li>
+          <li>e.g. "select NAME from customer" is different if accessed by
+            "xyz" and by "pqr"</li>
+          <li>If bind variables are not used, it will result in many unique
+            SQLs 
+            <ul>
+              <li>"select name from customer where id = 1234" is different than
+                "select name from customer where id = 9999"</li>
+              <li>Use "select name from customer where id = :cust_id"</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Below statements require a latch on shared pool</strong></li>
+      <li>Allocate memory in shared pool (if no memory free in shared pool, it
+        must age out previous entries)</li>
+      <li>Get values of bind variables and see if values fit in the selected
+        columns</li>
+      <li>Optimize query execution (consumes lot of CPU)</li>
+      <li>Build the parse tree and execution plan in a format that SQL can use
+        (row source generation)</li>
+      <li>Store in shared pool</li>
+    </ol>
+  </li>
+  <li>"Soft parse" -- Finds parsed SQL at step 3 and doesn't have to execute
+    rest of the statements.</li>
+  <li>"Hard parse" -- all the steps above.</li>
+  <li>"Sorts" -- Oracle will perform sorting on row data when using "order by"
+    and "group by" and when an index is created. 
+    <ul>
+      <li>Sorting can be during rows retrieval or after rows retrieval. This a
+        is influenced by a number of parameters including some optimizer
+        settings.</li>
+      <li>Sorting can be very costly on large data sets. If the results do not
+        fit in-memory, temp tables must be used.</li>
+    </ul>
+  </li>
+</ul>
+
+<p></p>
+
+<h2 id="L2919">References</h2>
+<ul>
+  <li>http://www.w3schools.com/sql/sql_syntax.asp</li>
+  <li>http://www.programmerinterview.com/index.php/database-sql/find-maximum-value-without-using-aggregate/
+    (Look at compare problem)</li>
+  <li>http://en.wikipedia.org/wiki/Nested_set_model</li>
+</ul>
+
+<p></p>
+
+<p></p>
+</body>
+</html>

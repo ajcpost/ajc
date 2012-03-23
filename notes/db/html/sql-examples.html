@@ -15,10 +15,10 @@
 
 <div class="toc">
 <ul>
-  <li><a href="#L1200">Example#1, Retail store</a>
+  <li><a href="#L1200">Example#1, Retail store</a> 
     <ul>
       <li><a href="#L1209">Schema details</a></li>
-      <li><a href="#L4418">Queries</a>
+      <li><a href="#L4418">Queries</a> 
         <ul>
           <li><a href="#L4443">customer with max transactions by volume</a></li>
           <li><a href="#L4494">customer with max transactions by price</a></li>
@@ -38,10 +38,10 @@
       </li>
     </ul>
   </li>
-  <li><a href="#L5164">Example#2, Employee</a>
+  <li><a href="#L5164">Example#2, Employee</a> 
     <ul>
       <li><a href="#L5172">Schema details</a></li>
-      <li><a href="#L5185">Queries</a>
+      <li><a href="#L5185">Queries</a> 
         <ul>
           <li><a href="#L4851">Find salary sum for all sub-ordinates</a></li>
         </ul>
@@ -53,7 +53,9 @@
 
 <h2 id="L1200">Example#1, Retail store</h2>
 
-<h3 id="L1209">Schema details</h3>
+<h3>Schema details</h3>
+
+<h3 id="L1209"></h3>
 <ul>
   <li>Manufacturer (master table)</li>
   <li>Product category (master table)</li>
@@ -2138,6 +2140,8 @@ Hence sum should be off e2 and not e1</p>
 <p>-------------- select e1.name, sum(e1.sal) from employee e1, employee e2
 where e1.id = e2.manager group by e1.name -------------- </p>
 
+<p></p>
+
 <table border="1">
   <tbody>
     <tr>
@@ -2158,5 +2162,130 @@ where e1.id = e2.manager group by e1.name -------------- </p>
     </tr>
   </tbody>
 </table>
+
+<p></p>
+
+<h2>Example#3, Top-N</h2>
+
+<p>From/Where clause</p>
+
+<p>Rownum is assigned.</p>
+
+<p>Select is applied</p>
+
+<p>Group by is applied</p>
+
+<p>Having is applied</p>
+
+<p>Order by is applied</p>
+
+<p></p>
+
+<h3>Schema details</h3>
+
+<p>Select ronum, name, salary from employee;</p>
+
+<p>ROWNUM NAME SAL</p>
+
+<p>---------- ---------- ----------</p>
+
+<p>1 SMITH 800</p>
+
+<p>2 ALLEN 1600</p>
+
+<p>3 WARD 1250</p>
+
+<p>4 JONES 2975</p>
+
+<p>5 MARTIN 1250</p>
+
+<p>6 BLAKE 2850</p>
+
+<p>7 CLARK 2450</p>
+
+<p>8 SCOTT 3000</p>
+
+<p>9 VOLLMAN 5000</p>
+
+<p>10 TURNER 1500</p>
+
+<p>11 ADAMS 1100</p>
+
+<p>12 JAMES 950</p>
+
+<p>13 FORD 3000</p>
+
+<p>14 MILLER 1300</p>
+
+<p></p>
+
+<h3>Queries</h3>
+
+<p><strong>Find top 5 employees by salary</strong></p>
+
+<p><strong>Incorrect</strong></p>
+
+<p><strong></strong>select rownum, name, sal from employee where rownum &lt; 6
+order by sal desc;</p>
+
+<p>ROWNUM NAME SAL</p>
+
+<p>---------- ---------- ----------</p>
+
+<p>4 JONES 2975</p>
+
+<p>2 ALLEN 1600</p>
+
+<p>3 WARD 1250</p>
+
+<p>5 MARTIN 1250</p>
+
+<p>1 SMITH 800</p>
+
+<p>Rownum exists for the life of a query and is made up at runtime after
+getting the resultset. The order by clause is applied after assignment of
+rownum and hence limiting by rownum will return wrong results.</p>
+
+<p></p>
+
+<p><strong>Correct</strong></p>
+
+<p>SELECT NAME, SAL FROM (SELECT ENAME, SAL FROM EMP ORDER BY SAL DESC) E WHERE
+ROWNUM &lt; 6;</p>
+
+<p></p>
+
+<p>ENAME SAL</p>
+
+<p>---------- ----------</p>
+
+<p>VOLLMAN 5000</p>
+
+<p>SCOTT 3000</p>
+
+<p>FORD 3000</p>
+
+<p>JONES 2975</p>
+
+<p>BLAKE 2850</p>
+
+<p></p>
+
+<p>The inner query rownum are not used.The outer query rownums will always be
+in correct order since it operates on an "order by" set.</p>
+
+<p></p>
+
+<h2>Example#4, Pagination</h2>
+
+<p>select * from ( select a.*, rownum r from ( select * from t where x =
+:host_variable order by y ) a where rownum &lt; :HigerBound ) where r &gt;
+:LowerBound</p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
 </body>
 </html>
