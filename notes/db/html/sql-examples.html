@@ -2167,20 +2167,6 @@ where e1.id = e2.manager group by e1.name -------------- </p>
 
 <h2>Example#3, Top-N</h2>
 
-<p>From/Where clause</p>
-
-<p>Rownum is assigned.</p>
-
-<p>Select is applied</p>
-
-<p>Group by is applied</p>
-
-<p>Having is applied</p>
-
-<p>Order by is applied</p>
-
-<p></p>
-
 <h3>Schema details</h3>
 
 <p>Select ronum, name, salary from employee;</p>
@@ -2278,9 +2264,8 @@ in correct order since it operates on an "order by" set.</p>
 
 <h2>Example#4, Pagination</h2>
 
-<p>select * from ( select a.*, rownum r from ( select * from t where x =
-:host_variable order by y ) a where rownum &lt; :HigerBound ) where r &gt;
-:LowerBound</p>
+<p>select * from ( select a.*, rownum r from ( select * from t where &lt;&gt;
+order by y ) a where rownum &lt; :HigerBound ) where r &gt; :LowerBound</p>
 
 <p></p>
 
