@@ -6,3 +6,4 @@
 #mount -t smbfs //achitale@maytag.ariba.com/export/home/rc ~/mnts/maytagrc
 mount -t smbfs //achitale@amana.ariba.com/idcrc ~/mnts/amana   ## rcmirror/
 mount -t smbfs //achitale@maytag.ariba.com/export/home/achitale ~/mnts/ajnfs
+mount -t smbfs //achitale@achitale2.ariba.com/share ~/mnts/windows ## windows d:/achitale/shared

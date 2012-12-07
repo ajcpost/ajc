@@ -1,0 +1,307 @@
+html {
+    overflow-y: scroll;
+}
+
+body {
+	font: 100%/1.4 Georgia, Verdana, Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	background: url(../images/bg.jpg) top center;
+	/*background: url(../images/bg.jpg) top center repeat-x, url(../images/bg_tile.jpg) top repeat-y;*/
+	background-color: #d9a64f;
+}
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 15px;
+	padding-left: 15px; /* adding the padding to the sides of the elements within the blocks, instead of the block elements themselves, gets rid of any box model math. A nested block with side padding can also be used as an alternate method. */
+}
+
+h2 {
+	font-size: 1.6em;
+	font-style: italic;
+	color: #A27D0D;
+}
+
+h5 {
+	font-size: .7em;
+	font-weight: normal;
+	padding-bottom: 20px;
+}
+
+a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+	border: none;
+}
+/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+a:link {
+	color: #42413C;
+	text-decoration: underline; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
+}
+a:visited {
+	color: #6E6C64;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+	text-decoration: none;
+}
+/* ~~ This fixed width container surrounds all other blocks ~~ */
+#master {
+	width: 1440px;
+	height: 500px;
+	left:50%;
+	margin-left:-720px;
+    position: absolute;
+	background: url(../images/bg_master.png) top center repeat-x;
+}
+.container {
+	width: 970px;
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+.header {
+	position: relative;
+	width: 960px;
+	height: 125px;
+	margin-left: 5px;
+	clear: both;
+}
+.headerlogo {
+	width: 170px;
+	height: 95px;
+	float:left;
+}
+#nav {
+	width: 960px;
+	height: 30px;
+	margin-top: 10px;
+	float: left;
+	background-color: #dfcfa9;
+}
+.content {
+	width: 970px;
+	position: relative;
+	margin-left: 0px;
+	margin-top: 10px;
+	line-height: 1.2;
+	background-image: url(../images/container_bg.png);
+}
+#contentarea {
+	width: 970px;
+	background-image: url(../images/container_bg.png);
+}
+section {
+	width: 970px;
+	background-image: url(../images/container_bg.png);
+}
+
+#sectionbottom {
+	width: 970px;
+	height: 10px;
+	background-image: url(../images/bg_contentbottom.jpg);
+}
+
+/* ~~ The menu page consists of several DIV layers stacked on top of each other, with visibility of each being switched by the buttons in the .menunav area. The "#menusection_container" tag (below) holds the other menusection DIVs so that they have an area where they can live on top of each other in the same space. ~~ */
+
+
+#menusection_container {
+	position: absolute;
+	display: block;
+	height: 350px;
+	clear: both;
+}
+
+#menusection_brunch {
+	position: relative;
+	display: block;
+	width: 970px;
+	background-image: url(../images/container_bg.png);
+}
+
+#menusection_lunch {
+	display: none;
+	width: 970px;
+	background-image: url(../images/container_bg.png);
+}
+
+#menusection_dinner {
+	display: none;
+	width: 970px;
+	background-image: url(../images/container_bg.png);
+}
+
+#menusection_ourchef {
+	display: none;
+	width: 970px;
+	background-image: url(../images/container_bg.png);
+}
+
+#menusection_todaysspecials {
+	display: block;
+	width: 970px;
+	background-image: url(../images/container_bg.png);
+}
+
+#menusection_banquets {
+	display: none;
+	width: 970px;
+	background-image: url(../images/container_bg.png);
+}
+
+
+/* ~~ Wine List Menu Sections ~~ */
+
+#menusection_sparklingwhite {
+	display: block;
+	width: 970px;
+	background-image: url(../images/container_bg.png);
+}
+
+#menusection_red {
+	display: none;
+	width: 970px;
+	background-image: url(../images/container_bg.png);
+}
+
+#menusection_glass {
+	display: none;
+	width: 970px;
+	background-image: url(../images/container_bg.png);
+}
+
+#menusection_signaturedrinks {
+	display: none;
+	width: 970px;
+	background-image: url(../images/container_bg.png);
+}
+
+/* ~~ This grouped selector gives the lists in the .content area space ~~ */
+.content ul, .content ol {
+	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+}
+
+/* ~~ The footer ~~ */
+footer {
+	width: 970px;
+	height: 25px;
+	position: relative;/* this gives IE6 hasLayout to properly clear */
+	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
+	font-size: .75em;
+	background-image: url(../images/footerleaf2.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	padding-top: 9px;
+}
+
+.footerleft {
+	text-align: left;
+    float: left;
+    margin-left: 20px;
+    text-decoration: none;
+}
+.footerleft a {
+    text-decoration: none;
+    color: #000;
+}
+.footerleft a:hover {
+    text-decoration: underline;
+    color: black;
+}
+.footerright {
+	text-align: right;
+    float: right;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+/* ~~ Miscellaneous float/clear classes ~~ */
+.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class can be placed on a <br /> or empty block element as the final element following the last floated block (within the .container) if the footer is removed or taken out of the .container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+
+/*HTML 5 support - Sets new HTML 5 tags to display:block so browsers know how to render the tags properly. */
+header, section, footer, aside, nav, article, figure, #nav {
+	display: block;
+}
+
+.pagetitle {
+	font-size: 130%;
+	font-style: italic;
+	font-weight: bold;
+	line-height: 150%;
+	margin-left: 15px;
+}
+
+.menutitle {
+	color: #b17a0b;
+	font: 90% Georgia, Verdana, Arial, Helvetica, sans-serif;
+	vertical-align: top;
+	padding-top: 5px;
+	font-weight: bold;
+	font-variant: small-caps;
+	margin-left: 15px;
+}
+
+.menunav {
+	font: 80% Georgia, Verdana, Arial, Helvetica, sans-serif;
+	line-height: .2em;
+	display: block;
+	width: 955px;
+	height: 28px;
+	padding-top: 14px;
+	padding-left: 15px;
+	background-image: url(../images/container_bg.png);
+	background-color: yellow;
+	background-repeat: repeat-y;
+}
+
+.menusubtitle {
+	font: 80% Georgia, Verdana, Arial, Helvetica, sans-serif;
+	vertical-align: top;
+	line-height: .8em;
+}
+
+.menuitemfirst {
+	font: 80% Georgia, Verdana, Arial, Helvetica, sans-serif;
+	vertical-align: top;
+}
+
+.menuitem {
+	font: 80% Georgia, Verdana, Arial, Helvetica, sans-serif;
+	vertical-align: top;
+}
+
+.alignright {
+	text-align: right;
+}
+
+table {
+	margin-left: 20px;
+	border-spacing: 0;
+}
+
+tr b {
+	line-height: 100%;
+}
+
+td {
+	font: 80% Georgia, Verdana, Arial, Helvetica, sans-serif;
+	padding: 6px 0px;
+}
+
+.banquettitle {
+	font-size: 110%;
+}

@@ -1,0 +1,276 @@
+
+/******************************* Horizontal Styles **************************************/
+
+.clear_wrap {
+	display:block;
+	float:left;
+	width:100%;
+	height:auto;
+}
+
+.opentable_wrap	{
+	position: relative;
+	float:right;
+	width:465px;
+	height:85px;
+	margin-top: 10px;
+	background:url(../images/opentable_bg.gif);
+	background-repeat: no-repeat;
+}
+
+/* Overall Wrapper for Client Supplied Snippet */
+	#OT_searchWrapperAll {
+	width:100%;
+	height:60px;/* for horizontal layout: 60px, for vertical layout: 100px */
+	position: relative;
+	margin:0;
+	padding:0;
+}
+
+/* wrapper */
+
+	#OT_searchWrapper {
+	border: none;
+	font-family: Verdana, Arial, Helvetica, Sans-Serif;
+	font-size: 12px;
+	width:100%;
+	height:60px;/* for horizontal layout: 60px, for vertical layout: 100px */
+	position: relative;
+	margin:0;
+}
+
+/* Title of Search */
+	 #OT_searchWrapper .OT_feedTitle {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0 0 1px 5px;
+	font-size:12px;
+	font-weight:normal;
+	line-height:1em;
+}
+
+.OT_feedTitle {
+	display:none;
+}
+
+/* Definition List */   
+    #OT_searchWrapper dl {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding:0;
+	margin:0;
+}
+
+/* Party Size Label Wrapper - dt tag */
+    #OT_partySizeLbl {
+	position: absolute;
+	top: 13px;/* for horizontal layout: 25px, for vertical layout: 25px */
+	left: 189px; /* for horizontal layout: 0px, for vertical layout: 0px */
+	margin: 0 0 0 5px;
+	padding:0px 0;
+	text-align:left;
+	width:110px;
+	color:#000000;
+	font-size:11px;
+}
+
+/* Party Size Wrapper - dd tag */    
+    #OT_partySize {
+	position: absolute;
+	top: 9px;/* for horizontal layout: 25px, for vertical layout: 25px */
+	left: 259px;/* for horizontal layout: 120px, for vertical layout: 85px */
+	margin:0;
+	padding:0;
+}
+
+/* Date Label Wrapper - dt tag */    
+    #OT_dateLbl {
+	position: absolute;
+	top: 40px;/* for horizontal layout: 25px, for vertical layout: 55px */
+	left:184px;/* for horizontal layout: 180px, for vertical layout: 0px */
+	margin: 0 0 0 0px;
+	padding:0px 0;
+	text-align:left;
+	width:55px;
+	color:#000000;
+	font-size:11px;
+}
+
+/* Date Label Wrapper - dd tag */    
+    #OT_date {
+	position: absolute;
+	top: 37px;/* for horizontal layout: 25px, for vertical layout: 55px */
+	left: 213px;/* for horizontal layout: 245px, for vertical layout: 85px */
+	width:100px;
+	margin:0;
+	padding:0;
+}
+
+/* Time Label Wrapper - dt tag */     
+    #OT_timeLbl {
+	position: absolute;
+	top: 13px;/* for horizontal layout: 25px, for vertical layout: 55px */
+	left: 327px;/* for horizontal layout: 335px, for vertical layout: 185px */
+	width:60px;
+	padding:0px 0;
+	text-align:left;
+	color:#000000;
+	font-size:11px;
+}
+
+/* Time Label Wrapper - dd tag */     
+    #OT_time {
+	position: absolute;
+	top: 9px;/* for horizontal layout: 25px, for vertical layout: 55px */
+	left: 363px;/* for horizontal layout: 398px, for vertical layout: 275px */
+	margin:0;
+}
+
+/* Placeholder empty dt */
+    #OT_empty {
+	position:absolute;
+	width:0;
+	height:0;
+	padding:0;
+	margin:0;
+	top:100px;
+	left:0;
+}
+
+/* Submit Button Wrapper - dd tag */    
+     #OT_submitWrap {
+	position:relative;
+	top: 37px; /* for horizontal layout: 25px, for vertical layout: 112px */
+	left: 341px;/* for horizontal layout: 500px, for vertical layout: 240px */
+	margin: 0 5px 0 0;
+	z-index:5; /* do not change */
+}
+
+/* Wrapper for Powered By OpenTable Logo */
+    #OT_logo {
+	position:absolute;
+	top:80px; /* for horizontal layout: 80px, for vertical layout: 120px */
+	left:0px; /* for horizontal layout:0px, for vertical layout: 0px */
+	width:100%;
+	padding:0;
+	margin:0;
+	display:block;
+	background:#fff;
+}
+
+/* Wrapper for Text Link */   
+    #OT_logoLink {
+	position: absolute;
+	top: 60px;/* for horizontal layout: 60px, for vertical layout: 100px */
+	left: 0px; /* for horizontal layout: 0px, for vertical layout: 0px */
+	width:100%;
+	padding:0 0 10px 0;
+	margin:0;
+	font-size:9px;
+	font-family: Verdana, Arial, Helvetica, Sans-Serif;
+	display:block;
+	background:#fff;
+}
+
+/* text link padding */
+     #OT_logoLink a {
+	padding:0 0 0 10px;
+}
+
+/* Logo Link Border and margin*/
+    #OT_imglogo {
+	border: 0;
+	margin:0 0 0 10px;
+}
+
+#OT_searchWrapper form {
+	margin:0;
+	padding:0;
+}
+
+#OT_searchWrapper input.hidden {
+	display:none;
+}
+
+/* Text Form Fields */
+	#OT_searchWrapper .feedFormField,
+#OT_searchWrapper .feedFormField option {
+	font-size:12px;
+	margin:2px 2px 2px 2px;
+}
+
+/* Text Form Field for Date field */
+	#OT_searchWrapper #startDate,
+#OT_searchWrapper .OT_feedFormfieldCalendar {
+	font-family: Verdana, Arial, Helvetica, Sans-Serif;
+	font-size:12px;
+	margin:0;
+	width:85px;
+}
+
+#OT_searchWrapper #dateDisplay {
+	font-size:10px;
+	color:#000000;
+	font-family: Verdana, Arial, Helvetica, Sans-Serif;
+	float:right;
+	margin:-3px 16px 0px 0px;
+	display:inline;
+}
+
+/*** calendar styles ***/
+
+	/* Placeholder. Don't change this */
+	#OT_searchWrapper .imgCal {
+	position: absolute;
+	display: none;
+	z-index:100;
+}
+
+/* Calendar Table properties */
+	#OT_searchWrapper #imageCal table {
+	font-size:12px;
+	width:150px;
+	font-family:arial;
+	font-weight: bold;
+	background:#FFF;
+}
+
+#OT_searchWrapper #imageCal td {
+	padding:0px 0px 0px 0;
+	text-align:center;
+}
+
+/* Days in the future */
+	#OT_searchWrapper .clickableDays {
+	color: #000000;
+	text-decoration: none;
+	height:18px;
+}
+
+/* Days in the past */
+	#OT_searchWrapper .nonclickableDays {
+	color: #CCCCCC;
+	height:18px;
+}
+
+/* Name of the month at the top */
+	#OT_searchWrapper .months {
+	color: #FFFFFF;
+	text-decoration: none
+}
+
+/* Day of the week */
+	#OT_searchWrapper .weekdays {
+	color: #000000;
+	text-decoration: none;
+	color:#666666;
+	background-color:#EFEFEF;
+	width:14%;
+}
+
+img.partOfCal,
+br.partOfCal {
+	display:none;
+}
