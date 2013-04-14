@@ -1,0 +1,491 @@
+!SESSION 2012-12-09 16:58:04.117 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.6.0_37
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/AChitale/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -keyring /Users/AChitale/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.jface 2 0 2012-12-09 16:58:12.066
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2012-12-09 16:58:12.067
+!MESSAGE A conflict occurred for ALT+COMMAND+Q P:
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@17cc01d,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@128c73f,,true),[Lorg.eclipse.core.commands.Parameterization;@3126d4),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@17cc01d,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@128c73f,,true),[Lorg.eclipse.core.commands.Parameterization;@ec2a72),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2012-12-09 16:58:12.067
+!MESSAGE A conflict occurred for COMMAND+SHIFT+I:
+Binding(COMMAND+SHIFT+I,
+	ParameterizedCommand(Command(org.eclipse.jdt.debug.ui.commands.Inspect,Inspect,
+		Inspect result of evaluating selected text,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.dialogAndWindow,,,system)
+Binding(COMMAND+SHIFT+I,
+	ParameterizedCommand(Command(org.eclipse.php.debug.ui.commands.Inspect,Inspect,
+		Inspect result of evaluating selected text,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.dialogAndWindow,,,system)
+
+!ENTRY org.eclipse.core.net 1 0 2012-12-09 16:58:12.231
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY com.perforce.team.core 2 0 2012-12-09 16:58:37.008
+!MESSAGE unable to get manifest version attribute: Not running from jar file: bundleresource://200.fwk29057219:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 2 0 2012-12-09 16:58:37.009
+!MESSAGE unable to get manifest date attribute: Not running from jar file: bundleresource://200.fwk29057219:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 1 0 2012-12-09 16:58:37.009
+!MESSAGE P4Java server factory loaded; version: Internal 2010.1 Perforce Development; date: unknown
+
+!ENTRY com.perforce.team.core 1 0 2012-12-09 16:58:37.009
+!MESSAGE Using default charset: MacRoman; JVM charset: MacRoman
+
+!ENTRY com.perforce.team.core 1 0 2012-12-09 16:58:37.010
+!MESSAGE initializing system file command helper class: java.io.File
+
+!ENTRY com.perforce.team.core 1 0 2012-12-09 16:58:37.011
+!MESSAGE Using default RPC system file command helper: com.perforce.p4java.impl.mapbased.rpc.sys.helper.RpcSystemFileCommandsHelper
+
+!ENTRY com.perforce.team.core 1 0 2012-12-09 16:58:37.011
+!MESSAGE setting RPC system file helper to class com.perforce.team.core.p4java.P4JavaSysFileCommandsHelper
+
+!ENTRY org.eclipse.ui 4 4 2012-12-09 16:59:34.787
+!MESSAGE Invalid preference page path: JSP Syntax
+
+!ENTRY org.eclipse.ui 4 4 2012-12-09 16:59:34.788
+!MESSAGE Invalid preference page path: HTML Syntax
+
+!ENTRY org.eclipse.ui 4 4 2012-12-09 16:59:34.788
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-12-09 17:02:32.193 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.6.0_37
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/AChitale/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -keyring /Users/AChitale/.eclipse_keyring -showlocation
+
+!ENTRY com.perforce.team.core 2 0 2012-12-09 17:02:49.020
+!MESSAGE unable to get manifest version attribute: Not running from jar file: bundleresource://200.fwk29057219:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 2 0 2012-12-09 17:02:49.023
+!MESSAGE unable to get manifest date attribute: Not running from jar file: bundleresource://200.fwk29057219:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 1 0 2012-12-09 17:02:49.023
+!MESSAGE P4Java server factory loaded; version: Internal 2010.1 Perforce Development; date: unknown
+
+!ENTRY com.perforce.team.core 1 0 2012-12-09 17:02:49.023
+!MESSAGE Using default charset: MacRoman; JVM charset: MacRoman
+
+!ENTRY com.perforce.team.core 1 0 2012-12-09 17:02:49.024
+!MESSAGE initializing system file command helper class: java.io.File
+
+!ENTRY com.perforce.team.core 1 0 2012-12-09 17:02:49.025
+!MESSAGE Using default RPC system file command helper: com.perforce.p4java.impl.mapbased.rpc.sys.helper.RpcSystemFileCommandsHelper
+
+!ENTRY com.perforce.team.core 1 0 2012-12-09 17:02:49.025
+!MESSAGE setting RPC system file helper to class com.perforce.team.core.p4java.P4JavaSysFileCommandsHelper
+
+!ENTRY org.eclipse.jface 2 0 2012-12-09 17:02:49.467
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2012-12-09 17:02:49.467
+!MESSAGE A conflict occurred for ALT+COMMAND+Q P:
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@1cdad73,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@368400,,true),[Lorg.eclipse.core.commands.Parameterization;@1144f66),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@1cdad73,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@368400,,true),[Lorg.eclipse.core.commands.Parameterization;@68cdca),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2012-12-09 17:02:49.467
+!MESSAGE A conflict occurred for COMMAND+SHIFT+I:
+Binding(COMMAND+SHIFT+I,
+	ParameterizedCommand(Command(org.eclipse.jdt.debug.ui.commands.Inspect,Inspect,
+		Inspect result of evaluating selected text,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.dialogAndWindow,,,system)
+Binding(COMMAND+SHIFT+I,
+	ParameterizedCommand(Command(org.eclipse.php.debug.ui.commands.Inspect,Inspect,
+		Inspect result of evaluating selected text,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.dialogAndWindow,,,system)
+
+!ENTRY org.eclipse.core.net 1 0 2012-12-09 17:02:49.614
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.ui 4 4 2012-12-09 17:03:01.140
+!MESSAGE Invalid preference page path: JSP Syntax
+
+!ENTRY org.eclipse.ui 4 4 2012-12-09 17:03:01.140
+!MESSAGE Invalid preference page path: HTML Syntax
+
+!ENTRY org.eclipse.ui 4 4 2012-12-09 17:03:01.141
+!MESSAGE Invalid preference page path: XML Syntax
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2012-12-09 21:25:53.743
+!MESSAGE Internal Error
+!STACK 1
+Java Model Exception: Java Model Status [Timed out while retrieving the attached javadoc for If {key=Lcom/sun/org/apache/xalan/internal/xsltc/compiler/If;} [in If.class [in com.sun.org.apache.xalan.internal.xsltc.compiler [in /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar]]] ]
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:808)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryType.getAttachedJavadoc(BinaryType.java:995)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:462)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:621)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:567)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:559)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:142)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+!SUBENTRY 1 org.eclipse.jdt.core 4 1012 2012-12-09 21:25:53.744
+!MESSAGE Timed out while retrieving the attached javadoc for If {key=Lcom/sun/org/apache/xalan/internal/xsltc/compiler/If;} [in If.class [in com.sun.org.apache.xalan.internal.xsltc.compiler [in /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar]]] 
+!SESSION 2012-12-11 13:58:28.148 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.6.0_37
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/AChitale/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -data /Users/AChitale/home/bak/tch/git/ws/jws -keyring /Users/AChitale/.eclipse_keyring -showlocation
+
+!ENTRY com.perforce.team.core 2 0 2012-12-11 13:58:45.794
+!MESSAGE unable to get manifest version attribute: Not running from jar file: bundleresource://200.fwk15512193:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 2 0 2012-12-11 13:58:45.833
+!MESSAGE unable to get manifest date attribute: Not running from jar file: bundleresource://200.fwk15512193:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 1 0 2012-12-11 13:58:45.833
+!MESSAGE P4Java server factory loaded; version: Internal 2010.1 Perforce Development; date: unknown
+
+!ENTRY com.perforce.team.core 1 0 2012-12-11 13:58:45.902
+!MESSAGE Using default charset: MacRoman; JVM charset: MacRoman
+
+!ENTRY com.perforce.team.core 1 0 2012-12-11 13:58:45.903
+!MESSAGE initializing system file command helper class: java.io.File
+
+!ENTRY com.perforce.team.core 1 0 2012-12-11 13:58:45.904
+!MESSAGE Using default RPC system file command helper: com.perforce.p4java.impl.mapbased.rpc.sys.helper.RpcSystemFileCommandsHelper
+
+!ENTRY com.perforce.team.core 1 0 2012-12-11 13:58:45.904
+!MESSAGE setting RPC system file helper to class com.perforce.team.core.p4java.P4JavaSysFileCommandsHelper
+
+!ENTRY org.eclipse.core.net 1 0 2012-12-11 13:58:49.090
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface 2 0 2012-12-11 13:59:07.999
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2012-12-11 13:59:07.999
+!MESSAGE A conflict occurred for ALT+COMMAND+Q P:
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@18a7b6c,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@ad2388,,true),[Lorg.eclipse.core.commands.Parameterization;@f7ea61),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@18a7b6c,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@ad2388,,true),[Lorg.eclipse.core.commands.Parameterization;@3cc038),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2012-12-11 13:59:08.000
+!MESSAGE A conflict occurred for COMMAND+SHIFT+I:
+Binding(COMMAND+SHIFT+I,
+	ParameterizedCommand(Command(org.eclipse.jdt.debug.ui.commands.Inspect,Inspect,
+		Inspect result of evaluating selected text,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.dialogAndWindow,,,system)
+Binding(COMMAND+SHIFT+I,
+	ParameterizedCommand(Command(org.eclipse.php.debug.ui.commands.Inspect,Inspect,
+		Inspect result of evaluating selected text,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.dialogAndWindow,,,system)
+
+!ENTRY org.eclipse.ui 4 4 2012-12-11 13:59:14.339
+!MESSAGE Invalid preference page path: JSP Syntax
+
+!ENTRY org.eclipse.ui 4 4 2012-12-11 13:59:14.339
+!MESSAGE Invalid preference page path: HTML Syntax
+
+!ENTRY org.eclipse.ui 4 4 2012-12-11 13:59:14.339
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-12-11 15:03:32.630 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.6.0_37
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/AChitale/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -data /Users/AChitale/home/bak/tch/git/ws/jws -keyring /Users/AChitale/.eclipse_keyring -showlocation
+
+!ENTRY com.perforce.team.core 2 0 2012-12-11 15:03:37.346
+!MESSAGE unable to get manifest version attribute: Not running from jar file: bundleresource://200.fwk29057219:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 2 0 2012-12-11 15:03:37.349
+!MESSAGE unable to get manifest date attribute: Not running from jar file: bundleresource://200.fwk29057219:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 1 0 2012-12-11 15:03:37.349
+!MESSAGE P4Java server factory loaded; version: Internal 2010.1 Perforce Development; date: unknown
+
+!ENTRY com.perforce.team.core 1 0 2012-12-11 15:03:37.350
+!MESSAGE Using default charset: MacRoman; JVM charset: MacRoman
+
+!ENTRY com.perforce.team.core 1 0 2012-12-11 15:03:37.351
+!MESSAGE initializing system file command helper class: java.io.File
+
+!ENTRY com.perforce.team.core 1 0 2012-12-11 15:03:37.352
+!MESSAGE Using default RPC system file command helper: com.perforce.p4java.impl.mapbased.rpc.sys.helper.RpcSystemFileCommandsHelper
+
+!ENTRY com.perforce.team.core 1 0 2012-12-11 15:03:37.352
+!MESSAGE setting RPC system file helper to class com.perforce.team.core.p4java.P4JavaSysFileCommandsHelper
+
+!ENTRY org.eclipse.jface 2 0 2012-12-11 15:03:38.757
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2012-12-11 15:03:38.757
+!MESSAGE A conflict occurred for ALT+COMMAND+Q P:
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@cd666f,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@1001b77,,true),[Lorg.eclipse.core.commands.Parameterization;@b4818),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@cd666f,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@1001b77,,true),[Lorg.eclipse.core.commands.Parameterization;@aa5b2d),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2012-12-11 15:03:38.757
+!MESSAGE A conflict occurred for COMMAND+SHIFT+I:
+Binding(COMMAND+SHIFT+I,
+	ParameterizedCommand(Command(org.eclipse.jdt.debug.ui.commands.Inspect,Inspect,
+		Inspect result of evaluating selected text,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.dialogAndWindow,,,system)
+Binding(COMMAND+SHIFT+I,
+	ParameterizedCommand(Command(org.eclipse.php.debug.ui.commands.Inspect,Inspect,
+		Inspect result of evaluating selected text,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.dialogAndWindow,,,system)
+
+!ENTRY org.eclipse.core.net 1 0 2012-12-11 15:03:39.014
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.ui 4 4 2012-12-11 15:40:46.413
+!MESSAGE Invalid preference page path: JSP Syntax
+
+!ENTRY org.eclipse.ui 4 4 2012-12-11 15:40:46.413
+!MESSAGE Invalid preference page path: HTML Syntax
+
+!ENTRY org.eclipse.ui 4 4 2012-12-11 15:40:46.414
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2013-02-05 08:01:30.799 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.6.0_37
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/AChitale/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -keyring /Users/AChitale/.eclipse_keyring -showlocation
+
+!ENTRY com.perforce.team.core 2 0 2013-02-05 08:01:59.085
+!MESSAGE unable to get manifest version attribute: Not running from jar file: bundleresource://200.fwk29057219:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 2 0 2013-02-05 08:01:59.121
+!MESSAGE unable to get manifest date attribute: Not running from jar file: bundleresource://200.fwk29057219:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 1 0 2013-02-05 08:01:59.121
+!MESSAGE P4Java server factory loaded; version: Internal 2010.1 Perforce Development; date: unknown
+
+!ENTRY com.perforce.team.core 1 0 2013-02-05 08:01:59.146
+!MESSAGE Using default charset: MacRoman; JVM charset: MacRoman
+
+!ENTRY com.perforce.team.core 1 0 2013-02-05 08:01:59.162
+!MESSAGE initializing system file command helper class: java.io.File
+
+!ENTRY com.perforce.team.core 1 0 2013-02-05 08:01:59.172
+!MESSAGE Using default RPC system file command helper: com.perforce.p4java.impl.mapbased.rpc.sys.helper.RpcSystemFileCommandsHelper
+
+!ENTRY com.perforce.team.core 1 0 2013-02-05 08:01:59.172
+!MESSAGE setting RPC system file helper to class com.perforce.team.core.p4java.P4JavaSysFileCommandsHelper
+
+!ENTRY org.eclipse.jface 2 0 2013-02-05 08:02:01.388
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2013-02-05 08:02:01.388
+!MESSAGE A conflict occurred for ALT+COMMAND+Q P:
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@ef29e7,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@1a83597,,true),[Lorg.eclipse.core.commands.Parameterization;@5658a3),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@ef29e7,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@1a83597,,true),[Lorg.eclipse.core.commands.Parameterization;@d547f8),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2013-02-05 08:02:01.388
+!MESSAGE A conflict occurred for COMMAND+SHIFT+I:
+Binding(COMMAND+SHIFT+I,
+	ParameterizedCommand(Command(org.eclipse.jdt.debug.ui.commands.Inspect,Inspect,
+		Inspect result of evaluating selected text,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.dialogAndWindow,,,system)
+Binding(COMMAND+SHIFT+I,
+	ParameterizedCommand(Command(org.eclipse.php.debug.ui.commands.Inspect,Inspect,
+		Inspect result of evaluating selected text,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.dialogAndWindow,,,system)
+
+!ENTRY org.eclipse.core.net 1 0 2013-02-05 08:02:02.285
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.ui 4 4 2013-02-05 08:02:20.719
+!MESSAGE Invalid preference page path: JSP Syntax
+
+!ENTRY org.eclipse.ui 4 4 2013-02-05 08:02:20.719
+!MESSAGE Invalid preference page path: HTML Syntax
+
+!ENTRY org.eclipse.ui 4 4 2013-02-05 08:02:20.720
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2013-02-19 16:50:59.727 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.6.0_37
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/AChitale/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -data /Users/AChitale/home/bak/tch/git/ws/jws -keyring /Users/AChitale/.eclipse_keyring -showlocation
+
+!ENTRY com.perforce.team.core 2 0 2013-02-19 16:51:05.917
+!MESSAGE unable to get manifest version attribute: Not running from jar file: bundleresource://200.fwk29057219:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 2 0 2013-02-19 16:51:05.934
+!MESSAGE unable to get manifest date attribute: Not running from jar file: bundleresource://200.fwk29057219:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 1 0 2013-02-19 16:51:05.934
+!MESSAGE P4Java server factory loaded; version: Internal 2010.1 Perforce Development; date: unknown
+
+!ENTRY com.perforce.team.core 1 0 2013-02-19 16:51:05.935
+!MESSAGE Using default charset: MacRoman; JVM charset: MacRoman
+
+!ENTRY com.perforce.team.core 1 0 2013-02-19 16:51:05.936
+!MESSAGE initializing system file command helper class: java.io.File
+
+!ENTRY com.perforce.team.core 1 0 2013-02-19 16:51:05.942
+!MESSAGE Using default RPC system file command helper: com.perforce.p4java.impl.mapbased.rpc.sys.helper.RpcSystemFileCommandsHelper
+
+!ENTRY com.perforce.team.core 1 0 2013-02-19 16:51:05.943
+!MESSAGE setting RPC system file helper to class com.perforce.team.core.p4java.P4JavaSysFileCommandsHelper
+
+!ENTRY org.eclipse.core.net 1 0 2013-02-19 16:51:06.977
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface 2 0 2013-02-19 16:51:21.610
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2013-02-19 16:51:21.610
+!MESSAGE A conflict occurred for ALT+COMMAND+Q P:
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@16af7bf,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@1af4241,,true),[Lorg.eclipse.core.commands.Parameterization;@126c06b),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@16af7bf,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@1af4241,,true),[Lorg.eclipse.core.commands.Parameterization;@122e8c9),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2013-02-19 16:51:21.610
+!MESSAGE A conflict occurred for COMMAND+SHIFT+I:
+Binding(COMMAND+SHIFT+I,
+	ParameterizedCommand(Command(org.eclipse.jdt.debug.ui.commands.Inspect,Inspect,
+		Inspect result of evaluating selected text,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.dialogAndWindow,,,system)
+Binding(COMMAND+SHIFT+I,
+	ParameterizedCommand(Command(org.eclipse.php.debug.ui.commands.Inspect,Inspect,
+		Inspect result of evaluating selected text,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.dialogAndWindow,,,system)
+
+!ENTRY org.eclipse.ui 4 4 2013-02-19 16:51:23.001
+!MESSAGE Invalid preference page path: JSP Syntax
+
+!ENTRY org.eclipse.ui 4 4 2013-02-19 16:51:23.001
+!MESSAGE Invalid preference page path: HTML Syntax
+
+!ENTRY org.eclipse.ui 4 4 2013-02-19 16:51:23.002
+!MESSAGE Invalid preference page path: XML Syntax

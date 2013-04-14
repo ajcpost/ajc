@@ -1,0 +1,16 @@
+
+public class Base {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public void f1 () {
+		System.out.println ("I am base");
+	}
+
+}
