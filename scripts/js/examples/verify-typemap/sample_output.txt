@@ -1,0 +1,1796 @@
+Response from UI16110008
+******************* Begin of Output of the execution ******************* 
+ 
+==================================================== Print Transaction Schema Details  Begin==============================================================
+
+Transaction Schemas31.0
+Transaction.Schema20
+Transaction.Schema09
+Transaction.Schema08
+Transaction.Schema07
+Transaction.Schema29
+Transaction.Schema28
+Transaction.Schema02
+Transaction.Schema27
+Transaction.Schema26
+Transaction.Schema25
+Transaction.Schema24
+Transaction.Schema06
+Transaction.Schema05
+Transaction.Schema23
+Transaction.Schema22
+Transaction.Schema04
+Transaction.Schema21
+Transaction.Schema03
+Transaction.Schema32
+Transaction.Schema19
+Transaction.Schema18
+Transaction.Schema15
+Transaction.Schema14
+Transaction.Schema17
+Transaction.Schema16
+Transaction.Schema11
+Transaction.Schema31
+Transaction.Schema10
+Transaction.Schema30
+Transaction.Schema13
+Transaction.Schema12
+
+==================================================== Print Transaction Schema Details  End==============================================================
+
+ 
+==================================================== Print Flex  field Details  Begin ==============================================================
+Number of objects found: 12
+
+Available FlexSuperTypes :ariba.analytics.fact.ConsultingCategoryLineItem,ariba.analytics.fact.ContractsDForm,ariba.analytics.fact.ContractsDFormDetail,ariba.analytics.fact.Custom,ariba.analytics.fact.CustomBenchmarking,ariba.analytics.fact.EForm,ariba.analytics.fact.EFormDetail,ariba.analytics.fact.GenericCategoryLineItem,ariba.analytics.fact.MarketResearchCategoryLineItem,ariba.basic.core.DynamicFlexMasterData,ariba.collaborate.core.DynamicFormDocument,ariba.collaborate.core.DynamicFormDocumentDetails 
+ 
+Class Name             |       isClusterRoot |       Table Name     |       Field Name
+ariba.analytics.fact.ConsultingCategoryLineItem                      |       true           |        FACT_Consulting_Category_LineI        |       Flex_Type_Id
+ariba.analytics.fact.ContractsDForm                  |       true           |        FACT_Contracts_D_Form          |       Flex_Type_Id
+ariba.analytics.fact.ContractsDFormDetail                    |       true           |        FACT_Contracts_D_Form_Detail          |       Flex_Type_Id
+ariba.analytics.fact.Custom                   |       true           |       FACT_Custom            |       Flex_Type_Id
+ariba.analytics.fact.CustomBenchmarking                      |       true           |        FACT_Custom_Benchmarking              |       Flex_Type_Id
+ariba.analytics.fact.EForm                    |       true           |       FACT_E_Form            |       Flex_Type_Id
+ariba.analytics.fact.EFormDetail                     |       true           |        FACT_E_Form_Detail             |       Flex_Type_Id
+ariba.analytics.fact.GenericCategoryLineItem                 |       true           |        FACT_Generic_Category_Line_I          |       Flex_Type_Id
+ariba.analytics.fact.MarketResearchCategoryLineItem                  |       true           |        FACT_Market_Research_CLI              |       Flex_Type_Id
+ariba.basic.core.DynamicFlexMasterData                       |       true           |        DynamicFlexMasterDataTab              |       DFMD__TYPE_
+ariba.collaborate.core.DynamicFormDocument                   |       true           |        DynamicFormDocumentTab         |       DCFD_TYPENAME
+ariba.collaborate.core.DynamicFormDocumentDetails                    |       false          |        DynamicFormDocumentDetailsTab         |       DCFDD_TYPENAME
+
+==================================================== Print Flex  field Details  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema20
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema20
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema20
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema20
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema20
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema20
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema20
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema20
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema20
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema20
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema20
+Total Nos of Records Found  : 2.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema20
+Total Nos of Records Found  : 117.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema20
+Total Nos of Records Found  : 10.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema09
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema09
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema09
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema09
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema09
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema09
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Custom_Benchmarking FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema09
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema09
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema09
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema09
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema09
+Total Nos of Records Found  : 1.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema09
+Total Nos of Records Found  : 32.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema09
+Total Nos of Records Found  : 9.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema08
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema08
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema08
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema08
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema08
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema08
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Custom_Benchmarking FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema08
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema08
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema08
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema08
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema08
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema08
+Total Nos of Records Found  : 51.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema08
+Total Nos of Records Found  : 16.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema07
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema07
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema07
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema07
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema07
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema07
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Custom_Benchmarking FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema07
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema07
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema07
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema07
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema07
+Total Nos of Records Found  : 26.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema07
+Total Nos of Records Found  : 122.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema07
+Total Nos of Records Found  : 33.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema29
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema29
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema29
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema29
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema29
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema29
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema29
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema29
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema29
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema29
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema29
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema29
+No records Found 
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema29
+No records Found 
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema28
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema28
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema28
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema28
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema28
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema28
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema28
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema28
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema28
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema28
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema28
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema28
+No records Found 
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema28
+No records Found 
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema02
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema02
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema02
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema02
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema02
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema02
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema02
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema02
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema02
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema02
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema02
+Total Nos of Records Found  : 13.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema02
+Total Nos of Records Found  : 68.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema02
+Total Nos of Records Found  : 18.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema27
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema27
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema27
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema27
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema27
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema27
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema27
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema27
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema27
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema27
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema27
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema27
+No records Found 
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema27
+No records Found 
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema26
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema26
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema26
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema26
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema26
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema26
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema26
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema26
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema26
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema26
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema26
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema26
+No records Found 
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema26
+No records Found 
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema25
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema25
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema25
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema25
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema25
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema25
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema25
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema25
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema25
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema25
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema25
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema25
+No records Found 
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema25
+No records Found 
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema24
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema24
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema24
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema24
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema24
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema24
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema24
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema24
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema24
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema24
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema24
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema24
+No records Found 
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema24
+No records Found 
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema06
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema06
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema06
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema06
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema06
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema06
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Custom_Benchmarking FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema06
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema06
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema06
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema06
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema06
+Total Nos of Records Found  : 2.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema06
+Total Nos of Records Found  : 86.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema06
+Total Nos of Records Found  : 1.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema05
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema05
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema05
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema05
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema05
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema05
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Custom_Benchmarking FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema05
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema05
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema05
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema05
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema05
+Total Nos of Records Found  : 6.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema05
+Total Nos of Records Found  : 137.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema05
+Total Nos of Records Found  : 9.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema23
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema23
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema23
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema23
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema23
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema23
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema23
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema23
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema23
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema23
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema23
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema23
+No records Found 
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema23
+No records Found 
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema22
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema22
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema22
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema22
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema22
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema22
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema22
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema22
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema22
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema22
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema22
+Total Nos of Records Found  : 18.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema22
+Total Nos of Records Found  : 129.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema22
+Total Nos of Records Found  : 6.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema04
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema04
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema04
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema04
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema04
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema04
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Custom_Benchmarking FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema04
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema04
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema04
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema04
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema04
+Total Nos of Records Found  : 1.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema04
+Total Nos of Records Found  : 13.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema04
+Total Nos of Records Found  : 1.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema21
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema21
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema21
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema21
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema21
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema21
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema21
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema21
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema21
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema21
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema21
+Total Nos of Records Found  : 14.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema21
+Total Nos of Records Found  : 93.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema21
+Total Nos of Records Found  : 11.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema03
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema03
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema03
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema03
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema03
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema03
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Custom_Benchmarking FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema03
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema03
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema03
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema03
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema03
+Total Nos of Records Found  : 11.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema03
+Total Nos of Records Found  : 183.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema03
+Total Nos of Records Found  : 64.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema32
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema32
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema32
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema32
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema32
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema32
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema32
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema32
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema32
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema32
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema32
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema32
+No records Found 
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema32
+No records Found 
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema19
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema19
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema19
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema19
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema19
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema19
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema19
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema19
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema19
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema19
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema19
+Total Nos of Records Found  : 3.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema19
+Total Nos of Records Found  : 163.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema19
+Total Nos of Records Found  : 11.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema18
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema18
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema18
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema18
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema18
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema18
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema18
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema18
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema18
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema18
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema18
+Total Nos of Records Found  : 25.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema18
+Total Nos of Records Found  : 173.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema18
+Total Nos of Records Found  : 38.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema15
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema15
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema15
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema15
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema15
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema15
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema15
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema15
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema15
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema15
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema15
+Total Nos of Records Found  : 7.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema15
+Total Nos of Records Found  : 251.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema15
+Total Nos of Records Found  : 10.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema14
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema14
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema14
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema14
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema14
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema14
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema14
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema14
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema14
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema14
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema14
+Total Nos of Records Found  : 9.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema14
+Total Nos of Records Found  : 6.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema14
+Total Nos of Records Found  : 1.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema17
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema17
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema17
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema17
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema17
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema17
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema17
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema17
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema17
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema17
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema17
+Total Nos of Records Found  : 2.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema17
+Total Nos of Records Found  : 115.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema17
+Total Nos of Records Found  : 8.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema16
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema16
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema16
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema16
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema16
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema16
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema16
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema16
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema16
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema16
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema16
+Total Nos of Records Found  : 10.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema16
+Total Nos of Records Found  : 69.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema16
+Total Nos of Records Found  : 9.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema11
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema11
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema11
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema11
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema11
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema11
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Custom_Benchmarking FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema11
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema11
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema11
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema11
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema11
+Total Nos of Records Found  : 7.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema11
+Total Nos of Records Found  : 82.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema11
+Total Nos of Records Found  : 7.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema31
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema31
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema31
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema31
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema31
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema31
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema31
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema31
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema31
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema31
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema31
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema31
+No records Found 
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema31
+No records Found 
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema10
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema10
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema10
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema10
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema10
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema10
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Custom_Benchmarking FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema10
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema10
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema10
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema10
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema10
+Total Nos of Records Found  : 4.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema10
+Total Nos of Records Found  : 150.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema10
+Total Nos of Records Found  : 4.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema30
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema30
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema30
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema30
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema30
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema30
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema30
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema30
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema30
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema30
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema30
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema30
+No records Found 
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema30
+No records Found 
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema13
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema13
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema13
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema13
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema13
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema13
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema13
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema13
+No records Found 
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema13
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema13
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema13
+Total Nos of Records Found  : 2.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema13
+Total Nos of Records Found  : 187.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema13
+Total Nos of Records Found  : 8.0
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+==================================================== Print Processing for Schema  Begin ==============================================================
+Schema NameTransaction.Schema12
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Consulting_Category_LineI] for schema :Transaction.Schema12
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Consulting_Category_LineI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form] for schema :Transaction.Schema12
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Contracts_D_Form_Detail] for schema :Transaction.Schema12
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Contracts_D_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom] for schema :Transaction.Schema12
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Custom.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Custom_Benchmarking] for schema :Transaction.Schema12
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_Custom_Benchmarking FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form] for schema :Transaction.Schema12
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_E_Form_Detail] for schema :Transaction.Schema12
+Erorr occured while querying 
+AQL Execution Error:  SQL Error ORA-00942: table or view does not exist
+:  [SQLBuffer `
+SELECT DISTINCT SUBSTR(FAC1.ROOTID, 1, 7), FAC1.FLEX_TYPE_ID 
+FROM FACT_E_Form_Detail FAC1']
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Generic_Category_Line_I] for schema :Transaction.Schema12
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Generic_Category_Line_I.
+Executing query [select  distinct SUBSTRING( RootId,1,7), Flex_Type_Id from FACT_Market_Research_CLI] for schema :Transaction.Schema12
+Erorr occured while querying 
+AQL Validation Error:  ariba.base.core.aql.AQLVisitorException: Cannot find class FACT_Market_Research_CLI.
+Executing query [select  distinct SUBSTRING( RootId,1,7), DFMD__TYPE_ from DynamicFlexMasterDataTab] for schema :Transaction.Schema12
+Total Nos of Records Found  : 2.0
+Executing query [select  distinct SUBSTRING( RootId,1,7), DCFD_TYPENAME from DynamicFormDocumentTab] for schema :Transaction.Schema12
+Total Nos of Records Found  : 1.0
+Executing query [select  distinct SUBSTRING( MYID,1,7), DCFDD_TYPENAME from DynamicFormDocumentDetailsTab] for schema :Transaction.Schema12
+No records Found 
+==================================================== Print Processing for Schema  End ==============================================================
+
+ 
+================ Print Validating Records Begin ==============================
+
+Type differs for the typcode :4.351646E8
+typemaptab type -->  table type  :  vrealm_166.fmd_2198.CostCenter1 --> __FLEX__.fmd_2198.CostCenter1
+Type differs for the typcode :3.017280987E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_840.OrganizationStructure --> __FLEX__.fmd_840.OrganizationStructure
+Type differs for the typcode :3.017280988E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_953.Requestingcompany --> __FLEX__.fmd_953.Requestingcompany
+Type differs for the typcode :3.759152688E9
+typemaptab type -->  table type  :  vrealm_1434.fmd_2906.TestFMD --> __FLEX__.fmd_2906.TestFMD
+Record Not found[object Object]
+Type differs for the typcode :6.89442526E8
+typemaptab type -->  table type  :  vrealm_263.fmd_1532.BusinessUnits --> __FLEX__.fmd_1532.BusinessUnits
+Record Not found[object Object]
+Type differs for the typcode :4.35164626E8
+typemaptab type -->  table type  :  vrealm_166.fmd_2207.WaterTreatmentFacilities --> __FLEX__.fmd_2207.WaterTreatmentFacilities
+Type differs for the typcode :2.063074345E9
+typemaptab type -->  table type  :  vrealm_787.fmd_20.CHSLegalEntity --> __FLEX__.fmd_20.CHSLegalEntity
+Type differs for the typcode :1.5736366E7
+typemaptab type -->  table type  :  vrealm_6.fmd_2905.Flexmaster --> __FLEX__.fmd_2905.Flexmaster
+Type differs for the typcode :4.4565548E7
+typemaptab type -->  table type  :  vrealm_17.fmd_27.Testtemplate --> __FLEX__.fmd_27.Testtemplate
+Type differs for the typcode :3.017281079E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_1470.OrganizationStructure --> __FLEX__.fmd_1470.OrganizationStructure
+Type differs for the typcode :4.4567466E7
+typemaptab type -->  table type  :  vrealm_17.fmd_1150.CompanyNameEnumeration --> __FLEX__.fmd_1150.CompanyNameEnumeration
+Type differs for the typcode :4.4567467E7
+typemaptab type -->  table type  :  vrealm_17.fmd_1151.SourcingProjectEnumeration --> __FLEX__.fmd_1151.SourcingProjectEnumeration
+Type differs for the typcode :4.4570919E7
+typemaptab type -->  table type  :  vrealm_17.fmd_2442.LegalEntity --> __FLEX__.fmd_2442.LegalEntity
+Type differs for the typcode :3.334478864E9
+typemaptab type -->  table type  :  vrealm_1272.fmd_2796.Negotiator --> __FLEX__.fmd_2796.Negotiator
+Type differs for the typcode :4.35160455E8
+typemaptab type -->  table type  :  vrealm_166.fmd_275.Hospital --> __FLEX__.fmd_275.Hospital
+Type differs for the typcode :6.31768144E8
+typemaptab type -->  table type  :  vrealm_241.fmd_40.FMD631 --> __FLEX__.fmd_40.FMD631
+Type differs for the typcode :6.31770444E8
+typemaptab type -->  table type  :  vrealm_241.fmd_1355.Sp9push --> __FLEX__.fmd_1355.Sp9push
+Type differs for the typcode :3.38690722E9
+typemaptab type -->  table type  :  vrealm_1292.fmd_2409.ProjectNumber --> __FLEX__.fmd_2409.ProjectNumber
+Type differs for the typcode :3.386907221E9
+typemaptab type -->  table type  :  vrealm_1292.fmd_2410.PrimeContractNumber --> __FLEX__.fmd_2410.PrimeContractNumber
+Type differs for the typcode :3.489140123E9
+typemaptab type -->  table type  :  vrealm_1331.fmd_1387.ProductLine_formlabel --> __FLEX__.fmd_1387.ProductLine_formlabel
+Type differs for the typcode :3.386907223E9
+typemaptab type -->  table type  :  vrealm_1292.fmd_2412.KeyFederalFlowdowns --> __FLEX__.fmd_2412.KeyFederalFlowdowns
+Type differs for the typcode :1.470635051E9
+typemaptab type -->  table type  :  vrealm_561.fmd_2806.PlantLocation --> __FLEX__.fmd_2806.PlantLocation
+Type differs for the typcode :3.489140124E9
+typemaptab type -->  table type  :  vrealm_1331.fmd_1388.PurchaseType_formlabel --> __FLEX__.fmd_1388.PurchaseType_formlabel
+Type differs for the typcode :2.794462083E9
+typemaptab type -->  table type  :  vrealm_1066.fmd_2737.RaulCastrotestflexfield --> __FLEX__.fmd_2737.RaulCastrotestflexfield
+Type differs for the typcode :3.916438606E9
+typemaptab type -->  table type  :  vrealm_1494.fmd_2815.LegalEntities --> __FLEX__.fmd_2815.LegalEntities
+Type differs for the typcode :4.03702766E8
+typemaptab type -->  table type  :  vrealm_154.fmd_6.FMD2 --> __FLEX__.fmd_6.FMD2
+Type differs for the typcode :2.794458033E9
+typemaptab type -->  table type  :  vrealm_1066.fmd_1155.LalaineFieldTest --> __FLEX__.fmd_1155.LalaineFieldTest
+Type differs for the typcode :4.03702768E8
+typemaptab type -->  table type  :  vrealm_154.fmd_5.FMD1 --> __FLEX__.fmd_5.FMD1
+Type differs for the typcode :1.8357665E7
+typemaptab type -->  table type  :  vrealm_7.fmd_2872.FinalMasterDataNid --> __FLEX__.fmd_2872.FinalMasterDataNid
+Type differs for the typcode :4.35160097E8
+typemaptab type -->  table type  :  vrealm_166.fmd_24.TestFMD --> __FLEX__.fmd_24.TestFMD
+Type differs for the typcode :4.03703162E8
+typemaptab type -->  table type  :  vrealm_154.fmd_268.FMD79test1 --> __FLEX__.fmd_268.FMD79test1
+Type differs for the typcode :3.334478879E9
+typemaptab type -->  table type  :  vrealm_1272.fmd_2800.BusinessOwner --> __FLEX__.fmd_2800.BusinessOwner
+Type differs for the typcode :6.31768942E8
+typemaptab type -->  table type  :  vrealm_241.fmd_527.TestSukantoSP6 --> __FLEX__.fmd_527.TestSukantoSP6
+Type differs for the typcode :2.249201258E9
+typemaptab type -->  table type  :  vrealm_858.fmd_2260.BusinessUnit --> __FLEX__.fmd_2260.BusinessUnit
+Type differs for the typcode :4.430240735E9
+typemaptab type -->  table type  :  vrealm_1690.fmd_2781.SourcingIdentification --> __FLEX__.fmd_2781.SourcingIdentification
+Type differs for the typcode :4.03704701E8
+typemaptab type -->  table type  :  vrealm_154.fmd_1131.SP8Test --> __FLEX__.fmd_1131.SP8Test
+Type differs for the typcode :2.791838552E9
+typemaptab type -->  table type  :  vrealm_1065.fmd_1970.Supplier --> __FLEX__.fmd_1970.Supplier
+Type differs for the typcode :2.791838553E9
+typemaptab type -->  table type  :  vrealm_1065.fmd_1971.EnterpriseUsers --> __FLEX__.fmd_1971.EnterpriseUsers
+Type differs for the typcode :4.03703561E8
+typemaptab type -->  table type  :  vrealm_154.fmd_478.TestSukanot --> __FLEX__.fmd_478.TestSukanot
+Type differs for the typcode :4.35160506E8
+typemaptab type -->  table type  :  vrealm_166.fmd_296.Hospital2 --> __FLEX__.fmd_296.Hospital2
+Type differs for the typcode :3.33447888E9
+typemaptab type -->  table type  :  vrealm_1272.fmd_2801.ContractSigner --> __FLEX__.fmd_2801.ContractSigner
+Type differs for the typcode :1.140329385E9
+typemaptab type -->  table type  :  vrealm_435.fmd_1149.SourcingProjectEnumeration --> __FLEX__.fmd_1149.SourcingProjectEnumeration
+Type differs for the typcode :3.237482293E9
+typemaptab type -->  table type  :  vrealm_1235.fmd_844.StationCode --> __FLEX__.fmd_844.StationCode
+Type differs for the typcode :4.03708938E8
+typemaptab type -->  table type  :  vrealm_154.fmd_2792.RaghuSP3 --> __FLEX__.fmd_2792.RaghuSP3
+Type differs for the typcode :3.274181764E9
+typemaptab type -->  table type  :  vrealm_1249.fmd_1266.Site --> __FLEX__.fmd_1266.Site
+Type differs for the typcode :3.274181961E9
+typemaptab type -->  table type  :  vrealm_1249.fmd_1354.SupplierContractingEntity --> __FLEX__.fmd_1354.SupplierContractingEntity
+Type differs for the typcode :4.35165503E8
+typemaptab type -->  table type  :  vrealm_166.fmd_2454.Warehouse --> __FLEX__.fmd_2454.Warehouse
+Type differs for the typcode :3.91643862E9
+typemaptab type -->  table type  :  vrealm_1494.fmd_2821.LegalEntitiesNew --> __FLEX__.fmd_2821.LegalEntitiesNew
+Type differs for the typcode :4.411889912E9
+typemaptab type -->  table type  :  vrealm_1683.fmd_2409.ProjectNumber --> __FLEX__.fmd_2409.ProjectNumber
+Type differs for the typcode :4.03706661E8
+typemaptab type -->  table type  :  vrealm_154.fmd_1929.Sp13 --> __FLEX__.fmd_1929.Sp13
+Type differs for the typcode :4.411889914E9
+typemaptab type -->  table type  :  vrealm_1683.fmd_2411.SupplierSegmentation --> __FLEX__.fmd_2411.SupplierSegmentation
+Type differs for the typcode :4.411889915E9
+typemaptab type -->  table type  :  vrealm_1683.fmd_2412.KeyFederalFlowdowns --> __FLEX__.fmd_2412.KeyFederalFlowdowns
+Type differs for the typcode :4.411889913E9
+typemaptab type -->  table type  :  vrealm_1683.fmd_2410.PrimeContractNumber --> __FLEX__.fmd_2410.PrimeContractNumber
+Type differs for the typcode :4.348974703E9
+typemaptab type -->  table type  :  vrealm_1659.fmd_2188.ProjectCode --> __FLEX__.fmd_2188.ProjectCode
+Type differs for the typcode :4.348974702E9
+typemaptab type -->  table type  :  vrealm_1659.fmd_2187.Client --> __FLEX__.fmd_2187.Client
+Type differs for the typcode :2.264929236E9
+typemaptab type -->  table type  :  vrealm_864.fmd_2002.VendorNumber --> __FLEX__.fmd_2002.VendorNumber
+Type differs for the typcode :2.264929237E9
+typemaptab type -->  table type  :  vrealm_864.fmd_2003.BSPVendorNumber --> __FLEX__.fmd_2003.BSPVendorNumber
+Type differs for the typcode :3.373798441E9
+typemaptab type -->  table type  :  vrealm_1287.fmd_1667.RigIMO --> __FLEX__.fmd_1667.RigIMO
+Type differs for the typcode :3.373798442E9
+typemaptab type -->  table type  :  vrealm_1287.fmd_1668.OwnerName --> __FLEX__.fmd_1668.OwnerName
+Type differs for the typcode :3.331857443E9
+typemaptab type -->  table type  :  vrealm_1271.fmd_2804.ContractSigner --> __FLEX__.fmd_2804.ContractSigner
+Type differs for the typcode :3.331857442E9
+typemaptab type -->  table type  :  vrealm_1271.fmd_2803.BusinessOwner --> __FLEX__.fmd_2803.BusinessOwner
+Type differs for the typcode :3.01728115E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_1408.Expendituregroup_label --> __FLEX__.fmd_1408.Expendituregroup_label
+Type differs for the typcode :3.017281151E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_1409.Expenditureitem_label --> __FLEX__.fmd_1409.Expenditureitem_label
+Type differs for the typcode :3.017281152E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_1410.Requestingcompany_label --> __FLEX__.fmd_1410.Requestingcompany_label
+Type differs for the typcode :3.017281153E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_1411.RequestingOrganization_label --> __FLEX__.fmd_1411.RequestingOrganization_label
+Type differs for the typcode :4.03702862E8
+typemaptab type -->  table type  :  vrealm_154.fmd_40.FMD631 --> __FLEX__.fmd_40.FMD631
+Type differs for the typcode :3.017281154E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_1412.Organizationstructure_label --> __FLEX__.fmd_1412.Organizationstructure_label
+Type differs for the typcode :3.331857441E9
+typemaptab type -->  table type  :  vrealm_1271.fmd_2802.Negotiator --> __FLEX__.fmd_2802.Negotiator
+Type differs for the typcode :3.017280919E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_1385.Expendituregroup_label --> __FLEX__.fmd_1385.Expendituregroup_label
+Type differs for the typcode :2.794457597E9
+typemaptab type -->  table type  :  vrealm_1066.fmd_933.JeffFieldTest --> __FLEX__.fmd_933.JeffFieldTest
+Type differs for the typcode :4.03705165E8
+typemaptab type -->  table type  :  vrealm_154.fmd_1355.Sp9push --> __FLEX__.fmd_1355.Sp9push
+Type differs for the typcode :1.790448584E9
+typemaptab type -->  table type  :  vrealm_683.fmd_1998.ERPCommodityCodes --> __FLEX__.fmd_1998.ERPCommodityCodes
+Type differs for the typcode :4.076344749E9
+typemaptab type -->  table type  :  vrealm_1555.fmd_2190.SignatoryLevel --> __FLEX__.fmd_2190.SignatoryLevel
+Type differs for the typcode :2.794460102E9
+typemaptab type -->  table type  :  vrealm_1066.fmd_1994.VendorInfo --> __FLEX__.fmd_1994.VendorInfo
+Type differs for the typcode :4.29654697E9
+typemaptab type -->  table type  :  vrealm_1639.fmd_2624.GasunieContractManager --> __FLEX__.fmd_2624.GasunieContractManager
+Type differs for the typcode :3.274181789E9
+typemaptab type -->  table type  :  vrealm_1249.fmd_1277.Site --> __FLEX__.fmd_1277.Site
+Type differs for the typcode :3.014659526E9
+typemaptab type -->  table type  :  vrealm_1150.fmd_1408.Expendituregroup_label --> __FLEX__.fmd_1408.Expendituregroup_label
+Type differs for the typcode :3.014659527E9
+typemaptab type -->  table type  :  vrealm_1150.fmd_1409.Expenditureitem_label --> __FLEX__.fmd_1409.Expenditureitem_label
+Type differs for the typcode :3.014659528E9
+typemaptab type -->  table type  :  vrealm_1150.fmd_1410.Requestingcompany_label --> __FLEX__.fmd_1410.Requestingcompany_label
+Type differs for the typcode :3.014659529E9
+typemaptab type -->  table type  :  vrealm_1150.fmd_1411.RequestingOrganization_label --> __FLEX__.fmd_1411.RequestingOrganization_label
+Type differs for the typcode :1.5736143E7
+typemaptab type -->  table type  :  vrealm_6.fmd_2856.Fmd1 --> __FLEX__.fmd_2856.Fmd1
+Type differs for the typcode :3.497004378E9
+typemaptab type -->  table type  :  vrealm_1334.fmd_1363.AutomaticManagementLevel --> __FLEX__.fmd_1363.AutomaticManagementLevel
+Type differs for the typcode :1.572964E7
+typemaptab type -->  table type  :  vrealm_6.fmd_3.Bank2 --> __FLEX__.fmd_3.Bank2
+Type differs for the typcode :4.03703664E8
+typemaptab type -->  table type  :  vrealm_154.fmd_527.TestSukantoSP6 --> __FLEX__.fmd_527.TestSukantoSP6
+Type differs for the typcode :2.005404687E9
+typemaptab type -->  table type  :  vrealm_765.fmd_1200.CompanyNameFMD --> __FLEX__.fmd_1200.CompanyNameFMD
+Type differs for the typcode :6.9468715E8
+typemaptab type -->  table type  :  vrealm_265.fmd_2191.GeographicHQlocationofcompanythatwehavecontractedwith --> __FLEX__.fmd_2191.GeographicHQlocationofcompanythatwehavecontractedwith
+Type differs for the typcode :4.01085863E8
+typemaptab type -->  table type  :  vrealm_153.fmd_2185.Raghutest --> __FLEX__.fmd_2185.Raghutest
+Type differs for the typcode :4.01085864E8
+typemaptab type -->  table type  :  vrealm_153.fmd_2186.Raghu2 --> __FLEX__.fmd_2186.Raghu2
+Type differs for the typcode :3.258453878E9
+typemaptab type -->  table type  :  vrealm_1243.fmd_1599.ProjectSubtype --> __FLEX__.fmd_1599.ProjectSubtype
+Type differs for the typcode :3.258453877E9
+typemaptab type -->  table type  :  vrealm_1243.fmd_1598.ProcurementSponsor --> __FLEX__.fmd_1598.ProcurementSponsor
+Type differs for the typcode :3.274181793E9
+typemaptab type -->  table type  :  vrealm_1249.fmd_1281.RTContractingParties --> __FLEX__.fmd_1281.RTContractingParties
+Type differs for the typcode :4.2205665E8
+typemaptab type -->  table type  :  vrealm_161.fmd_1532.BusinessUnits --> __FLEX__.fmd_1532.BusinessUnits
+Type differs for the typcode :3.662156238E9
+typemaptab type -->  table type  :  vrealm_1397.fmd_1736.ManulifeCompany --> __FLEX__.fmd_1736.ManulifeCompany
+Type differs for the typcode :6.31768684E8
+typemaptab type -->  table type  :  vrealm_241.fmd_412.FMD871 --> __FLEX__.fmd_412.FMD871
+Type differs for the typcode :3.01465953E9
+typemaptab type -->  table type  :  vrealm_1150.fmd_1412.Organizationstructure_label --> __FLEX__.fmd_1412.Organizationstructure_label
+Type differs for the typcode :3.274181792E9
+typemaptab type -->  table type  :  vrealm_1249.fmd_1280.ProjectSubtype --> __FLEX__.fmd_1280.ProjectSubtype
+Type differs for the typcode :3.274181791E9
+typemaptab type -->  table type  :  vrealm_1249.fmd_1279.EffectivenessCatDriver --> __FLEX__.fmd_1279.EffectivenessCatDriver
+Type differs for the typcode :3.27418179E9
+typemaptab type -->  table type  :  vrealm_1249.fmd_1278.ProcurementSponsor --> __FLEX__.fmd_1278.ProcurementSponsor
+Type differs for the typcode :3.258453879E9
+typemaptab type -->  table type  :  vrealm_1243.fmd_1600.RTContractingParties --> __FLEX__.fmd_1600.RTContractingParties
+Type differs for the typcode :6.94687151E8
+typemaptab type -->  table type  :  vrealm_265.fmd_2192.Primarygeographiclocationofoutputifdifferentfromcompanylocation --> __FLEX__.fmd_2192.Primarygeographiclocationofoutputifdifferentfromcompanylocation
+Type differs for the typcode :1.77996286E9
+typemaptab type -->  table type  :  vrealm_679.fmd_2014.ERPCommodityCodes --> __FLEX__.fmd_2014.ERPCommodityCodes
+Type differs for the typcode :3.497004381E9
+typemaptab type -->  table type  :  vrealm_1334.fmd_1366.ProductLine --> __FLEX__.fmd_1366.ProductLine
+Type differs for the typcode :2.778731495E9
+typemaptab type -->  table type  :  vrealm_1060.fmd_2010.Supplier --> __FLEX__.fmd_2010.Supplier
+Type differs for the typcode :2.778731496E9
+typemaptab type -->  table type  :  vrealm_1060.fmd_2011.EnterpriseUsers --> __FLEX__.fmd_2011.EnterpriseUsers
+Type differs for the typcode :3.017279807E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_838.Furtheramountdestinedfornonrelatedexpenditurenotincludedinnegotiation --> __FLEX__.fmd_838.Furtheramountdestinedfornonrelatedexpenditurenotincludedinnegotiation
+Type differs for the typcode :3.49700438E9
+typemaptab type -->  table type  :  vrealm_1334.fmd_1365.PurchaseType --> __FLEX__.fmd_1365.PurchaseType
+Record Not found[object Object]
+Type differs for the typcode :6.94687152E8
+typemaptab type -->  table type  :  vrealm_265.fmd_2193.Secondarygeographiclocationofoutputifdifferentfromcompanyandprimarylocation --> __FLEX__.fmd_2193.Secondarygeographiclocationofoutputifdifferentfromcompanyandprimarylocation
+Type differs for the typcode :6.94687153E8
+typemaptab type -->  table type  :  vrealm_265.fmd_2194.KeyBusinessStakeholderBusinessUnitDirectorate --> __FLEX__.fmd_2194.KeyBusinessStakeholderBusinessUnitDirectorate
+Type differs for the typcode :4.01085888E8
+typemaptab type -->  table type  :  vrealm_153.fmd_2200.Dennishospital1 --> __FLEX__.fmd_2200.Dennishospital1
+Type differs for the typcode :3.258453881E9
+typemaptab type -->  table type  :  vrealm_1243.fmd_1602.SupplierContractingEntity --> __FLEX__.fmd_1602.SupplierContractingEntity
+Type differs for the typcode :2.364544616E9
+typemaptab type -->  table type  :  vrealm_902.fmd_2258.BusinessUnit --> __FLEX__.fmd_2258.BusinessUnit
+Type differs for the typcode :4.430240782E9
+typemaptab type -->  table type  :  vrealm_1690.fmd_2793.PrimaryAlcoaEntity --> __FLEX__.fmd_2793.PrimaryAlcoaEntity
+Type differs for the typcode :6.31770631E8
+typemaptab type -->  table type  :  vrealm_241.fmd_1433.SP10PUB --> __FLEX__.fmd_1433.SP10PUB
+Type differs for the typcode :3.489142079E9
+typemaptab type -->  table type  :  vrealm_1331.fmd_1365.PurchaseType --> __FLEX__.fmd_1365.PurchaseType
+Type differs for the typcode :4.351595946E9
+typemaptab type -->  table type  :  vrealm_1660.fmd_2187.Client --> __FLEX__.fmd_2187.Client
+Type differs for the typcode :4.351595947E9
+typemaptab type -->  table type  :  vrealm_1660.fmd_2188.ProjectCode --> __FLEX__.fmd_2188.ProjectCode
+Type differs for the typcode :3.423608326E9
+typemaptab type -->  table type  :  vrealm_1306.fmd_2900.LOBBeneficiary --> __FLEX__.fmd_2900.LOBBeneficiary
+Type differs for the typcode :2.262308442E9
+typemaptab type -->  table type  :  vrealm_863.fmd_2252.VendorNumber --> __FLEX__.fmd_2252.VendorNumber
+Type differs for the typcode :3.497005857E9
+typemaptab type -->  table type  :  vrealm_1334.fmd_1928.ManagementLevel --> __FLEX__.fmd_1928.ManagementLevel
+Type differs for the typcode :3.24010222E9
+typemaptab type -->  table type  :  vrealm_1236.fmd_844.StationCode --> __FLEX__.fmd_844.StationCode
+Type differs for the typcode :3.48914208E9
+typemaptab type -->  table type  :  vrealm_1331.fmd_1366.ProductLine --> __FLEX__.fmd_1366.ProductLine
+Type differs for the typcode :7.5497984E8
+typemaptab type -->  table type  :  vrealm_288.fmd_2024.JZTest --> __FLEX__.fmd_2024.JZTest
+Type differs for the typcode :6.31769507E8
+typemaptab type -->  table type  :  vrealm_241.fmd_930.TestSM --> __FLEX__.fmd_930.TestSM
+Type differs for the typcode :3.017279587E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_732.Requestingorganization --> __FLEX__.fmd_732.Requestingorganization
+Type differs for the typcode :3.017279588E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_733.Expenditureitem --> __FLEX__.fmd_733.Expenditureitem
+Type differs for the typcode :3.017279589E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_734.MasterPlan --> __FLEX__.fmd_734.MasterPlan
+Type differs for the typcode :6.31771813E8
+typemaptab type -->  table type  :  vrealm_241.fmd_1843.Sp12Test --> __FLEX__.fmd_1843.Sp12Test
+Record Not found[object Object]
+Type differs for the typcode :1.391987754E9
+typemaptab type -->  table type  :  vrealm_531.fmd_1210.Project --> __FLEX__.fmd_1210.Project
+Type differs for the typcode :2.008026028E9
+typemaptab type -->  table type  :  vrealm_766.fmd_1152.CompanyNameEnumeration --> __FLEX__.fmd_1152.CompanyNameEnumeration
+Type differs for the typcode :3.01727959E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_735.Expenditurecenter --> __FLEX__.fmd_735.Expenditurecenter
+Type differs for the typcode :3.017279591E9
+typemaptab type -->  table type  :  vrealm_1151.fmd_736.Costcenter --> __FLEX__.fmd_736.Costcenter
+Type differs for the typcode :1.468014037E9
+typemaptab type -->  table type  :  vrealm_560.fmd_2887.PlantLocation --> __FLEX__.fmd_2887.PlantLocation
+Type differs for the typcode :1.468014038E9
+typemaptab type -->  table type  :  vrealm_560.fmd_2888.PlantLocations --> __FLEX__.fmd_2888.PlantLocations
+Type differs for the typcode :3.01203976E9
+typemaptab type -->  table type  :  vrealm_1149.fmd_1736.ManulifeCompany --> __FLEX__.fmd_1736.ManulifeCompany
+Type differs for the typcode :8.91296102E8
+typemaptab type -->  table type  :  vrealm_340.fmd_2191.GeographicHQlocationofcompanythatwehavecontractedwith --> __FLEX__.fmd_2191.GeographicHQlocationofcompanythatwehavecontractedwith
+Type differs for the typcode :8.91296103E8
+typemaptab type -->  table type  :  vrealm_340.fmd_2192.Primarygeographiclocationofoutputifdifferentfromcompanylocation --> __FLEX__.fmd_2192.Primarygeographiclocationofoutputifdifferentfromcompanylocation
+Type differs for the typcode :4.35161105E8
+typemaptab type -->  table type  :  vrealm_166.fmd_682.TestFMDTemplate101509 --> __FLEX__.fmd_682.TestFMDTemplate101509
+Type differs for the typcode :4.35161106E8
+typemaptab type -->  table type  :  vrealm_166.fmd_683.Expenditureitem --> __FLEX__.fmd_683.Expenditureitem
+Type differs for the typcode :4.278197719E9
+typemaptab type -->  table type  :  vrealm_1632.fmd_2889.SubcategoryHR --> __FLEX__.fmd_2889.SubcategoryHR
+Type differs for the typcode :4.03703403E8
+typemaptab type -->  table type  :  vrealm_154.fmd_412.FMD871 --> __FLEX__.fmd_412.FMD871
+Type differs for the typcode :4.173337679E9
+typemaptab type -->  table type  :  vrealm_1592.fmd_2059.JZTest --> __FLEX__.fmd_2059.JZTest
+Type differs for the typcode :8.91296104E8
+typemaptab type -->  table type  :  vrealm_340.fmd_2193.Secondarygeographiclocationofoutputifdifferentfromcompanyandprimarylocation --> __FLEX__.fmd_2193.Secondarygeographiclocationofoutputifdifferentfromcompanyandprimarylocation
+Type differs for the typcode :8.91296105E8
+typemaptab type -->  table type  :  vrealm_340.fmd_2194.KeyBusinessStakeholderBusinessUnitDirectorate --> __FLEX__.fmd_2194.KeyBusinessStakeholderBusinessUnitDirectorate
+Type differs for the typcode :3.497005914E9
+typemaptab type -->  table type  :  vrealm_1334.fmd_1387.ProductLine_formlabel --> __FLEX__.fmd_1387.ProductLine_formlabel
+Type differs for the typcode :3.497005915E9
+typemaptab type -->  table type  :  vrealm_1334.fmd_1388.PurchaseType_formlabel --> __FLEX__.fmd_1388.PurchaseType_formlabel
+Type differs for the typcode :3.376418815E9
+typemaptab type -->  table type  :  vrealm_1288.fmd_1667.RigIMO --> __FLEX__.fmd_1667.RigIMO
+Type differs for the typcode :3.376418816E9
+typemaptab type -->  table type  :  vrealm_1288.fmd_1668.OwnerName --> __FLEX__.fmd_1668.OwnerName
+Type differs for the typcode :4.35162268E8
+typemaptab type -->  table type  :  vrealm_166.fmd_1276.Site --> __FLEX__.fmd_1276.Site
+Type differs for the typcode :6.31768045E8
+typemaptab type -->  table type  :  vrealm_241.fmd_5.FMD1 --> __FLEX__.fmd_5.FMD1
+Type differs for the typcode :4.27819772E9
+typemaptab type -->  table type  :  vrealm_1632.fmd_2890.SubcategoryITT --> __FLEX__.fmd_2890.SubcategoryITT
+Type differs for the typcode :4.278197721E9
+typemaptab type -->  table type  :  vrealm_1632.fmd_2891.SubcategoryOfficeServices --> __FLEX__.fmd_2891.SubcategoryOfficeServices
+Type differs for the typcode :4.278197722E9
+typemaptab type -->  table type  :  vrealm_1632.fmd_2892.SubcategoryPrintMarketing --> __FLEX__.fmd_2892.SubcategoryPrintMarketing
+Type differs for the typcode :2.794458558E9
+typemaptab type -->  table type  :  vrealm_1066.fmd_1406.DrillDown --> __FLEX__.fmd_1406.DrillDown
+Type differs for the typcode :4.278197724E9
+typemaptab type -->  table type  :  vrealm_1632.fmd_2894.SubcategoryPropertyFM --> __FLEX__.fmd_2894.SubcategoryPropertyFM
+Type differs for the typcode :4.278197725E9
+typemaptab type -->  table type  :  vrealm_1632.fmd_2895.SubcategoryTravelEntertainment --> __FLEX__.fmd_2895.SubcategoryTravelEntertainment
+Type differs for the typcode :4.278197723E9
+typemaptab type -->  table type  :  vrealm_1632.fmd_2893.SubcategoryProfessionalServices --> __FLEX__.fmd_2893.SubcategoryProfessionalServices
+Type differs for the typcode :6.31768441E8
+typemaptab type -->  table type  :  vrealm_241.fmd_268.FMD79test1 --> __FLEX__.fmd_268.FMD79test1
+Type differs for the typcode :6.31768444E8
+typemaptab type -->  table type  :  vrealm_241.fmd_269.FMD79prod1 --> __FLEX__.fmd_269.FMD79prod1
+Type differs for the typcode :4.03705352E8
+typemaptab type -->  table type  :  vrealm_154.fmd_1433.SP10PUB --> __FLEX__.fmd_1433.SP10PUB
+Type differs for the typcode :6.3176998E8
+typemaptab type -->  table type  :  vrealm_241.fmd_1130.Test1111 --> __FLEX__.fmd_1130.Test1111
+Type differs for the typcode :4.35164599E8
+typemaptab type -->  table type  :  vrealm_166.fmd_2197.CostCenter --> __FLEX__.fmd_2197.CostCenter
+Record Not found[object Object]
+
+================ Print Validating Records End ==============================
+
+
+
+
+==================================================== Print Invalid records  Begin==============================================================
+ariba.basic.core.DynamicFlexMasterData  :   DynamicFlexMasterDataTab
+AAZ8BW4        4.351646E8             __FLEX__.fmd_2198.CostCenter1
+ACz2A3b        3.017280987E9          __FLEX__.fmd_840.OrganizationStructure
+ACz2A3c        3.017280988E9          __FLEX__.fmd_953.Requestingcompany
+ADgEB4w        3.759152688E9          __FLEX__.fmd_2906.TestFMD
+AB6+AQO        2.063074318E9          __FLEX__.fmd_20.CHSLegalEntity
+AApGA7e        6.89442526E8           __FLEX__.fmd_1532.BusinessUnits
+AB6+AQg        2.063074336E9          __FLEX__.fmd_23.CHSLegalEntities
+AAZ8BXS        4.35164626E8           __FLEX__.fmd_2207.WaterTreatmentFacilities
+AB6+AQp        2.063074345E9          __FLEX__.fmd_20.CHSLegalEntity
+AAA8B4u        1.5736366E7            __FLEX__.fmd_2905.Flexmaster
+AACqAQs        4.4565548E7            __FLEX__.fmd_27.Testtemplate
+ACz2A43        3.017281079E9          __FLEX__.fmd_1470.OrganizationStructure
+AACqAuq        4.4567466E7            __FLEX__.fmd_1150.CompanyNameEnumeration
+AACqAur        4.4567467E7            __FLEX__.fmd_1151.SourcingProjectEnumeration
+AACqBkn        4.4570919E7            __FLEX__.fmd_2442.LegalEntity
+ADGwBwQ        3.334478864E9          __FLEX__.fmd_2796.Negotiator
+AAZ8AWH        4.35160455E8           __FLEX__.fmd_275.Hospital
+AAlqARQ        6.31768144E8           __FLEX__.fmd_40.FMD631
+AAlqA1M        6.31770444E8           __FLEX__.fmd_1355.Sp9push
+ADJ4BpU        3.38690722E9           __FLEX__.fmd_2409.ProjectNumber
+ADJ4BpV        3.386907221E9          __FLEX__.fmd_2410.PrimeContractNumber
+ADP+A2b        3.489140123E9          __FLEX__.fmd_1387.ProductLine_formlabel
+ADJ4BpX        3.386907223E9          __FLEX__.fmd_2412.KeyFederalFlowdowns
+ABXqBwr        1.470635051E9          __FLEX__.fmd_2806.PlantLocation
+ADP+A2c        3.489140124E9          __FLEX__.fmd_1388.PurchaseType_formlabel
+ACmkBuD         2.794462083E9          __FLEX__.fmd_2737.RaulCastrotestflexfield
+ADpcBxO        3.916438606E9          __FLEX__.fmd_2815.LegalEntities
+AAYEAPu        4.03702766E8           __FLEX__.fmd_6.FMD2
+ACmkAux        2.794458033E9          __FLEX__.fmd_1155.LalaineFieldTest
+AAYEAPw        4.03702768E8           __FLEX__.fmd_5.FMD1
+AABGB2h        1.8357665E7            __FLEX__.fmd_2872.FinalMasterDataNid
+AAZ8AQh        4.35160097E8           __FLEX__.fmd_24.TestFMD
+AAYEAV6        4.03703162E8           __FLEX__.fmd_268.FMD79test1
+ADGwBwf        3.334478879E9          __FLEX__.fmd_2800.BusinessOwner
+AAlqAdu        6.31768942E8           __FLEX__.fmd_527.TestSukantoSP6
+ACGEBZq        2.249201258E9          __FLEX__.fmd_2260.BusinessUnit
+AEIEBvf        4.430240735E9          __FLEX__.fmd_2781.SourcingIdentification
+AAYEAt9        4.03704701E8           __FLEX__.fmd_1131.SP8Test
+ACmaBNY        2.791838552E9          __FLEX__.fmd_1970.Supplier
+ACmaBNZ        2.791838553E9          __FLEX__.fmd_1971.EnterpriseUsers
+AAYEAcJ        4.03703561E8           __FLEX__.fmd_478.TestSukanot
+AAZ8AW6        4.35160506E8           __FLEX__.fmd_296.Hospital2
+ADGwBwg        3.33447888E9           __FLEX__.fmd_2801.ContractSigner
+ABD+Aup        1.140329385E9          __FLEX__.fmd_1149.SourcingProjectEnumeration
+ADA+A81        3.237482293E9          __FLEX__.fmd_844.StationCode
+AAYEBwK        4.03708938E8           __FLEX__.fmd_2792.RaghuSP3
+ADDKAyE        3.274181764E9          __FLEX__.fmd_1266.Site
+ADDKA1J        3.274181961E9          __FLEX__.fmd_1354.SupplierContractingEntity
+AAZ8Bk!        4.35165503E8           __FLEX__.fmd_2454.Warehouse
+ADpcBxc        3.91643862E9           __FLEX__.fmd_2821.LegalEntitiesNew
+AEG+Bj4        4.411889912E9          __FLEX__.fmd_2409.ProjectNumber
+AAYEBMl        4.03706661E8           __FLEX__.fmd_1929.Sp13
+AEG+Bj6        4.411889914E9          __FLEX__.fmd_2411.SupplierSegmentation
+AEG+Bj7        4.411889915E9          __FLEX__.fmd_2412.KeyFederalFlowdowns
+AEG+Bj5        4.411889913E9          __FLEX__.fmd_2410.PrimeContractNumber
+AEDOBZv        4.348974703E9          __FLEX__.fmd_2188.ProjectCode
+AEDOBZu        4.348974702E9          __FLEX__.fmd_2187.Client
+ACHABPU        2.264929236E9          __FLEX__.fmd_2002.VendorNumber
+ACHABPV        2.264929237E9          __FLEX__.fmd_2003.BSPVendorNumber
+ADJGBQp        3.373798441E9          __FLEX__.fmd_1667.RigIMO
+ADJGBQq        3.373798442E9          __FLEX__.fmd_1668.OwnerName
+ADGmBwj        3.331857443E9          __FLEX__.fmd_2804.ContractSigner
+ADGmBwi        3.331857442E9          __FLEX__.fmd_2803.BusinessOwner
+ACz2A5+        3.01728115E9           __FLEX__.fmd_1408.Expendituregroup_label
+ACz2A5!        3.017281151E9          __FLEX__.fmd_1409.Expenditureitem_label
+ACz2A6A        3.017281152E9          __FLEX__.fmd_1410.Requestingcompany_label
+ACz2A6B        3.017281153E9          __FLEX__.fmd_1411.RequestingOrganization_label
+AAYEARO        4.03702862E8           __FLEX__.fmd_40.FMD631
+ACz2A6C        3.017281154E9          __FLEX__.fmd_1412.Organizationstructure_label
+ADGmBwh        3.331857441E9          __FLEX__.fmd_2802.Negotiator
+ACz2A2X        3.017280919E9          __FLEX__.fmd_1385.Expendituregroup_label
+ACmkAn9        2.794457597E9          __FLEX__.fmd_933.JeffFieldTest
+AAYEA1N        4.03705165E8           __FLEX__.fmd_1355.Sp9push
+ABquBPI        1.790448584E9          __FLEX__.fmd_1998.ERPCommodityCodes
+ADy+BWt        4.076344749E9          __FLEX__.fmd_2190.SignatoryLevel
+ACmkBPG        2.794460102E9          __FLEX__.fmd_1994.VendorInfo
+AEAGBqa        4.29654697E9           __FLEX__.fmd_2624.GasunieContractManager
+ADDKAyd        3.274181789E9          __FLEX__.fmd_1277.Site
+ACzsA3G        3.014659526E9          __FLEX__.fmd_1408.Expendituregroup_label
+ACzsA3H        3.014659527E9          __FLEX__.fmd_1409.Expenditureitem_label
+ACzsA3I        3.014659528E9          __FLEX__.fmd_1410.Requestingcompany_label
+ACzsA3J        3.014659529E9          __FLEX__.fmd_1411.RequestingOrganization_label
+AAA8B1P        1.5736143E7            __FLEX__.fmd_2856.Fmd1
+ADQcA1a        3.497004378E9          __FLEX__.fmd_1363.AutomaticManagementLevel
+AAA8APo        1.572964E7             __FLEX__.fmd_3.Bank2
+AAYEAdw        4.03703664E8           __FLEX__.fmd_527.TestSukantoSP6
+AB3iAwP        2.005404687E9          __FLEX__.fmd_1200.CompanyNameFMD
+AApaBWu        6.9468715E8            __FLEX__.fmd_2191.GeographicHQlocationofcompanythatwehavecontractedwith
+AAX6BWn        4.01085863E8           __FLEX__.fmd_2185.Raghutest
+AAX6BWo        4.01085864E8           __FLEX__.fmd_2186.Raghu2
+ADCOA92        3.258453878E9          __FLEX__.fmd_1599.ProjectSubtype
+ADCOA91        3.258453877E9          __FLEX__.fmd_1598.ProcurementSponsor
+ADDKAyh        3.274181793E9          __FLEX__.fmd_1281.RTContractingParties
+AAZKBLK        4.2205665E8            __FLEX__.fmd_1532.BusinessUnits
+ADaSBHO        3.662156238E9          __FLEX__.fmd_1736.ManulifeCompany
+AAlqAZs        6.31768684E8           __FLEX__.fmd_412.FMD871
+ACzsA3K        3.01465953E9           __FLEX__.fmd_1412.Organizationstructure_label
+ADDKAyg        3.274181792E9          __FLEX__.fmd_1280.ProjectSubtype
+ADDKAyf        3.274181791E9          __FLEX__.fmd_1279.EffectivenessCatDriver
+ADDKAye        3.27418179E9           __FLEX__.fmd_1278.ProcurementSponsor
+ADCOA93        3.258453879E9          __FLEX__.fmd_1600.RTContractingParties
+AApaBWv        6.94687151E8           __FLEX__.fmd_2192.Primarygeographiclocationofoutputifdifferentfromcompanylocation
+ABqGBPs        1.77996286E9           __FLEX__.fmd_2014.ERPCommodityCodes
+ADQcA1d        3.497004381E9          __FLEX__.fmd_1366.ProductLine
+ACloBPn        2.778731495E9          __FLEX__.fmd_2010.Supplier
+ACloBPo        2.778731496E9          __FLEX__.fmd_2011.EnterpriseUsers
+ACz2Ak!        3.017279807E9          __FLEX__.fmd_838.Furtheramountdestinedfornonrelatedexpenditurenotincludedinnegotiation
+ADQcA1c        3.49700438E9           __FLEX__.fmd_1365.PurchaseType
+ACz2AlB        3.017279809E9          __FLEX__.fmd_840.OrganizationStructure
+AApaBWw        6.94687152E8           __FLEX__.fmd_2193.Secondarygeographiclocationofoutputifdifferentfromcompanyandprimarylocation
+AApaBWx        6.94687153E8           __FLEX__.fmd_2194.KeyBusinessStakeholderBusinessUnitDirectorate
+AAX6BXA        4.01085888E8           __FLEX__.fmd_2200.Dennishospital1
+ADCOA95        3.258453881E9          __FLEX__.fmd_1602.SupplierContractingEntity
+ACM8BZo        2.364544616E9          __FLEX__.fmd_2258.BusinessUnit
+AEIEBwO        4.430240782E9          __FLEX__.fmd_2793.PrimaryAlcoaEntity
+AAlqA4H        6.31770631E8           __FLEX__.fmd_1433.SP10PUB
+ADP+BU!        3.489142079E9          __FLEX__.fmd_1365.PurchaseType
+AEDYBWq        4.351595946E9          __FLEX__.fmd_2187.Client
+AEDYBWr        4.351595947E9          __FLEX__.fmd_2188.ProjectCode
+ADMEB4G        3.423608326E9          __FLEX__.fmd_2900.LOBBeneficiary
+ACG2BZa        2.262308442E9          __FLEX__.fmd_2252.VendorNumber
+ADQcBMh        3.497005857E9          __FLEX__.fmd_1928.ManagementLevel
+ADBIAlM        3.24010222E9           __FLEX__.fmd_844.StationCode
+ADP+BVA        3.48914208E9           __FLEX__.fmd_1366.ProductLine
+AAtABQA        7.5497984E8            __FLEX__.fmd_2024.JZTest
+AAlqAmj        6.31769507E8           __FLEX__.fmd_930.TestSM
+ACz2Ahj        3.017279587E9          __FLEX__.fmd_732.Requestingorganization
+ACz2Ahk        3.017279588E9          __FLEX__.fmd_733.Expenditureitem
+ACz2Ahl        3.017279589E9          __FLEX__.fmd_734.MasterPlan
+AAlqBKl        6.31771813E8           __FLEX__.fmd_1843.Sp12Test
+ABS+Awn        1.391987751E9          __FLEX__.fmd_1208.Project
+ABS+Awq        1.391987754E9          __FLEX__.fmd_1210.Project
+AB3sAus        2.008026028E9          __FLEX__.fmd_1152.CompanyNameEnumeration
+ACz2Ahm        3.01727959E9           __FLEX__.fmd_735.Expenditurecenter
+ACz2Ahn        3.017279591E9          __FLEX__.fmd_736.Costcenter
+ABXgB3V        1.468014037E9          __FLEX__.fmd_2887.PlantLocation
+ABXgB3W        1.468014038E9          __FLEX__.fmd_2888.PlantLocations
+ACziBRQ        3.01203976E9           __FLEX__.fmd_1736.ManulifeCompany
+AA1IBlm        8.91296102E8           __FLEX__.fmd_2191.GeographicHQlocationofcompanythatwehavecontractedwith
+AA1IBln        8.91296103E8           __FLEX__.fmd_2192.Primarygeographiclocationofoutputifdifferentfromcompanylocation
+AAZ8AgR        4.35161105E8           __FLEX__.fmd_682.TestFMDTemplate101509
+AAZ8AgS        4.35161106E8           __FLEX__.fmd_683.Expenditureitem
+AD!AB3X        4.278197719E9          __FLEX__.fmd_2889.SubcategoryHR
+AAYEAZr        4.03703403E8           __FLEX__.fmd_412.FMD871
+AD4wBRP        4.173337679E9          __FLEX__.fmd_2059.JZTest
+AA1IBlo        8.91296104E8           __FLEX__.fmd_2193.Secondarygeographiclocationofoutputifdifferentfromcompanyandprimarylocation
+AA1IBlp        8.91296105E8           __FLEX__.fmd_2194.KeyBusinessStakeholderBusinessUnitDirectorate
+ADQcBNa        3.497005914E9          __FLEX__.fmd_1387.ProductLine_formlabel
+ADQcBNb        3.497005915E9          __FLEX__.fmd_1388.PurchaseType_formlabel
+ADJQA!!        3.376418815E9          __FLEX__.fmd_1667.RigIMO
+ADJQBAA        3.376418816E9          __FLEX__.fmd_1668.OwnerName
+AAZ8Ayc        4.35162268E8           __FLEX__.fmd_1276.Site
+AAlqAPt        6.31768045E8           __FLEX__.fmd_5.FMD1
+AD!AB3Y        4.27819772E9           __FLEX__.fmd_2890.SubcategoryITT
+AD!AB3Z        4.278197721E9          __FLEX__.fmd_2891.SubcategoryOfficeServices
+AD!AB3a        4.278197722E9          __FLEX__.fmd_2892.SubcategoryPrintMarketing
+ACmkA2+        2.794458558E9          __FLEX__.fmd_1406.DrillDown
+AD!AB3c        4.278197724E9          __FLEX__.fmd_2894.SubcategoryPropertyFM
+AD!AB3d        4.278197725E9          __FLEX__.fmd_2895.SubcategoryTravelEntertainment
+AD!AB3b        4.278197723E9          __FLEX__.fmd_2893.SubcategoryProfessionalServices
+AAlqAV5        6.31768441E8           __FLEX__.fmd_268.FMD79test1
+AAlqAV8        6.31768444E8           __FLEX__.fmd_269.FMD79prod1
+AAYEA4I        4.03705352E8           __FLEX__.fmd_1433.SP10PUB
+AAlqAt8         6.3176998E8            __FLEX__.fmd_1130.Test1111
+AAZ8BW3        4.35164599E8           __FLEX__.fmd_2197.CostCenter
+
+ 
+ariba.collaborate.core.DynamicFormDocument  :   DynamicFormDocumentTab
+ABD+ARH        1.140327495E9          vrealm_435.formDoc_36.Hardware
+
+ 
+==================================================== Print Invalid records  End==============================================================
+******************* End of Output of the execution *******************

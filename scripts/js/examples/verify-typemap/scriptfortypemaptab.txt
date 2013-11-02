@@ -1,0 +1,307 @@
+var partitionName = "None";
+var msg = new java.lang.StringBuilder("******************* Begin of Output of the execution *******************");
+
+function verifyTypeMapTabData () 
+{
+	var metadata = getMetaDataObject();
+	var plainVariant = ariba.base.fields.Variant.PlainName;
+	var transactionSchemas = ariba.base.jdbcserver.DatabaseParameters.getDatabaseParameters().getTransactionalSchemas().toArray();
+	debugTransactionSchemas(transactionSchemas);
+	var objects = [];
+	var info = getJavaTypeFromTypeMapTab("vrealm");
+
+	if (info.flexSuperTypes.length > 0) {
+		for (i=0; i<info.flexSuperTypes.length; i++) {
+			var classMetaDt = metadata.maybeGetClass(info.flexSuperTypes[i], plainVariant);
+			var tableName = classMetaDt.getPrimaryMainReferencedTable().getName();
+			var fieldName = getFieldNameForTable(tableName);
+			objects.push({className:info.flexSuperTypes[i], clusterRoot:classMetaDt.isClusterRoot(), tableName:tableName, fieldName:fieldName, typecodemap:[], failedTypeCodes:[]});				
+		}
+	}
+	debugFlexObjectDetails(info, objects);
+
+	for(var j=0; j<transactionSchemas.length; j++) {
+		processForSchema(objects, transactionSchemas[j]);
+
+	}
+
+	validateTypeCodeExistsInTypeTab(objects);
+
+	printInvalidTypeCodes(objects);
+
+}
+
+function getMetaDataObject ()
+{
+	var service = ariba.base.meta.server.MetaServerService.getService();
+	return service.metadata();
+
+}
+
+function debugTransactionSchemas (transactionSchemas) 
+{
+	msg.append(" \n");
+	msg.append(" \n");
+
+	msg.append("==================================================== Print Transaction Schema Details  Begin==============================================================\n");
+
+	msg.append("\n Transaction Schemas").append(transactionSchemas.length).append("\n");
+
+	for(var j=0; j<transactionSchemas.length; j++) {
+		msg.append(transactionSchemas[j]).append("\n");
+
+	}
+
+	msg.append(" \n");
+	msg.append("==================================================== Print Transaction Schema Details  End==============================================================\n");
+	msg.append(" \n");
+	msg.append(" \n");
+
+}
+
+function getJavaTypeFromTypeMapTab(realmName) 
+{
+
+    var AQLQuery = ariba.base.core.aql.AQLQuery;
+    var selectQuery = "select distinct FLEXSUPERTYPE from typemaptab where FLEXSUPERTYPE is not null and javatype like  '%"
+                        + realmName + "%'";
+    var parsed_qry = AQLQuery.parseQuery(selectQuery);
+	var output="";
+    var success = true;
+	var session = getSession (partitionName);    
+	var options = new ariba.base.core.aql.AQLOptions(session.getPartition());
+	var defaultSchemaName = ariba.server.jdbcserver.JDBCUtil.getDefaultDatabaseSchemaName();	
+	options.setDatabaseSchemaName(defaultSchemaName);
+	var flexSuperTypes = [];
+	var resultset = Base.getService().executeQuery(parsed_qry, options);
+
+    try
+    {
+        if (resultset.getFirstError() == null) {
+            var sz = resultset.getSize();
+            output += " Number of objects found: ";
+            output += sz;
+            output += "\n";
+            while (resultset.next()) {
+	            flexSuperTypes.push(resultset.getString(0));
+            }
+        }
+        else {
+            output += "The select query has failed";
+        }
+    }
+    catch(error) {
+        output += "An error has occurred: " + "\n" + error + "\n";
+        success = false;
+    }
+    finally {
+        if (resultset != null) {
+            resultset.close();
+        }
+    }	
+
+	return {success:success, output:output, flexSuperTypes:flexSuperTypes};
+}
+
+function getSession (partitionName)
+{
+    var session = ariba.base.core.Base.getSession();
+    var partition = Base.getService().getPartition(partitionName);
+    session.setPartition(partition);
+    return session;
+}
+
+function getFieldNameForTable (tableName) {
+	var tableToFieldMap = [];
+	tableToFieldMap['DynamicFlexMasterDataTab'] = 'DFMD__TYPE_';
+	tableToFieldMap['DynamicFormDocumentTab'] = 'DCFD_TYPENAME';
+	tableToFieldMap['DynamicFormDocumentDetailsTab'] = 'DCFDD_TYPENAME';
+
+	if(tableToFieldMap[tableName]) {
+		return tableToFieldMap[tableName];
+	}
+	return "Flex_Type_Id";
+}
+
+function debugFlexObjectDetails (info, objects)
+{
+	msg.append("==================================================== Print Flex  field Details  Begin ==============================================================\n");
+
+	msg.append(info.output);
+	msg.append(" \n");
+	msg.append("Available FlexSuperTypes :");
+	msg.append(info.flexSuperTypes.toString());
+
+	msg.append(" \n");
+	msg.append(" \n");
+	msg.append("Class Name").append("\t\t|\t").append("isClusterRoot ").append("\t|\t").append("Table Name").append("\t|\t").append("Field Name").append("\n");
+
+	for (j=0; j<objects.length; j++) {
+		msg.append(objects[j].className).append("\t\t\t|\t").append(objects[j].clusterRoot).append("\t\t|\t").append(objects[j].tableName).append("\t\t|\t").append(objects[j].fieldName).append("\n");
+	
+	}
+	msg.append(" \n");
+	msg.append("==================================================== Print Flex  field Details  End ==============================================================\n");
+	msg.append(" \n");
+	msg.append(" \n");
+
+}
+
+function processForSchema (flexObjects, schemaName) 
+{
+	
+	msg.append("==================================================== Print Processing for Schema  Begin ==============================================================\n");
+
+	msg.append("Schema Name").append(schemaName).append("\n");
+	for(j=0; j<flexObjects.length; j++) {
+		var flexObject = flexObjects[j];
+		var idcol = 'RootId';
+		if(flexObject.clusterRoot === false) {
+			idcol = 'MYID';
+		}	
+	
+		var sql = "select  distinct SUBSTRING( #id,1,7), #fname from #tname";
+		sql = sql.replace('#id', idcol);
+		sql = sql.replace('#fname', flexObject.fieldName);
+		sql = sql.replace('#tname', flexObject.tableName);
+	
+		msg.append("Executing query [").append(sql).append("] for schema :").append(schemaName).append("\n");
+		executeQueryForgettingTypeCode(sql, schemaName, flexObject)
+
+	}
+
+	msg.append("==================================================== Print Processing for Schema  End ==============================================================\n");
+	msg.append(" \n");
+	msg.append(" \n");
+}
+
+function executeQueryForgettingTypeCode (sql, schemaName, flexobject) 
+{
+	var _origSession = ariba.base.core.Base.getSession(false);
+	var systemPrivilegedInactiveSession = getSystemPrivilegedInactiveSession();
+	ariba.base.core.Base.setSession(systemPrivilegedInactiveSession);
+	var options = new ariba.base.core.aql.AQLOptions(systemPrivilegedInactiveSession.getPartition());
+	options.setDatabaseSchemaName(schemaName);
+    var AQLQuery = ariba.base.core.aql.AQLQuery;
+    var parsed_qry = AQLQuery.parseQuery(sql);
+	var resultset = Base.getService().executeQuery(parsed_qry, options);
+    try {
+      if (resultset.getFirstError() == null) {
+			var found = false;
+			var count = 0;
+            while (resultset.next()) {
+				found = true;
+
+				if(flexobject.typecodemap[resultset.getString(0)] == null) {
+					var typeCode_Base10 = ariba.base.core.BaseId.parseTypecode(resultset.getString(0));
+					flexobject.typecodemap[typeCode_Base10] = {typeCode_Base64:resultset.getString(0), typeName:resultset.getString(1), typeCode_Base10:typeCode_Base10};
+				}
+				count++;
+
+            }
+			if(!found) {
+				msg.append("No records Found ").append("\n");
+			} 
+			else {
+				msg.append("Total Nos of Records Found  : ").append(count).append("\n");
+			}
+
+      }
+      else {
+		msg.append("Erorr occured while querying \n").append(resultset.getFirstError()).append("\n");
+          
+      }
+    }
+    catch(error) {
+		msg.append("Erorr occured  in accessing resultset\n");
+    }
+    finally {
+        if (resultset != null) {
+            resultset.close();
+        }
+    }
+
+}
+
+function getSystemPrivilegedInactiveSession ()
+{
+    var systemPrivilegedInactiveSession = new ariba.base.server.ObjectServerSession(ariba.base.server.BaseServer.baseServer(), 
+  						ariba.base.core.BaseSession.SessionTypeDefault, ariba.base.fields.Realm.System);
+    systemPrivilegedInactiveSession.setPrivileged(true);
+    systemPrivilegedInactiveSession.setSupportsInactiveRealm(true);
+    var partition = Base.getService().getPartition(partitionName);
+    systemPrivilegedInactiveSession.setPartition(partition);
+
+  	return systemPrivilegedInactiveSession;
+}
+
+
+function validateTypeCodeExistsInTypeTab (records) 
+{
+	var query = "select javatype from typemaptab where typecode = #tc";
+  	var session = getSession (partitionName);    
+  	var options = new ariba.base.core.aql.AQLOptions(session.getPartition());
+  	var defaultSchemaName = ariba.server.jdbcserver.JDBCUtil.getDefaultDatabaseSchemaName();	
+  	options.setDatabaseSchemaName(defaultSchemaName);
+    var AQLQuery = ariba.base.core.aql.AQLQuery;
+
+	for(var i=0; i<records.length; i++) {
+		var rec = records[i];
+		
+		for(var key in rec.typecodemap) {
+			var typecodedata = rec.typecodemap[key];
+			var sql = query.replace('#tc', typecodedata.typeCode_Base10);
+		    var parsed_qry = AQLQuery.parseQuery(sql);
+			var resultset = Base.getService().executeQuery(parsed_qry, options);
+		    try {
+
+				if(resultset.next()) {
+					if(resultset.get(0) != typecodedata.typeName) {
+						rec.failedTypeCodes.push(typecodedata);
+					}
+				} 
+				else {
+					rec.failedTypeCodes.push(typecodedata);
+				}
+			}
+		    catch(error) {
+				rec.failedTypeCodes.push(typecodedata);
+
+		    }
+		    finally {
+		        if (resultset != null) {
+		            resultset.close();
+		        }
+		    }
+			
+		}
+	
+	}
+
+}
+
+function printInvalidTypeCodes ( records) 
+{
+	msg.append("\n");
+	msg.append("==================================================== Print Invalid records  Begin==============================================================\n");
+
+	for(var i=0; i<records.length; i++) {
+		if (records[i].failedTypeCodes.length > 0) {
+			msg.append(records[i].className).append("  :   ").append(records[i].tableName).append("\n"); 
+			for(var j=0; j<records[i].failedTypeCodes.length; j++) {
+				msg.append(records[i].failedTypeCodes[j].typeCode_Base64).append("\t\t").append(records[i].failedTypeCodes[j].typeCode_Base10).append("\t\t").append(records[i].failedTypeCodes[j].typeName).append("\n");
+			}
+			msg.append(" \n");
+			msg.append(" \n");
+
+		}
+			
+	}	
+	msg.append("==================================================== Print Invalid records  End==============================================================\n");
+
+}
+
+verifyTypeMapTabData();
+msg.append("******************* End of Output of the execution *******************");
+
+msg.toString();

@@ -1,0 +1,63 @@
+var output = new java.lang.StringBuilder("******************************** Beginning\n\n");
+
+var desc = new java.lang.StringBuilder();
+desc.append("FRC1-A/B: Barcode Scanners per RJL Technologies Estimate# 33601 dated 06/15/2012 (Del: Q2'12)");
+desc.append("\n\n");
+desc.append("DS3578-HDBU0100UR, MOTOROLA, DS3578, HIGH DENSITY IMAGER, CORDLESS, USB KIT, INCLUDES CRADLE, POWER SUPPLY, US LINE CORD, USB CABLE");
+
+
+
+function execute (type, partition, parentId, childId) {
+    setSession(partition);
+
+    output.append("\n"+type+" details : \n")
+    var parentObject = getParentObject(parentId);
+    output.append(parentObject);
+    output.append("\n\n");
+    
+    output.append("\n Before Update Description :\n");
+    var baseObj = getLineItemDescription(parentObject, childId);
+    output.append(baseObj.getDescription());
+    output.append("\n\n");
+    
+    baseObj.setDescription(desc);
+    Base.getSession().sessionCommit();
+    
+    output.append("\n After Update Description: \n");
+    baseObj = getLineItemDescription(parentObject, childId);
+    output.append(baseObj.getDescription());
+    output.append("\n******************************** Finished SuccessFully");    
+    
+ 
+}
+
+function setSession (partition) {
+    var Base = ariba.base.core.Base;
+    var objPartition = Base.getService().getPartition(partition);
+    Base.getSession().setPartition(objPartition);
+}
+
+function getParentObject(oid) {
+    var objectId = ariba.base.core.BaseId.parse(oid);
+    var object = objectId .get();
+    return object;
+}
+
+
+function getLineItemDescription (pobject, parLineId) {
+    var itemBaseId = ariba.base.core.BaseId.parse(parLineId);
+    var lineItems = pobject.getLineItemsIterator();
+    while (lineItems.hasNext()) {
+        lineItem = lineItems.next();
+        lineItemBaseId = lineItem.getBaseId();
+        if (lineItemBaseId.equals(itemBaseId)) {
+            return lineItem.getDescription();            
+        }
+    }
+    return null;    
+}
+
+
+execute('Invoice Reconciliation','prealm_251','AAnOAQOEQmCanx','AAnOAQKEQmCaqG');
+execute('Requisition', 'prealm_251','AAnOAOVELuzQVb','AAnOAOLELvCq2J');
+output;

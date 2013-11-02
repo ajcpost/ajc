@@ -1,0 +1,27 @@
+
+var rr = ariba.base.fields.Fields.getService().getRealmRuntime().getAllNonSystemRealms(true).toArray();
+var resp = new java.lang.StringBuilder("----");
+for (i =0;i<rr.length;i++)
+{
+   var r = rr[i];
+   if (r.getName() == "p2pTeSg-48")
+   {
+       resp.append("p2pTeSg-48: ");
+       resp.append (ariba.base.meta.server.CommunityUtil.getCommunityId(r));
+   }
+}
+resp.toString();
+
+
+var msg = new java.lang.StringBuilder("*******************Node Status *******************");
+msg.append("\n");
+var list = ariba.cluster.topology.TopologyService.getTopology().getNodes().toArray();
+for (var i=0;i<list.length;i++){
+      msg.append(list[i].toString());
+      msg.append("\n");
+}
+msg
+
+
+ariba.util.nodemanager.NodeManager.getGlobalNodeManager().getAliveNodeNames()
+

@@ -1,0 +1,3159 @@
+// cache clearing stuff
+
+java.lang.System.gc();
+
+java.lang.System.gc();
+
+java.lang.System.gc();
+
+before = java.lang.Runtime.getRuntime().freeMemory();
+
+ariba.base.fields.Fields.getService().clearFPLCache()
+
+java.lang.System.gc();
+
+after = java.lang.Runtime.getRuntime().freeMemory();
+
+diff = before - after;
+
+result = ariba.util.core.ListUtil.list(before, after, diff);
+
+
+
+java.lang.System.gc();
+
+before = java.lang.Runtime.getRuntime().freeMemory();
+
+ariba.htmlui.fieldsui.FieldsUIApplication.clearFieldControllerCache()
+
+java.lang.System.gc();
+
+after = java.lang.Runtime.getRuntime().freeMemory();
+
+diff = before - after;
+
+result = ariba.util.core.ListUtil.list(before, after, diff);
+
+
+
+java.lang.System.gc();
+
+before = java.lang.Runtime.getRuntime().freeMemory();
+
+ariba.base.server.BaseServer.baseServer().serverObjectCache.clear();
+
+java.lang.System.gc();
+
+after = java.lang.Runtime.getRuntime().freeMemory();
+
+diff = before - after;
+
+result = ariba.util.core.ListUtil.list(before, after, diff);
+
+
+
+
+
+java.lang.System.gc();
+
+before = java.lang.Runtime.getRuntime().freeMemory();
+
+ariba.util.messaging.NotificationCenter.defaultCenter().notifyOnTopic(
+
+    ariba.util.cache.Cache.getClearAllCachesTopic(), null, null);
+
+java.lang.System.gc();
+
+after = java.lang.Runtime.getRuntime().freeMemory();
+
+diff = before - after;
+
+result = ariba.util.core.ListUtil.list(before, after, diff);
+
+
+
+// how to get access to the realm locals
+
+runtime = ariba.base.fields.Fields.getService().getRealmRuntime();
+
+c = runtime.getClass();
+
+c = java.lang.Class.forName("ariba.base.fields.RealmRuntime"); // OK
+
+classArray = java.lang.reflect.Array.newInstance(java.lang.Class, 0);
+
+methods = c.getDeclaredMethods();
+
+java.util.Arrays.asList(methods);
+
+method = c.getDeclaredMethod("getActiveRealmLocals", classArray);
+
+method.setAccessible(true);
+
+objectArray = java.lang.reflect.Array.newInstance(java.lang.Object, 0);
+
+realmLocals = method.invoke(runtime, objectArray);
+
+result = ariba.util.core.MapUtil.map();
+
+for (var i = 0; i<realmLocals.length; i++) {
+
+  var realmLocal = realmLocals[i];
+
+  var integer = new java.lang.Integer(realmLocal.size());
+
+  /*
+
+  result.put(realmLocal, integer);
+
+  */
+
+}
+
+result;
+
+
+
+java.lang.System.gc();
+
+before = java.lang.Runtime.getRuntime().freeMemory();
+
+
+
+runtime = ariba.base.fields.Fields.getService().getRealmRuntime();
+
+realms = runtime.getAllRealms();
+
+iter = realms.iterator();
+
+while (iter.hasNext()) {
+
+   realm = iter.next();
+
+   runtime.clearRealmLocalsForRealm(realm);
+
+}
+
+
+
+runtime = ariba.base.fields.Fields.getService().getRealmRuntime();
+
+realms = new java.util.TreeSet(ariba.base.fields.Realm.ID_COMPARATOR);
+
+realms.addAll(runtime.getAllRealms());
+
+iter = realms.iterator();
+
+buffer = new java.lang.StringBuffer()
+
+while (iter.hasNext()) {
+
+   realm = iter.next();
+
+   buffer.append(realm + "\n");
+
+}
+
+buffer
+
+
+
+
+
+java.lang.System.gc();
+
+after = java.lang.Runtime.getRuntime().freeMemory();
+
+diff = before - after;
+
+result = ariba.util.core.ListUtil.list(before, after, diff);
+
+
+
+
+
+alives = ariba.util.nodemanager.NodeManager.getNodeManager().getAliveNodes();
+
+sorted = new java.util.TreeSet();
+
+iter = alives.iterator();
+
+while(iter.hasNext()) {
+
+    node = iter.next();
+
+    sorted.add(node.host() + " -> " + node.nodeName());
+
+}
+
+iter = sorted.iterator();
+
+buffer = new java.lang.StringBuffer();
+
+buffer.append("node count: " + sorted.size() + "\n");
+
+while (iter.hasNext()) {
+
+    buffer.append(iter.next());
+
+    buffer.append("\n");
+
+}
+
+buffer
+
+
+
+// check the number of alive nodes
+
+alives = ariba.util.nodemanager.NodeManager.getNodeManager().getAliveNodes();
+
+"node count: " + alives.size();
+
+
+
+
+
+// how to drop the following caches from the system:
+
+//  - server object cache
+
+//  - realm locals
+
+//  - field properties library 
+
+//  - field controller cache
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+gcCount = 0;
+
+function printMemory (kind) {
+
+  kind = (kind != null ? kind : "free");
+
+  runtime = java.lang.Runtime.getRuntime();
+
+  mem = "total".equals(kind) ? runtime.totalMemory() : runtime.freeMemory();
+
+  mem = mem / (1024.0 * 1024);
+
+  out.println("" + kind + " memory: " + mem + " MB");
+
+  return mem;
+
+}
+
+function runGC (numberOfTimes) {
+
+  n = (numberOfTimes == null ? 1 : numberOfTimes);
+
+  for (i=0; n>i; i++) {java.lang.System.gc();}
+
+}
+
+runGC(gcCount);
+
+before = printMemory();
+
+out.println("clearing fpl cache...");
+
+ariba.base.fields.Fields.getService().clearFPLCache()
+
+runGC(gcCount);
+
+printMemory();
+
+out.println("clearing field controller cache...");
+
+ariba.htmlui.fieldsui.FieldsUIApplication.clearFieldControllerCache();
+
+runGC(gcCount);
+
+printMemory();
+
+out.println("clearing server cache ...");
+
+ariba.base.server.BaseServer.baseServer().serverObjectCache.clear();
+
+runGC(gcCount);
+
+printMemory();
+
+ariba.util.messaging.NotificationCenter.defaultCenter().notifyOnTopic(	ariba.util.cache.Cache.getClearAllCachesTopic(), null, null);
+
+runGC(gcCount);
+
+printMemory();
+
+runtime = ariba.base.fields.Fields.getService().getRealmRuntime();
+
+realms = runtime.getAllRealms();
+
+iter = realms.iterator();
+
+while (iter.hasNext()) {
+
+   realm = iter.next();
+
+   runtime.clearRealmLocals(realm);
+
+}
+
+runGC(gcCount);
+
+after = printMemory();
+
+out.println("after memory: " + after);
+
+out.println("difference: " + (before - after));
+
+buffer
+
+
+
+java.lang.System.gc();
+
+java.lang.System.gc();
+
+before = java.lang.Runtime.getRuntime().freeMemory();
+
+
+
+ariba.base.fields.Fields.getService().clearFPLCache()
+
+
+
+instance = ariba.htmlui.fieldsui.FieldsUIApplication.SharedInstance;
+
+c = java.lang.Class.forName("ariba.htmlui.fieldsui.FieldsUIApplication");
+
+field = c.getDeclaredField("m_fieldControllerCache");
+
+field.setAccessible(true);
+
+newHash = new ariba.util.core.GrowOnlyHashtable();
+
+field.set(instance,newHash);
+
+classArray = java.lang.reflect.Array.newInstance(java.lang.Class, 0);
+
+methods = c.getDeclaredMethods();
+
+java.util.Arrays.asList(methods);
+
+
+
+java.lang.System.gc();
+
+java.lang.System.gc();
+
+java.lang.System.gc();
+
+after = java.lang.Runtime.getRuntime().freeMemory();
+
+diff = before - after;
+
+
+
+
+
+// 
+
+support = ariba.base.meta.server.MetadataServerSupport.getDefaultSupport();
+
+path = support.getExtrinsicAMLPath();
+
+name = "ariba.variants.vrealm_1.runtimemodifications.extensions.Modifications";
+
+file = ariba.base.meta.server.basexml.ModuleAST.fileForModule(name, path);
+
+ariba.server.jdbcserver.StringFile.readStringFile(file);
+
+
+
+file = "ariba/variants/vrealm_2/runtimemodifications/extensions/Modifications.aml";
+
+ariba.server.jdbcserver.StringFile.readStringFile(file);
+
+
+
+
+
+query = "select s.\"Path\", s.\"fileId\" from StringFileNameTab s " + 
+
+        "inner join StringFileChunkTab c on s.FileId = c.FileId " + 
+
+	"where s.Path like '%Mod%'";
+
+any = ariba.base.core.Partition.Any;
+
+schema = ariba.server.jdbcserver.JDBCUtil.getDefaultDatabaseSchemaName()
+
+options = new ariba.base.core.aql.AQLOptions(any);
+
+options.setDatabaseSchemaName(schema);
+
+result = ariba.base.core.Base.getService().executeQuery(query, options);
+
+output = new java.lang.StringBuffer();
+
+while (result.next()) {
+
+    output.append(result.getString(0));
+
+    output.append(",");
+
+    output.append(result.getInteger(1));
+
+    output.append("\n");
+
+}
+
+output
+
+
+
+query = "select s.Path, s.Chunk from StringFileNameTab s " + 
+
+        "inner join StringFileChunkTab c on s.FileId = c.FileId " + 
+
+	"where s.Path like '%Mod%'";
+
+any = ariba.base.core.Partition.Any;
+
+schema = ariba.server.jdbcserver.JDBCUtil.getDefaultDatabaseSchemaName()
+
+options = new ariba.base.core.aql.AQLOptions(any);
+
+options.setDatabaseSchemaName(schema);
+
+result = ariba.base.core.Base.getService().executeQuery(query, options);
+
+output = new java.lang.StringBuffer();
+
+while (result.next()) {
+
+    output.append(result.getString(0));
+
+    output.append(",");
+
+    output.append(result.getString(1));
+
+    output.append("\n");
+
+}
+
+output
+
+
+
+variant = "vrealm_1";
+
+query = "select c.Chunk from StringFileNameTab s " + 
+
+        "inner join StringFileChunkTab c on s.FileId = c.FileId " + 
+
+	"where s.Path like '%Mod%' and s.Path like '%" + variant + "%'";
+
+any = ariba.base.core.Partition.Any;
+
+schema = ariba.server.jdbcserver.JDBCUtil.getDefaultDatabaseSchemaName()
+
+options = new ariba.base.core.aql.AQLOptions(any);
+
+options.setDatabaseSchemaName(schema);
+
+result = ariba.base.core.Base.getService().executeQuery(query, options);
+
+output = new java.lang.StringBuffer();
+
+while (result.next()) {
+
+    output.append(result.getString(0));
+
+    output.append("\n");
+
+}
+
+output
+
+
+
+
+
+query = "select r from ariba.sourcing.content.RFXItem as r";
+
+service = ariba.base.core.Base.getService();
+
+partition = service.getPartition("prealm_1");
+
+options = new ariba.base.core.aql.AQLOptions(partition);
+
+result = ariba.base.core.Base.getService().executeQuery(query, options);
+
+output = new java.lang.StringBuffer();
+
+cache = ariba.base.server.BaseServer.baseServer().serverObjectCache;
+
+c = java.lang.Class.forName("ariba.sourcing.basic.Item");
+
+field = c.getDeclaredField("_listeners");
+
+field.setAccessible(true);
+
+while (result.next()) {
+
+    bid = result.getBaseId(0);
+
+    item = cache.getClusterRoot(bid);
+
+    output.append(item.id);
+
+    output.append("->");
+
+    listeners = field.get(item);
+
+    output.append(listeners);
+
+    output.append("\n");
+
+}
+
+output
+
+
+
+
+
+
+
+c = java.lang.Class.forName("ariba.sourcing.basic.Item");
+
+field = c.getDeclaredField("_listeners");
+
+field.setAccessible(true);
+
+
+
+
+
+c = java.lang.Class.forName("ariba.sourcing.rfxui.ASBRFXOnClient");
+
+field = c.getDeclaredField("OnClientCache");
+
+field.setAccessible(true);
+
+field.get(null);
+
+
+
+c = java.lang.Class.forName("ariba.util.formula.JEPExpressionParser");
+
+field = c.getDeclaredField("customFunctions");
+
+field.setAccessible(true);
+
+list = field.get(null);
+
+list.clear();
+
+list != null ? list.size() : 0;
+
+
+
+
+
+java.lang.System.gc();
+
+java.lang.System.gc();
+
+java.lang.System.gc();
+
+java.lang.Runtime.getRuntime().freeMemory() / (1024.0 * 1024)
+
+
+
+c = java.lang.Class.forName("ariba.htmlui.fieldsui.FieldsUIApplication");
+
+field = c.getDeclaredField("m_fieldControllerCache");
+
+field.setAccessible(true);
+
+field.get(null);
+
+
+
+ariba.htmlui.fieldsui.FieldsUIApplication.clearFieldControllerCache();
+
+
+
+
+
+c = java.lang.Class.forName("ariba.htmlui.baseui.fields.ARFNameTable");
+
+field = c.getDeclaredField("NameTableFamilyCache");
+
+field.setAccessible(true);
+
+cache = new ariba.util.core.GrowOnlyHashtable();
+
+//field.set(null, cache);
+
+field.get(null);
+
+
+
+// how to browse files
+
+arg = new java.io.File(".");
+
+function listFiles (file) {
+
+  var files = file.listFiles();
+
+  var buffer = new java.lang.StringBuffer();
+
+  for (var i=0; i < files.length; i++) {
+
+    var file = files[i];
+
+    var path = file.getPath(); 
+
+    buffer.append(new java.util.Date(file.lastModified()));
+
+    buffer.append(" " + path + "\n");
+
+  }
+
+  return buffer.toString();
+
+}
+
+function printFile (file) {
+
+  var input = new java.io.FileInputStream(file);
+
+  var reader = new java.io.InputStreamReader(input);
+
+  var writer = new java.io.StringWriter();
+
+  var cls = java.lang.Character.TYPE;
+
+  var buf = java.lang.reflect.Array.newInstance(cls, 256);
+
+  while ((read=reader.read(buf)) != -1) {
+
+    writer.write(buf, 0, read);
+
+  }
+
+  input.close();
+
+  writer.flush();
+
+  return writer.toString();
+
+}
+
+result = arg.isFile() ? printFile(arg) : listFiles(arg);
+
+
+
+service = ariba.base.meta.server.MetaServerService.getService();
+
+classMeta = service.findClass("ariba.sourcing.basic.ItemValue", "vrealm_9");
+
+fields = classMeta.getInstanceFields();
+
+buffer = new java.lang.StringBuffer();
+
+buffer.append("field count: " + fields.length + "\n");
+
+for (var i=0; i<fields.length; i++) {
+
+  field = fields[i];
+
+  buffer.append(field.name() + "\n");
+
+}
+
+buffer
+
+  
+
+service = ariba.base.meta.server.MetaServerService.getService();
+
+classMeta = service.findClass("ariba.sourcing.basic.ItemValue", "vrealm_9");
+
+support = ariba.base.meta.server.ClassMappingSupport.getClassMappingSupport();
+
+support.getClassMappings(classMeta);
+
+
+
+buffer = new java.lang.StringBuffer();
+
+
+
+for (var i=0; i<fields.length; i++) {
+
+  field = fields[i];
+
+  buffer.append(field.name() + "\n");
+
+}
+
+buffer
+
+
+
+c = java.lang.Class.forName("ariba.base.server.RealmNodeSelector");
+
+field = c.getDeclaredField("singleton");
+
+field.setAccessible(true);
+
+selector = field.get(null);
+
+c = java.lang.Class.forName("ariba.base.server.NodeSelector");
+
+field = c.getDeclaredField("assignmentManager");
+
+field.setAccessible(true);
+
+manager = field.get(selector);
+
+
+
+
+
+manager = ariba.util.nodeassignment.AssignmentManager.getManager("RealmNodeSelector");
+
+assignedrealms = manager.getAssignedObjects();
+
+runtime = ariba.base.fields.Fields.getService().getRealmRuntime();
+
+iter = runtime.getAllRealms().iterator();
+
+buffer = new java.lang.StringBuffer();
+
+while (iter.hasNext()) {
+
+    realm = iter.next();
+
+    if (realm.isSystem()) {
+
+        continue;
+
+    }
+
+    shouldBeAssigned = realm.isAssigned() || realm.isEnabled();
+
+    isAssigned = assignedrealms.contains(realm.getName());
+
+    if (shouldBeAssigned && !isAssigned) {
+
+        buffer.append(realm + " should be assigned but is not\n");
+
+    }
+
+    else if (!shouldBeAssigned && isAssigned) {
+
+        buffer.append(realm + " should not be assiged but is\n");
+
+    }
+
+}
+
+if (buffer.length() == 0) {
+
+    buffer.append("ok");
+
+}
+
+buffer
+
+
+
+
+
+session = ariba.base.core.Base.getSession();
+
+bid = ariba.base.core.BaseId.parse("6qee.36f");
+
+cache = ariba.base.server.BaseServer.baseServer().serverObjectCache;
+
+cr = cache.getClusterRoot(bid)
+
+cr.getVersion()
+
+
+
+
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+server = ariba.base.server.BaseServer.baseServer();
+
+result = ariba.util.core.MapUtil.map();
+
+memory = java.lang.Runtime.getRuntime().freeMemory() / (1024.0 * 1024);
+
+out.println("Free memory (MB): " + memory);
+
+sessions = server.sessions();
+
+counts = new java.util.TreeMap();
+
+size = 0;
+
+c = java.lang.Class.forName("ariba.base.server.ObjectServerSession");
+
+field = c.getDeclaredField("m_localObjectCache");
+
+field.setAccessible(true);
+
+typeCounts = ar
+
+for (var i=0; i<sessions.length; i++) {
+
+  session = sessions[i];
+
+  name = session.getRealm().getName();
+
+  count = counts.get(name);
+
+  if (count == null) {
+
+    count = new java.lang.Integer(0);
+
+  }
+
+  count = new java.lang.Integer(count.intValue() + 1);
+
+  counts.put(name,count);
+
+  size += session.getSessionCacheSize();
+
+  cache = field.get(session);
+
+  for (iter = cache.keySet().iterator(); iter.hasNext(); ) {
+
+     bid = iter.next();
+
+  }
+
+  
+
+}
+
+if (sessions.length > 0) {
+
+  size /= (sessions.length);
+
+}
+
+out.println("Sessions: " + sessions.length + ", size: " + size + " " + counts);
+
+out.println("Server cache: " + server.serverObjectCache.size());
+
+buffer
+
+
+
+
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+current = java.lang.Thread.currentThread().getThreadGroup();
+
+next = current.getParent();
+
+while (next != null) {
+
+  current = next;
+
+  next = current.getParent();                    
+
+}
+
+function getId(obj)
+
+{
+
+  return java.lang.Integer.toHexString(java.lang.System.identityHashCode(obj));
+
+}
+
+function printThreads(threadGroup, pw, indent) 
+
+{
+
+  var count = threadGroup.activeCount();
+
+  var array = java.lang.reflect.Array.newInstance(java.lang.Thread,count);
+
+  threadGroup.enumerate(array, false);
+
+  for (var i=0; i<count; i++) {
+
+    var thread = array[i];
+
+    if (thread != null) {
+
+      pw.println(indent + "-" + thread.getName());
+
+    }
+
+  }
+
+}
+
+function printGroup(threadGroup, pw, indent) 
+
+{
+
+  pw.println("");
+
+  pw.println(indent + threadGroup + "@" + getId(threadGroup));
+
+  printThreads(threadGroup, pw, indent);
+
+  var count = threadGroup.activeGroupCount();
+
+  var array = java.lang.reflect.Array.newInstance(java.lang.ThreadGroup,count);
+
+  threadGroup.enumerate(array);
+
+  for (var j=0; j<count; j++) {
+
+    var group = array[j];
+
+    if (group != null) {
+
+      printGroup(group, pw, indent + "  ");
+
+    }
+
+  }
+
+}
+
+printGroup(current, out, "");
+
+buffer
+
+
+
+
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+current = java.lang.Thread.currentThread().getThreadGroup();
+
+next = current.getParent();
+
+while (next != null) {
+
+  current = next;
+
+  next = current.getParent();                    
+
+}
+
+function findThreads(threadGroup, toFind) 
+
+{
+
+  var count = threadGroup.activeCount();
+
+  var array = java.lang.reflect.Array.newInstance(java.lang.Thread,count);
+
+  threadGroup.enumerate(array, true);
+
+  var result = ariba.util.core.ListUtil.list();
+
+  for (var i=0; i<count; i++) {
+
+    var thread = array[i];
+
+    if (thread != null) {
+
+      name = thread.getName();
+
+      if (name != null && name.indexOf(toFind) != -1) {
+
+        result.add(thread);
+
+      }
+
+    }
+
+  }
+
+  return result;
+
+}
+
+list = findThreads(current, "TP-Processor");
+
+for (var j=0; j<list.size(); j++) {
+
+  thread = list.get(j);
+
+  out.println(thread + ", isAlive: " + thread.isAlive());
+
+}
+
+buffer
+
+
+
+// compare tomcat threads and allocated connections
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+current = java.lang.Thread.currentThread().getThreadGroup();
+
+next = current.getParent();
+
+while (next != null) {
+
+  current = next;
+
+  next = current.getParent();                    
+
+}
+
+function findThreads(threadGroup, toFind) 
+
+{
+
+  var count = threadGroup.activeCount();
+
+  var array = java.lang.reflect.Array.newInstance(java.lang.Thread,count);
+
+  threadGroup.enumerate(array, true);
+
+  var result = ariba.util.core.ListUtil.list();
+
+  for (var i=0; i<count; i++) {
+
+    var thread = array[i];
+
+    if (thread != null) {
+
+      name = thread.getName();
+
+      if (name != null && name.indexOf(toFind) != -1) {
+
+        result.add(thread);
+
+      }
+
+    }
+
+  }
+
+  return result;
+
+}
+
+list = findThreads(current, "TP-Processor");
+
+out.println("tomcat threads: " + list.size());
+
+server = ariba.server.jdbcserver.JDBCUtil.getDefaultJDBCServer();
+
+out.println("allocated: " + server.getAllocatedConnections().size());
+
+out.println("difference: " + (server.getAllocatedConnections().size() - list.size()));
+
+buffer
+
+
+
+// get allocated, in-use and free connnections
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+server = ariba.server.jdbcserver.JDBCUtil.getDefaultJDBCServer();
+
+out.println("allocated: " + server.getAllocatedConnections().size());
+
+c = java.lang.Class.forName("ariba.server.jdbcserver.JDBCServer");
+
+field = c.getDeclaredField("_connectionPool");
+
+field.setAccessible(true);
+
+pool = field.get(server);
+
+out.println("pool: " + pool.size());
+
+out.println("pool(in-use): " + pool.inUseCount());
+
+out.println("pool(free): " + pool.freeCount());
+
+buffer
+
+
+
+manager = ariba.util.nodemanager.NodeManager.getNodeManager();
+
+c = java.lang.Class.forName("ariba.util.nodemanager.JGNodeManager");
+
+field = c.getDeclaredField("m_channel");
+
+field.setAccessible(true);
+
+channel = field.get(manager);
+
+stack = channel.getProtocolStack();
+
+protocols = stack.getProtocols();
+
+length = protocols.size();
+
+ping = protocols.get(length - 1 - 2);
+
+c = java.lang.Class.forName("org.jgroups.protocols.PING");
+
+field = c.getDeclaredField("num_initial_members");
+
+field.setAccessible(true);
+
+field.set(ping, new java.lang.Integer(3));
+
+field.get(ping);
+
+
+
+// how to print out the session copy metrics
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+server = ariba.base.server.BaseServer.baseServer();
+
+metrics = server.metrics;
+
+metric = metrics.sessionObjectCopyCounter;
+
+out.println("copies: " + metric.getCurrentDensity());
+
+values = metric.getBuckets();
+
+fast = new ariba.util.core.FastStringBuffer("[");
+
+for (j = 0; j < values.length; j++) {
+
+  fast.append(java.lang.Integer.toString(values[j]));
+
+  fast.append(',');
+
+}
+
+fast.append("]");
+
+out.println("buckets: " + fast);
+
+buffer
+
+
+
+# dump out a counts of instances in the server cache by class name + variant
+
+cache = ariba.base.server.BaseServer.baseServer().serverObjectCache;
+
+sw = new java.io.StringWriter();
+
+writer = new java.io.PrintWriter(sw, true);
+
+c = java.lang.Class.forName("ariba.base.server.ServerObjectCache");
+
+f = c.getDeclaredField("tables");
+
+f.setAccessible(true);
+
+tables = f.get(cache);
+
+counts = new java.util.HashMap();
+
+for (i=0; i<tables.length; i++) {
+
+  table = tables[i];
+
+  entries = table.entries();
+
+  for (j=0; j<entries.length; j++) {
+
+    entry = entries[j];
+
+    if (entry.value != null) {
+
+      //writer.println(entry.value.root().getClass().getName());
+
+      meta = entry.value.root().getBaseMeta();
+
+      key = meta.getClassName() + "[" + meta.getVariantName() + "]";
+
+      count = counts.get(key);
+
+      if (count == null) {
+
+        count = new java.lang.Integer(0);
+
+      }
+
+      count = new java.lang.Integer(count.intValue() + 1);
+
+      counts.put(key, count);
+
+    }
+
+  }
+
+}
+
+for (iter = counts.keySet().iterator(); iter.hasNext(); ) {
+
+  key = iter.next();
+
+  writer.println(key + ": " + counts.get(key));
+
+}
+
+sw
+
+
+
+// how to delete a reconstitutable object
+
+sw = new java.io.StringWriter();
+
+writer = new java.io.PrintWriter(sw, true);
+
+service = ariba.base.fields.Fields.getService();
+
+realm = service.getRealm("name");
+
+ariba.base.server.BaseServer.convertThread("inspector javascript");
+
+session = new ariba.base.server.ObjectServerSession(0, realm);
+
+ariba.base.core.Base.setSession(null);
+
+ariba.base.core.Base.setSession(session);
+
+bid = ariba.base.core.BaseId.parse("string id");
+
+object = session.objectForWrite(bid);
+
+
+
+c = java.lang.Class.forName("ariba.base.server.ObjectServerSession");
+
+c = java.lang.Class.forName("ariba.base.core.ClusterRoot");
+
+p = java.lang.reflect.Array.newInstance(c, 1);
+
+m = c.getMethod();
+
+
+
+
+
+writer.("called deleted: " + object.delete());
+
+session.transactionCommit();
+
+sw
+
+
+
+// how to remove an object from the cache
+
+id = ariba.base.core.BaseId.parse("AAAKAG+1KK");
+
+server = ariba.base.server.BaseServer.baseServer();
+
+cache = server.getServerObjectCache();
+
+cache.remove(id);
+
+
+
+// how to find entries in the MetadataProvider
+
+sw = new java.io.StringWriter();
+
+writer = new java.io.PrintWriter(sw, true);
+
+manager = ariba.integration.server.AMFManager.getAMFManager();
+
+application = manager.getApplication();
+
+provider = application.getMetadataProvider();
+
+ariba.util.io.FormattingSerializer.serializeObject(provider.toHashtable());
+
+c = java.lang.Class.forName("ariba.integration.base.MetadataProvider");
+
+field = c.getDeclaredField("m_classes");
+
+field.setAccessible(true);
+
+classes = field.get(provider);
+
+iter = classes.entrySet().iterator();
+
+while (iter.hasNext()) {
+
+    entry = iter.next();
+
+    variant = entry.getKey();
+
+    table = entry.getValue();
+
+    jter = table.keySet().iterator(); 
+
+    while (jter.hasNext()) {
+
+        className = jter.next();
+
+        defn = table.get(className);
+
+        if (className.indexOf("SupplierLocation") != -1) {
+
+            writer.println(variant + "::" + className + " " + defn);
+
+	}
+
+    }
+
+}
+
+sw
+
+
+
+
+
+
+
+writer = new java.io.PrintWriter(sw, true);
+
+id = ariba.base.core.BaseId.parse("AAAKAFG7eq");
+
+session = ariba.base.core.Base.getSession();
+
+session.removeFromSession(id);
+
+translations = id.get().getFieldValue("Title").getTranslationsInternal();
+
+writer.println("translations.size(): " + translations.size());
+
+trans = translations.get(0);
+
+writer.println("trans tyep: " + trans.getTypeName());
+
+sw
+
+
+
+variant = ariba.base.fields.Variant.getVariantForName("vrealm_4");
+
+ariba.base.core.Base.getService().getBaseMeta("ariba.user.core.Organization", variant);
+
+
+
+id = new ariba.base.fields.ClassId("ariba.user.core.Organization", "vrealm_4");
+
+service = ariba.base.meta.core.MetaService.getMetaService();
+
+classMeta = service.findClassMeta(id);
+
+
+
+// node manager stuff
+
+manager = ariba.util.nodemanager.NodeManager.getNodeManager()
+
+
+
+
+
+// clearing the cache of a particular type
+
+className = "ariba.user.core.User";
+
+sw = new java.io.StringWriter();
+
+writer = new java.io.PrintWriter(sw, true);
+
+server = ariba.base.server.BaseServer.baseServer();
+
+c = java.lang.Class.forName("ariba.base.server.BaseServer");
+
+f = c.getDeclaredField("varTable");
+
+f.setAccessible(true);
+
+runtime = ariba.base.fields.Fields.getVariantRuntime();
+
+names = runtime.getAllVariantNames(true);
+
+varTable = f.get(server);
+
+writer.println(varTable);
+
+for (var i=0; i<names.length; i++) {
+
+    writer.print(names[i]);
+
+    variant = runtime.findVariant(names[i], true);
+
+    table = varTable.get(variant);
+
+    if (table != null) {
+
+       typeCode = table.get(className);
+
+       if (typeCode != null) {
+
+	  writer.print(" " + typeCode);
+
+       }
+
+    }
+
+    writer.println("");
+
+}
+
+sw
+
+
+
+// clearing the cache of a particular type
+
+className = "ariba.user.core.User";
+
+sw = new java.io.StringWriter();
+
+writer = new java.io.PrintWriter(sw, true);
+
+server = ariba.base.server.BaseServer.baseServer();
+
+cache = server.getServerObjectCache();
+
+sw.println("" + cache.size());
+
+
+
+
+
+
+
+// clearing the server cache across the system
+
+sw = new java.io.StringWriter();
+
+writer = new java.io.PrintWriter(sw, true);
+
+server = ariba.base.server.BaseServer.baseServer();
+
+cache = server.getServerObjectCache();
+
+writer.println("before cache size: " + cache.size());
+
+writer.println("clearing cache...");
+
+cache.clear();
+
+writer.println("after cache size: " + cache.size());
+
+sw
+
+
+
+
+
+// javascript to dump out a schema
+
+mdm = ariba.integration.server.AMFManager.getAMFManager().getMessageDefinitionManager();
+
+metadataProvider = ariba.integration.server.AMFManager.getAMFManager().getApplication().getMetadataProvider();
+
+variants = metadataProvider.getVariants();
+
+for (i=0; i < variants.length; i++ ) {
+
+    currentVariant = variants[i];
+
+    md = mdm.getMessageDefinition("PaymentExport",currentVariant);
+
+
+
+    if (md != null) {
+
+       topic = md.getTopicName();
+
+
+
+       ctx = new ariba.tool.xmlschema.ConvertToXSD(currentVariant);
+
+       ctx.defineElement(md, metadataProvider, currentVariant);
+
+
+
+       fileout = new java.io.PrintWriter(new java.io.FileOutputStream(ariba.util.core.StringUtil.strcat("internal/",topic,".xsd")));
+
+       ctx.setOutput(fileout);
+
+       ctx.buildTree();
+
+       ctx.write();
+
+       fileout.close();
+
+   }
+
+}
+
+
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+service = ariba.base.meta.server.MetaServerService.getService();
+
+metadata = service.metadata();
+
+modules = metadata.moduleMetas();
+
+for (i=0; i<modules.length; i++) {
+
+    module = modules[i];
+
+    classes = module.getClasses();
+
+    for (j=0; j<classes.length; j++) {
+
+        c = classes[j];
+
+        if (c.isClusterRoot() && 
+
+            !c.isAbstract &&
+
+            !c.isNoSchema && 
+
+            c.isPlainVariant()) {
+
+            out.print(c.getName());
+
+            out.print(",");
+
+	    out.print(c.variantKind());
+
+	    out.println();
+
+        }
+
+    }
+
+}
+
+buffer
+
+
+
+
+
+// shows the available unused fields for classes in the system
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+service = ariba.base.meta.server.MetaServerService.getService();
+
+metadata = service.metadata();
+
+modules = metadata.moduleMetas();
+
+for (i=0; i<modules.length; i++) {
+
+    module = modules[i];
+
+    classes = module.getClasses();
+
+    for (j=0; j<classes.length; j++) {
+
+        c = classes[j];
+
+	unuseds = c.getUnused();
+
+        if (c.isClusterRoot() && 
+
+            !c.isAbstract &&
+
+            !c.isNoSchema && 
+
+            c.isPlainVariant() && 
+
+            unuseds.length > 0) {
+
+            out.print(c.getName());
+
+            out.print(",");
+
+	    out.print(c.variantKind());
+
+	    out.println();
+
+	    for (k=0; k<unuseds.length; k++) {
+
+                unused = unuseds[k];
+
+		out.print(" -");
+
+		out.print(unused.name());
+
+		out.print(":");
+
+		out.print(unused.getType());
+
+		out.println();
+
+	    }
+
+
+
+        }
+
+    }
+
+}
+
+buffer
+
+
+
+// get all users
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+aql = "select u from ariba.user.core.User u";
+
+session = Base.getSession();
+
+realm = session.getRealm();
+
+service = ariba.base.core.Base.getService();
+
+partition = service.getNonePartitionFor(realm);
+
+options = new ariba.base.core.aql.AQLOptions(partition);
+
+rc = service.executeQuery(aql, options);
+
+while (rc.next()) {
+
+  bid = rc.getBaseId(0);
+
+  user = bid.get();
+
+  permissions = new java.util.HashSet(user.getAllPermissions());
+
+  result = ""
+
+  for (iter = permissions.iterator(); iter.hasNext(); ) {
+
+    permission = iter.next();
+
+    result = result + (permission.get().getUniqueName() + ", ");
+
+  }
+
+  groups = user.getAllGlobalParentGroupsUsingQuery();
+
+  for (iter = groups.iterator(); iter.hasNext(); ) {
+
+    group = iter.next().get();
+
+    ps = group.getAllPermissions();
+
+    for (jter = ps.iterator(); jter.hasNext(); ) {
+
+      p = jter.next();
+
+      if (!permissions.contains(p)) {
+
+        out.println("" + user.getUniqueName() + " should have permission: " + 
+
+			 p.get().getUniqueName() + " but does not");
+
+      }
+
+    }
+
+  }
+
+  query = User.getPermissionsViaGroupsRolesQuery(user);
+
+  ps = ariba.basic.util.BaseUtil.executeQuery(query, partition);
+
+  for (jter = ps.iterator(); jter.hasNext(); ) {
+
+    p = jter.next();
+
+    if (!permissions.contains(p)) {
+
+      out.println("" + user.getUniqueName() + " should have permission: " + 
+
+	 p.get().getUniqueName() + " but does not");
+
+    }   
+
+  }
+
+  ps = ariba.basic.util.BaseUtil.executeQuery(query);
+
+  out.println("" + user.getUniqueName() + ": " + result);
+
+}
+
+buffer
+
+
+
+
+
+
+
+// get all users
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+aql = "select u from ariba.user.core.User u";
+
+session = Base.getSession();
+
+realm = session.getRealm();
+
+service = ariba.base.core.Base.getService();
+
+partition = service.getNonePartitionFor(realm);
+
+options = new ariba.base.core.aql.AQLOptions(partition);
+
+rc = service.executeQuery(aql, options);
+
+while (rc.next()) {
+
+  bid = rc.getBaseId(0);
+
+  user = bid.get();
+
+  permissions = user.getAllPermissions();
+
+  result = "";
+
+  out.println("" + user.getUniqueName() + ": " + result);
+
+}
+
+buffer
+
+
+
+
+
+ 
+
+// get the user - groups - roles - permissions query
+
+id = ariba.base.core.BaseId.parse("AASwACoTryFi");
+
+user = ariba.base.core.Base.getService().objectIfAny(id)
+
+ariba.user.core.User.getPermissionsViaGroupsRolesQuery(user)
+
+ 
+
+
+
+
+
+// run an AQL query, dumping out the AQL and the SQL
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+id = ariba.base.core.BaseId.parse("AAB4ACoXiEG");
+
+service = ariba.base.core.Base.getService();
+
+user = service.objectIfAny(id);
+
+session = ariba.base.core.Base.getSession();
+
+realm = session.getRealm();
+
+partition = service.getNonePartitionFor(realm);
+
+aql = ariba.user.core.User.getPermissionsViaGroupsRolesQuery(user);
+
+serverService = ariba.base.server.BaseServerService.getService();
+
+source = serverService.getAqlObjectSource();
+
+out.println("aql: " + aql.toString());
+
+options = new ariba.base.core.aql.AQLOptions(partition);
+
+info = source.generateQuery(aql, options, false);
+
+sql = info.getSQLString();
+
+out.println("sql: " + sql);
+
+rs = service.executeQuery(aql, options)
+
+while (rs.next()) {
+
+   out.println("row: " + rs.getObject(0));
+
+}
+
+buffer
+
+
+
+// get the application adapter and do stuff
+
+mgr = ariba.integration.server.AMFManager.getAMFManager();
+
+app = mgr.getApplication();
+
+realm = ariba.base.core.Base.getSession().getRealm();
+
+partition = ariba.base.core.Base.getService().getNonePartitionFor(realm);
+
+ariba.base.core.Base.getSession().setPartition(partition);
+
+topic = app.getRealEventName("Batch Data Load");
+
+app.integrationTaskStatus(partition,topic)
+
+
+
+// sessions in the BaseServer
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+server = ariba.base.server.BaseServer.baseServer();
+
+sessions = server.sessions();
+
+count = sessions.length;
+
+out.println("session: " + count);
+
+for (i=0; i<count; i++) {
+
+//  out.println(sessions[i]);
+
+}
+
+buffer
+
+
+
+// sessions in the BaseServer
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+server = ariba.base.server.BaseServer.baseServer();
+
+c = server.getClass();
+
+field = c.getDeclaredField("sessions");
+
+field.setAccessible(true);
+
+sessions = field.get(server);
+
+sessions.clear();
+
+
+
+// getting the threadmap and the context map
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+c = java.lang.Class.forName("ariba.rpc.server.ServerThread");
+
+field = c.getDeclaredField("threadMap");
+
+field.setAccessible(true);
+
+map = field.get(null);
+
+out.println("map.size: " + map.size());
+
+for (iter = map.keySet().iterator(); iter.hasNext(); ) {
+
+  th = iter.next();
+
+  out.println("" + th + ", isAlive: " + th.isAlive());
+
+}
+
+buffer
+
+
+
+//
+
+sql = "SELECT COUNT(*) FROM DocumentTab Doc1 WHERE (Doc1.rootId LIKE 'AAAKAHp%') AND (Doc1.doc_NextVersion IS NULL AND Doc1.doc_CreateDate <= :mydate) AND (Doc1.doc_Active = 1) AND (Doc1.doc_PurgeState = 0) AND (Doc1.doc_PartitionNumber = 10)";
+
+query = ariba.base.core.aql.AQLQuery.parseQuery(sql);
+
+date = new ariba.util.core.Date();
+
+params = java.util.Collections.singletonMap("mydate", date);
+
+service = ariba.base.core.Base.getService();
+
+options = new ariba.base.core.aql.AQLOptions(ariba.base.core.Partition.None);
+
+options.setActualParameters(params);
+
+options.setDatabaseSchemaName("Schema1");
+
+rc = service.executeQuery(query, options);
+
+if (rc.next()){
+
+  rc.getObject(0);
+
+}
+
+
+
+// how to set a realm back to unassigned / complete hack
+
+runtime = ariba.base.fields.Fields.getRealmRuntime();
+
+realm = runtime.getRealm("realm_4");
+
+info = new ariba.base.fields.RealmInfo(realm);
+
+info.setState("unassigned");
+
+mgr = ariba.base.fields.RealmEnablementManager.get();
+
+mgr.changeRealm(realm, info);
+
+
+
+
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+service = ariba.base.meta.server.MetaServerService.getService();
+
+classMeta = service.findClass("ariba.purchasing.core.PurchaseOrder", "vrealm_8");
+
+out.println("classMeta: " + classMeta);
+
+classMapping = classMeta.getClassMapping();
+
+out.println("classMapping: " + classMapping);
+
+fieldMapping = classMapping.getFieldMappingByFieldPath("CUS_OrderType");
+
+out.println("fieldMapping: " + fieldMapping);
+
+
+
+// invalidating the metadata provider cache
+
+c = java.lang.Class.forName("ariba.integration.base.MetadataProvider")
+
+params = java.lang.reflect.Array.newInstance(c.getClass(), 1);
+
+params[0] = java.lang.Class.forName("java.lang.String"); 
+
+m = c.getDeclaredMethod("removeClassInfosForVariant", params);
+
+m.setAccessible(true);
+
+manager = ariba.integration.server.AMFManager.getAMFManager();
+
+application = manager.getApplication();
+
+provider = application.getMetadataProvider();
+
+objectClass = java.lang.Class.forName("java.lang.Object");
+
+args = java.lang.reflect.Array.newInstance(objectClass, 1);
+
+args[0] = "vrealm_1";
+
+m.invoke(provider, args);
+
+
+
+// setting up a session and finding a DurableEmail
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+id = ariba.base.core.BaseId.parse("AAAoABtI4BU");
+
+ariba.app.util.AppUtil.setUpSessionForRealm(id);
+
+session = ariba.base.core.Base.getSession(false);
+
+value = (session != null) ? session.getRealm() : null;
+
+out.println("realm on the session: " + value);
+
+object = session.objectForWrite(id);        
+
+out.println("object: " + object);
+
+
+
+ariba.base.core.Base.setSession(null);
+
+buffer
+
+
+
+// finding class metas
+
+className = "ariba.payment.core.Payment"
+
+groupName = "PaymentDetailExport";
+
+variantName = "Plain";
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+manager = ariba.integration.server.AMFManager.getAMFManager();
+
+application = manager.getApplication();
+
+provider = application.getMetadataProvider();
+
+name = className + ":" + groupName;
+
+cm = provider.getClassMeta(name, variantName);
+
+map = ariba.integration.util.Mapper.getMapFields(cm, true);
+
+iter = map.keySet().iterator();
+
+while (iter.hasNext()) {
+
+  key = iter.next();
+
+  out.println(map.get(key) + " = " + key);
+
+  out.println("    rank: " + cm.getPropertyForField(key, "Rank"));
+
+  out.println("    integration: " + cm.getPropertyForField(key, "Integration"));
+
+}
+
+buffer
+
+
+
+
+
+// printing the ERPNetworkId
+
+sw = java.io.StringWriter();
+
+log = java.io.PrintWriter(sw,true);
+
+runtime = ariba.base.fields.Fields.getService().getRealmRuntime();
+
+rp = ariba.base.core.RealmProfile.getRealmProfile(10);
+
+log.println("network id:" + rp.getAribaSNNetworkId());
+
+log.println("erp network id:" + rp.getFieldValue("ERPNetworkId"));
+
+sw
+
+
+
+
+
+// printing the cXML directory service "is remote source profile valid" realm local
+
+sw = java.io.StringWriter();
+
+log = java.io.PrintWriter(sw,true);
+
+mgr = ariba.cxml.service.ServiceManager.getInstance();
+
+svc = mgr.lookup("DirectoryService.ClassName");
+
+field = svc.getClass().getDeclaredField("_isRemoteCachedSourceProfileValid");
+
+field.setAccessible(true);
+
+field;
+
+value = field.get(svc);
+
+runtime = ariba.base.fields.Fields.getService().getRealmRuntime();
+
+all = runtime.getAllRealms();
+
+iter = all.iterator();
+
+while (iter.hasNext()) {
+
+  realm = iter.next();
+
+  log.print("" + realm.getName() + ": " + value.get(realm));
+
+}
+
+sw
+
+
+
+// printing the cXML directory service credential map
+
+sw = java.io.StringWriter();
+
+log = java.io.PrintWriter(sw,true);
+
+mgr = ariba.cxml.service.ServiceManager.getInstance();
+
+svc = mgr.lookup("DirectoryService.ClassName");
+
+field = svc.getClass().getSuperclass().getDeclaredField("_credentialToBusinessKeyMap");
+
+field.setAccessible(true);
+
+field;
+
+value = field.get(svc);
+
+iter = value.keySet().iterator();
+
+while (iter.hasNext()) {
+
+   credential = iter.next();
+
+   instance = value.get(credential);
+
+   log.println("credential: " + credential.getIdentity() + " -> " + instance);
+
+}
+
+sw
+
+
+
+// simply printing memory
+
+sw = new java.io.StringWriter();
+
+log = new java.io.PrintWriter(sw, true);
+
+runtime = java.lang.Runtime.getRuntime();
+
+log.println("" + runtime.maxMemory());
+
+log.println("" + runtime.freeMemory());
+
+sw
+
+
+
+// printing the number of references in the meta reference finder config
+
+cls = java.lang.Class.forName("ariba.base.meta.server.MetaReferenceFinderConfig");
+
+f = cls.getDeclaredField("_cachedConfigs");
+
+f.setAccessible(true);
+
+configs = f.get(null);
+
+configs[0].getFoundReferences().getMetaReferences().size();
+
+
+
+// parsing dates in EDT and getting the date patterns
+
+sw = new java.io.StringWriter();
+
+log = new java.io.PrintWriter(sw,true);
+
+cls = java.lang.Class.forName("ariba.util.formatter.DateFormatter");
+
+locale = ariba.integration.util.DateFormatter.getDefaultLocale();
+
+string = "Sun Jun 17 15:55:36 EDT 2007";
+
+log.println("normalized: " + ariba.util.i18n.LocaleSupport.normalizeDate(string,locale));
+
+formatsKey = new java.lang.String("SystemFormats");
+
+log.println("" + formatsKey.getClass());
+
+array = [formatsKey.getClass(), locale.getClass()];
+
+m = cls.getDeclaredMethod("acquirePatterns", array);
+
+m.setAccessible(true);
+
+result = m.invoke(null, [formatsKey, locale]);
+
+for (i=0; i < 31; i++);
+
+  try {
+
+    date = ariba.integration.util.DateFormatter.parseDate(string, pattern, locale, timezone, false);
+
+    log.println("" + date);
+
+  }
+
+  catch (ex) {
+
+    log.println("null");
+
+  };
+
+  try {
+
+    dateFmt = new java.text.SimpleDateFormat(pattern, locale);
+
+    date = dateFmt.parse(string);
+
+    log.println("" + date);
+
+  }
+
+  catch (ex) {
+
+    log.println("null");
+
+  };
+
+}
+
+log.println("" + locale);
+
+timezone = ariba.integration.util.DateFormatter.getDefaultTimeZone();
+
+log.println("" + timezone);
+
+date = ariba.integration.util.DateFormatter.parseDate(string, locale, timezone, false);
+
+log.println("" + date);
+
+sw
+
+
+
+// finding objects that may or may not exist
+
+id = ariba.base.core.BaseId.parse('207is6t.1k7f9')
+
+meta = ariba.base.core.Base.getService().getBaseMeta(id, true)
+
+ariba.base.core.BaseId.getVariantFromTypecode(id.typeCode())
+
+
+
+// creating expense companys
+
+i = 0;
+
+none = ariba.base.core.Partition.None;
+
+type = "ariba.expense.core.Company";
+
+while (i < 10) {
+
+  cr = ariba.base.core.BaseObject.create(type, none);
+
+  cr.setFieldValue("Name", "co-" + i);
+
+  cr.save();
+
+  i += 1;
+
+}
+
+ariba.base.core.Base.getSession().transactionCommit();
+
+
+
+// how to create persisted tokens
+
+base = 0;
+
+count = 11; 
+
+none = ariba.base.core.Partition.None;
+
+for (i=base; i<count; i++) {
+
+   token = ariba.base.core.BaseObject.create("ariba.app.util.PersistedToken", none);
+
+   token.setFieldValue("TokenString", "token:" + i);
+
+   token.setFieldValue("UseCount", new java.lang.Integer(1));
+
+   token.setFieldValue("Expiration", new ariba.util.core.Date());
+
+   for (j=0; j<11; j++) {
+
+     pair = ariba.base.core.BaseObject.create("ariba.app.util.PersistedTokenDataPair", none);
+
+     pair.setFieldValue("Key", "pair: " +j);
+
+     pair.save();
+
+     token.getTokenDataPair().add(pair);
+
+   }
+
+   token.save();
+
+}
+
+ariba.base.core.Base.getSession().transactionCommit();
+
+
+
+// check the eforms wizard bindings cache 
+
+inst = ariba.htmlui.fieldsui.wizards.ARBWizardFactory.getInstance();
+
+c = inst.getClass()
+
+f = c.getDeclaredField("m_wizardGroupBindings");
+
+f.setAccessible(true);
+
+f.get(inst);
+
+ 
+
+// portlet providers (10s1 and earlier)
+
+sw = new java.io.StringWriter();
+
+writer = new java.io.PrintWriter(sw, true);
+
+providers = ariba.dashboard.core.PortletProvider.getAllProviders();
+
+iter = providers.iterator();
+
+while (iter.hasNext()) {
+
+   provider = iter.next();
+
+   writer.println(provider.getDisplayName());
+
+   portlets = provider.getPortlets();
+
+   for (iter = portlets.iterator(); iter.hasNext(); ) { 
+
+      portlet = iter.next();
+
+      writer.println("  " + portlet.getDisplayName());
+
+   }
+
+}
+
+sw
+
+
+
+// walking through the portlet providers (10s2)
+
+b = new java.io.StringWriter();
+
+pw = new java.io.PrintWriter(b, true);
+
+list = ariba.dashboard.core.PortletProvider.getAllProviders().get("System")
+
+for (i =0; i<list.size(); i++) {
+
+  p = list.get(i);
+
+  pw.println("provider: " + p.getUniqueName() + ", local:" + p.isLocal() + 
+
+  ", doctypes: " + p.getDocTypes());
+
+}
+
+b
+
+
+
+
+
+// clearing the cache of a particular type
+
+className = "ariba.user.core.User";
+
+realmName = "....";
+
+sw = new java.io.StringWriter();
+
+writer = new java.io.PrintWriter(sw, true);
+
+server = ariba.base.server.BaseServer.baseServer();
+
+realm = ariba.base.fields.Fields.getRealmRuntime().getRealm(realmName);
+
+if (realm != null) {
+
+  writer.println("realm: " + realm);
+
+  partition = ariba.base.core.Base.getService().getNonePartitionFor(realm);
+
+  writer.println("partition: " + partition);
+
+  server.clearCache(className, partition);
+
+  writer.println("cache cleared for " + className + " in partition: " + partition);
+
+}
+
+else {
+
+  writer.println("couldn't find realm with name: " + realmName);
+
+}
+
+sw
+
+
+
+
+
+// printing out timezones
+
+buffer = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buffer, true);
+
+tz = java.util.TimeZone.getTimeZone("Australia/Victoria");
+
+pattern = "EEE MMMM d yyyy 'at' h:mm a zzzz";
+
+function printDate (date) {
+
+ out.print(date.toString());
+
+ value = ariba.util.formatter.DateFormatter.getStringValue(date, pattern);
+
+ out.print(",\t" + value);
+
+ value = ariba.util.formatter.DateFormatter.getStringValue(date, pattern, tz);
+
+ out.println(",\t" + value);
+
+}
+
+for (i = 1; i < 32; i++) {
+
+ printDate(new ariba.util.core.Date(2008, 9, i));
+
+}
+
+for (i = 1; i < 31; i++) {
+
+ printDate(new ariba.util.core.Date(2008, 10, i));
+
+}
+
+buffer
+
+
+
+// get the awnode manager
+
+m = ariba.util.nodemanager.NodeManager.getNodeManager();
+
+m.getLocalNode()
+
+
+
+// try out a direct action on the node validator
+
+a = ariba.ui.aribaweb.core.AWConcreteServerApplication.SharedInstance;
+
+m = a.getNodeManager();
+
+m.nodeValidatorForDirectAction("SSOActions", "loginAction")
+
+
+
+
+
+  // try out a direct action on the node validator
+
+a = ariba.ui.aribaweb.core.AWConcreteServerApplication.SharedInstance;
+
+m = a.getNodeManager();
+
+v = m.getDefaultNodeValidator();
+
+cls = v.getClass();
+
+array = java.lang.reflect.Array.newInstance(java.lang.Class, 1);
+
+array[0] = java.lang.String;
+
+method = cls.getDeclaredMethod("nodeIdsForRealm", array);
+
+method.setAccessible(true);
+
+method.invoke(v, [""]);
+
+
+
+// implement an interface in Rhino JS
+
+str = "foo"
+
+obj = { run: function () { str = "bar";} };
+
+runnable = new java.lang.Runnable(obj);
+
+str // is foo
+
+runnable.run();
+
+str // is bar
+
+
+
+// finding out information about a private key
+
+s = "MIIBVwIBADANBgkqhkiG9w0BAQEFAASCAUEwggE9AgEAAkEA6KdGKzrHu556qyqdbhbFSuEfAJ82/SugRJyrEeo0LdEV8Pa4h1HJRLZkRiOanmH0c7aGFjbNqVssYH6o1Q1JDwIDAQABAkEAzjPkB1Cz0mCmTKsamYZpGvLorX5wGHfgNq+9F8XCtY9YmViYik4pDX315K3c7UfERGInXOh3mDhRyMb0fjudsQIhAP91neFYfHwp4fij+oJKTvzpb46EamkW/9+AGRkchJSjAiEA6SVNo0dy9eC81eO92b2E40Qe4ThU8fQZ58cs1ZscVKUCIQDd/9+BKr2bxWX8Bry3p033WgG5T3eN9g/Mseydtvu8kwIhAI2Hv6Gm9fqc+wU8wzsy+UCdUcGW2LooXLF/D5B8IK6hAiEA3sbNWIF/561KWZP3obyHochD2KOj3cUN6PLk1na2d6s="
+
+k = new ariba.util.security.PrivateKeyInfo(s)
+
+buf = new java.io.StringWriter();
+
+pw = new java.io.PrintWriter(buf, true);
+
+pw.println("" + k.getKeyAlgorithm())
+
+pw.println("" + k.getSignatureAlgorithm());
+
+c = java.lang.Class.forName("ariba.util.security.KeyInfo");
+
+f = c.getDeclaredField("_key")
+
+f.setAccessible(true);
+
+key = f.get(k)
+
+pw.println("key\n" + key);
+
+buf
+
+
+
+// finding out information about a private key, same in Viking
+
+s = "MIIBVwIBADANBgkqhkiG9w0BAQEFAASCAUEwggE9AgEAAkEA6KdGKzrHu556qyqdbhbFSuEfAJ82/SugRJyrEeo0LdEV8Pa4h1HJRLZkRiOanmH0c7aGFjbNqVssYH6o1Q1JDwIDAQABAkEAzjPkB1Cz0mCmTKsamYZpGvLorX5wGHfgNq+9F8XCtY9YmViYik4pDX315K3c7UfERGInXOh3mDhRyMb0fjudsQIhAP91neFYfHwp4fij+oJKTvzpb46EamkW/9+AGRkchJSjAiEA6SVNo0dy9eC81eO92b2E40Qe4ThU8fQZ58cs1ZscVKUCIQDd/9+BKr2bxWX8Bry3p033WgG5T3eN9g/Mseydtvu8kwIhAI2Hv6Gm9fqc+wU8wzsy+UCdUcGW2LooXLF/D5B8IK6hAiEA3sbNWIF/561KWZP3obyHochD2KOj3cUN6PLk1na2d6s="
+
+k = new ariba.ui.sso.PrivateKeyInfo(s, null, null)
+
+buf = new java.io.StringWriter();
+
+pw = new java.io.PrintWriter(buf, true);
+
+pw.println("" + k.getSignatureAlgorithm());
+
+key = k.getPrivateKey()
+
+pw.println("key\n" + key);
+
+buf
+
+
+
+// display the messaging scheduler for a partition
+
+buf = new java.io.StringWriter();
+
+pw = new java.io.PrintWriter(buf, true);
+
+manager = ariba.integration.server.AMFManager.getAMFManager();
+
+app = manager.getApplication();
+
+session = ariba.base.core.Base.getSession();
+
+realm = session.getRealm();
+
+pw.println("realm: " + realm);
+
+service = ariba.base.core.Base.getService();
+
+partition = service.getNonePartitionFor(realm);
+
+sched = app.getScheduler(partition.getName());
+
+pw.println("partition: " + partition);
+
+pw.println("sched: " + sched);
+
+buf
+
+
+
+// display some NodeManager information
+
+buf = new java.io.StringWriter();
+
+pw = new java.io.PrintWriter(buf, true);
+
+nm = ariba.util.nodemanager.NodeManager.getNodeManager();
+
+nodes = nm.getNodesWithServerRole("AribaTaskRunner");
+
+pw.println("task runners: " + nodes );
+
+nodes = nm.getAliveNodes();
+
+pw.println("alive nodes: " + nodes );
+
+pw.println("local node: " + nm.getLocalNode());
+
+buf
+
+
+
+
+
+// getting hashed passwords for upload
+
+buf = new java.io.StringWriter();
+
+pw = new java.io.PrintWriter(buf, true);
+
+aes256 = ariba.util.security.MessageDigestUtil.digestWithSalt("ariba123");
+
+sha1 = ariba.util.security.MessageDigestUtil.digest("ariba123");
+
+pw.println("digest (aes-256): " + aes256);
+
+pw.println("digest (sha1):    " + sha1);
+
+buf
+
+
+
+// javascript regular expressions
+
+s = "id=\"foo\" and more crap here";
+
+re = /\s*id=["\'](.+?)["\']/
+
+re.exec(s)[0]
+
+
+
+
+
+
+
+// comparing messaging configurations
+
+partition = "prealm_1";
+
+c = java.lang.Class.forName("ariba.integration.core.MessageConfiguration");
+
+m_data = c.getDeclaredField("m_data");
+
+m_data.setAccessible(true);
+
+c = java.lang.Class.forName("ariba.integration.core.MessageConfigurationData");
+
+m_owner = c.getDeclaredField("m_owner");
+
+m_owner.setAccessible(true);
+
+
+
+function id(obj) {
+
+  var hash = java.lang.System.identityHashCode(obj);
+
+  return "0x" + java.lang.Integer.toString(hash,16);
+
+}
+
+buf = new java.io.StringWriter();
+
+pw = new java.io.PrintWriter(buf, true);
+
+manager = ariba.integration.server.AMFManager.getAMFManager();
+
+mgr = manager.getMessageConfigurationManager();
+
+baseConfigs = mgr.getMessageConfigurations("pbase");
+
+baseMap = new java.util.HashMap();
+
+iter = baseConfigs.iterator();
+
+while (iter.hasNext()) {
+
+  var config = iter.next();
+
+  conflict = baseMap.put(config.getTopicName(), config);
+
+  if (conflict != null) pw.println("!!! conflict: " + config);
+
+}
+
+unshared = new java.util.ArrayList();
+
+pw.print("partition, topic, channel,");
+
+pw.print("config ID,config.m_data,config.m_data.m_owner,");
+
+pw.print("base ID,base.m_data,base.m_data.m_owner");
+
+pw.println();
+
+
+
+ps = ariba.base.core.Base.getService().getAllPartitions(true);
+
+for (i=0; i<ps.length; i++) {
+
+  partition = ps[i].getName();
+
+
+
+  configs = mgr.getMessageConfigurations(partition);
+
+  iter = configs.iterator();
+
+  while (iter.hasNext()) {
+
+    var config = iter.next();
+
+    var topic = config.getTopicName();
+
+    var base = baseMap.get(topic);
+
+    pw.print(partition + ",");
+
+    pw.print(topic + ",");
+
+    pw.print(config.getChannelName() + ",");
+
+    pw.print(id(config) + ","); 
+
+    data = m_data.get(config);
+
+    pw.print(id(data) + ",");
+
+    pw.print(id(m_owner.get(data)) + ",");
+
+    if (base != null) { 
+
+      pw.print(id(base) + ",");
+
+      data = m_data.get(base);
+
+      pw.print(id(data) + ",");
+
+      pw.print(id(m_owner.get(data))+ ",");
+
+    }
+
+    pw.println();
+
+  }
+
+}
+
+/*pw.println("unshared:");
+
+for (iter = unshared.iterator(); iter.hasNext(); ) {
+
+  pw.println(iter.next());
+
+}
+
+*/
+
+
+
+buf
+
+
+
+// test localization in fpls
+
+type = "ariba.user.core.User";
+
+variant = "vrealm_1";
+
+buf = new java.io.StringWriter();
+
+pw = new java.io.PrintWriter(buf, true);
+
+s = ariba.base.fields.Fields.getService();
+
+v = ariba.base.fields.Variant.getVariantForName("vrealm_1");
+
+pw.println("For class: " + type + " variant: " + variant);
+
+fpl = s.getFpl("ariba.user.core.User", v, null);
+
+fp = fpl.getFieldProperties("Name");
+
+pw.println("In locale: " + fpl.getLocale());
+
+pw.println("  label: " + fp.getPropertyForKey("Label"));
+
+fpl = s.getFpl("ariba.user.core.User", v, java.util.Locale.FRENCH);
+
+fp = fpl.getFieldProperties("Name");
+
+pw.println("In locale: " + fpl.getLocale());
+
+pw.println("  label: " + fp.getPropertyForKey("Label"));
+
+buf
+
+
+
+
+
+
+
+
+
+// comparing messaging definitions
+
+partition = "prealm_1";
+
+c = java.lang.Class.forName("ariba.integration.core.MessageDefinition");
+
+m_data = c.getDeclaredField("m_data");
+
+m_data.setAccessible(true);
+
+c = java.lang.Class.forName("ariba.integration.core.MessageDefinitionData");
+
+m_owner = c.getDeclaredField("m_owner");
+
+m_owner.setAccessible(true);
+
+
+
+function id(obj) {
+
+  var hash = java.lang.System.identityHashCode(obj);
+
+  return "0x" + java.lang.Integer.toString(hash,16);
+
+}
+
+buf = new java.io.StringWriter();
+
+pw = new java.io.PrintWriter(buf, true);
+
+manager = ariba.integration.server.AMFManager.getAMFManager();
+
+mgr = manager.getMessageDefinitionManager();
+
+baseDefs = mgr.getMessageDefinitions("vbase");
+
+baseMap = new java.util.HashMap();
+
+for (i=0; i<baseDefs.length; i++) {
+
+  var defn = baseDefs[i];
+
+  conflict = baseMap.put(defn.getTopicName(), defn);
+
+  if (conflict != null) pw.println("!!! conflict: " + defn);
+
+}
+
+unshared = new java.util.ArrayList();
+
+pw.print("variant, topic,");
+
+pw.print("defn ID,defn.m_data,defn.m_data.m_owner,");
+
+pw.print("base ID,base.m_data,base.m_data.m_owner");
+
+pw.println();
+
+service = ariba.base.fields.Fields.getService();
+
+vr = service.getVariantRuntime();
+
+vs = vr.getAllVariants(true);
+
+for (i=0; i<vs.length; i++) {
+
+  variant = vs[i].getName();
+
+  defns = mgr.getMessageDefinitions(variant);
+
+  for (j=0; defns != null && j<defns.length; j++) {
+
+    var defn = defns[j];
+
+    var topic = defn.getTopicName();
+
+    var base = baseMap.get(topic);
+
+    pw.print(variant + ",");
+
+    pw.print(topic + ",");
+
+    pw.print(id(defn) + ","); 
+
+    data = m_data.get(defn);
+
+    pw.print(id(data) + ",");
+
+    pw.print(id(m_owner.get(data)) + ",");
+
+    if (base != null) { 
+
+      pw.print(id(base) + ",");
+
+      data = m_data.get(base);
+
+      pw.print(id(data) + ",");
+
+      pw.print(id(m_owner.get(data))+ ",");
+
+    }
+
+    pw.println();
+
+  }
+
+}
+
+/*
+
+pw.println("unshared:");
+
+for (iter = unshared.iterator(); iter.hasNext(); ) {
+
+  pw.println(iter.next());
+
+}
+
+*/
+
+
+
+buf
+
+
+
+// finding the jar file from which a class is loaded 
+
+java.lang.Thread.currentThread().getContextClassLoader().getResource("oracle/jdbc/driver/OracleDriver.class");
+
+
+
+// assorted scheduler stuff
+
+
+
+server = ariba.app.server.CoreServer.coreServer();
+
+mgr = server.getScheduleManager();
+
+scheduler = server.getScheduler("prealm_32");
+
+c = scheduler.getClass();
+
+scheduler.hasScheduleEntry("foo");
+
+
+
+server = ariba.app.server.CoreServer.coreServer();
+
+mgr = server.getScheduleManager();
+
+scheduler = mgr.getScheduler("prealm_32");
+
+c = scheduler.getClass().getSuperclass();
+
+f = c.getDeclaredField("nameToDisplayNameMap");
+
+f.setAccessible(true)
+
+f.get(scheduler)
+
+
+
+server = ariba.app.server.CoreServer.coreServer();
+
+mgr = server.getScheduleManager();
+
+c = mgr.getClass().getSuperclass();
+
+c.getClass()
+
+args = java.lang.reflect.Array.newInstance(c.getClass(), 2);
+
+args[0] = c.getName().getClass();
+
+args[1] = java.lang.Boolean.TYPE;
+
+m = c.getDeclaredMethod("getRemoteTaskNames", args);
+
+m.setAccessible(true);
+
+args = java.lang.reflect.Array.newInstance(java.lang.Class.forName("java.lang.Object"), 2);
+
+args[0] = "prealm_32";
+
+args[1] = java.lang.Boolean.TRUE;
+
+m.invoke(mgr, args)
+
+
+
+# checking the heap timer queue
+
+count = 100
+
+b = ariba.backplane.container.Backplane.getInstance()
+
+l = b.getEventLoop()
+
+c = java.lang.Class.forName("ariba.util.core.EventLoop")
+
+f = c.getDeclaredField("timerQueue");
+
+f.setAccessible(true)
+
+q = f.get(l)
+
+buf = new java.io.StringWriter();
+
+out = new java.io.PrintWriter(buf, true);
+
+out.println("heap timer size: " + q.size())
+
+c = java.lang.Class.forName("ariba.util.core.HeapTimerQueue")
+
+f = c.getDeclaredField("heap");
+
+f.setAccessible(true)
+
+h = f.get(q);
+
+c = java.lang.Class.forName("ariba.util.core.Timer")
+
+f = c.getDeclaredField("expirationTime");
+
+f.setAccessible(true)
+
+
+
+function printTimer (timer) {
+
+  exptime = java.lang.Long.valueOf(f.get(timer))
+
+  date = new java.util.Date()
+
+  date.setTime(exptime)
+
+  out.println(""+ date + ": " + timer);
+
+}
+
+
+
+i = h.iterator()
+
+idx = 0
+
+while (i.hasNext()) {
+
+  if (idx > count) {
+
+    break
+
+  }
+
+  t = i.next();
+
+  if (t != null) {
+
+    printTimer(t)
+
+  }
+
+  idx= idx + 1
+
+}
+
+buf

@@ -1,0 +1,60 @@
+11s2 DF
+DF: CR#1-BWK8IH  Facebook API Pull Failures
+RCA: CR#1-BUFWNE
+
+Issue: 
+Facebook API Pull is failing for InvoiceReconciliation. One of the reason is that the LineItem Description for the Invoice Reconciliation contains a Control Character
+
+Solution:
+Update the Description for the LineItem order by removing the Control Character
+
+/* Need Inspector WRITE access.  */
+
+Steps:
+---------------------------------
+1. Go to the inspector on Community associated with the "facebook" realm (currently community 62)
+2. Log into Inspector with read, write and debug privilege.
+3. For Realm Chooser, choose 'facebook' from the drop down and click Apply.
+4. Go to Javascript section and paste the contents of javascript file "11s2_DF_1-BWK8IH_Javascript.txt" into the text box.
+5. Click on Run button.
+6. Mail the javascript output to hprabhakara@ariba.com
+
+
+Expected output (value's might differ):
+
+ Response from TaskCXML20520022
+
+******************************** Beginning
+
+
+Invoice Reconciliation details : 
+IR00661927-32109 ([ariba.invoicing.core.InvoiceReconciliation [BaseId 245734579776 AAnOAQODk27B5A 34w00v9c.avquj2]])
+
+
+ Before Update Description :
+FRC1-A/B: Barcode Scanners per RJL Technologies Estimate# 33601 dated 06/15/2012 (Del: Q2'12)
+
+DS3578-HDBU0100UR, MOTOROLA, DS3578, HIGH DENSITY IMAGER, CORDLESS, Test USB KIT, INCLUDES CRADLE, POWER SUPPLY, US LINE CORD, USB CABLE
+
+
+ After Update Description: 
+FRC1-A/B: Barcode Scanners per RJL Technologies Estimate# 33601 dated 06/15/2012 (Del: Q2'12)
+
+DS3578-HDBU0100UR, MOTOROLA, DS3578, HIGH DENSITY IMAGER, CORDLESS, Test USB KIT, INCLUDES CRADLE, POWER SUPPLY, US LINE CORD, USB CABLE
+******************************** Finished SuccessFully
+Requisition details : 
+PR5147 ([ariba.purchasing.core.Requisition [BaseId 99150188760 AAnOAOVBcVz9DY 19jrgna0.avqufp]])
+
+
+ Before Update Description :
+FRC1-A/B: Barcode Scanners per RJL Technologies Estimate# 33601 dated 06/15/2012 (Del: Q2'12)
+
+DS3578-HDBU0100UR, MOTOROLA, DS3578, HIGH DENSITY IMAGER, CORDLESS, Test USB KIT, INCLUDES CRADLE, POWER SUPPLY, US LINE CORD, USB CABLE
+
+
+ After Update Description: 
+FRC1-A/B: Barcode Scanners per RJL Technologies Estimate# 33601 dated 06/15/2012 (Del: Q2'12)
+
+DS3578-HDBU0100UR, MOTOROLA, DS3578, HIGH DENSITY IMAGER, CORDLESS, Test USB KIT, INCLUDES CRADLE, POWER SUPPLY, US LINE CORD, USB CABLE
+******************************** Finished SuccessFully
+
