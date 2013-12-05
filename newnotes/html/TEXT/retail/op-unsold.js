@@ -1,0 +1,3 @@
+document.write(' \
+<TABLE BORDER=1><TR><TH>name</TH><TH>price</TH><TH>category</TH><TH>name</TH></TR><TR><TD>htc-sp1</TD><TD>75</TD><TD>smartphone</TD><TD>htc</TD></TR><TR><TD>htc-sp3</TD><TD>45</TD><TD>smartphone</TD><TD>htc</TD></TR><TR><TD>samsung-sp2</TD><TD>73</TD><TD>smartphone</TD><TD>samsung</TD></TR><TR><TD>nokia-sp1</TD><TD>78</TD><TD>smartphone</TD><TD>nokia</TD></TR><TR><TD>nokia-sp1</TD><TD>80</TD><TD>smartphone</TD><TD>nokia</TD></TR><TR><TD>nokia-sp1</TD><TD>90</TD><TD>smartphone</TD><TD>nokia</TD></TR><TR><TD>acer-tablet2</TD><TD>120</TD><TD>tablet</TD><TD>acer</TD></TR><TR><TD>hp-tablet1</TD><TD>74</TD><TD>tablet</TD><TD>hp</TD></TR><TR><TD>hp-laptop1</TD><TD>80</TD><TD>laptop</TD><TD>hp</TD></TR></TABLE>\
+');

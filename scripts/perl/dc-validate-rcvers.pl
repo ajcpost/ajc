@@ -3,7 +3,7 @@
 ### Copyright (c) 2013 Ariba, Inc.
 ### All rights reserved. 
 ###
-### $Id: //ariba/platform/tools/validateRCVers.pl# $
+### $Id: //ariba/platform/tools/config/perl/dc-validate-rcvers.pl#2 $
 ### Responsible: achitale
 ### 
 ### Utility to validate RC version across cluster nodes. The tool does 
@@ -182,7 +182,7 @@ sub getNodeRCVersions {
         my $rcVersion = -1;
         if (defined ($rcVersionLine)) {
             my $xp = XML::XPath->new($rcVersionLine);
-            my $nodeset = $xp->find('/$RC_VERSION_FIELD');
+            my $nodeset = $xp->find("/$RC_VERSION_FIELD");
             foreach my $node ($nodeset->get_nodelist)
             {
                $rcVersion = $node->string_value;

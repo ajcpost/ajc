@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+	<head><link rel="stylesheet" type="text/css" href="http://htmlcheats.com/wp-content/cache/minify/000000/fY7RDsIwCEV_aLXuk7CwtdqWpWC0fy8uc4l72APhQg6XO_rQoHN10qvC28U0x2yl1HwQ8SXVjbiYHMYTXCMVEh8yiKTw66cnE1e1H1whsIF30gXCwxb4zGb1SjiT7n24fn-4G7OKNljWgPu05jsSoj3TlvzoLhEaISD2VaY6G4ToJm6lQMqW72_6AA.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://htmlcheats.com/wp-content/cache/minify/000000/M9QvL9AtSi3ILyrRTS0qyi_Sh3DiCxLTU-PBIsUA.css" media="all" />
+<script type="text/javascript" src="http://htmlcheats.com/wp-content/cache/minify/000000/bY5hDsIwCEYvNKxmB2pqi2vnOiqw6G4vm4uJiT9I-ODlQe_Gx4K8dv3RQC0DB8VTLXN3cZHDSjPIOmt4QS5DnqwU2Y3iDDmAg342YGzECshMO_PJfs_iJXJpamRKcCOuNZTJXMkO-piJBNmWI2oL8e4qpWVCMe3AlKk7O80IVyIV5dA2_TfsH_wBfgYb9AY.js"></script>
+<script type="text/javascript" src="http://htmlcheats.com/wp-content/cache/minify/000000/M9TPSi0pSEzO1s_NTynNSS3WL85ILEpNSUxJqQQzM_PSAQ.js"></script>
+
+				<link rel="profile" href="http://gmpg.org/xfn/11" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<title>Reveal.js tutorial | Reveal.js Step by Step for Beginners</title>
+		
+				
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.4.13 - http://yoast.com/wordpress/seo/ -->
+<meta name="description" content="This Reveal.js tutorial shows how to create a Reveal.js presentation from the ground up, with no experience required. Every thing a beginner needs for reveal.js."/>
+<link rel="canonical" href="http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/" />
+<!-- / Yoast WordPress SEO plugin. -->
+
+<link rel="alternate" type="application/rss+xml" title="HTML Cheats &raquo; Feed" href="http://htmlcheats.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="HTML Cheats &raquo; Comments Feed" href="http://htmlcheats.com/comments/feed/" />
+
+
+
+
+
+
+
+
+
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"2.4.0","is_admin":"0","ajaxurl":"http:\/\/htmlcheats.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://htmlcheats.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://htmlcheats.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 3.6" />
+<link rel='shortlink' href='http://wp.me/p3jiix-1W' />
+
+
+
+
+<script type="text/javascript">var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-41737832-1"]);_gaq.push(["_trackPageview"]);(function(){var ga=document.createElement("script");ga.type="text/javascript";ga.async=true;ga.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ga,s);})();</script><!-- Wordpress Report Page Errors --><!-- Wordpress Report Page Errors --><style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #EFEFEF; }
+</style>
+	<!--[if lt IE 9]>
+		<script src="http://htmlcheats.com/wp-content/themes/the-bootstrap/js/html5shiv.min.js" type="text/javascript"></script>
+		<script src="http://htmlcheats.com/wp-content/themes/the-bootstrap/js/respond.min.js" type="text/javascript"></script>
+	<![endif]-->
+		</head>
+	
+	<body class="single single-post postid-120 single-format-standard custom-background content-sidebar">
+		<div class="container">
+			<div id="page" class="hfeed row">
+								<header id="branding" role="banner" class="span12">
+										<hgroup>
+						<h1 id="site-title">
+							<a href="http://htmlcheats.com/" title="HTML Cheats" rel="home">
+								<span>HTML Cheats</span>
+							</a>
+						</h1>
+						<h2 id="site-description">Copy and paste HTML cheats and sheets for Bootstrap, JQuery, HTML5</h2>
+					</hgroup>
+					
+					
+					<nav id="access" role="navigation">
+						<h3 class="assistive-text">Main menu</h3>
+						<div class="skip-link"><a class="assistive-text" href="#content" title="Skip to primary content">Skip to primary content</a></div>
+						<div class="skip-link"><a class="assistive-text" href="#secondary" title="Skip to secondary content">Skip to secondary content</a></div>
+												<div class="navbar navbar-inverse">
+							<div class="navbar-inner">
+								<div class="container">
+									<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+									<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+									</a>
+																		<div class="nav-collapse">
+											<form id="searchform" class="navbar-search pull-right" method="get" action="http://htmlcheats.com/">
+						<label for="s" class="assistive-text hidden">Search</label>
+						<input type="search" class="search-query" name="s" id="s" placeholder="Search" />
+					</form>								    </div>
+								</div>
+							</div>
+						</div>
+											</nav><!-- #access -->
+									</header><!-- #branding -->
+<section id="primary" class="span8">
+	
+		<div id="content" role="main">
+		<article id="post-120" class="post-120 post type-post status-publish format-standard hentry category-reveal-js">
+		
+	<header class="page-header">
+		<h1 class="entry-title">Reveal.js Tutorial-Reveal.js for Beginners</h1>		<div class="entry-meta"><span class="sep">Posted on </span><a href="http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/" title="5:41 pm" rel="bookmark"><time class="entry-date" datetime="2013-03-19T17:41:14+00:00" pubdate>March 19, 2013</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="http://htmlcheats.com/author/TomCampbell/" title="View all posts by Tom Campbell" rel="author">Tom Campbell</a></span></span></div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+	<div class="entry-content clearfix">
+		<p><a href="https://github.com/hakimel/reveal.js">Reveal.js</a> lets you create spectacular, interactive slide shows using  HTML. It&#8217;s free. It sports a massive built-in feature set. It does things that PowerPoint, Keynote, and Impress can&#8217;t. You only need to know a few things to create a presentation, but as with most open source projects like this, you are simply expected to know how to look through the source and to do some experiments on your own.</p>
+<p>Here&#8217;s a screenshot from a typical Reveal.js presentation using the default theme:</p>
+<p><a href="http://htmlcheats.com/examples/revealjs/revealjs-3slides-minimal-comments.html"><img alt="reveal.js example default theme" src="http://htmlcheats.com/wp-content/uploads/2013/03/reveal.js-example-default-theme.png" width="865" height="517" /></a></p>
+<h2>Here&#8217;s some of what Reveal.js does for you</h2>
+<p>Reveal.js has a giant feature set out of the box. <a href="http://htmlcheats.com/examples/revealjs/revealjs-3slides-minimal-comments.html">Click here to run the Reveal.js tutorial file</a> and try the following:</p>
+<ul>
+<li>Use the space keys or arrow keys to move through the presentation</li>
+<li>iOS-style swipes also work on any touch-enabled screen, Apple-branded or not</li>
+<li>Reveal.js presentations are <a href="http://en.wikipedia.org/wiki/Responsive_web_design">responsive</a>: they look as good on a mobile phone as on a 30&#8243; screen with no code changes needed</li>
+<li>Mouse users get a complete set of controls placed unobtrusively at the lower right</li>
+<li>Press the Escape key to get a thumbnail view</li>
+<li>Press the period (<strong>.</strong>) key to darken the screen</li>
+</ul>
+<p>This doesn&#8217;t feel like some kind of public domain freebie. It feels like a fully developed application.</p>
+<h3>Where to go from here</h3>
+<p>This article shows you how to create the presentation above, but in a modular fashion so that you can return to it again and again as you create other Reveal.js presentations.</p>
+<p>If you just want the basics summarized in easy, step-by-step form, you&#8217;re in the right place. I spent a fair amount of time poring through the source to understand how to get a Reveal.js presentation up and running. Then I cut out everything that wasn&#8217;t necessary, which turned out to be a lot. Reveal.js chooses all the right defaults and requires very little code to get very big effects.</p>
+<p>Reveal.js is a particularly well-designed system. Internal documentation is chatty and illuminating. Reading through its source code is an education. The main demo file used as an example employs many advanced Reveal.js tricks, making it a little hard to understand what a typical presentation actually needs. I have found the <a href="https://github.com/hakimel/reveal.js/blob/master/css/reveal.css">CSS</a> to work well on all test systems, but it&#8217;s bloat-free. Also worth a visit.</p>
+<p>I want this article to be as useful as possible. If you find a bug, just click <a class="wprperrorsform" href="#wprperrors">Report Error</a>
+		<div id="wrpbody" class="wrphidden"></div>
+		<div id="wrpsubmitform">
+		<h2 class="wrphead">Report Error<img id="wrpcloseform" src="http://htmlcheats.com/wp-content/plugins/wp-report-error/images/close.png" alt="Close" /></h2>
+		<div id="wrpresponse"></div>
+		<div id="wrperror"></div>
+		<form class="wpreportform" action="http://htmlcheats.com/wp-content/plugins/wp-report-error/send_email.php?action=sendemail#wprresponse" method="post" id="wrpsubmitlink">
+       
+        <input type="hidden" name="pageurl" id="wrpurl" value="http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/" /><p>Your e-mail address <small>(required, but will not be published)</small><br />
+            <input type="text" name="email" id="wrpemail" value="" /> 
+        </p><p>Error description<small>(Maximum 250 characters.) required</small><br />
+
+            <textarea name="info" rows="5" cols="30" id="wrpinfo" onKeyDown="wprp_limitText(this,250);" onKeyUp="wprp_limitText(this,250);"></textarea>
+			<br />
+			
+        </p>
+		<p>Are you human?  <small>(required)</small><br />
+			2 + 2 = 
+			<input type="text" name="answer" id="wrpanswer" value="" />
+
+		</p>
+        <p>
+            <input type="submit" name="wrpsubmitlink" value="Send Error" class="wprpsubmit"/>
+        </p>
+		<p class="wprpsponsors">Brought to you by <a href="http://www.daddydesign.com" title="Daddy Design" target="_blank">Daddy Design</a></p>
+    </form>
+</div></p>
+<h2>Intended Audience</h2>
+<p>Some folks aren&#8217;t used to reading source code. They  just want to RTFM and get the job done. This tutorial is for intermediate HTML programmers who fit that description. With this article you don&#8217;t need to know any Javascript to  get a glorious Reveal.js presentation written quickly, reliably, and clearly. If you can download and extract a zip file, copy directories, and edit an HTML file, you can create a Reveal.js presentation in just a few minutes using this tutorial. Obviously it doesn&#8217;t go into Reveal&#8217;s advanced features, but if all you ever use is what you learn here your customers will still be thrilled.</p>
+<p>The steps are quite simple:</p>
+<ol>
+<li>Download the Reveal.js-master.zip file from Github and extract its contents to a temporary location</li>
+<li>Copy a few directories to the location of your HTML file</li>
+<li>Create a single HTML file containing the slide show.</li>
+</ol>
+<h2>Obtain the Reveal.js-master.zip file and extract to your working directory</h2>
+<ul>
+<li>Visit the Reveal.js home page at <a href="https://github.com/hakimel/reveal.js">https://github.com/hakimel/reveal.js</a>.</li>
+<li>Find the Download as Zip icon and click it:</li>
+</ul>
+<p style="padding-left: 30px;"><a href="http://htmlcheats.com/wp-content/uploads/2013/03/gitub-download-as-zip.png"><img class="alignnone size-full wp-image-121" alt="gitub-download-as-zip" src="http://htmlcheats.com/wp-content/uploads/2013/03/gitub-download-as-zip.png" width="116" height="67" /></a></p>
+<ul>
+<li>The zipped archive file downloads as reveal.js-master.zip.</li>
+<li>Use your operating system&#8217;s shell to extract the file to a working directory (AKA folder). Usually that means right click (or Command-Click, if using an Macintosh/iOS keyboard), then choose an option that reads something like Extract or Compress.</li>
+<li>A directory called reveal.js master is created containing dozens of files. You don&#8217;t need them all to create a presentation. The other files are required by developers to change the source code for Reveal.js, which is definitely not necessary for normal usage.</li>
+</ul>
+<h2>Copy the files you need to your working directory</h2>
+<ul>
+<li>Copy the directories css, js, plugin, and lib into the directory you&#8217;ll use to write the HTML file that makes up the presentation.</li>
+</ul>
+<p>It can be a local directory on your computer or the WWW directory on your production machine. We&#8217;ll call it the production directory, to distinguish it from the working directory you used to extract the full Reveal.js-master.zip file.</p>
+<h2>Create the slide show as a single HTML file</h2>
+<p>Your Reveal.js slide show is a normal HTML file. <span style="font-size: 13px; line-height: 19px;">Here&#8217;s the complete code for a 3-slide presentation with minimal comments so you can see how little work you actually need to do. The rest of this article shows how you would build this presentation in bite-size pieces, explaining what the source code means along the way.</span></p>
+<ul>
+<li>Save it as index.html in your working directory with your Reveal.js directories.</li>
+<li>Open the page in your browser and you&#8217;ll see it in action:</li>
+</ul>
+<p></p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c7436779645878" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">XHTML</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;	
+&lt;head&gt;
+	&lt;meta charset="utf-8"&gt;
+	&lt;title&gt;Reveal.js 3 Slide Demo&lt;/title&gt;
+	&lt;link rel="stylesheet" href="css/reveal.min.css"&gt;
+	&lt;link rel="stylesheet" href="css/theme/default.css" id="theme"&gt;	
+	&lt;!--Add support for earlier versions of Internet Explorer --&gt;
+	&lt;!--[if lt IE 9]&gt;
+	&lt;script src="lib/js/html5shiv.js"&gt;&lt;/script&gt;
+	&lt;![endif]--&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;!-- Wrap the entire slide show in a div using the "reveal" class. --&gt;
+	&lt;div class="reveal"&gt;
+		&lt;!-- Wrap all slides in a single "slides" class --&gt;
+		&lt;div class="slides"&gt;
+
+			&lt;!-- ALL SLIDES GO HERE --&gt;
+			&lt;!-- Each section element contains an individual slide --&gt;
+			&lt;section&gt;
+				&lt;h1&gt;About My Product&lt;/h1&gt;
+				&lt;p&gt;My product discussed here&lt;/p&gt;		
+			&lt;/section&gt;
+
+			&lt;section id="show-a-link"&gt;
+				&lt;h1&gt;Show a live link&lt;/h1&gt;
+				&lt;p&gt;Slide 2 discussed here&lt;/p&gt;
+				&lt;p&gt;See &lt;a href="http://www.htmlcheats.com"&gt;HTMLCheats.com&lt;/a&gt;&lt;p&gt;
+			&lt;/section&gt;
+
+			&lt;section&gt;
+				&lt;h1&gt;Slide 3&lt;/h1&gt;
+				&lt;p&gt;How does one revisit an arbitrary slide in code?&lt;/p&gt;
+				&lt;p&gt;Visit internal slide&lt;a href="#/show-a-link"&gt; 2&lt;/a&gt;
+			&lt;/section&gt;
+
+			&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;script src="lib/js/head.min.js"&gt;&lt;/script&gt;
+	&lt;script src="js/reveal.min.js"&gt;&lt;/script&gt;
+
+	&lt;script&gt;
+		// Required, even if empty.
+		Reveal.initialize({
+		});
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-2">2</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-4">4</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-6">6</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-8">8</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-10">10</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-12">12</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-14">14</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-16">16</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-18">18</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-20">20</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-22">22</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-24">24</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-25">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-26">26</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-27">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-28">28</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-29">29</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-30">30</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-31">31</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-32">32</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-33">33</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-34">34</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-35">35</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-36">36</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-37">37</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-38">38</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-39">39</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-40">40</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-41">41</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-42">42</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-43">43</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-44">44</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-45">45</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-46">46</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-47">47</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-48">48</div><div class="crayon-num" data-line="crayon-52956ff5c7436779645878-49">49</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7436779645878-50">50</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c7436779645878-1"><span class="crayon-n">&lt;!doctype html&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-2"><span class="crayon-r ">&lt;html </span><span class="crayon-e ">lang</span><span class="crayon-o">=</span><span class="crayon-s ">"en"</span><span class="crayon-r ">&gt;</span><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-3"><span class="crayon-r ">&lt;head&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-4"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;meta </span><span class="crayon-e ">charset</span><span class="crayon-o">=</span><span class="crayon-s ">"utf-8"</span><span class="crayon-r ">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-5"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;title&gt;</span><span class="crayon-i ">Reveal.js 3 Slide Demo</span><span class="crayon-r ">&lt;/title&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-6"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;link </span><span class="crayon-e ">rel</span><span class="crayon-o">=</span><span class="crayon-s ">"stylesheet"</span><span class="crayon-h"> </span><span class="crayon-e ">href</span><span class="crayon-o">=</span><span class="crayon-s ">"css/reveal.min.css"</span><span class="crayon-r ">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-7"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;link </span><span class="crayon-e ">rel</span><span class="crayon-o">=</span><span class="crayon-s ">"stylesheet"</span><span class="crayon-h"> </span><span class="crayon-e ">href</span><span class="crayon-o">=</span><span class="crayon-s ">"css/theme/default.css"</span><span class="crayon-h"> </span><span class="crayon-e ">id</span><span class="crayon-o">=</span><span class="crayon-s ">"theme"</span><span class="crayon-r ">&gt;</span><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-8"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">&lt;!--Add support for earlier versions of Internet Explorer --&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-9"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">&lt;!--[if lt IE 9]&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-10"><span class="crayon-c">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-ta">&lt;script </span><span class="crayon-e ">src</span><span class="crayon-o">=</span><span class="crayon-s">"lib/js/html5shiv.js"</span><span class="crayon-o">&gt;</span><span class="crayon-ta">&lt;/script&gt;</span></span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-11"><span class="crayon-c">&nbsp;&nbsp;&nbsp;&nbsp;&lt;![endif]--&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-12"><span class="crayon-r ">&lt;/head&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-13">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-14"><span class="crayon-r ">&lt;body&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-15"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">&lt;!-- Wrap the entire slide show in a div using the "reveal" class. --&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-16"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;div </span><span class="crayon-e ">class</span><span class="crayon-o">=</span><span class="crayon-s ">"reveal"</span><span class="crayon-r ">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-17"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">&lt;!-- Wrap all slides in a single "slides" class --&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-18"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;div </span><span class="crayon-e ">class</span><span class="crayon-o">=</span><span class="crayon-s ">"slides"</span><span class="crayon-r ">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-19">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-20"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">&lt;!-- ALL SLIDES GO HERE --&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-21"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">&lt;!-- Each section element contains an individual slide --&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-22"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;section&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-23"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;h1&gt;</span><span class="crayon-i ">About My Product</span><span class="crayon-r ">&lt;/h1&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-24"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;p&gt;</span><span class="crayon-i ">My product discussed here</span><span class="crayon-r ">&lt;/p&gt;</span><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-25"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;/section&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-26">&nbsp;</div><div class="crayon-line" id="crayon-52956ff5c7436779645878-27"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;section </span><span class="crayon-e ">id</span><span class="crayon-o">=</span><span class="crayon-s ">"show-a-link"</span><span class="crayon-r ">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-28"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;h1&gt;</span><span class="crayon-i ">Show a live link</span><span class="crayon-r ">&lt;/h1&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-29"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;p&gt;</span><span class="crayon-i ">Slide 2 discussed here</span><span class="crayon-r ">&lt;/p&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-30"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;p&gt;</span><span class="crayon-i ">See </span><span class="crayon-r ">&lt;a </span><span class="crayon-e ">href</span><span class="crayon-o">=</span><span class="crayon-s ">"http://www.htmlcheats.com"</span><span class="crayon-r ">&gt;</span><span class="crayon-i ">HTMLCheats.com</span><span class="crayon-r ">&lt;/a&gt;</span><span class="crayon-r ">&lt;p&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-31"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;/section&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-32">&nbsp;</div><div class="crayon-line" id="crayon-52956ff5c7436779645878-33"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;section&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-34"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;h1&gt;</span><span class="crayon-i ">Slide 3</span><span class="crayon-r ">&lt;/h1&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-35"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;p&gt;</span><span class="crayon-i ">How does one revisit an arbitrary slide in code?</span><span class="crayon-r ">&lt;/p&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-36"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;p&gt;</span><span class="crayon-i ">Visit internal slide</span><span class="crayon-r ">&lt;a </span><span class="crayon-e ">href</span><span class="crayon-o">=</span><span class="crayon-s ">"#/show-a-link"</span><span class="crayon-r ">&gt;</span><span class="crayon-i "> 2</span><span class="crayon-r ">&lt;/a&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-37"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;/section&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-38">&nbsp;</div><div class="crayon-line" id="crayon-52956ff5c7436779645878-39"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;/div&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-40"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r ">&lt;/div&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-41"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-ta">&lt;script </span><span class="crayon-e ">src</span><span class="crayon-o">=</span><span class="crayon-s">"lib/js/head.min.js"</span><span class="crayon-o">&gt;</span><span class="crayon-ta">&lt;/script&gt;</span></span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-42"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-ta">&lt;script </span><span class="crayon-e ">src</span><span class="crayon-o">=</span><span class="crayon-s">"js/reveal.min.js"</span><span class="crayon-o">&gt;</span><span class="crayon-ta">&lt;/script&gt;</span></span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-43">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-44"><span class="crayon-i ">&nbsp;&nbsp;&nbsp;&nbsp;<span class="crayon-ta">&lt;script&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-45"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// Required, even if empty.</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-46"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">Reveal</span><span class="crayon-sy">.</span><span class="crayon-e">initialize</span><span class="crayon-sy">(</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-47"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-48"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;/script&gt;</span></span></div><div class="crayon-line" id="crayon-52956ff5c7436779645878-49"><span class="crayon-r ">&lt;/body&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7436779645878-50"><span class="crayon-r ">&lt;/html&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Load Time: 0.0004 seconds] [Format Time: 0.0287 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<h2>Try it here</h2>
+<p>Here&#8217;s the <a title="Minimal Reveal.js HTML presentation" href="http://htmlcheats.com/examples/revealjs/revealjs-3slides-minimal-comments.html">example Reveal.js code</a> in living color. A step-by-step explanation follows.</p>
+<h1>Creating a Reveal.js Presentation Step by Step</h1>
+<p>Here&#8217;s a look at the source code above, with step by step explanations of what to add to your HTML file and why. You can use this as a template anytime you make a Reveal.js presentation. It all starts with a minimal HTML file:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c7481683228679" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Start with a minmal HTML file</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;	
+&lt;head&gt;
+	&lt;meta charset="utf-8"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c7481683228679-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7481683228679-2">2</div><div class="crayon-num" data-line="crayon-52956ff5c7481683228679-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7481683228679-4">4</div><div class="crayon-num" data-line="crayon-52956ff5c7481683228679-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7481683228679-6">6</div><div class="crayon-num" data-line="crayon-52956ff5c7481683228679-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7481683228679-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c7481683228679-1"><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-e">doctype </span><span class="crayon-i">html</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7481683228679-2"><span class="crayon-o">&lt;</span><span class="crayon-e">html </span><span class="crayon-v">lang</span><span class="crayon-o">=</span><span class="crayon-s">"en"</span><span class="crayon-o">&gt;</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-52956ff5c7481683228679-3"><span class="crayon-o">&lt;</span><span class="crayon-i">head</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7481683228679-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">meta </span><span class="crayon-v">charset</span><span class="crayon-o">=</span><span class="crayon-s">"utf-8"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7481683228679-5"><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">head</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7481683228679-6"><span class="crayon-o">&lt;</span><span class="crayon-i">body</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7481683228679-7"><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">body</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7481683228679-8"><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">html</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0133 seconds] -->
+<p></p>
+<h2>1. Add references to the Reveal.js base and theme style sheets to the &lt;head&gt; section</h2>
+<p></p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c748d857801202" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Add these references to base and theme style sheets to the head</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;	
+&lt;head&gt;
+	&lt;meta charset="utf-8"&gt;
+	&lt;title&gt;Reveal.js 3 Slide Demo&lt;/title&gt;
+	&lt;link rel="stylesheet" href="css/reveal.min.css"&gt;
+	&lt;link rel="stylesheet" href="css/theme/default.css" id="theme"&gt;	
+	&lt;!--Add support for earlier versions of Internet Explorer --&gt;
+	&lt;!--[if lt IE 9]&gt;
+	&lt;script src="lib/js/html5shiv.js"&gt;&lt;/script&gt;
+	&lt;![endif]--&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;!-- Wrap the entire slide show in a div using the "reveal" class. --&gt;
+	&lt;div class="reveal"&gt;
+		&lt;!-- Wrap all slides in a single "slides" class --&gt;
+		&lt;div class="slides"&gt;
+
+			&lt;!-- ALL SLIDES GO HERE --&gt;
+			&lt;!-- Each section element contains an individual slide --&gt;
+			&lt;section&gt;
+				&lt;h1&gt;About My Product&lt;/h1&gt;
+				&lt;p&gt;My product discussed here&lt;/p&gt;		
+			&lt;/section&gt;
+
+			&lt;section id="show-a-link"&gt;
+				&lt;h1&gt;Show a live link&lt;/h1&gt;
+				&lt;p&gt;Slide 2 discussed here&lt;/p&gt;
+				&lt;p&gt;See &lt;a href="http://www.htmlcheats.com"&gt;HTMLCheats.com&lt;/a&gt;&lt;p&gt;
+			&lt;/section&gt;
+
+			&lt;section&gt;
+				&lt;h1&gt;Slide 3&lt;/h1&gt;
+				&lt;p&gt;How does one revisit an arbitrary slide in code?&lt;/p&gt;
+				&lt;p&gt;Visit internal slide&lt;a href="#/show-a-link"&gt; 2&lt;/a&gt;
+			&lt;/section&gt;
+
+			&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;script src="lib/js/head.min.js"&gt;&lt;/script&gt;
+	&lt;script src="js/reveal.min.js"&gt;&lt;/script&gt;
+
+	&lt;script&gt;
+		// Required, even if empty.
+		Reveal.initialize({
+		});
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c748d857801202-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c748d857801202-4">4</div><div class="crayon-num" data-line="crayon-52956ff5c748d857801202-5">5</div><div class="crayon-num crayon-marked-num crayon-top crayon-striped-num" data-line="crayon-52956ff5c748d857801202-6">6</div><div class="crayon-num crayon-marked-num crayon-bottom" data-line="crayon-52956ff5c748d857801202-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c748d857801202-8">8</div><div class="crayon-num" data-line="crayon-52956ff5c748d857801202-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c748d857801202-10">10</div><div class="crayon-num" data-line="crayon-52956ff5c748d857801202-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c748d857801202-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c748d857801202-3"><span class="crayon-o">&lt;</span><span class="crayon-i">head</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c748d857801202-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">meta </span><span class="crayon-v">charset</span><span class="crayon-o">=</span><span class="crayon-s">"utf-8"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c748d857801202-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">title</span><span class="crayon-o">&gt;</span><span class="crayon-v">Reveal</span><span class="crayon-sy">.</span><span class="crayon-i">js</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-h"> </span><span class="crayon-e">Slide </span><span class="crayon-i">Demo</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">title</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-marked-line crayon-top crayon-striped-line" id="crayon-52956ff5c748d857801202-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">link </span><span class="crayon-v">rel</span><span class="crayon-o">=</span><span class="crayon-s">"stylesheet"</span><span class="crayon-h"> </span><span class="crayon-v">href</span><span class="crayon-o">=</span><span class="crayon-s">"css/reveal.min.css"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-marked-line crayon-bottom" id="crayon-52956ff5c748d857801202-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">link </span><span class="crayon-v">rel</span><span class="crayon-o">=</span><span class="crayon-s">"stylesheet"</span><span class="crayon-h"> </span><span class="crayon-v">href</span><span class="crayon-o">=</span><span class="crayon-s">"css/theme/default.css"</span><span class="crayon-h"> </span><span class="crayon-v">id</span><span class="crayon-o">=</span><span class="crayon-s">"theme"</span><span class="crayon-o">&gt;</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c748d857801202-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-o">--</span><span class="crayon-e">Add</span><span class="crayon-h"> </span><span class="crayon-e">support</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">earlier</span><span class="crayon-h"> </span><span class="crayon-e">versions</span><span class="crayon-h"> </span><span class="crayon-e">of</span><span class="crayon-h"> </span><span class="crayon-e">Internet</span><span class="crayon-h"> </span><span class="crayon-e">Explorer</span><span class="crayon-h"> </span><span class="crayon-o">--</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c748d857801202-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-o">--</span><span class="crayon-sy">[</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">lt</span><span class="crayon-h"> </span><span class="crayon-e">IE</span><span class="crayon-h"> </span><span class="crayon-cn">9</span><span class="crayon-sy">]</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c748d857801202-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;script </span><span class="crayon-e ">src</span><span class="crayon-o">=</span><span class="crayon-s">"lib/js/html5shiv.js"</span><span class="crayon-o">&gt;</span><span class="crayon-ta">&lt;/script&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c748d857801202-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-sy">[</span><span class="crayon-st">endif</span><span class="crayon-sy">]</span><span class="crayon-o">--</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c748d857801202-12"><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">head</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Load Time: 0.0006 seconds] [Format Time: 0.0464 seconds] -->
+<p></p>
+<p>The &lt;head&gt; section must include references to two style sheets: reveal.min.css, and a theme, such as default.css.</p>
+<p>The file reveal.min.css is a &#8220;minimized&#8221; file that gives Reveal its base styles.</p>
+<h3>About minimized files</h3>
+<p>&#8220;Minimized&#8221; means that  every part of the file a human needs is removed, leaving only what the browser needs. For example, reveal.min.css is all on a single line of text. Minimizing files of any type speeds up page loads because they&#8217;re smaller. By convention, a minimized file is named like the full style sheet (in this case, reveal.css) but with &#8220;min&#8221; before the &#8220;css&#8221;, thus reveal.min.css.</p>
+<p><span style="font-size: 13px; line-height: 19px;">The file default.css represents the default Reveal.js theme, which provides a skin for the overall appearance of your presentation. If you replaced &#8220;default.css&#8221; with  &#8221;sky.css&#8221; it would load the Sky theme, which looks like this: </span><a style="font-size: 13px; line-height: 19px;" href="http://htmlcheats.com/examples/revealjs/switchtheme.html"><img class="alignnone  wp-image-157" alt="reveal.js example sky theme" src="http://htmlcheats.com/wp-content/uploads/2013/03/reveal.js-example-sky-theme.png" width="865" height="519" /></a></p>
+<p>You can find all the themes in the directory css/theme.</p>
+<h3>Try all the things!</h3>
+<p>You can change themes the fly. Here&#8217;s demo that changes Reveal.js themes dynamically: <a href="http://htmlcheats.com/examples/revealjs/switchtheme.html">Demo</a></p>
+<h2>2. Add support for Internet Explorer 9 to the &lt;head&gt; section</h2>
+<p>The next thing to add to the &lt;head&gt; section is optional but strongly recommended: support for the errant Internet Explorer 9, which at the time of writing is one of the most popular browsers. Eventually this will be unnecessary, but include it if you plan for the general public to view your presentation.</p>
+<p></p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c749d509347991" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Add support for Internet Explorer 9</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;	
+&lt;head&gt;
+	&lt;meta charset="utf-8"&gt;
+	&lt;title&gt;Reveal.js 3 Slide Demo&lt;/title&gt;
+	&lt;link rel="stylesheet" href="css/reveal.min.css"&gt;
+	&lt;link rel="stylesheet" href="css/theme/default.css" id="theme"&gt;	
+	&lt;!--Add support for earlier versions of Internet Explorer --&gt;
+	&lt;!--[if lt IE 9]&gt;
+	&lt;script src="lib/js/html5shiv.js"&gt;&lt;/script&gt;
+	&lt;![endif]--&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;!-- Wrap the entire slide show in a div using the "reveal" class. --&gt;
+	&lt;div class="reveal"&gt;
+		&lt;!-- Wrap all slides in a single "slides" class --&gt;
+		&lt;div class="slides"&gt;
+
+			&lt;!-- ALL SLIDES GO HERE --&gt;
+			&lt;!-- Each section element contains an individual slide --&gt;
+			&lt;section&gt;
+				&lt;h1&gt;About My Product&lt;/h1&gt;
+				&lt;p&gt;My product discussed here&lt;/p&gt;		
+			&lt;/section&gt;
+
+			&lt;section id="show-a-link"&gt;
+				&lt;h1&gt;Show a live link&lt;/h1&gt;
+				&lt;p&gt;Slide 2 discussed here&lt;/p&gt;
+				&lt;p&gt;See &lt;a href="http://www.htmlcheats.com"&gt;HTMLCheats.com&lt;/a&gt;&lt;p&gt;
+			&lt;/section&gt;
+
+			&lt;section&gt;
+				&lt;h1&gt;Slide 3&lt;/h1&gt;
+				&lt;p&gt;How does one revisit an arbitrary slide in code?&lt;/p&gt;
+				&lt;p&gt;Visit internal slide&lt;a href="#/show-a-link"&gt; 2&lt;/a&gt;
+			&lt;/section&gt;
+
+			&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;script src="lib/js/head.min.js"&gt;&lt;/script&gt;
+	&lt;script src="js/reveal.min.js"&gt;&lt;/script&gt;
+
+	&lt;script&gt;
+		// Required, even if empty.
+		Reveal.initialize({
+		});
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c749d509347991-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c749d509347991-4">4</div><div class="crayon-num" data-line="crayon-52956ff5c749d509347991-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c749d509347991-6">6</div><div class="crayon-num" data-line="crayon-52956ff5c749d509347991-7">7</div><div class="crayon-num crayon-marked-num crayon-top crayon-striped-num" data-line="crayon-52956ff5c749d509347991-8">8</div><div class="crayon-num crayon-marked-num" data-line="crayon-52956ff5c749d509347991-9">9</div><div class="crayon-num crayon-marked-num crayon-striped-num" data-line="crayon-52956ff5c749d509347991-10">10</div><div class="crayon-num crayon-marked-num crayon-bottom" data-line="crayon-52956ff5c749d509347991-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c749d509347991-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c749d509347991-3"><span class="crayon-o">&lt;</span><span class="crayon-i">head</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c749d509347991-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">meta </span><span class="crayon-v">charset</span><span class="crayon-o">=</span><span class="crayon-s">"utf-8"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c749d509347991-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">title</span><span class="crayon-o">&gt;</span><span class="crayon-v">Reveal</span><span class="crayon-sy">.</span><span class="crayon-i">js</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-h"> </span><span class="crayon-e">Slide </span><span class="crayon-i">Demo</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">title</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c749d509347991-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">link </span><span class="crayon-v">rel</span><span class="crayon-o">=</span><span class="crayon-s">"stylesheet"</span><span class="crayon-h"> </span><span class="crayon-v">href</span><span class="crayon-o">=</span><span class="crayon-s">"css/reveal.min.css"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c749d509347991-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">link </span><span class="crayon-v">rel</span><span class="crayon-o">=</span><span class="crayon-s">"stylesheet"</span><span class="crayon-h"> </span><span class="crayon-v">href</span><span class="crayon-o">=</span><span class="crayon-s">"css/theme/default.css"</span><span class="crayon-h"> </span><span class="crayon-v">id</span><span class="crayon-o">=</span><span class="crayon-s">"theme"</span><span class="crayon-o">&gt;</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-marked-line crayon-top crayon-striped-line" id="crayon-52956ff5c749d509347991-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-o">--</span><span class="crayon-e">Add</span><span class="crayon-h"> </span><span class="crayon-e">support</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">earlier</span><span class="crayon-h"> </span><span class="crayon-e">versions</span><span class="crayon-h"> </span><span class="crayon-e">of</span><span class="crayon-h"> </span><span class="crayon-e">Internet</span><span class="crayon-h"> </span><span class="crayon-e">Explorer</span><span class="crayon-h"> </span><span class="crayon-o">--</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-marked-line" id="crayon-52956ff5c749d509347991-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-o">--</span><span class="crayon-sy">[</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">lt</span><span class="crayon-h"> </span><span class="crayon-e">IE</span><span class="crayon-h"> </span><span class="crayon-cn">9</span><span class="crayon-sy">]</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-marked-line crayon-striped-line" id="crayon-52956ff5c749d509347991-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;script </span><span class="crayon-e ">src</span><span class="crayon-o">=</span><span class="crayon-s">"lib/js/html5shiv.js"</span><span class="crayon-o">&gt;</span><span class="crayon-ta">&lt;/script&gt;</span></div><div class="crayon-line crayon-marked-line crayon-bottom" id="crayon-52956ff5c749d509347991-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-sy">[</span><span class="crayon-st">endif</span><span class="crayon-sy">]</span><span class="crayon-o">--</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c749d509347991-12"><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">head</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Load Time: 0.0005 seconds] [Format Time: 0.0452 seconds] -->
+<p></p>
+<h2>3. &lt;body&gt;: Wrap the entire slide show in a &lt;div&gt; using &#8220;reveal&#8221; class</h2>
+<p>All CSS frameworks use some kind of container scheme which requires all markup used by that framework to be placed inside a &lt;div&gt; of the specified class that wraps the outermost reaches of the &lt;body&gt; section. In this case, of course, its name is &#8220;reveal&#8221;:</p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c74aa349864939" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Surround the whole things within div tags of type reveal in the body</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;body&gt;
+	&lt;!-- Wrap the entire slide show in a div using the "reveal" class. --&gt;
+	&lt;div class="reveal"&gt;
+	&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c74aa349864939-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74aa349864939-2">2</div><div class="crayon-num crayon-marked-num crayon-top" data-line="crayon-52956ff5c74aa349864939-3">3</div><div class="crayon-num crayon-marked-num crayon-bottom crayon-striped-num" data-line="crayon-52956ff5c74aa349864939-4">4</div><div class="crayon-num" data-line="crayon-52956ff5c74aa349864939-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c74aa349864939-1"><span class="crayon-o">&lt;</span><span class="crayon-i">body</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74aa349864939-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-o">--</span><span class="crayon-h"> </span><span class="crayon-e">Wrap </span><span class="crayon-e">the </span><span class="crayon-e">entire </span><span class="crayon-e">slide </span><span class="crayon-e">show </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">div </span><span class="crayon-e">using </span><span class="crayon-i">the</span><span class="crayon-h"> </span><span class="crayon-s">"reveal"</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-o">--</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-marked-line crayon-top" id="crayon-52956ff5c74aa349864939-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">div </span><span class="crayon-t">class</span><span class="crayon-o">=</span><span class="crayon-s">"reveal"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-marked-line crayon-bottom crayon-striped-line" id="crayon-52956ff5c74aa349864939-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">div</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c74aa349864939-5"><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">body</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Load Time: 0.0003 seconds] [Format Time: 0.0109 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<h2>4. &lt;body&gt;: Wrap all slides in a single &lt;div&gt; using the &#8220;slides&#8221; class</h2>
+<p>Each slide presentation is must live within a lt;div&gt; of the class &#8220;slides&#8221;, which is in turn wrapped by the &lt;div&gt; of class &#8220;reveal&#8221;:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c74b5481168129" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Wrap all slides in a single div using the slides class</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;body&gt;
+	&lt;!-- Wrap the entire slide show in a div using the "reveal" class. --&gt;
+	&lt;div class="reveal"&gt;
+		&lt;!-- Wrap all slides in a single "slides" class --&gt;
+		&lt;div class="slides"&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/body&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c74b5481168129-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74b5481168129-2">2</div><div class="crayon-num" data-line="crayon-52956ff5c74b5481168129-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74b5481168129-4">4</div><div class="crayon-num crayon-marked-num crayon-top" data-line="crayon-52956ff5c74b5481168129-5">5</div><div class="crayon-num crayon-marked-num crayon-bottom crayon-striped-num" data-line="crayon-52956ff5c74b5481168129-6">6</div><div class="crayon-num" data-line="crayon-52956ff5c74b5481168129-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74b5481168129-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c74b5481168129-1"><span class="crayon-o">&lt;</span><span class="crayon-i">body</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74b5481168129-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-o">--</span><span class="crayon-h"> </span><span class="crayon-e">Wrap </span><span class="crayon-e">the </span><span class="crayon-e">entire </span><span class="crayon-e">slide </span><span class="crayon-e">show </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">div </span><span class="crayon-e">using </span><span class="crayon-i">the</span><span class="crayon-h"> </span><span class="crayon-s">"reveal"</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-o">--</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c74b5481168129-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">div </span><span class="crayon-t">class</span><span class="crayon-o">=</span><span class="crayon-s">"reveal"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74b5481168129-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-o">--</span><span class="crayon-h"> </span><span class="crayon-e">Wrap </span><span class="crayon-e">all </span><span class="crayon-e">slides </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-i">single</span><span class="crayon-h"> </span><span class="crayon-s">"slides"</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-o">--</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-marked-line crayon-top" id="crayon-52956ff5c74b5481168129-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">div </span><span class="crayon-t">class</span><span class="crayon-o">=</span><span class="crayon-s">"slides"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-marked-line crayon-bottom crayon-striped-line" id="crayon-52956ff5c74b5481168129-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">div</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c74b5481168129-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">div</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74b5481168129-8"><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">body</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Load Time: 0.0003 seconds] [Format Time: 0.0046 seconds] -->
+<p></p>
+<h2>5. &lt;body&gt;: Each slide is a &lt;section&gt; element</h2>
+<p>Each slide is simply an HTML5 &lt;section&gt; element reconfigured using CSS. All slides must be further nested in the &lt;div&gt; of class &#8220;slides&#8221; but the &lt;section&gt; elements themselves require no special class:</p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c74c0299163028" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Create each slide using the section element</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;body&gt;
+	&lt;!-- Wrap the entire slide show in a div using the "reveal" class. --&gt;
+	&lt;div class="reveal"&gt;
+		&lt;!-- Wrap all slides in a single "slides" class --&gt;
+		&lt;div class="slides"&gt;
+			&lt;!-- Each section element contains an individual slide --&gt;
+			&lt;section&gt;
+				&lt;h1&gt;About My Product&lt;/h1&gt;
+				&lt;p&gt;My product discussed here&lt;/p&gt;		
+			&lt;/section&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/body&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c74c0299163028-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74c0299163028-2">2</div><div class="crayon-num" data-line="crayon-52956ff5c74c0299163028-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74c0299163028-4">4</div><div class="crayon-num" data-line="crayon-52956ff5c74c0299163028-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74c0299163028-6">6</div><div class="crayon-num crayon-marked-num crayon-top" data-line="crayon-52956ff5c74c0299163028-7">7</div><div class="crayon-num crayon-marked-num crayon-striped-num" data-line="crayon-52956ff5c74c0299163028-8">8</div><div class="crayon-num crayon-marked-num" data-line="crayon-52956ff5c74c0299163028-9">9</div><div class="crayon-num crayon-marked-num crayon-bottom crayon-striped-num" data-line="crayon-52956ff5c74c0299163028-10">10</div><div class="crayon-num" data-line="crayon-52956ff5c74c0299163028-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74c0299163028-12">12</div><div class="crayon-num" data-line="crayon-52956ff5c74c0299163028-13">13</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c74c0299163028-1"><span class="crayon-o">&lt;</span><span class="crayon-i">body</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74c0299163028-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-o">--</span><span class="crayon-h"> </span><span class="crayon-e">Wrap </span><span class="crayon-e">the </span><span class="crayon-e">entire </span><span class="crayon-e">slide </span><span class="crayon-e">show </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">div </span><span class="crayon-e">using </span><span class="crayon-i">the</span><span class="crayon-h"> </span><span class="crayon-s">"reveal"</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-o">--</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c74c0299163028-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">div </span><span class="crayon-t">class</span><span class="crayon-o">=</span><span class="crayon-s">"reveal"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74c0299163028-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-o">--</span><span class="crayon-h"> </span><span class="crayon-e">Wrap </span><span class="crayon-e">all </span><span class="crayon-e">slides </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-i">single</span><span class="crayon-h"> </span><span class="crayon-s">"slides"</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-o">--</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c74c0299163028-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">div </span><span class="crayon-t">class</span><span class="crayon-o">=</span><span class="crayon-s">"slides"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74c0299163028-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-o">--</span><span class="crayon-h"> </span><span class="crayon-st">Each</span><span class="crayon-h"> </span><span class="crayon-e">section </span><span class="crayon-e">element </span><span class="crayon-e">contains </span><span class="crayon-e">an </span><span class="crayon-e">individual </span><span class="crayon-i">slide</span><span class="crayon-h"> </span><span class="crayon-o">--</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-marked-line crayon-top" id="crayon-52956ff5c74c0299163028-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">section</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-marked-line crayon-striped-line" id="crayon-52956ff5c74c0299163028-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span><span class="crayon-e">About </span><span class="crayon-e">My </span><span class="crayon-i">Product</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-marked-line" id="crayon-52956ff5c74c0299163028-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-e">My </span><span class="crayon-e">product </span><span class="crayon-e">discussed </span><span class="crayon-i">here</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-marked-line crayon-bottom crayon-striped-line" id="crayon-52956ff5c74c0299163028-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">section</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c74c0299163028-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">div</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74c0299163028-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">div</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c74c0299163028-13"><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">body</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Load Time: 0.0003 seconds] [Format Time: 0.0084 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<h2>6. &lt;body&gt;: Load Javascript references at bottom</h2>
+<p>At the bottom of the &lt;body&gt; section include references to the Reveal.js Javascript files. Putting them at the bottom reduces the perceived load time.</p>
+<p></p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c74cc077978172" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Add Javascript references to bottom of body section</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;script src="lib/js/head.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/reveal.min.js"&gt;&lt;/script&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c74cc077978172-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74cc077978172-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c74cc077978172-1"><span class="crayon-ta">&lt;script </span><span class="crayon-e ">src</span><span class="crayon-o">=</span><span class="crayon-s">"lib/js/head.min.js"</span><span class="crayon-o">&gt;</span><span class="crayon-ta">&lt;/script&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74cc077978172-2"><span class="crayon-ta">&lt;script </span><span class="crayon-e ">src</span><span class="crayon-o">=</span><span class="crayon-s">"js/reveal.min.js"</span><span class="crayon-o">&gt;</span><span class="crayon-ta">&lt;/script&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0020 seconds] -->
+<p></p>
+<ul>
+<li>The Javascript file reveal.min.js is of course what gives Reveal.js most of its behaviors. It is minimized for speed, but you can learn a lot from the original, un-minimized version, simply called reveal.js.</li>
+<li><a style="font-size: 13px; line-height: 19px;" href="http://headjs.com/">Head JS</a> project. It provides a number of utility classes. It&#8217;s stable now but from time to time it wouldn&#8217;t hurt to get an updated version.</li>
+</ul>
+<h2>7. &lt;body&gt;: Call to Reveal.initialize()</h2>
+<p>The last thing you need is at the very bottom of the  &lt;body&gt; section. It&#8217;s a call to the Javascript function Reveal.initialize(). The demo shows a billion options but you don&#8217;t need any of them for your first presentation.</p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c74de670466072" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Call Reveal.initialize</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;script&gt;
+  // Required, even if empty.
+  Reveal.initialize({
+  });
+ &lt;/script&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c74de670466072-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74de670466072-2">2</div><div class="crayon-num" data-line="crayon-52956ff5c74de670466072-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74de670466072-4">4</div><div class="crayon-num" data-line="crayon-52956ff5c74de670466072-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c74de670466072-1"><span class="crayon-ta">&lt;script&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74de670466072-2"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c">// Required, even if empty.</span></div><div class="crayon-line" id="crayon-52956ff5c74de670466072-3"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">Reveal</span><span class="crayon-sy">.</span><span class="crayon-e">initialize</span><span class="crayon-sy">(</span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74de670466072-4"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-52956ff5c74de670466072-5"><span class="crayon-h"> </span><span class="crayon-ta">&lt;/script&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0016 seconds] -->
+<p>Later you can take a look at Reveal.initialize() in <a href="https://github.com/hakimel/reveal.js/blob/master/js/reveal.js">Github</a> to see how you can use it to customize your presentation. For example, here&#8217;s how you&#8217;d get Reveal.js presentations to run without the controls if you&#8217;re speaking publicly and just want to press Space to move through the presentation in a linear fashion:</p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c74e9493050489" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;script&gt;
+  // Required, even if empty.
+  Reveal.initialize({
+    controls: false
+  });
+ &lt;/script&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c74e9493050489-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74e9493050489-2">2</div><div class="crayon-num" data-line="crayon-52956ff5c74e9493050489-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74e9493050489-4">4</div><div class="crayon-num" data-line="crayon-52956ff5c74e9493050489-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74e9493050489-6">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c74e9493050489-1"><span class="crayon-ta">&lt;script&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74e9493050489-2"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-c">// Required, even if empty.</span></div><div class="crayon-line" id="crayon-52956ff5c74e9493050489-3"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">Reveal</span><span class="crayon-sy">.</span><span class="crayon-e">initialize</span><span class="crayon-sy">(</span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74e9493050489-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">controls:</span><span class="crayon-h"> </span><span class="crayon-t">false</span></div><div class="crayon-line" id="crayon-52956ff5c74e9493050489-5"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74e9493050489-6"><span class="crayon-h"> </span><span class="crayon-ta">&lt;/script&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0036 seconds] -->
+<p></p>
+<h1>Linking to other slides in a Reveal.js presentation</h1>
+<p>Part of Reveal.js&#8217;s CSS magic is that it renders each  &lt;section&gt; as if it were a separate HTML page, when in fact that are all &lt;section&gt; are part of the same HTML file&#8217;s markup.</p>
+<p>There are several ways to address a slide separately and navigate to it, among them using the slide&#8217;s implicit order in the presentation and assigning the slide and id=&#8221;slide name&#8221;. Reveal.js uses familiar HTML bookmark syntax for this purpose.</p>
+<p>Let&#8217;s review the sample code where slides are defined.</p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c74f6066260562" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Reveal.js slide navigation example</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;	
+&lt;head&gt;
+	&lt;meta charset="utf-8"&gt;
+	&lt;title&gt;Reveal.js 3 Slide Demo&lt;/title&gt;
+	&lt;link rel="stylesheet" href="css/reveal.min.css"&gt;
+	&lt;link rel="stylesheet" href="css/theme/default.css" id="theme"&gt;	
+	&lt;!--Add support for earlier versions of Internet Explorer --&gt;
+	&lt;!--[if lt IE 9]&gt;
+	&lt;script src="lib/js/html5shiv.js"&gt;&lt;/script&gt;
+	&lt;![endif]--&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;!-- Wrap the entire slide show in a div using the "reveal" class. --&gt;
+	&lt;div class="reveal"&gt;
+		&lt;!-- Wrap all slides in a single "slides" class --&gt;
+		&lt;div class="slides"&gt;
+
+			&lt;!-- ALL SLIDES GO HERE --&gt;
+			&lt;!-- Each section element contains an individual slide --&gt;
+			&lt;section&gt;
+				&lt;h1&gt;About My Product&lt;/h1&gt;
+				&lt;p&gt;My product discussed here&lt;/p&gt;		
+			&lt;/section&gt;
+
+			&lt;section id="show-a-link"&gt;
+				&lt;h1&gt;Show a live link&lt;/h1&gt;
+				&lt;p&gt;Slide 2 discussed here&lt;/p&gt;
+				&lt;p&gt;See &lt;a href="http://www.htmlcheats.com"&gt;HTMLCheats.com&lt;/a&gt;&lt;p&gt;
+			&lt;/section&gt;
+
+			&lt;section&gt;
+				&lt;h1&gt;Slide 3&lt;/h1&gt;
+				&lt;p&gt;How does one revisit an arbitrary slide in code?&lt;/p&gt;
+				&lt;p&gt;Visit internal slide&lt;a href="#/show-a-link"&gt; 2&lt;/a&gt;
+			&lt;/section&gt;
+
+			&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;script src="lib/js/head.min.js"&gt;&lt;/script&gt;
+	&lt;script src="js/reveal.min.js"&gt;&lt;/script&gt;
+
+	&lt;script&gt;
+		// Required, even if empty.
+		Reveal.initialize({
+		});
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74f6066260562-22">22</div><div class="crayon-num" data-line="crayon-52956ff5c74f6066260562-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74f6066260562-24">24</div><div class="crayon-num" data-line="crayon-52956ff5c74f6066260562-25">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74f6066260562-26">26</div><div class="crayon-num" data-line="crayon-52956ff5c74f6066260562-27">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74f6066260562-28">28</div><div class="crayon-num" data-line="crayon-52956ff5c74f6066260562-29">29</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74f6066260562-30">30</div><div class="crayon-num" data-line="crayon-52956ff5c74f6066260562-31">31</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74f6066260562-32">32</div><div class="crayon-num" data-line="crayon-52956ff5c74f6066260562-33">33</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74f6066260562-34">34</div><div class="crayon-num" data-line="crayon-52956ff5c74f6066260562-35">35</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c74f6066260562-36">36</div><div class="crayon-num" data-line="crayon-52956ff5c74f6066260562-37">37</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74f6066260562-22"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">section</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c74f6066260562-23"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span><span class="crayon-e">About </span><span class="crayon-e">My </span><span class="crayon-i">Product</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74f6066260562-24"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-e">My </span><span class="crayon-e">product </span><span class="crayon-e">discussed </span><span class="crayon-i">here</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-52956ff5c74f6066260562-25"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">section</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74f6066260562-26">&nbsp;</div><div class="crayon-line" id="crayon-52956ff5c74f6066260562-27"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">section </span><span class="crayon-v">id</span><span class="crayon-o">=</span><span class="crayon-s">"show-a-link"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74f6066260562-28"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span><span class="crayon-i">Show</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">live </span><span class="crayon-i">link</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c74f6066260562-29"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-i">Slide</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-e">discussed </span><span class="crayon-i">here</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74f6066260562-30"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-i">See</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-v">href</span><span class="crayon-o">=</span><span class="crayon-s">"http://www.htmlcheats.com"</span><span class="crayon-o">&gt;</span><span class="crayon-v">HTMLCheats</span><span class="crayon-sy">.</span><span class="crayon-i">com</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">a</span><span class="crayon-o">&gt;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c74f6066260562-31"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">section</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74f6066260562-32">&nbsp;</div><div class="crayon-line" id="crayon-52956ff5c74f6066260562-33"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">section</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74f6066260562-34"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span><span class="crayon-i">Slide</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c74f6066260562-35"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-e">How </span><span class="crayon-e">does </span><span class="crayon-e">one </span><span class="crayon-e">revisit </span><span class="crayon-e">an </span><span class="crayon-e">arbitrary </span><span class="crayon-e">slide </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">code</span><span class="crayon-sy">?</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c74f6066260562-36"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-e">Visit </span><span class="crayon-e">internal </span><span class="crayon-i">slide</span><span class="crayon-o">&lt;</span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-v">href</span><span class="crayon-o">=</span><span class="crayon-s">"#/show-a-link"</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-e">a</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c74f6066260562-37"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-e">section</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Load Time: 0.0004 seconds] [Format Time: 0.0403 seconds] -->
+<p></p>
+<p>Reveal.js automatically assigns each slide a number starting with 1, in the order they are defined in markup. So the &#8220;About&#8221; my Product slide is #1, the &#8220;Show a live link&#8221; slide is #2, and &#8220;Slide 3&#8243; is, uh, slide #3.</p>
+<h2>Linking to slides using implicit numbering</h2>
+<p>When you visit &#8220;Slide 3&#8243; and click its link, it currently uses the  ID assigned to it for navigation purposes to move to slide #2 when the link is clicked. Let&#8217;s rewrite that link to use the slide number instead.</p>
+<p></p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c7503398211142" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;section&gt;
+&lt;h1&gt;Slide 3&lt;/h1&gt;
+  &lt;p&gt;How does one revisit an arbitrary slide in code?&lt;/p&gt;
+  &lt;p&gt;Visit internal slide &lt;a href="#/2"&gt;2&lt;/a&gt;
+&lt;/section&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c7503398211142-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7503398211142-2">2</div><div class="crayon-num" data-line="crayon-52956ff5c7503398211142-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7503398211142-4">4</div><div class="crayon-num" data-line="crayon-52956ff5c7503398211142-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c7503398211142-1"><span class="crayon-o">&lt;</span><span class="crayon-i">section</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7503398211142-2"><span class="crayon-o">&lt;</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span><span class="crayon-i">Slide</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7503398211142-3"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-e">How </span><span class="crayon-e">does </span><span class="crayon-e">one </span><span class="crayon-e">revisit </span><span class="crayon-e">an </span><span class="crayon-e">arbitrary </span><span class="crayon-e">slide </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">code</span><span class="crayon-sy">?</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7503398211142-4"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-e">Visit </span><span class="crayon-e">internal </span><span class="crayon-i">slide</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-v">href</span><span class="crayon-o">=</span><span class="crayon-s">"#/2"</span><span class="crayon-o">&gt;</span><span class="crayon-cn">2</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">a</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7503398211142-5"><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">section</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0033 seconds] -->
+<p>Obviously the problem with this straightforward technique is that you could insert a section later and forget to update the number.  Assign an ID to the &lt;section&gt; eliminates this problem and makes your slides futureproof.</p>
+<h2>Linking to slides using &lt;section&gt; IDs</h2>
+<p>Sections have an optional ID you create using a quoted string, as shown in Slide 2, which has been assigned the ID &#8220;show-a-link&#8221;:</p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c7513649939175" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Slide 2 showing ID</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;	
+&lt;head&gt;
+	&lt;meta charset="utf-8"&gt;
+	&lt;title&gt;Reveal.js 3 Slide Demo&lt;/title&gt;
+	&lt;link rel="stylesheet" href="css/reveal.min.css"&gt;
+	&lt;link rel="stylesheet" href="css/theme/default.css" id="theme"&gt;	
+	&lt;!--Add support for earlier versions of Internet Explorer --&gt;
+	&lt;!--[if lt IE 9]&gt;
+	&lt;script src="lib/js/html5shiv.js"&gt;&lt;/script&gt;
+	&lt;![endif]--&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;!-- Wrap the entire slide show in a div using the "reveal" class. --&gt;
+	&lt;div class="reveal"&gt;
+		&lt;!-- Wrap all slides in a single "slides" class --&gt;
+		&lt;div class="slides"&gt;
+
+			&lt;!-- ALL SLIDES GO HERE --&gt;
+			&lt;!-- Each section element contains an individual slide --&gt;
+			&lt;section&gt;
+				&lt;h1&gt;About My Product&lt;/h1&gt;
+				&lt;p&gt;My product discussed here&lt;/p&gt;		
+			&lt;/section&gt;
+
+			&lt;section id="show-a-link"&gt;
+				&lt;h1&gt;Show a live link&lt;/h1&gt;
+				&lt;p&gt;Slide 2 discussed here&lt;/p&gt;
+				&lt;p&gt;See &lt;a href="http://www.htmlcheats.com"&gt;HTMLCheats.com&lt;/a&gt;&lt;p&gt;
+			&lt;/section&gt;
+
+			&lt;section&gt;
+				&lt;h1&gt;Slide 3&lt;/h1&gt;
+				&lt;p&gt;How does one revisit an arbitrary slide in code?&lt;/p&gt;
+				&lt;p&gt;Visit internal slide&lt;a href="#/show-a-link"&gt; 2&lt;/a&gt;
+			&lt;/section&gt;
+
+			&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;script src="lib/js/head.min.js"&gt;&lt;/script&gt;
+	&lt;script src="js/reveal.min.js"&gt;&lt;/script&gt;
+
+	&lt;script&gt;
+		// Required, even if empty.
+		Reveal.initialize({
+		});
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c7513649939175-27">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7513649939175-28">28</div><div class="crayon-num" data-line="crayon-52956ff5c7513649939175-29">29</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c7513649939175-30">30</div><div class="crayon-num" data-line="crayon-52956ff5c7513649939175-31">31</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c7513649939175-27"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">section </span><span class="crayon-v">id</span><span class="crayon-o">=</span><span class="crayon-s">"show-a-link"</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7513649939175-28"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span><span class="crayon-i">Show</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">live </span><span class="crayon-i">link</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7513649939175-29"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-i">Slide</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-e">discussed </span><span class="crayon-i">here</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c7513649939175-30"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-i">See</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-v">href</span><span class="crayon-o">=</span><span class="crayon-s">"http://www.htmlcheats.com"</span><span class="crayon-o">&gt;</span><span class="crayon-v">HTMLCheats</span><span class="crayon-sy">.</span><span class="crayon-i">com</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">a</span><span class="crayon-o">&gt;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c7513649939175-31"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">section</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Load Time: 0.0003 seconds] [Format Time: 0.0218 seconds] -->
+<p></p>
+<p>To link to it from another slide, just use HTML bookmark syntax:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.4.0 -->
+
+		<div id="crayon-52956ff5c751d430367133" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-mac print-yes" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Linking using HTML bookmark syntax</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="off" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;	
+&lt;head&gt;
+	&lt;meta charset="utf-8"&gt;
+	&lt;title&gt;Reveal.js 3 Slide Demo&lt;/title&gt;
+	&lt;link rel="stylesheet" href="css/reveal.min.css"&gt;
+	&lt;link rel="stylesheet" href="css/theme/default.css" id="theme"&gt;	
+	&lt;!--Add support for earlier versions of Internet Explorer --&gt;
+	&lt;!--[if lt IE 9]&gt;
+	&lt;script src="lib/js/html5shiv.js"&gt;&lt;/script&gt;
+	&lt;![endif]--&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;!-- Wrap the entire slide show in a div using the "reveal" class. --&gt;
+	&lt;div class="reveal"&gt;
+		&lt;!-- Wrap all slides in a single "slides" class --&gt;
+		&lt;div class="slides"&gt;
+
+			&lt;!-- ALL SLIDES GO HERE --&gt;
+			&lt;!-- Each section element contains an individual slide --&gt;
+			&lt;section&gt;
+				&lt;h1&gt;About My Product&lt;/h1&gt;
+				&lt;p&gt;My product discussed here&lt;/p&gt;		
+			&lt;/section&gt;
+
+			&lt;section id="show-a-link"&gt;
+				&lt;h1&gt;Show a live link&lt;/h1&gt;
+				&lt;p&gt;Slide 2 discussed here&lt;/p&gt;
+				&lt;p&gt;See &lt;a href="http://www.htmlcheats.com"&gt;HTMLCheats.com&lt;/a&gt;&lt;p&gt;
+			&lt;/section&gt;
+
+			&lt;section&gt;
+				&lt;h1&gt;Slide 3&lt;/h1&gt;
+				&lt;p&gt;How does one revisit an arbitrary slide in code?&lt;/p&gt;
+				&lt;p&gt;Visit internal slide&lt;a href="#/show-a-link"&gt; 2&lt;/a&gt;
+			&lt;/section&gt;
+
+			&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;script src="lib/js/head.min.js"&gt;&lt;/script&gt;
+	&lt;script src="js/reveal.min.js"&gt;&lt;/script&gt;
+
+	&lt;script&gt;
+		// Required, even if empty.
+		Reveal.initialize({
+		});
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-52956ff5c751d430367133-33">33</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c751d430367133-34">34</div><div class="crayon-num" data-line="crayon-52956ff5c751d430367133-35">35</div><div class="crayon-num crayon-striped-num" data-line="crayon-52956ff5c751d430367133-36">36</div><div class="crayon-num" data-line="crayon-52956ff5c751d430367133-37">37</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-52956ff5c751d430367133-33"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">section</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c751d430367133-34"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span><span class="crayon-i">Slide</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">h1</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c751d430367133-35"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-e">How </span><span class="crayon-e">does </span><span class="crayon-e">one </span><span class="crayon-e">revisit </span><span class="crayon-e">an </span><span class="crayon-e">arbitrary </span><span class="crayon-e">slide </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">code</span><span class="crayon-sy">?</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-52956ff5c751d430367133-36"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-i">p</span><span class="crayon-o">&gt;</span><span class="crayon-e">Visit </span><span class="crayon-e">internal </span><span class="crayon-i">slide</span><span class="crayon-o">&lt;</span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-v">href</span><span class="crayon-o">=</span><span class="crayon-s">"#/show-a-link"</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-e">a</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-52956ff5c751d430367133-37"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-e">section</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Load Time: 0.0004 seconds] [Format Time: 0.0203 seconds] -->
+<p></p>
+<h1>Now go create your own Reveal.js presentation!</h1>
+<p>We&#8217;ve hit the 20% of the Reveal.js features that make up 80% of a presentation. Maybe more: this is enough to create a show that no one will criticize because it&#8217;s low on bling. Reveal.js has lots of other tricks up its sleeves, such as nested slides,  fragments that build up the slide incrementally, slide speaker notes, broadcasting speaker notes to viewers without showing them onscreen, and creating PDFs from a Chrome browser.</p>
+<p>To me very few Javascript libraries give you so much bang for your coding buck. You only need a few lines of code to deliver a lively, interactive slide show to anyone with a browser or smart phone. The trick is knowing what those few lines are, and that&#8217;s what this article showed you.</p>
+<p>Even if you&#8217;re not a go-to-the-source kind of person, this article was designed to make that process easier for you. Visit the Reveal.js demo file on <a href="https://github.com/hakimel/reveal.js/blob/master/index.html">Github</a> at (<a href="https://github.com/hakimel/reveal.js/blob/master/index.html">https://github.com/hakimel/reveal.js/blob/master/index.html</a>) and it should be much easier to understand at this point. Even if you&#8217;re unsure, just try stuff. It&#8217;s HTML. No one will get hurt.</p>
+<a class="wprperrorsform" href="#wprperrors">Report Error</a>
+		<div id="wrpbody" class="wrphidden"></div>
+		<div id="wrpsubmitform">
+		<h2 class="wrphead">Report Error<img id="wrpcloseform" src="http://htmlcheats.com/wp-content/plugins/wp-report-error/images/close.png" alt="Close" /></h2>
+		<div id="wrpresponse"></div>
+		<div id="wrperror"></div>
+		<form class="wpreportform" action="http://htmlcheats.com/wp-content/plugins/wp-report-error/send_email.php?action=sendemail#wprresponse" method="post" id="wrpsubmitlink">
+       
+        <input type="hidden" name="pageurl" id="wrpurl" value="http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/" /><p>Your e-mail address <small>(required, but will not be published)</small><br />
+            <input type="text" name="email" id="wrpemail" value="" /> 
+        </p><p>Error description<small>(Maximum 250 characters.) required</small><br />
+
+            <textarea name="info" rows="5" cols="30" id="wrpinfo" onKeyDown="wprp_limitText(this,250);" onKeyUp="wprp_limitText(this,250);"></textarea>
+			<br />
+			
+        </p>
+		<p>Are you human?  <small>(required)</small><br />
+			2 + 2 = 
+			<input type="text" name="answer" id="wrpanswer" value="" />
+
+		</p>
+        <p>
+            <input type="submit" name="wrpsubmitlink" value="Send Error" class="wprpsubmit"/>
+        </p>
+		<p class="wprpsponsors">Brought to you by <a href="http://www.daddydesign.com" title="Daddy Design" target="_blank">Daddy Design</a></p>
+    </form>
+</div><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li><a href="#" class="sharing-anchor sd-button share-more"><span>Share</span></a></li><li class="share-end"></li></ul><div class="sharing-hidden"><div class="inner" style="display: none;"><ul><li class="share-twitter"><a rel="nofollow" class="share-twitter sd-button share-icon" href="http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/?share=twitter" title="Click to share on Twitter" id="sharing-twitter-120"><span>Twitter</span></a></li><li class="share-pinterest"><a rel="nofollow" class="share-pinterest sd-button share-icon" href="http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/?share=pinterest" title="Click to share on Pinterest"><span>Pinterest</span></a></li><li class="share-end"></li><li class="share-google-plus-1"><a rel="nofollow" class="share-google-plus-1 sd-button share-icon" href="http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/?share=google-plus-1" title="Click to share on Google+" id="sharing-google-120"><span>Google +1</span></a></li><li class="share-reddit"><a rel="nofollow" class="share-reddit sd-button share-icon" href="http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/?share=reddit" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-end"></li><li class="share-facebook"><a rel="nofollow" class="share-facebook sd-button share-icon" href="http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/?share=facebook" title="Share on Facebook" id="sharing-facebook-120"><span>Facebook</span></a></li><li class="share-end"></li></ul></div></div></div></div></div>	</div><!-- .entry-content -->
+
+	<footer class="entry-footer">
+		<span class="cat-links block">Posted in <a href="http://htmlcheats.com/category/reveal-js/" title="View all posts in reveal.js" rel="category tag">reveal.js</a>.</span>	</footer><!-- .entry-footer -->
+	
+	</article><!-- #post-120 -->
+							<p class="nocomments">Comments are closed.</p>
+						
+		<nav id="nav-single" class="pager">
+			<h3 class="assistive-text">Post navigation</h3>
+			<span class="next"><a href="http://htmlcheats.com/html/bootstrap-js-headers-and-footers-using-javascript-includes/" rel="next">Next Post <span class="meta-nav">&rarr;</span></a></span>
+			<span class="previous"><a href="http://htmlcheats.com/bootstrap/bootstrap-tutorial-cdn/" rel="prev"><span class="meta-nav">&larr;</span> Previous Post</a></span>
+		</nav><!-- #nav-single -->
+		
+			</div><!-- #content -->
+	</section><!-- #primary -->
+
+<section id="secondary" class="widget-area span4" role="complementary">
+	<aside id="search-2" class="widget well widget_search"><form method="get" id="searchform" class="form-search" action="http://htmlcheats.com/">
+	<label for="s" class="assistive-text hidden">Search</label>
+	<div class="input-append">
+		<input id="s" class="span2 search-query" type="search" name="s" placeholder="Search"><!--
+	 --><button class="btn btn-primary" name="submit" id="searchsubmit" type="submit">Go</button>
+   	</div>
+</form>
+</aside>		<aside id="recent-posts-2" class="widget well widget_recent_entries">		<h2 class="widget-title">Recent Posts</h2>		<ul>
+					<li>
+				<a href="http://htmlcheats.com/html/absolute-horizontal-and-vertical-centering-in-css/" title="Absolute Horizontal And Vertical Centering In CSS">Absolute Horizontal And Vertical Centering In CSS</a>
+						</li>
+					<li>
+				<a href="http://htmlcheats.com/reveal-js/reveal-js-create-webcomic-interface-using-addeventlistener/" title="Reveal.js-Create Webcomic Interface Using addEventListener">Reveal.js-Create Webcomic Interface Using addEventListener</a>
+						</li>
+					<li>
+				<a href="http://htmlcheats.com/jquery/minimal-html5-document-with-latest-version-of-jquery-from-cdn/" title="Minimal HTML5 Document With Latest Version of jQuery from CDN">Minimal HTML5 Document With Latest Version of jQuery from CDN</a>
+						</li>
+					<li>
+				<a href="http://htmlcheats.com/recommended-reading/addy-osmanis-blog-javascript-html/" title="Addy Osmani&#8217;s Blog: a Treasure Trove for Javascript and HTML5 Programmers">Addy Osmani&#8217;s Blog: a Treasure Trove for Javascript and HTML5 Programmers</a>
+						</li>
+					<li>
+				<a href="http://htmlcheats.com/cdn-2/6-reasons-use-cdn/" title="6 Reasons to Use a CDN&#8211;And 7 Reasons Not To">6 Reasons to Use a CDN&#8211;And 7 Reasons Not To</a>
+						</li>
+				</ul>
+		</aside><aside id="archives-2" class="widget well widget_archive"><h2 class="widget-title">Archives</h2>		<ul>
+			<li><a href='http://htmlcheats.com/2013/08/' title='August 2013'>August 2013</a></li>
+	<li><a href='http://htmlcheats.com/2013/07/' title='July 2013'>July 2013</a></li>
+	<li><a href='http://htmlcheats.com/2013/06/' title='June 2013'>June 2013</a></li>
+	<li><a href='http://htmlcheats.com/2013/04/' title='April 2013'>April 2013</a></li>
+	<li><a href='http://htmlcheats.com/2013/03/' title='March 2013'>March 2013</a></li>
+	<li><a href='http://htmlcheats.com/2012/12/' title='December 2012'>December 2012</a></li>
+	<li><a href='http://htmlcheats.com/2012/05/' title='May 2012'>May 2012</a></li>
+	<li><a href='http://htmlcheats.com/2012/03/' title='March 2012'>March 2012</a></li>
+		</ul>
+</aside><aside id="categories-2" class="widget well widget_categories"><h2 class="widget-title">Categories</h2>		<ul>
+	<li class="cat-item cat-item-6"><a href="http://htmlcheats.com/category/bootstrap/" title="View all posts filed under bootstrap">bootstrap</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="http://htmlcheats.com/category/cdn-2/" title="View all posts filed under CDN">CDN</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="http://htmlcheats.com/category/fabric-js/" title="View all posts filed under fabric.js">fabric.js</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://htmlcheats.com/category/html/" title="View all posts filed under html">html</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://htmlcheats.com/category/javascript/" title="View all posts filed under javascript">javascript</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://htmlcheats.com/category/jquery/" title="View all posts filed under jquery">jquery</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="http://htmlcheats.com/category/recommended-reading/" title="View all posts filed under recommended reading">recommended reading</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://htmlcheats.com/category/reveal-js/" title="View all posts filed under reveal.js">reveal.js</a>
+</li>
+		</ul>
+</aside></section><!-- #secondary .widget-area -->
+				<footer id="colophon" role="contentinfo" class="span12">
+										<div id="page-footer" class="well clearfix">
+						<span class="credits alignleft">&copy; 2013 <a href="http://htmlcheats.com/">HTML Cheats</a>, all rights reserved.</span>						<div id="site-generator">
+							<a	href="http://wordpress.org/"
+								title="Semantic Personal Publishing Platform"
+								target="_blank"
+								rel="generator">Proudly powered by WordPress</a>
+						</div>
+					</div><!-- #page-footer .well .clearfix -->
+									</footer><!-- #colophon -->
+							</div><!-- #page -->
+		</div><!-- .container -->
+	<!-- 47 queries. 1.306 seconds. -->
+		<div style="display:none">
+	</div>
+
+	<script type="text/javascript">
+		WPCOM_sharing_counts = {"http:\/\/htmlcheats.com\/reveal-js\/reveal-js-tutorial-reveal-js-for-beginners\/":120}	</script>
+		<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+							<script type="text/javascript">
+			jQuery(document).on('ready', function(){
+				jQuery('body').on('click', 'a.share-pinterest', function(e){
+					e.preventDefault();
+
+					// Load Pinterest Bookmarklet code
+					var s = document.createElement("script");
+					s.type = "text/javascript";
+					s.src = window.location.protocol + "//assets.pinterest.com/js/pinmarklet.js?r=" + ( Math.random() * 99999999 );
+					var x = document.getElementsByTagName("script")[0];
+					x.parentNode.insertBefore(s, x);
+
+					// Trigger Stats
+					var s = document.createElement("script");
+					s.type = "text/javascript";
+					s.src = this + ( this.toString().indexOf( '?' ) ? '&' : '?' ) + 'js_only=1';
+					var x = document.getElementsByTagName("script")[0];
+					x.parentNode.insertBefore(s, x);
+				});
+			});
+			</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=600,height=600' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+		<script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201348'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2013Novaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+
+
+
+<script type='text/javascript'>
+/* <![CDATA[ */
+var recaptcha_options = {"lang":"en"};
+/* ]]> */
+</script>
+
+
+	<script src="http://stats.wordpress.com/e-201348.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:2.3.5',blog:'48927581',post:'120',tz:'0'});
+	var load_cmc = function(){linktracker_init(48927581,120,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script>	</body>
+</html>
+
+<!-- Served from: htmlcheats.com @ 2013-11-27 04:07:18 by W3 Total Cache -->

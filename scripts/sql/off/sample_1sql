@@ -1,0 +1,41 @@
+SELECT *
+FROM
+  (SELECT m.*,
+    rownum AS r
+  FROM
+    (SELECT ms_messageid,
+      ms_statevalue,
+      ms_timeupdated,
+      ms_consumer,
+      rownum
+    FROM messagestatustab
+    WHERE ms_queueid   = 1000
+    AND ms_statevalue  = 1
+    AND ms_timeupdated < TO_DATE('2012-06-20 18:08:08', 'YYYY-MM-DD HH24:MI:SS')
+    ORDER BY ms_consumer
+    ) m
+  )
+WHERE r BETWEEN 1 AND 1000;
+
+
+
+SELECT ms_MessageId,
+  ms_StateValue,
+  ms_TimeUpdated,
+  ms_Consumer
+FROM
+  (SELECT
+    /*+  FIRST_ROWS(500) */
+    m.ms_MessageId,
+    m.ms_StateValue,
+    m.ms_TimeUpdated,
+    m.ms_Consumer
+  FROM MessageStatusTab m
+  WHERE ms_QueueId   = 1019
+  AND ms_StateValue  = 1
+  AND ms_TimeUpdated < to_date('2012:06:21 03:33:35', 'yyyy:MM:dd HH24:mi:ss')
+  )
+  
+select ms_TimeUpdated from messagestatustab where ms_QueueId = 1019 and ms_statevalue = 1
+
+--describe messagestatustab

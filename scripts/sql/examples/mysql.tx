@@ -1,0 +1,11 @@
+
+# This captures the output in html format.
+# *-table sql is used to create the tables in mysql db
+# *-examples.sql is used to capture the sql output in html
+#   format and is converted to js.
+
+# mysql -uroot -p < retail-tables.sql  -t -vvv --html
+# mysql -uroot -p < retail-examples.sql  -t -vvv --html
+
+# mysql -uroot -p < emp-tables.sql  -t -vvv --html
+# mysql -uroot -p < emp-examples.sql  -t -vvv --html

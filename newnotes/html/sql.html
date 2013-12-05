@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">    
+<head>
+    <meta charset="utf-8">
+    <title>Reveal.js 3 Slide Demo</title>
+    <link rel="stylesheet" href="../css/ajreveal.css">
+    <link rel="stylesheet" href="../css/theme/default.css" id="theme">    
+</head>
+ 
+<body>
+    <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+    <div class="reveal">
+        <!-- Wrap all slides in a single "slides" class -->
+        <div class="slides">
+            <!-- ALL SLIDES GO HERE -->
+            <!-- Each section element contains an individual slide -->
+            <section>
+                <h2>SQL</h2>
+            </section>
+            <section id="toc">
+                <section>
+                    <h3>TOC</h3>
+                    <ul style="font-size: 1em">
+                        <li>Overview</li>
+                        <li>Examples</li>
+                        <ul>
+                            <li>Retail store</li>
+                            <li>Employee</li>
+                            <li>Pagination</li>
+                            <li>Top-N</li>
+                        </ul>
+                        <li>Loopholes</li>
+                        <li>References</li>
+                    </ul>
+                </section>
+            </section>
+            <section id="joins">
+                <section>
+                    <h3>WHERE vs JOIN (Implicit vs Explicit joins)</h3>
+<pre> <code data-trim contenteditable>
+SELECT * 
+FROM product 
+LEFT JOIN sales on sales.product=product.id 
+WHERE product.id=2
+
+* This will return Product 2 and sales transactions for this product.
+* Doing explain "query" will show only one row is fetched from product table
+</code></pre>
+<pre> <code data-trim contenteditable>
+SELECT * 
+FROM product 
+LEFT JOIN sales on sales.product=product.id and product.id=2
+
+* This will return all Products but only Product "2" will have associated 
+  sales transaction. All others will have NULL output.
+* Doing explain "query" will show all row are fetched from product table
+</code></pre>
+<p>
+For INNER JOIN, these mean the same thing but for OUTER JOINS it will give different reasons.
+</p>
+                </section>
+            </section>
+            <section id="retail-store">
+                <section>
+                    <h3>Retail store</h3>
+                </section>
+                <section>
+                    <h5>Schema details</h5>
+                    <div id="table_container">
+                    <script src="TEXT/retail-sql/table-category.js"></script>
+                    <script src="TEXT/retail-sql/table-product.js"></script>
+                    <script src="TEXT/retail-sql/table-manufacturer.js"></script>
+                    </div>
+                </section>
+                <section>
+                    <h5>Schema details</h5>
+                    <div id="table_container">
+                    <script src="TEXT/retail-sql/table-customer.js"></script>
+                    <script src="TEXT/retail-sql/table-sales.js"></script>
+                    </div>
+                </section>
+                <section id="max-tran-volume">
+                    <h5>Cust with max transactions by volume</h5>
+                    <script src="TEXT/retail-sql/q-max-tran-volume.js"></script>
+                </section>
+                <section id="max-tran-pay">
+                    <h5>Cust with max total pay</h5>
+                    <script src="TEXT/retail-sql/q-max-tran-pay1.js"></script>
+                    <script src="TEXT/retail-sql/q-max-tran-pay2.js"></script>
+                </section>
+                <section>
+                    <h5>Cust with max total pay for given product list</h5>
+                    <script src="TEXT/retail-sql/q-max-tran-pay-list.js"></script>
+                </section>
+                <section>
+                    <h5>Unsold products</h5>
+                    <script src="TEXT/retail-sql/q-unsold.js"></script>
+                    <br></br>
+                    <h5>Least sold products</h5>
+                    <script src="TEXT/retail-sql/q-least-sold.js"></script>
+                </section>
+                <section>
+                    <h5>Products purchased by aj</h5>
+                    <script src="TEXT/retail-sql/q-tran-aj.js"></script>
+                </section>
+                <section>
+                    <h5>Customers who purchased same products as aj</h5>
+                    <script src="TEXT/retail-sql/q-tran-ajlike1.js"></script>
+                    <script src="TEXT/retail-sql/q-tran-ajlike2.js"></script>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="../lib/js/head.min.js"></script>
+    <script src="../js/reveal.js"></script>
+    <script>
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+
+            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+            ]
+        });
+    </script>
+</body>
+</html>
