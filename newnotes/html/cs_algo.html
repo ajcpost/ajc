@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">    
+<head>
+    <meta charset="utf-8">
+    <title>Reveal.js 3 Slide Demo</title>
+    <link rel="stylesheet" href="../css/ajreveal.css">
+    <link rel="stylesheet" href="../css/theme/default.css" id="theme">    
+</head>
+ 
+<body>
+    <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+    <div class="reveal">
+        <!-- Wrap all slides in a single "slides" class -->
+        <div class="slides">
+            <!-- ALL SLIDES GO HERE -->
+            <!-- Each section element contains an individual slide -->
+            <section>
+                <h2>SSL</h2>
+            </section>
+            <section>
+                <section>
+                <h3>TOC</h3>
+                <ul style="font-size: 1em">
+                    <li>Why SSL</li>
+                    <li>Terms</li>
+                    <ul>
+                        <li>Asymmetric keys</li>
+                        <li>Symmetric keys</li>
+                        <li>Certificates</li>
+                    </ul>
+                    <li>SSL Handshake</li>
+                    <li>References</li>
+                </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Why SSL</h3>
+                </section>
+                <section>
+                    <h4>Network communication - isses</h4>
+                    <ul>
+                        <li>Data theft on the remote side...client ends up communicating with a wrong/malicious server.</li>
+                        <li>Data theft by sniffers...packet sniffers on route steal the data.</li>
+                        <li>Man in the middle attack...rouge program intercepts all of client/server communication, poses as client to the server and poses as server to the client.</li>
+                        <li>Data manipulation...intended or unintended change of data.</li>
+                    </ul>
+                    <BR></BR>
+                    <h4>Network communicaiton - needs</h4>
+                    <ul>
+                        <li>Authentication...client must be able to establish what the server says who it is and similarly Server may also need to establish what the client says who it is.</li>
+                        <li>Confidentiality...no third party should be able to view the data.</li>
+                        <li>Integrity...data must reach its destination in original format.</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Terms</h3>
+                </section>
+                <section>
+                    <h3>Asymmetric keys</h3>
+                    <ul>
+                        <li>Private keys always with owner, Public key is shared.</li>
+                        <li>Server encrypts data using private key, anybody can decrypt it using Server's public key.</li>
+                        <li>Client encrypts data using Server's public key, only Server can decrypt it using its private key.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Symmetric keys</h3>
+                    <ul>
+                        <li>Must be known to both client/server</li>
+                        <li>Is much faster to process</li>
+                        <li>Typically used once initial handshake it complete with asymmetric keys.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Certificates</h3>
+                    <ul>
+                        <li>Is nothing but key (plus additional info like name, contact info, validity period.</li>
+                        <li>To create, one must go to CA who will approve it after verification.</li>
+                        <li>Two keys get created: public, private</li>
+                        <li>If keys are compromised, CA will revoke the certificate and publish a certificate revoke list which client should check</li>
+                        <li>Certificates received from CA authority must be loaded in the local store. Without these, no authentication is possible.</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>SSL Handshake</h3>
+                </section>
+                <section>
+                <ul>
+                    <li>Step#1, Client sends connect</li>
+                    <ul>
+                        <li>Client sends "connect" with highest supported TSL/SSL version, random number, (preferred) cipher settings, Session ID(for reusing already exchanged data). Server responds back with similar info and also its certificate. It may ask for client certificate if client authentication is required.</li>
+                    </ul>
+                    <li>Step#2, Client verifies server certificate</li>
+                    <ul>
+                        <li>Client checks with CA loaded certificates to see whether the public key sent by Server belongs to the Server. It must check that the name on the certificate matches with server's domain name.</li>
+                        <li>If yes, it means the data encrypted with this public key can only be decrypted by Server's private key which is only with Server.</li>
+                        <li>This way any fake server can't send a fake public key (with associated fake private key) and gain access to client data.</li>
+                    </ul>
+                </ul>
+                </section>
+                <section>
+                <ul>
+                    <li>Step#3, Client generates secret key for the session</li>
+                    <ul>
+                        <li>Client encrypts this secret using Server's public key and sends across.</li>
+                        <li>Server decrypts the "premaster" secret number using its private key.</li>
+                        <li>This way the secret is known only to Client and Server and is used to generate session keys for symmetric encrypting the communication.</li>
+                    </ul>
+                    <li>Step#optional, client authentication - two ways</li>
+                    <ul>
+                        <li>Client sends the certificate and Server has to check with its CA loaded certificate.</li>
+                        <li>Client creates one way hash of a random number, signs using Client's private key and sends it to server along with Client's certificate. One way hash of run time data (known only to server, client) enables client to have a self-signed certificate rather than going to CA.</li>
+                    </ul>
+                </ul>
+                </section>
+            </section>
+            <section>
+                <h3>References</h3>
+                <ul>
+                    <li><a href="http://www.ibm.com/developerworks/webservices/library/ws-ssl-security/index.html">IBM tutorial<tiny> (http://www.ibm.com/developerworks/webservices/library/ws-ssl-security/index.html)</tiny></li>
+                    <li><a href="http://www.ibm.com/developerworks/linux/library/l-openssl/index.html">IBM openssl part-1 <tiny> (http://www.ibm.com/developerworks/linux/library/l-openssl/index.html)</tiny></li>
+                    <li><a href="http://www.ibm.com/developerworks/linux/library/l-openssl2/index.html">IBM openssl part-2 <tiny> (http://www.ibm.com/developerworks/linux/library/l-openssl2/index.html)</tiny></li>
+                    <li><a href="http://www.ibm.com/developerworks/linux/library/l-openssl3/index.html">IBM openssl part-3 <tiny> (http://www.ibm.com/developerworks/linux/library/l-openssl3/index.html)</tiny></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Introduction_to_SSL#The_SSL_Handshake">Mozzila tutorial<tiny>(https://developer.mozilla.org/en-US/docs/Introduction_to_SSL#The_SSL_Handshake)</tiny></li>
+                    <li><a href="http://doc.qt.nokia.com/solutions/4/qtsslsocket/sslguide.html">Nokia tutorial<tiny> (http://doc.qt.nokia.com/solutions/4/qtsslsocket/sslguide.html)</tiny></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <script src="../lib/js/head.min.js"></script>
+    <script src="../js/reveal.js"></script>
+    <script>
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+
+            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+            ]
+        });
+    </script>
+</body>
+</html>

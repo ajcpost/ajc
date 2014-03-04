@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">    
+<head>
+    <meta charset="utf-8">
+    <title>Reveal.js 3 Slide Demo</title>
+    <link rel="stylesheet" href="../css/ajreveal.css">
+    <link rel="stylesheet" href="../css/theme/default.css" id="theme">    
+</head>
+ 
+<body>
+    <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+    <div class="reveal">
+        <!-- Wrap all slides in a single "slides" class -->
+        <div class="slides">
+            <!-- ALL SLIDES GO HERE -->
+            <!-- Each section element contains an individual slide -->
+            <section>
+                <h2>CS Basics</h2>
+            </section>
+            <section>
+                <section>
+                <h3>TOC</h3>
+                <ul style="font-size: 1em">
+                    <li>Encoding</li>
+                    <li>Language/Locales</li>
+                    <li>Algorithm complexity</li>
+                </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Encoding</h3>
+                </section>
+                <section>
+                    <h4>Terms</h4>
+                    <ul>
+                        <li>Radix/Base is the number of unique digits (including zero)  that can be used to represent numbers.</li>
+                        <li>Decimal system uses 0-9, 10 digits to represent a number. A value of "10" in decimal system is "10"</li>
+                        <li>Base two system will use only 0-1, 2 digits to represent a number. A value of "10" in base 2 system is "2".   (00, 01, 10, 11)</li>
+                    </ul>
+                    <BR></BR>
+                    <h4>Why encode</h4>
+                    <ul>
+                        <li>When binary data is to be transported across the network, not all media can handle it. e.g. Html/Email may refuse it, FTP may assume special meaning to control characters, modem may do the same. So, it's best to convert the binary data into textual form.</li>
+                        <li>When displaying hash values (e.g. checkSum), it's lot easier to display it as a text value.</li>
+                        <li>The encryption keys may need to be stored in db/file and hence text conversion is useful.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h4>Why Base64</h4>
+                    <ul>
+                        <li>Base 64: will use 64 (2^6) characters from the ASCII set, i.e. 6 bits are used to represent a base64 character.</li>
+                            <ul>
+                                <li>Consider binary bytes of 155, 162, 233 which translates to bit stream of 100110111010001011101001</li>
+                                <li>Converting these 24 bits will require 4 base64 characters, 6 bits each.</li>
+                                <li>100110 -> 38  (== m)</li>
+                                <li>111010 -> 58  (== 6)</li>
+                                <li>001011 -> 11  (== L)</li>
+                                <li>101001 -> 41  (== p)</li>
+                                <li>So the converted base64 value is m6Lp</li>
+                                <li>Not all data will be multiple of 3 bytes, base64 encoding uses a padding character of '=' to make the number divisible by 3.</li>
+                            </ul>
+                        <li>Decimal: will use 10 (2^3, not exactly) characters from the ASCII set, i.e. at least 3 bits are used to represent a decimal character</li>
+                            <ul>
+                                <li>Consider binary bytes of 155, 162, 233 which translates to bit stream of 100110111010001011101001</li>
+                                <li>Converting these 24 bits will require 8 decimal characters, 3 bits each. So, <bold>data size is almost tripled.</bold> </li>
+                            </ul>
+                        <li>Base36: Will use 36 (2^5, ) characters from the ASCII set, i.e. at least 5 bit</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Language/Locales</h3>
+                </section>
+                <section>
+                    <ul>
+                        <li>The term language indicates a collection of properties used in spoken and written communication. Each language has a language name and a language identifier that indicate the particular code page (ANSI, DOS, Macintosh) used to represent the geographical location for the language on the operating system. A neutral language is indicated by a name such as "en" for English. A more geographically specific language can be indicated by a name that includes both locale and country/region information. For example, the locale English (United States) has the language name en-US.</li>
+                        <li>A locale is a collection of language-related user preference information represented as a list of values. Windows XP supports more than 150 locales, and Windows Vista supports about 200. Each locale is defined by a language and a sort order, and has both a locale name and a locale identifier. An example of a locale name for German (Germany) is de-DE_phonebook.</li>
+                    </ul>
+                </section>
+                <section>
+                    <ul>
+                        <li>Each operating system has at least one installed locale and often has many locales from which the user can select. Each locale has a variety of information associated with it, other than its name and identifier. Locale information types are described in Locale Information Constants.</li>
+                        <li>The operating system assigns a locale to each thread, initially assigning the "system default locale," defined by LOCALE_SYSTEM_DEFAULT. This locale is set when the operating system is installed or when the user selects it using the regional and language options portion of the Control Panel. When running a thread in a process belonging to the user, the operating system assigns the "user default locale" to the thread. This locale is defined by LOCALE_USER_DEFAULT. An application can override either default by using the SetThreadLocale function to explicitly set the locale for a thread.</li>
+                        <li>User A speaks French and lives in UK - Locale is UK, but user prefs say Locale is France</li>
+                        <li>User B speaks English and lives in USA - Locale is USA, and user prefs default to American English.</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Algorithm complexity</h3>
+                </section>
+                <section>
+                    <h4>Polynomial time</h4>
+                    <ul>
+                        <li>Is time taken to perform some operation where there are repetitive steps and the overall time required is a function of the number of steps to the power of some value.</li>
+                        <li>Suppose a task is to make a series of increasing squares from inch-square tiles and it takes 1 second to position each tile.</li>
+                        <li>To do a 1 inch square will need 1 tile and this will take 1 second.</li>
+                        <li>To do a 2 inch square will need 4 tiles and this will take 4 seconds</li>
+                        <li>To do a 3 inch square will need 9 tiles and this will take 9 seconds.</li>
+                        <li>So the time required to lay out a square is polynomial according to the size of the square where:<li>
+                        <li>           T (seconds) = 1 second x square size in inches ^ 2</li>
+                    </ul>
+                </section>
+                <section>
+                    <h4>P vs NP</h4>
+                    <ul>
+                        <li>P class: The general class of questions for which some algorithm can provide an answer in polynomial time is called "class P"</li>
+                        <li>NP class: For some questions, there is no known way to find an answer quickly, but if one is provided with information showing what the answer is, it may be possible to verify the answer quickly. The class of questions for which an answer can be verified in polynomial time is called NP</li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="../lib/js/head.min.js"></script>
+    <script src="../js/reveal.js"></script>
+    <script>
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+
+            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+            ]
+        });
+    </script>
+</body>
+</html>

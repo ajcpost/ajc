@@ -24,6 +24,9 @@ The above query would return 3 type of results which you only need 2. As I menti
 2) # of unprocessed emails waiting to be processed by task node mailer (pending emails: Owner column = empty string)
 3) # of to be sent emails already owned by a task node mailer
 
+(6) Find bad durable emails
+SELECT (Dur1.rootId) FROM DurableEmailTab Dur1, LongStringElementTab Lon2 WHERE Dur1.c14MDLUM_Strngs_Me = Lon2.lvId AND Dur1.rootId = Lon2.rootId AND (Dur1.dem_SentStatus = 0 AND Dur1.dem_RetryCount < 96 AND Lon2.lse_Index = 0 AND Lon2.lse_String LIKE ('%To:%noreply@ansmtp.ariba.com%')) AND (Dur1.dem_Active = 1) AND (Dur1.dem_PurgeState = 0) AND (Dur1.dem_PartitionNumber = 7440) 
+
 ::Mark:: Scheduled Tasls
 -------------------------
 (1) Which schedule task are running, Run in system.privileged

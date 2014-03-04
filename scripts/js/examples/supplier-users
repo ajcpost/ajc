@@ -1,0 +1,59 @@
+Script1: to be run on SSP side
+
+ 
+
+var org = ariba.common.core.CommonSupplier.lookupBySystemID("sid524");
+
+var prefix = "supplier_";
+
+for (var index = 1; index <= 9000; index++) {
+
+    var name = prefix+index;
+
+    var user = ariba.user.core.User.createUser("SourcingSupplierUser",name,org);
+
+}
+
+ariba.base.core.Base.getSession().transactionCommit();
+
+ 
+
+Script 2: to be run on SSP side
+
+ 
+
+var prefix = "supplier_";
+
+var group = ariba.user.core.Group.getGroup("Suppliers");
+
+var users = group.getUsers();
+
+var msg = new java.lang.StringBuilder();
+
+for (var index = 1; index <= 9000; index++) {
+
+    var name = prefix+index;
+
+    var user = ariba.user.core.User.getUser(name,"SourcingSupplierUser");
+
+    if (user != null) {
+
+        users.add(user);
+
+    }
+
+    else {
+
+        msg.append(name+"\n");
+
+    }
+
+}
+
+ariba.base.core.Base.getSession().transactionCommit();
+
+msg;
+
+ 
+
+Run MasterDataPull from S4 realm

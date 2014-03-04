@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+  <title>New</title>
+  <meta name="generator" content="Amaya, see http://www.w3.org/Amaya/" />
+</head>
+
+<body>
+<p></p>
+
+<h1>Kerberos basics</h1>
+
+<div class="toc">
+<ul>
+  <li><a href="#L569">Issues with password authentication</a></li>
+  <li><a href="#L605">Need</a></li>
+  <li><a href="#L1084">Kerberos</a>
+    <ul>
+      <li><a href="#L76">Trusted 3rd party</a></li>
+      <li><a href="#L252">Client authentication</a></li>
+      <li><a href="#L338">Client request for service access</a></li>
+      <li><a href="#L413">Service request and service authentication</a></li>
+    </ul>
+  </li>
+  <li><a href="#L646">Summary</a>
+    <ul>
+      <li><a href="#L665">What it is</a></li>
+      <li><a href="#L694">Problems</a></li>
+    </ul>
+  </li>
+  <li><a href="#L1570">References</a></li>
+</ul>
+</div>
+
+<h2 id="L569">Issues with password authentication</h2>
+<ul>
+  <li>Password is sent over wire in clear and open to attack</li>
+  <li>Password needs to be replicated in all services leading to operational
+    overheads</li>
+  <li>No provision to authenticate services</li>
+  <li>No provision for single sign-on</li>
+</ul>
+
+<p><img alt="client server setup" src="IMG/kerberos1.png" width="616"
+height="254" /></p>
+
+<p></p>
+
+<h2 id="L605">Need</h2>
+<ul>
+  <li>Mutual authentication; Clients must prove who they are and so must
+    services.</li>
+  <li>Single sign-on.</li>
+  <li>Privacy, data should be viewable only by intended audience.</li>
+</ul>
+
+<p></p>
+<hr />
+
+<h2 id="L1084">Kerberos</h2>
+
+<h3 id="L76">Trusted 3rd party</h3>
+
+<p>Kerberos introduces a concept of a trusted 3rd party which maintains a
+centralized database of passwords for clients and services. The trusted
+authority forms the basis for supporting single sign-on and secure
+authentication for both clients and services. Any attack on the trusted service
+would compromise all the passwords and hence this should be kept secure, should
+ideally not host any other network service. </p>
+
+<p></p>
+
+<p><img alt="Ticket granting service" src="IMG/kerberos2.png" width="995"
+/></p>
+
+<p></p>
+<hr />
+
+<h3 id="L252">Client authentication</h3>
+
+<p>Client connects with the ticket granting service to authenticate. It sends
+its username, network address <strong>but no password.</strong> The TGS
+validates network address, creates a "metaticket" which grants access to TGS,
+encrypts it with client's password and sends it back as a response. The
+metaticket acts as a gateway to obtain actual service tickets. It's reusable
+but valid for a fixed duration to reduce the possbility of attack.</p>
+
+<p>Noone else apart from the requesting client can access the metaticket since
+it's encrypted with client's password. Conversly, no malicious TG server can
+create a metaticket since it will not have client password.</p>
+
+<p></p>
+
+<p><img alt="Client authentication" src="IMG/kerberos3.png" width="995"
+/></p>
+
+<p></p>
+<hr />
+
+<h3 id="L338">Client request for service access</h3>
+
+<p>To access a service, client uses the metaticket to request TGS for the
+actual service ticket. It sends its username, network address, service name,
+all encrypted with the TG key obtained as part of the metaticket. It gets back
+(a) real time secret, session encrypted with TG key (b) ticket for the service
+encrypted with server pw.</p>
+
+<p>It's not possible for any malicious TG server to respond since it doesn't
+have the TG key and can neither decrypt the client request nor can send any
+false response encrypted with the TG key.</p>
+
+<p>The real time secret is created as a mechanism to prevent anyone from
+stealing the ticket and reusing it. This secret is shared for the session and
+gets known only to the real client and real service (by means of appropriate
+encryption)<span style="color:#ff0000">.</span></p>
+
+<p></p>
+
+<p><img alt="Service ticket request" src="IMG/kerberos4.png" width="1092"
+height="529" /></p>
+
+<p></p>
+
+<p></p>
+<hr />
+
+<h3 id="L413">Service request and service authentication</h3>
+
+<p>Client uses the real time secret and encrypts an authenticator containing
+its name and network address. It sends this authenticator and the service
+ticket obtained earlier to the service. Service first decrypts its ticket and
+obtains the session key. It then decrypts the authenticator with this session
+key and verifies client information. It then encrypts an ACK with the session
+key and sends back as an response. Client receives the ACK, decrypts with the
+session key to verify.</p>
+
+<p></p>
+
+<p>It's not possible for a malicous service to send a valid ACK since it
+doesn't have the real time secret, session. It's also not possible for someone
+to just steal service ticket and use it because the service ticket must match
+the information in authenticator and for that session key is required.</p>
+
+<p></p>
+
+<p><img alt="Service request" src="IMG/kerberos5.png" width="1129"
+height="629" /></p>
+
+<p></p>
+
+<p></p>
+<hr />
+
+<p></p>
+
+<h2 id="L646">Summary</h2>
+
+<p></p>
+
+<h3 id="L665">What it is</h3>
+<ul>
+  <li>Is a trusted 3rd party authentication system (does not support
+    authorization).</li>
+  <li>Is based on symmetric key encryption.</li>
+  <li>Kerberized clients
+    <ul>
+      <li>Login, ftp, smtp, imap, pop3,</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="L694">Problems</h3>
+<ul>
+  <li>It&rsquo;s possible for someone to steal authenticator and service ticket
+    together, fake as that client and use the service. Hence authenticator must
+    be short-lived (actually should not be reusable). Chances of someone
+    stealing it after the real request and resending in a short span are
+    limited.</li>
+  <li>The time clocks must be synchronized.</li>
+</ul>
+<hr />
+
+<p></p>
+
+<h2 id="L1570">References</h2>
+<ul>
+  <li>http://web.mit.edu/kerberos/dialogue.html</li>
+  <li>https://www.secure-endpoints.com/public/workshop/afsbpw10/tutorial2/Kerberos_Tutorial_BPW2010.pdf</li>
+</ul>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+</body>
+</html>

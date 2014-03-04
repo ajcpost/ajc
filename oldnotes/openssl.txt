@@ -1,0 +1,2 @@
+openssl des3 -in <in> -out <out>
+openssl des3 -d -in <out> -out <in>

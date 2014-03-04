@@ -17,97 +17,117 @@
             <section>
                 <h2>SSL</h2>
             </section>
-            <section id="toc">
+            <section>
                 <section>
                 <h3>TOC</h3>
                 <ul style="font-size: 1em">
                     <li>Why SSL</li>
-                    <li>What is SSL</li>
+                    <li>Terms</li>
                     <ul>
                         <li>Asymmetric keys</li>
                         <li>Symmetric keys</li>
                         <li>Certificates</li>
                     </ul>
-                    <li>Protocol</li>
+                    <li>SSL Handshake</li>
                     <li>References</li>
                 </ul>
                 </section>
             </section>
-            <section id="why">
+            <section>
                 <section>
                     <h3>Why SSL</h3>
                 </section>
                 <section>
                     <h4>Network communication - isses</h4>
                     <ul>
-                        <li>Data theft on the remote side... i.e. Client ends up communicating with a wrong/malicious server.</li>
-                        <li>Data theft by sniffers... i.e. packet sniffers on route steal the data.</li>
-                        <li>Man in the middle attack... i.e. rouge program intercepts all of client/server communication, poses as client to the server and poses as server to the client.</li>
-                        <li>Data manipulation...i.e. Intended or unintended change of data.</li>
+                        <li>Data theft on the remote side...client ends up communicating with a wrong/malicious server.</li>
+                        <li>Data theft by sniffers...packet sniffers on route steal the data.</li>
+                        <li>Man in the middle attack...rouge program intercepts all of client/server communication, poses as client to the server and poses as server to the client.</li>
+                        <li>Data manipulation...intended or unintended change of data.</li>
                     </ul>
                     <BR></BR>
                     <h4>Network communicaiton - needs</h4>
                     <ul>
-                        <li>Authentication... Client must be able to establish what the server says who it is and similarly Server may also need to establish what the client says who it is.</li>
-                        <li>Confidentiality... No third party should be able to view the data.</li>
-                        <li>Integrity... Data must reach its destination in original format.</li>
+                        <li>Authentication...client must be able to establish what the server says who it is and similarly Server may also need to establish what the client says who it is.</li>
+                        <li>Confidentiality...no third party should be able to view the data.</li>
+                        <li>Integrity...data must reach its destination in original format.</li>
                     </ul>
                 </section>
             </section>
-            <section id="what">
+            <section>
                 <section>
-                    <h3>What is SSL</h3>
+                    <h3>Terms</h3>
+                </section>
+                <section>
+                    <h3>Asymmetric keys</h3>
                     <ul>
-                        <li> Is a trusted 3rd party authentication system (does not support authorization). </li>
-                        <li> Is based on symmetric key encryption.</li>
-                        <li> Example kerberized clients Login, ftp, smtp, imap, pop3 </li>
+                        <li>Private keys always with owner, Public key is shared.</li>
+                        <li>Server encrypts data using private key, anybody can decrypt it using Server's public key.</li>
+                        <li>Client encrypts data using Server's public key, only Server can decrypt it using its private key.</li>
                     </ul>
                 </section>
                 <section>
-                    <h3>Ticket granting service</h3>
-                    <p> Kerberos introduces a concept of a trusted 3rd party which maintains a centralized database of passwords for clients and services. The trusted authority forms the basis for supporting single sign-on and secure authentication for both clients and services. Any attack on the trusted service would compromise all the passwords and hence this should be kept secure, should ideally not host any other network service.</p>
-                    <img width="600" height="220" alt="ticket granting service" src="IMG/kerberos/kerberos2.png"></img>
+                    <h3>Symmetric keys</h3>
+                    <ul>
+                        <li>Must be known to both client/server</li>
+                        <li>Is much faster to process</li>
+                        <li>Typically used once initial handshake it complete with asymmetric keys.</li>
+                    </ul>
                 </section>
                 <section>
-                    <h3>Authentication flow - meta ticket</h3>
-                    <p>Client connects with the ticket granting service to authenticate. It sends its username, network address <strong>but no password</strong>. TGS validates network address, creates a "metaticket" which grants access to TGS, encrypts it with client's password and sends it back as a response. The metaticket acts as a gateway to obtain actual service tickets. It's reusable but valid for a fixed duration to reduce the possbility of attack.</p>
+                    <h3>Certificates</h3>
                     <ul>
-                        <li>Noone else apart from the requesting client can access the metaticket since it's encrypted with client's password.</li>
-                        <li>Conversly, no malicious TG server can create a metaticket since it will not have client password.</li>
+                        <li>Is nothing but key (plus additional info like name, contact info, validity period.</li>
+                        <li>To create, one must go to CA who will approve it after verification.</li>
+                        <li>Two keys get created: public, private</li>
+                        <li>If keys are compromised, CA will revoke the certificate and publish a certificate revoke list which client should check</li>
+                        <li>Certificates received from CA authority must be loaded in the local store. Without these, no authentication is possible.</li>
                     </ul>
-                    <img width="600" height="250" alt="metaticket" src="IMG/kerberos/kerberos3.png"></img>
-                </section>
-                <section>
-                    <h3>Authentication flow - service access request</h3>
-                    <p> To access a service, client uses the metaticket to request TGS for the actual service ticket. It sends its username, network address, service name, all encrypted with the TG key obtained as part of the metaticket. It gets back (a) real time secret, session encrypted with TG key (b) ticket for the service encrypted with server pw.</p>
-                    <ul>
-                        <li>It's not possible for any malicious TG server to respond since it doesn't have the TG key and can neither decrypt the client request nor can send any false response encrypted with the TG key.</li>
-                        <li>The real time secret is created as a mechanism to prevent anyone from stealing the ticket and reusing it. This secret is shared for the session and gets known only to the real client and real service (by means of appropriate encryption).</li>
-                    </ul>
-                    <img width="650" height="250" alt="client server setup" src="IMG/kerberos/kerberos4.png"></img>
-                </section>
-                <section>
-                    <h3>Authentication flow - service request</h3>
-                    <p>Client uses the real time secret and encrypts an authenticator containing its name and network address. It sends this authenticator and the service ticket obtained earlier to the service. Service first decrypts its ticket and obtains the session key. It then decrypts the authenticator with this session key and verifies client information. It then encrypts an ACK with the session key and sends back as an response. Client receives the ACK, decrypts with the session key to verify.</p>
-                    <ul>
-                        <li>It's not possible for a malicous service to send a valid ACK since it doesn't have the real time secret, session. </li>
-                        <li> It's not possible for someone to just steal service ticket and use it because the service ticket must match the information in authenticator and for that session key is required.</li>
-                    </ul>
-                    <img width="700" height="250" alt="client server setup" src="IMG/kerberos/kerberos5.png"></img>
                 </section>
             </section>
-            <section id="loopholes">
-                <h3>Loopholes</h3>
+            <section>
+                <section>
+                    <h3>SSL Handshake</h3>
+                </section>
+                <section>
                 <ul>
-                    <li>It’s possible for someone to steal authenticator and service ticket together, fake as that client and use the service. Hence authenticator must be short-lived (actually should not be reusable). Chances of someone stealing it after the real request and resending in a short span are limited.</li>
-                    <li>Time clocks must be synchronized.</li>
+                    <li>Step#1, Client sends connect</li>
+                    <ul>
+                        <li>Client sends "connect" with highest supported TSL/SSL version, random number, (preferred) cipher settings, Session ID(for reusing already exchanged data). Server responds back with similar info and also its certificate. It may ask for client certificate if client authentication is required.</li>
+                    </ul>
+                    <li>Step#2, Client verifies server certificate</li>
+                    <ul>
+                        <li>Client checks with CA loaded certificates to see whether the public key sent by Server belongs to the Server. It must check that the name on the certificate matches with server's domain name.</li>
+                        <li>If yes, it means the data encrypted with this public key can only be decrypted by Server's private key which is only with Server.</li>
+                        <li>This way any fake server can't send a fake public key (with associated fake private key) and gain access to client data.</li>
+                    </ul>
                 </ul>
+                </section>
+                <section>
+                <ul>
+                    <li>Step#3, Client generates secret key for the session</li>
+                    <ul>
+                        <li>Client encrypts this secret using Server's public key and sends across.</li>
+                        <li>Server decrypts the "premaster" secret number using its private key.</li>
+                        <li>This way the secret is known only to Client and Server and is used to generate session keys for symmetric encrypting the communication.</li>
+                    </ul>
+                    <li>Step#optional, client authentication - two ways</li>
+                    <ul>
+                        <li>Client sends the certificate and Server has to check with its CA loaded certificate.</li>
+                        <li>Client creates one way hash of a random number, signs using Client's private key and sends it to server along with Client's certificate. One way hash of run time data (known only to server, client) enables client to have a self-signed certificate rather than going to CA.</li>
+                    </ul>
+                </ul>
+                </section>
             </section>
-            <section id="references">
+            <section>
                 <h3>References</h3>
                 <ul>
-                    <li><a href="http://web.mit.edu/kerberos/dialogue.html">Kerberos on MIT <tiny> (http://web.mit.edu/kerberos/dialogue.html)</tiny></li>
-                    <li><a href="http://sipb-server-1.mit.edu/afs/dementia.org/project/afstest/Kerberos_Tutorial_BPW2010.pdf">Kerberos tutorial <tiny>(http://sipb-server-1.mit.edu/afs/dementia.org/project/afstest/Kerberos_Tutorial_BPW2010.pdf)</tiny></li>
+                    <li><a href="http://www.ibm.com/developerworks/webservices/library/ws-ssl-security/index.html">IBM tutorial<tiny> (http://www.ibm.com/developerworks/webservices/library/ws-ssl-security/index.html)</tiny></li>
+                    <li><a href="http://www.ibm.com/developerworks/linux/library/l-openssl/index.html">IBM openssl part-1 <tiny> (http://www.ibm.com/developerworks/linux/library/l-openssl/index.html)</tiny></li>
+                    <li><a href="http://www.ibm.com/developerworks/linux/library/l-openssl2/index.html">IBM openssl part-2 <tiny> (http://www.ibm.com/developerworks/linux/library/l-openssl2/index.html)</tiny></li>
+                    <li><a href="http://www.ibm.com/developerworks/linux/library/l-openssl3/index.html">IBM openssl part-3 <tiny> (http://www.ibm.com/developerworks/linux/library/l-openssl3/index.html)</tiny></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Introduction_to_SSL#The_SSL_Handshake">Mozzila tutorial<tiny>(https://developer.mozilla.org/en-US/docs/Introduction_to_SSL#The_SSL_Handshake)</tiny></li>
+                    <li><a href="http://doc.qt.nokia.com/solutions/4/qtsslsocket/sslguide.html">Nokia tutorial<tiny> (http://doc.qt.nokia.com/solutions/4/qtsslsocket/sslguide.html)</tiny></li>
                 </ul>
             </section>
         </div>
