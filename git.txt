@@ -1,0 +1,28 @@
+
+* Download & install GIT client
+* Set global configuration
+  git config --global user.name "Your Name"
+  git config --global user.email ajcpost@gmail.com
+* Set SSH keys
+  http://help.github.com/win-set-up-git/
+  Add the id_rsa.pub to git website
+* Set remote settings
+  Windows: Use GUI client and set below repository
+  Unix: git remote add origin <repo_name>
+  Repository: git@github.com:ajcpost/ajc.git
+* If creating a new repository
+  mkdir <top_level_dir>
+  cd <top_level_dir>
+  git init
+  add <files>
+  use git commands below
+* Else
+  If git repository is already cloned in the local machine
+  Start using git commands below
+  Else, clone git repository
+  Windows: Use GUI client
+* Commands
+  git status
+  git add *
+  git commit -a -m <update comment>
+  git push origin master

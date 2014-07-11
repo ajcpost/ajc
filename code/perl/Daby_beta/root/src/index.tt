@@ -1,0 +1,29 @@
+[% INCLUDE header.tt %]
+
+<div id="plain_display">
+  <div id="home_page">
+
+    <p>Little Drops aims to provide a platform to learn something new everyday, however small the learning may be. One of the most effective ways to learn is to write about it... write without any worries about confidential data leaving company network, without geting lost into generic purpose content sites, without getting to cult sites where you have to worry about credentials/scores and unknown faces. Little dropss is built to fill this gap.</p>
+    <br>
+    <p>Getting on board is as simple as signing up. You can of course browse the site without signing up but then what's the fun if you aren't part of the community. Signup and you can share a tidbit, send across a small puzzle, cool facts about new (and old too) technology or a detailed deep dive... every little piece of data is valuable and there's always someone out there who's going to thank you for that. </p>
+    <br>
+    <p>The site has been designed with Perl, Mysql, Jquery and a cool WYSIWYG editor called summernote based off bootstrap project from twitter. There's lot more to do - replication, scalability, improving UI experience, building lucene search... and yes, help will be appreciated.</p>
+    <br>
+    <p>Finally, this is voluntary work. The site is hosted on a local MAC desktop without any OPS/SRE/IT support, it may be taken offline for routine maintenance (read crash :-) and is surely suspectible to power failures.
+    <br>
+    <br>
+
+    <hr>
+    <div id="display_regulations">
+      <p>Rules and regulations</p>
+         <li> All SAP compliance policies for contents on SAP network are to be strictly adhered to.</li>
+         <li> Your postings will not be published automatically. It will undergo review before making it to the publish page.</li>
+         <li> If you do not know what tags to apply, pick unknown. Approval process will add appropriate tags.</li>
+         <li> Please acknowledge any references, material that you may have used in your posting.</li>
+      <p></p>
+    </div>
+    <hr>
+  </div>
+</div>
+
+[% INCLUDE footer.tt %]

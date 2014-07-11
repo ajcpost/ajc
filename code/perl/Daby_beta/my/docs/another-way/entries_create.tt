@@ -1,0 +1,40 @@
+[% INCLUDE header.tt %]
+
+<div id="plain_display">
+  <h3>Create New Article</h3>
+  <form method="post" action="[% c.uri_for_action('/article/entries/create') %]">
+      Title: <input id="title" name="title" type="text"><br>
+      Tags: <input id="" name="title" type="text"><br>
+      <textarea id="content" name="content"> </textarea>
+      <p> All good? </p>
+      <input id="tosend" type="submit" name="submit" value="Yes"> <input type="submit" name="submit" value="No">
+  </form> 
+</div>
+
+
+[% INCLUDE footer.tt %]
+
+<script language="javascript" type="text/javascript">
+<!--    
+$(function () {
+    $('#content').summernote({
+        height: 300,
+        minHeight: null,
+        maxHeight: null,
+        minWidth: null,
+        maxWidth: null,
+        focus: true
+    }); 
+});      
+//-->   
+</script>
+
+<script language="javascript" type="text/javascript">
+<!--    
+    document.getElementById("tosend").onclick = function () {
+        var $content_arr = $('textarea[name="content"]').html($('#content').code());
+        var elem = document.getElementById("content");
+        elem.value = $content_arr.html();
+    }
+//-->   
+</script>
