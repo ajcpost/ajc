@@ -1,0 +1,24 @@
+[% INCLUDE header.tt %]
+<div id="plain_display">
+    <h4>Login</h4>
+
+    <form method="post" action="[% c.uri_for_action('/login/index') %]">
+      <table class="daby_table">
+        <tr class="daby_table_tr">
+          <td class="daby_table_td">Username:</td>
+          <td class="daby_table_td"><input type="text" name="username" size="40" /></td>
+        </tr>
+        <tr class="daby_table_tr">
+          <td class="daby_table_td">Password:</td>
+          <td class="daby_table_td"><input type="password" name="password" size="40" /></td>
+        </tr>
+        <tr class="daby_table_tr">
+          <td class="daby_table_td"> </td>
+          <td class="daby_table_td" colspan="2"><input type="submit" name="submit" value="Submit" /></td>
+        </tr>
+      </table>
+    </form> 
+
+</div>
+
+[% INCLUDE footer.tt %]

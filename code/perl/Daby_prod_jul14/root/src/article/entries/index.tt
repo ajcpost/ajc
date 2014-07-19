@@ -1,0 +1,72 @@
+[% INCLUDE header.tt %]
+
+<div id="top_list">
+  [%# article.article_state 0 is $Daby::BL::Constants::ARTICLE_STATE_SAVED %]
+  [%# article.article_state 1 is $Daby::BL::Constants::ARTICLE_STATE_SUBMITTED %]
+  [%# article.article_state 5 is $Daby::BL::Constants::ARTICLE_STATE_PUBLISHED %]
+  [% IF (article.article_state == 0) %]
+    [% articleState = "Article is in DRAFT state (click submit to send for publication)" %]
+  [% END %]
+  [% IF (article.article_state == 1) %]
+    [% articleState = "Article is in SUBMITTED state (wait for sanity review checks before it gets published)" %]
+  [% END %]
+  [% IF (article.article_state == 5) %]
+    [% articleState = "Article is in PUBLISHED state" %]
+  [% END %]
+
+
+  [% IF (c.user_exists) %]
+    <p> [% articleState %] </p>
+    [% IF (c.user.id == article.userid.id) %]
+      [% IF (article.article_state == 0) %]
+        <a id="top_list_title" href="[% c.uri_for_action('/article/entries/edit', article.id) %]">Edit, </a>
+        <a id="top_list_title" href="[% c.uri_for_action('/article/entries/changestate', article.id, "submit") %]">Submit, </a>
+      [% END %]
+      <a id="top_list_title" href="[% c.uri_for_action('/article/entries/delete', article.id) %]">Delete</a>
+    [% END %]
+    [% IF c.user.isApprover %]
+      [% IF (article.article_state == 1) %]
+        <a id="top_list_title" href="[% c.uri_for_action('/article/entries/changestate', article.id, "approve") %]">Approve, </a>
+        <a id="top_list_title" href="[% c.uri_for_action('/article/entries/changestate', article.id, "revoke") %]">Revoke</a>
+      [% END %]
+    [% END %]
+  [% END %]
+</div>
+<hr>
+<div id="plain_display">
+  <div id="article">
+    <h4>[% article.title %]</h4>
+    <li id="article_title">Tags (
+    [% FOREACH tag IN article.tagids %]
+    [% tag.tag %]
+    [% END %]
+    ) </li>
+    <li id="article_subtitle">By [% article.userid.name %] on [% article.created.strftime('%B %e, %Y %l:%M %p') %]</li> 
+
+    <hr>
+    <p>[% htmlcontent %]</p>
+    <hr>
+    <hr>
+
+    <div id="comments">
+      <h4>Comments</h4>
+      <br>
+
+      [% FOREACH comment IN comments %]
+        <div id="comment">
+          <li id="comment_content">By [% comment.userid.name %] on [% comment.created.strftime('%B %e, %Y %l:%M %p') %]</li> 
+          <pre id="comment_content" width="100" >[% comment.content %]</pre>
+        </div id="comment">
+      [% END %]
+
+      [% IF c.user_exists %] 
+        <p id="comment_title">Leave a comment</p>
+        [% form.render %] 
+      [% ELSE %]
+        <a id="comment_title" href="[% c.uri_for_action('/login/index') %]">Login to comment</a> | <a id="comment_title" href="[% c.uri_for_action('/membership/create') %]">Not a member?</a>
+      [% END %]
+    </div>
+  </div>
+</div>
+
+[% INCLUDE footer.tt %]

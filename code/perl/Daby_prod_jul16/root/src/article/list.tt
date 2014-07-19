@@ -1,0 +1,74 @@
+[% INCLUDE header.tt %]
+
+[% IF (viewType == 'approve') %]
+   [% listUri = '/article/approve' %]
+[% ELSE %]
+   [% listUri = '/article/show' %]
+[% END %]
+
+<div id="top_list">
+  [% IF (c.user_exists) && (!c.user.isApprover()) && (!c.user.isAdmin())%]
+    <p>
+    <a id="top_list_title" href="[% c.uri_for_action('/article/entries/create') %]">Post new, </a>
+    <a id="top_list_title" href="[% c.uri_for('/article/mysaved') %]">My saved, </a>
+    <a id="top_list_title" href="[% c.uri_for('/article/mysubmitted') %]">My submitted, </a>
+    <a id="top_list_title" href="[% c.uri_for('/article/mypublished') %]">My published </a> 
+    </p>
+  [% END %]
+
+  [% IF (tagName) %]
+    <p id="top_list_title">[Search by tag ([% tagName %])]
+  [% ELSE %]
+    <p id="top_list_title">[Search by tag (empty)]
+  [% END %]
+
+  [% FOREACH tag IN tags %]
+    <a id="top_list_title" href="[% c.uri_for(listUri, {tagName => tag.tag}) %]">[% tag.tag %]</a>
+  [% END %]
+    <a id="top_list_title" href="[% c.uri_for('/tag/', {viewType => viewType}) %]">more ...</a>
+  </p>
+
+  [% IF (memberName) %]
+    <p id="top_list_title">[Search by member ([% memberName %])]
+  [% ELSE %]
+    <p id="top_list_title">[Search by member (empty)]
+  [% END %]
+
+  [% FOREACH user IN users %]
+    <a id="top_list_title" href="[% c.uri_for(listUri, {memberName => user.username}) %]">[% user.username %]</a>
+  [% END %]
+    <a id="top_list_title" href="[% c.uri_for('/member/', {viewType => viewType}) %]">more ...</a>
+  </p>
+
+</div>
+<hr>
+<div id="plain_display">
+  <div id="Pagination">
+    [% IF (articles.size() > 0) %]
+      <a href="[% c.uri_for(listUri, {page => pager.first_page, tagName => tagName, memberName => memberName}) %]">First</a> <a href="[% c.uri_for(listUri, {page => pager.previous_page, tagName => tagName, memberName => memberName}) %]">Previous</a> <a href="[% c.uri_for(listUri, {page => pager.next_page, tagName => tagName, memberName => memberName}) %]">Next</a> <a href="[% c.uri_for(listUri, {page => pager.last_page, tagName => tagName, memberName => memberName}) %]">Last</a>
+    [% ELSE %]
+      <p> None found </p>
+    [% END %]
+  </div>
+
+  <div id="article_table">
+    [% USE table(articles, cols=2) %]
+    <table>
+    [% FOREACH row IN table.rows %]
+        <tr>
+          [% FOREACH item IN row %]
+            <td id="article_table_column">
+              [% IF item %]
+                <p id="article_table_column_title"> <a href="[% c.uri_for_action('/article/entries/index', item.id) %]">[% item.title %] </a> </p>
+                <p id="article_table_column_subtitle">By [% item.userid.name %] on [% item.created.strftime('%B %e, %Y %l:%M %p') %]</p>
+                <p id="article_table_column_subtitle">[% item.content_summary %]...</p>
+              [% END %]
+            </td>
+          [% END %]
+        </tr>
+    [% END %]
+    </table>
+  </div>
+</div>
+
+[% INCLUDE footer.tt %]

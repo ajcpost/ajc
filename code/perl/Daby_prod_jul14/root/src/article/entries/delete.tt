@@ -1,0 +1,43 @@
+[% INCLUDE header.tt %]
+
+<div id="plain_display">
+  <div id="article">
+    <h3>Delete below article and corresponding comments?</h3>
+    <form method="post" action="[% c.uri_for_action('/article/entries/delete', article.id) %]">
+      <table>
+        <tr>
+          <td><input type="submit" name="submit" value="Yes" /> <input type="submit" name="submit" value="No" /></td>
+        </tr>
+      </table>
+    </form> 
+
+    <hr>
+
+    <h4>[% article.title %]</h4>
+    <li id="article_title">Tags (
+    [% FOREACH tag IN article.tagids %]
+    [% tag.tag %]
+    [% END %]
+    ) </li>
+    <li id="article_subtitle">By [% article.userid.name %] on [% article.created.strftime('%B %e, %Y %l:%M %p') %]</li> 
+
+    <hr>
+    <p>[% htmlcontent %]</p>
+    <hr>
+    <hr>
+
+    <div id="comments">
+      <h4>Comments</h4>
+      <br>
+
+      [% FOREACH comment IN comments %]
+        <div id="comment">
+          <li id="comment_content">By [% comment.userid.name %] on [% comment.created.strftime('%B %e, %Y %l:%M %p') %]</li> 
+          <pre id="comment_content" width="100" >[% comment.content %]</pre>
+        </div id="comment">
+      [% END %]
+    </div>
+  </div>
+</div>
+
+[% INCLUDE footer.tt %]

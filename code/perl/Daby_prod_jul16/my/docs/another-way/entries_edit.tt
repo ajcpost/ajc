@@ -1,0 +1,32 @@
+[% INCLUDE header.tt %]
+
+<div id="plain_display">
+  <h3>Edit Article</h3>
+  <form method="post" action="[% c.uri_for_action('/article/entries/edit', article.id) %]">
+    <table>
+      <tr>
+        <td>Title:</td>
+      </tr>
+      <tr>
+        <td><textarea name="title" rows="1" cols="88" wrap="virtual">[% article.title | html %]</textarea></td>
+      </tr>
+      <tr>
+        <td><p></p></td>
+      </tr>
+      <tr>
+        <td>Content:</td>
+      </tr>
+      <tr>
+        <td><textarea name="content" rows="20" cols="88" wrap="virtual">[% article.content | html %]</textarea></td>
+      </tr>
+      <tr>
+        <td><p>All good?</p></td>
+      </tr>
+      <tr>
+        <td><input type="submit" name="submit" value="Yes" /> <input type="submit" name="submit" value="No" /></td>
+      </tr>
+    </table>
+  </form> 
+</div>
+
+[% INCLUDE footer.tt %]

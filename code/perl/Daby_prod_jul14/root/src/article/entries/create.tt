@@ -1,0 +1,45 @@
+[% INCLUDE header.tt %]
+
+<div id="plain_display">
+<div id="article_content">
+  <div class="form-group">
+    <h4>Save Article</h4> 
+    <p>(You can save this draft, edit it multiple times before submitting it for publish) </p>
+    [% form.render %]
+  </div>
+</div>
+</div>
+
+[% INCLUDE footer.tt %]
+
+<script language="javascript" type="text/javascript">
+<!--    
+$(function () {
+    $('#htmlcontent').summernote({
+        height: 300,
+        width: 850,
+        minHeight: null,
+        maxHeight: null,
+        minWidth: null,
+        maxWidth: null,
+    }); 
+});      
+//-->   
+</script>
+
+[%# Below code is commented out
+### It's not required anymore because Article form has 'htmlcontent' as field
+### and summernote JS function directly uses that. If that had not been the case:
+### - below can be used to retrieve content from summernote and push it back to 
+###   a form element identified by getElementById
+### - hadn't yet figured out how to push content to summernode fo EDIT usecase
+<script language="javascript" type="text/javascript">
+<!--    
+    document.getElementById("tosend").onclick = function () {
+        var $content_arr = $('textarea[name="htmlcontent"]').html($('#htmlcontent').code());
+        var elem = document.getElementById("htmlcontent");
+        elem.value = $content_arr.html();
+    }
+//-->   
+</script>
+%]

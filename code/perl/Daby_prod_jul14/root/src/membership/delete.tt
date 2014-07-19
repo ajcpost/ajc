@@ -1,0 +1,26 @@
+[% INCLUDE header.tt %]
+
+<div id="plain_display">
+  <h3>Cancel Membership</h3>
+  <form method="post" action="[% c.uri_for_action('/membership/delete', c.user.id) %]">
+    <table>
+      <tr>
+        <td>Canceling your membership permanently deletes:
+          <ul>
+          <li>All your membership information</li>
+          <li>All your blog entries</li>
+          <li>All your comments on yours and other's blog entries</li>
+          <li>All comments on your blog entries</li>
+          </ul>
+        </td>
+      <tr>
+        <td>Go ahead?</td>
+      </tr>
+      <tr>
+        <td><p><input type="submit" name="submit" value="Yes" /> <input type="submit" name="submit" value="No" /></p></td>
+      </tr>
+    </table>
+  </form> 
+</div>
+
+[% INCLUDE footer.tt %]

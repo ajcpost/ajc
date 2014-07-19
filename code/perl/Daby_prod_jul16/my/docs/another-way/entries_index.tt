@@ -1,0 +1,45 @@
+[% INCLUDE header.tt %]
+
+<div id="plain_display">
+  <div id="top_list">
+      [% IF (c.user_exists) && (c.user.id == article.userid.id || c.user.isApprover()) %]
+        <a id="top_list_title" href="[% c.uri_for_action('/article/entries/edit', article.id) %]">Edit</a>
+        <a id="top_list_title" href="[% c.uri_for_action('/article/entries/delete', article.id) %]">Delete</a>
+      [% END %]
+  </div>
+  <hr>
+
+  <div id="article">
+    <li id="article_title">[% article.title %]</li>
+    <li id="article_title">Tags (
+    [% FOREACH tag IN article.tagids %]
+    [% tag.tag %]
+    [% END %]
+    )
+    <li id="article_subtitle">By [% article.userid.name %] on [% article.created.strftime('%B %e, %Y %l:%M %p') %]</li> 
+
+    <hr>
+    <h4>Article content <p>
+    <p>[% article.content %]</p>
+    <hr>
+
+    <div id="comments">
+      <p id="comments_heading">Comments</p>
+      [% FOREACH comment IN comments %]
+        <div id="comment">
+          <li id="comment_title">By [% comment.userid.name %] on [% comment.created.strftime('%B %e, %Y %l:%M %p') %]</li> 
+          <li id="comment_content">[% comment.content %]</li>
+        </div id="comment">
+      [% END %]
+
+      [% IF c.user_exists %] 
+        <p id="comment_title">Leave a comment</p>
+        [% form.render %] 
+      [% ELSE %]
+        <a id="comment_title" href="[% c.uri_for_action('/login/index') %]">Login to comment</a> | <a id="comment_title" href="[% c.uri_for_action('/membership/create') %]">Not a member?</a>
+      [% END %]
+    </div>
+  </div>
+</div>
+
+[% INCLUDE footer.tt %]
