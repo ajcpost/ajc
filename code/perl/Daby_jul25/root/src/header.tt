@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" media="screen" href="[% c.uri_for('/static/css/daby.css') %]" />
+    <script language="javascript" src="[% c.uri_for('/static/others/jquery/jquery-1.11.1.min.js') %]"></script>
+    <script language="javascript" src="[% c.uri_for('/static/others/bootstrap/js/bootstrap.min.js') %]"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="[% c.uri_for('/static/others/bootstrap/css/bootstrap.css') %]" />
+  <link rel="stylesheet" type="text/css" media="screen" href="[% c.uri_for('/static/others/font-awesome-4.1.0/css/font-awesome.min.css') %]" />
+    <script language="javascript" src="[% c.uri_for('/static/others/summernote/summernote.min.js') %]"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="[% c.uri_for('/static/others/summernote/summernote.css') %]" />
+  <base href="[% c.uri_for('/static/images/') %]"/>
+</head>
+
+<body>
+  <div id="daby_page">
+    <div id="daby_top_bar">
+      <div id="daby_logo">
+        <img src ="daby.jpg" height = "80" width = "90"> Little Drops
+      </div>
+      <div id="daby_top_bar_left">
+        <li><a href="[% c.uri_for_action('/index') %]">Home</a></li>
+        <li><a href="[% c.uri_for_action('article/normal') %]">Articles</a></li>
+
+        [% IF c.user_exists %] 
+          <li><a href="[% c.uri_for_action('article/teaser') %]">Teasers</a></li>
+          <li>Search</li>
+          [% IF c.user.isApprover %] 
+            <li><a href="[% c.uri_for_action('/article/approve') %]">Approve</a></li>
+          [% END %]
+        [% ELSE %]
+          <li>Teasers</li>
+          <li>Search</li>
+        [% END %]
+        <li><a href="[% c.uri_for_action('/membership/index') %]">Members</a></li>
+      </div>
+      <div id="daby_top_bar_right">
+        [% IF c.user_exists %] 
+          <li>[% c.user.name %] | <a href="[% c.uri_for_action('/logout/index') %]">Logout</a></li>
+        [% ELSE %]
+          <li><a href="[% c.uri_for_action('/login/index') %]">Login</a> | <a href="[% c.uri_for_action('/membership/create') %]">Signup</a></li> 
+        [% END %]
+      </div>
+    </div>
+  </div>

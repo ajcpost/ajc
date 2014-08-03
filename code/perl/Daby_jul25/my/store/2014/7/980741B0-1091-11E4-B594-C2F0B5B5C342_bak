@@ -1,0 +1,1 @@
+<p>Write code to determine if an input string can be tweaked (i.e. change character ordering) so that it matches some part of another longer string... e.g. longer string = " this is a test string", short string = "ntris". Letters in short string can be arranged so that it matches "strin" portion of the longer string.</p>

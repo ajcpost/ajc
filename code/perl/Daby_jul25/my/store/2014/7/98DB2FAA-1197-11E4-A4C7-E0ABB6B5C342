@@ -1,0 +1,1 @@
+Looks like it doesnt like < sign<br><br>for (i = 0; i < stringToBeChecked.length-1; i++)<br>

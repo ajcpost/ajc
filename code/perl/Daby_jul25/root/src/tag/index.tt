@@ -1,0 +1,32 @@
+[% INCLUDE header.tt %]
+
+[% IF (viewType == 'normal') %]
+   [% listUri = '/article/normal' %]
+[% END %]
+[% IF (viewType == 'teaser') %]
+   [% listUri = '/article/teaser' %]
+[% END %]
+[% IF (viewType == 'approve') %]
+   [% listUri = '/article/approve' %]
+[% END %]
+
+<div id="plain_display">
+  <div id="item_table">
+    [% USE table(tags, cols=4) %]
+    <table>
+    [% FOREACH row IN table.rows %]
+        <tr>
+          [% FOREACH item IN row %]
+            <td id="item_table_column">
+              [% IF item %]
+                <p id="item_table_column_title"> <a href="[% c.uri_for(listUri, {tagName => item.tag}) %]">[% item.tag %] </a> </p>
+              [% END %]
+            </td>
+          [% END %]
+        </tr>
+    [% END %]
+    </table>
+  </div>
+</div>
+
+[% INCLUDE footer.tt %]

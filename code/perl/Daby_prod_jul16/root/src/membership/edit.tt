@@ -1,8 +1,0 @@
-[% INCLUDE header.tt %]
-<div id="plain_display">
-  <div class="form-group">
-    <h4>Update details [% c.user.username %]</h4>
-    [% form.render %]
-  </div>
-</div>
-[% INCLUDE footer.tt %]

@@ -1,7 +1,0 @@
-  <div id="daby_footer">
-   <hr>
-   <li> Built using Perl catalyst framework.</li>
-   <li>Special thanks to j0e whose <a href="http://blogs.perl.org/users/j0e/2013/03/notes-from-a-newbie-10-authenticationauthorization.html">blog</a> on catalyst framework really proved helpful.</li>
-  </div>
-</body>
-</html>

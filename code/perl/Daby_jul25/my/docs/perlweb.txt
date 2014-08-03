@@ -1,0 +1,135 @@
+
+*** Follow ORDER ***
+
+Environment variables
+---------------------
+* For office proxies
+  export http_proxy=http://10.53.131.79:8080
+  export https_proxy=https://10.53.131.79:8080
+* Once mysql is installed/configured
+  export DYLD_LIBRARY_PATH=/usr/local/mysql/lib
+
+Get another perl
+----------------
+* This is optional but useful if we don't want to disturb system perl setup
+  It also makes independent of any system updates
+* See instructions here http://learn.perl.org/installing/osx.html
+* run curl -L http://xrl.us/installperlosx | bash
+  This will install perlbrew, cpan, and download latest perl in ~/perl5
+  It will also set PATH in .bashrc
+* Open new terminal after this to reflect new perl version
+* To make sure Perl is using 64 bit
+  run defaults read com.apple.versioner.perl Prefer-32-Bit 
+  It should show 0 or doesn't exist, else do defaults write com.apple.versioner.perl Prefer-32-Bit -bool no
+  Other option is to export VERSIONER_PERL_PREFER_32_BIT=no
+
+Install/Configure of Mysql
+--------------------------
+* Download 64 bit mysql, had some linkage issues with 32bit version
+  To check Perl version, do "file <perl_binary>", currently perl supports both 32/64
+  To check mysql version, run /usr/local/mysql/bin/mysql --version
+  /usr/local/mysql/bin/mysql  Ver 14.14 Distrib 5.6.19, for osx10.7 (i386) using  EditLine wrapper
+  i386 is 32 bit, x86_64 will be 64 bit
+* See configuration instructions at http://dev.mysql.com/doc/refman/5.1/en/binary-installation.html
+* Run scripts/mysql_install_db
+* point /usr/local/mysql link to this new installation
+* Run bin/mysqld
+* Run bin/mysql -u root  
+    CREATE DATABASE `daby`;
+    GRANT ALL PRIVILEGES ON daby.* TO 'daby'@'localhost' IDENTIFIED BY 'daby';
+    FLUSH PRIVILEGES;
+
+Install/Configure Perl Mysql access module
+------------------------------------------
+* Make sure terminal points to new perl
+* Make sure env varibles above are set
+* Run cpanm DBD::mysql
+* IF it fails:
+  cd to folder in ~/.cpanm or ~/.cpan
+  Run "install_name_tool -id /usr/local/mysql-5.6.11-osx10.7-x86_64/lib/libmysqlclient.18.dylib /usr/local/mysql-5.6.11-osx10.7-x86_64/lib/libmysqlclient.18.dylib"
+  perl Makefile.PL
+  make
+  make test
+  make install
+
+Install Catalyst and other modules
+----------------------------------
+* There may be a better way to download all these modules rather than doing it one by one
+* May require more modules as development progresses
+
+* Make sure terminal points to new perl
+* Make sure env varibles above are set
+
+* Test-WWW-Mechanize-1.44
+  This requires special handling if you are behind firewall so do it first.
+  Download the module from cpan
+  perl Makefile.PL
+  make
+  unset http_proxy
+  make test
+  make install
+  set http_proxy
+* cpanm Catalyst::Devel
+* cpanm MooseX::NonMoose
+* Catalyst::Plugin::Authentication
+* cpanm Catalyst::Authentication::Realm::SimpleDB
+* cpanm DBIx::Class::Schema::Loader
+* cpanm Catalyst::Devel
+* cpanm Catalyst::Runtime
+* cpanm install Catalyst::Model::DBIC::Schema
+* cpanm Catalyst::Helper::View::TT
+* cpanm DBD::mysql
+* cpanm Catalyst::View::TT
+* cpanm Catalyst::Plugin::Session
+* cpanm Catalyst::Plugin::Session::Store::FastMmap
+* cpanm Catalyst::Plugin::Session::Store::File
+* cpanm Catalyst::Plugin::Session::State::Cookie
+* cpanm Catalyst::Model::DBIC::Schema
+* cpanm HTML::FormHandler
+* cpanm HTML::FormHandler::Model::DBIC
+* cpanm DBIx::Class::TimeStamp
+* cpanm Log::Any::Adapter::Catalyst
+* cpanm Log::Any::Adapter
+* cpanm Log::Any
+* cpanm DBIx::Class::PassphraseColumn
+* cpanm Catalyst::Plugin::Authorization::Roles
+* cpanm Data::UUID
+
+
+Download JQuery and WYSIWYG HTML plugin
+---------------------------------------
+* summernote
+
+
+Other links/tidbits of interest
+-------------------------------
+* http://www.catalystframework.org/
+  The framework used
+  See tutorial
+
+* http://grokbase.com/t/sc/catalyst/088v88sgwk/rfc-fyi-html-formfu-extjs
+* http://blogs.perl.org/users/mohammad_s_anwar/2012/07/build-mvc-application-using-catalyst-and-dbixclass.html
+* http://blogs.perl.org/users/j0e/2012/09/using-jqgrid-with-catalyst-tutorial-with-examples-for-newbies.html
+* http://justatheory.com/computers/programming/perl/catalyst/
+* http://www.catalystframework.org/calendar/2009/3
+* To create tables in DB from model
+  perl -I./lib -MBlog::Model::DB  -e " Blog::Model::DB->new->schema->deploy "
+* Program to test DB
+  http://www.perlmonks.org/?node_id=1061138
+* Using stash
+  http://stackoverflow.com/questions/7882509/i-cant-add-a-hash-to-a-stash-in-catalyst
+* Pagination
+  http://wiki.catalystframework.org/wiki/wikicookbook/tt_pager.view
+  http://www.gossamer-threads.com/lists/catalyst/users/20322
+  https://www.mail-archive.com/catalyst@lists.scsys.co.uk/msg07704.html
+
+* http://www.slideshare.net/ranguard/dbixclass-beginners-presentation
+* http://search.cpan.org/~gshank/HTML-FormHandler-0.40013/lib/HTML/FormHandler/Manual/Cookbook.pod
+* http://www.slideshare.net/bbeeley/hfhtalk
+* http://catdev.blogspot.in/2009/06/flexible-extensions-with-moose-method.html
+* http://blogs.perl.org/users/j0e/2013/02/notes-from-a-newbie-experiment-02-dbixclass.html
+* http://www.catalystframework.org/calendar/2011/15
+* http://blogs.perl.org/users/j0e/2013/03/notes-from-a-newbie-10-authenticationauthorization.html#211
+* http://perl.mines-albi.fr/perl5.8.5/site_perl/5.8.5/Catalyst/Manual/Intro.html
+* http://search.cpan.org/~ribasushi/SQL-Abstract-1.78/lib/SQL/Abstract.pm (WHERE clause syntax)
+

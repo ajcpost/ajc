@@ -1,4 +1,7 @@
 
+----------------------------------------
+GIT ssh key created with Temporary security
+----------------------------------------
 * Download & install GIT client
 * Set global configuration
   git config --global user.name "Your Name"
